@@ -1,0 +1,28 @@
+// Local configs
+
+export default {
+    env: 'dev',
+    cors: 1,
+    logs: 1,
+    isStackTrace: 1,
+    baseUrl: 'https://1.0.4.211:9001',
+    // apiBaseUrl: 'http://app.connecto.io/newconnecto/',
+    // apiServerBaseUrl: 'http://app.connecto.io/newconnecto/',
+    jobsBaseUrl: 'https://staging-app.connecto.io/',
+    //jobsBaseUrl: 'http://jobs.connecto.io/',
+    //apiBaseUrl:'http://localhost:8081/api/v1/',
+    apiBaseUrl: 'https://bookWrench-dev.cardekho.com/api/v1/',
+    // apiBaseUrl:'http://b01d7a7da368.ngrok.io/api/v1/',
+    apiServerBaseUrl: 'https://staging-app.connecto.io/',
+    appBaseUrl: 'https://staging-api.connecto.io/',
+    imgPath: 'https://img.gaadicdn.com/pwa/img/',
+    imgpath2: 'https://img2.gaadicdn.com/',
+    staticServer: 'https://stagingstatic.cardekho.com',
+    localImgPath: '/pwa/img',
+    localFontPath: '/pwa/font',
+    jsAssetPath: '/pwa/js',
+    cssAssetPath: '/pwa/css',
+    gtmId: '',
+    otherAPIDomain: {},
+    // cookieDomain: 'staging-app.connecto.io',
+};

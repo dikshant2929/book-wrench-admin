@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/ico" href="https://stimg.cardekho.com/pwa/img/favicon/cd-favicon-48x48.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarDekho - NCT B2B</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0; 
+    }
+    
+    input:checked ~ .dot {
+      transform: translateX(100%);
+      background-color: #7E72F2;
+    }
+   
+    input[data-checked="false"]{
+     background-image: none !important;
+     background: white !important;
+     border: solid 1px #6b7280 !important;
+    }
+    
+    input[type="radio"]:checked + label span, input[data-radiochecked="true"] + label span {
+      background-color: #F75D34; 
+      box-shadow: 0px 0px 0px 3px white inset;
+      border: solid 1px #F75D34;
+    }
+
+    .react-datepicker-wrapper{display: block !important;}
+    .reactTypehead > div > div > div{border-radius: 10px !important;}
+    .reactTypehead > div > div{border-radius: 10px !important;}
+    .reactTypehead > div > div.__menu{box-shadow: 0 1px 3px rgb(36 39 44 / 30%) !important;margin-top: 0px !important;text-align: left !important;border-radius: 3px !important;}
+    .reactTypehead .__indicator-separator{display: none !important;}
+    .reactTypehead .__dropdown-indicator{padding:5px !important;}
+    .reactTypehead .__control--menu-is-open svg{transform: rotateZ(180deg);}
+    .truncate{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+    .triangle-bottom::after{position: absolute;content: "";display: inline-block;bottom: -9px;right: 12px;border-top: 9px solid #fff;border-right: 9px solid transparent;border-left: 9px solid transparent;}
+    .triangle-top::after{position: absolute;content: "";display: inline-block;top: -9px;right: 12px;border-bottom: 9px solid #fff;border-right: 9px solid transparent;border-left: 9px solid transparent;}
+    /* #react-select-3-input{border: solid 1px #000 !important;width: 100% !important;} */
+    .gridColumnPicker .custamSelectBox.__dropdown-indicator::after{content: "Add Column";background: #FFF5F3;color: #F75D37;padding: 0px 13px;border-radius: 3px;font-size: 12px;margin-right: 2px;cursor: pointer;}
+    .gridColumnPicker .custamSelectBox.__dropdown-indicator svg, .custamSelectBox.__clear-indicator svg{display:none;}
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <div id="root"></div>
+    <script type="module" src="/bookWrench/main.tsx"></script>
+  </body>
+</html>

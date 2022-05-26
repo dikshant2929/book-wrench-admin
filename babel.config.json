@@ -1,0 +1,14 @@
+{
+    "presets": [
+        ["@babel/preset-env", { "loose": true }], 
+        "@babel/preset-react",
+        "@babel/preset-typescript"
+    ],
+    "env": {
+        "test": {
+            "presets": [
+                "react-app"
+            ]
+        }
+    }
+}

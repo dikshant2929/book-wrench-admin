@@ -1,0 +1,221 @@
+def basePath = "${env.WORKSPACE}"
+def targetEnvironment = "development"
+def ecrUrl = "439876011496.dkr.ecr.ap-south-1.amazonaws.com"
+shortCommit = ""
+dockerImageName = ""
+docker_tag = "service-tag"
+change_set = "Empty"
+pipeline {
+    agent { label 'master' }
+   /* parameters {
+       string(defaultValue: 'src', description: 'Relative Path of Project', name: 'ProjectPath')       
+    }*/
+		environment {
+	 	product = "core-service"
+        project_name = "nct-service-b2b"
+        sonar_url = 'http://sonar.girnarsoft.co/dashboard?id=girnar-nct-service-b2b-ui'
+ 		health_check_respone = "OK 200"
+ 		service_name = "nct-service-b2b-ui"
+        EMAIL_TO = 'rajendra.singh@girnarsoft.com,kapil.gupta@girnarsoft.com,ankur.agarwal@girnarsoft.co.in,manish.bhatnagar@girnarsoft.com'
+        NIGHTLY_TO_LIST = 'rajendra.singh@girnarsoft.com,ankur.agarwal@girnarsoft.co.in,kapil.gupta@girnarsoft.com,trupti.swain@gaadi.com,manish.bhatnagar@girnarsoft.com'
+        //docker variables
+        dockerBuildApp ="girnar-nct-service-b2b-ui"        
+        ecr_repo = 'nct-b2b-ui'
+        dev_docker_repo="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-dev"
+	dev_docker_registry_url="https://439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-dev"
+    	dev_docker_registry="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-dev"
+    	docker_credential='ecr:ap-south-1:aws-credentials-ecr'
+        
+        qa_docker_repo="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-qa"
+	qa_docker_registry_url="https://439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-qa"
+    	qa_docker_registry="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-qa"
+        
+        uat_docker_repo="439876011496.dkr.ecr.ap-south-1.amazonaws.com/my-acc-uat"
+	uat_docker_registry_url="https://439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-uat"
+    	uat_docker_registry="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-uat"
+
+	prod_docker_repo="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-prod"
+	prod_docker_registry_url="https://439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-prod"
+	prod_docker_registry="439876011496.dkr.ecr.ap-south-1.amazonaws.com/${ecr_repo}-prod"
+	}
+    
+    stages {
+         stage('Pull') {
+            steps {
+
+		echo "Workspace Path: ${env.WORKSPACE}"
+				sh 'ls -lrt'
+                script {
+				shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+                echo "CommitID: $shortCommit"
+                //change_set = sh(
+                //  script: "git log --pretty=format:\"%ad%x09%h%x09%an%x09%s\" $GIT_PREVIOUS_SUCCESSFUL_COMMIT..$GIT_COMMIT|cut -c 5-23,30-|sed '0~1 a\\<br>\\'",
+                 // returnStdout: true
+                 //   ).split('\n')
+                 //   change_set.each { println it }
+                }
+				//commitChangeset = sh(returnStdout: true, script: 'git diff-tree --no-commit-id --name-status -r HEAD').trim()
+                echo " Code Pull completed "
+				echo " "
+                
+            }
+            
+         }
+        stage('BuildandTest') { 
+            steps {
+                  dir("${env.WORKSPACE}") {
+                      script {
+                          sh """
+                          echo "$USER"
+						  pwd
+                          rm -rf build  node_modules package-lock.json
+                          npm install
+                          npm run build:prod
+                         #npm run test
+                          echo "INFO: Build and Test are Successfullly"
+                            """
+                      }
+                  }
+            }
+        }
+stage('sonar') { 
+            steps {
+                  dir("${env.WORKSPACE}") {
+                     script {
+                          sh """
+                            echo "$USER"
+                            echo "INFO: SonarQube started ... ...."
+							sonar-scanner
+							echo "INFO: SonarQube Build completed Successfullly ...!!!!"
+                            """
+                          //sh 'sh build.sh '
+                      }
+                  }
+            }
+        }
+stage('dockerimage') { 
+            steps {
+                  dir("${env.WORKSPACE}") {
+                  script {
+                  echo "${shortCommit}"
+                  echo "${env.GIT_COMMIT}"
+                  echo "${env.dockerBuildApp}"
+                  echo "${docker_tag}"
+                  echo "${env.BUILD_NUMBER}"
+                  dockerImageName = "${env.dockerBuildApp}-${shortCommit}"
+                  echo "${dockerImageName}"
+                  docker_tag = "${env.dockerBuildApp}-${shortCommit}-${env.BUILD_NUMBER}"
+                  echo "New Tag Value"
+                  echo "${docker_tag}"
+                    }                    
+                      script {
+                         sh """
+                            echo "$USER"
+                            echo "INFO: Docket tag: ${docker_tag}"
+                            echo "INFO: Docker Image build started ... ...."
+							docker  build -t  ${dockerImageName}:${docker_tag}  . 
+							echo "INFO: Docker Image Build completed Successfullly ...!!!!"
+                            """
+                      }
+                  }
+            }
+        }
+stage('imagepush') { 
+            steps {
+                  dir("${env.WORKSPACE}") {
+                      script {
+                          sh """
+                            echo "$USER"
+                            echo "INFO: Docker Image push started ... ...."
+	                #	docker  tag ${dockerImageName}:${docker_tag} ${dev_docker_repo}:latest
+                         #   docker  tag ${dockerImageName}:${docker_tag} ${dev_docker_repo}:${docker_tag}
+                           # docker  tag ${dockerImageName}:${docker_tag} ${qa_docker_repo}:latest
+                           # docker  tag ${dockerImageName}:${docker_tag} ${qa_docker_repo}:${docker_tag}
+                           # docker  tag ${dockerImageName}:${docker_tag} ${uat_docker_repo}:latest
+                           # docker  tag ${dockerImageName}:${docker_tag} ${uat_docker_repo}:${docker_tag}
+                            docker  tag ${dockerImageName}:${docker_tag} ${prod_docker_repo}:latest
+                            docker  tag ${dockerImageName}:${docker_tag} ${prod_docker_repo}:${docker_tag}
+                            """
+						    docker.withRegistry(dev_docker_registry_url,docker_credential) {
+    			//			docker.image(dev_docker_repo).push(docker_tag)
+                           // docker.image(dev_docker_repo).push("latest")
+    						//docker.image(qa_docker_repo).push(docker_tag)
+                            //docker.image(qa_docker_repo).push("latest")
+    						//docker.image(uat_docker_repo).push(docker_tag)
+                            //docker.image(uat_docker_repo).push("latest")
+            				docker.image(prod_docker_repo).push(docker_tag)
+                            docker.image(prod_docker_repo).push("latest")
+                            }
+      						echo "INFO: Docker Image Push completed Successfullly ...!!!!"
+                          }
+                  }
+            }
+        }
+stage('Image cleanup'){
+    		steps {
+    			echo "INFO: Clean up the Image from local"
+    			script {
+    		 //		sh "docker rmi $dev_docker_repo:$docker_tag $dev_docker_repo:latest"
+                   // sh "docker rmi $qa_docker_repo:$docker_tag $qa_docker_repo:latest"
+                   // sh "docker rmi $uat_docker_repo:$docker_tag $uat_docker_repo:latest"
+                    sh "docker rmi $prod_docker_repo:$docker_tag $prod_docker_repo:latest"
+                    sh "docker rmi ${dockerImageName}:$docker_tag"
+                    //sh "docker rmi $dev_docker_repo $dev_docker_repo:$docker_tag $dev_docker_repo $dev_docker_repo:latest"
+                    }
+    		}
+        }  
+stage ('Spinnaker Property File'){
+    		steps {
+    			script {
+    				sh "echo --- > build_properties.yaml"
+    				sh "echo dev_namespace: dev-$product >> build_properties.yaml"
+    				sh "echo dev-image: ${ecr_repo}-dev:$docker_tag >> build_properties.yaml"
+       				sh "echo qa-image: ${ecr_repo}-qa:$docker_tag >> build_properties.yaml"
+    				sh "echo uat-image: ${ecr_repo}-uat:$docker_tag >> build_properties.yaml"
+                                sh "echo prod-image: ${ecr_repo}-prod:$docker_tag >> build_properties.yaml"
+    			}
+     		}
+    	} 
+
+}
+      post {
+        always {
+            archiveArtifacts artifacts: 'build_properties.yaml', onlyIfSuccessful: true
+        script {
+           if (currentBuild.currentResult == 'SUCCESS') {
+            COLORCODE = 'GREEN'
+            colorCode = '#00FF00'
+            } else {
+                  COLORCODE = 'RED'
+                  colorCode = '#FF0000'
+                }
+            step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "${EMAIL_TO}", sendToIndividuals: true])
+            
+            emailext (
+              subject: "${currentBuild.currentResult}: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+              mimeType: 'text/html',
+              replyTo: '$DEFAULT_REPLYTO',
+              from: 'platform-ci@girnarsoft.com',
+              body: """<p style="background-color:${colorCode};"> ${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}</p>
+              <p> <b>BUILD URL:</b> ${env.BUILD_URL} <br> 
+              <b>Project:</b>    ${project_name} <br>
+              <b>Date of build:</b> ${BUILD_TIMESTAMP} <br></p>
+              <h3 style="background-color:powderblue;"> CHANGES </h3>
+              <p> <b>Bitbucket Repo url:</b> ${GIT_URL} <br>
+              <b>Branch Name for this build:</b> ${GIT_BRANCH} </p>
+              <p style="color:blue;"> ${change_set} </p>
+              <h4 style="background-color:powderblue;"> <b>Junit Test</b> </h4>
+              <p> <b>Code Coverage Report</b> </p>
+              <p> <b>SonarQube Dashboard url:</b> ${sonar_url} </p>
+              <p> <b>Build Arctifact url:</b> ${dev_docker_registry_url} </p>
+              <p> <b>ARTIFACTS DISPLAY URL:</b> ${RUN_ARTIFACTS_DISPLAY_URL} </p>
+              <p> Build logs  attached here :\n  </p>""",
+              attachLog: true,
+              //compressLog: true,
+              recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']],
+              to: "${EMAIL_TO}"
+              )
+          }
+        }
+    }
+}

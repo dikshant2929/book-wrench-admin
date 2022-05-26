@@ -1,0 +1,10 @@
+// @import "tailwindcss/tailwind.css";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+    .switchBtn:checked ~ .dot {
+        @apply transform translate-x-full bg-green-500;
+    }
+}
