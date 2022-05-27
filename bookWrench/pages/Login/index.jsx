@@ -14,7 +14,7 @@ const Login = (props) => {
             </div>
         </div>
         <footer>
-            <div className="foot-item-wraper w-full flex bg-[#35324A] text-[#FFFFFF] justify-between items-center p-3 sm:p-4 md:p-8 ">
+            <div className="foot-item-wraper w-full flex bg-[#35324A] text-[#FFFFFF] justify-between items-baseline p-3 sm:p-4 md:p-8 ">
                <div className="">
                     <ul className="text-sm flex flex-col text-center md:flex md:flex-row">
                         <li className="pr-3 sm:flex-grow[2]"><a href="#" className="">Copyright 2022 - BookWrench</a></li>
