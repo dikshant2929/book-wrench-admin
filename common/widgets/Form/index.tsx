@@ -37,20 +37,31 @@ const Form = (props: any) => {
     return (
         <form onSubmit={onSubmit} className={`${props.className || ''}`}>
             <div className="flex flex-wrap">
+                <div className="remember-me order-3 flex justify-between w-full py-4">
+                    <div className="flex items-center p-1 gap-2">
+                        <input type="checkbox" className="rounded"/>
+                        <label htmlFor="above-checkbox" className="text-[#35324A] text-sm">Remember Me</label>
+                    </div>
+                    <div className="">
+                        <p className="text-[#1C5A9C] text-sm"><a href="#" className="href">Forgot Password?</a></p>
+                    </div>
+
+                </div>
                 <Renderer config={config} />
             </div>
             {React.Children.count(props.children) ? (
                 props.children
             ) : (
                 <div className="text-center mt-6">
-                    <Button 
+
+                    <Button
                         disabled={!state.isValidForm ?? false}
                         title={props.buttonTitle || 'Submit'}
-                        className={` ml-1 ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
-                        display="inline-flex" 
-                        width="w-auto" 
-                        height="h-46px" 
-                        padding="px-20px" 
+                        className={`rounded-full ml-1 ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
+                        display="inline-flex"
+                        width="w-full"
+                        height="h-46px"
+                        padding="px-20px"
                         fontSize="text-sm"
                     />
                 </div>

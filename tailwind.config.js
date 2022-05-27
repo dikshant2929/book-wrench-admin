@@ -145,12 +145,14 @@ module.exports = {
                     'vertical-align': 'middle'
                 },
                 '.button-primary': {
-                    'border': 'solid 1px #F75D34',
+                    'border': 'solid 1px #0052CC;',
                     'color': '#fff',
-                    'background': '#F75D34',
+                    'background': '#0052CC;',
                     'align-items': 'center',
                     'justify-content': 'center',
-                    'border-radius':'4px',
+                    'border-radius':'50px',
+                    'font-size':'16px',
+                    'line-height':'50px',
                     'box-shadow': '0px 8px 8px rgba(247, 93, 52, 0.2)',
                     'vertical-align': 'middle'
                 },

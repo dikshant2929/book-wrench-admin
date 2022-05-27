@@ -117,6 +117,7 @@ class Input extends React.Component<PropsWithChildren<InputBoxProps>, InputState
                         className="block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
                         placeholder={props.placeholder}
                     />
+                    
                     {!error.status && (
                         <span
                             data-gsv-error="1"
@@ -136,6 +137,7 @@ class Input extends React.Component<PropsWithChildren<InputBoxProps>, InputState
                         />
                     )}
                 </div>
+                
             </div>
         );
     }

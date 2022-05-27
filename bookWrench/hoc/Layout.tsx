@@ -27,7 +27,7 @@ export default function Layout(props: any) {
                 </>
             )}
             <div className="app-content font-poppins">
-                <div className={`container max-w-full ${isLoggedIn ? 'pl-72' : 'pl-0'} mt-16`}>{props.children}</div>
+                <div className={`max-w-full ${isLoggedIn ? 'pl-72' : 'pl-0'}`}>{props.children}</div>
             </div>
             <Popup />
             <ToastNotification />

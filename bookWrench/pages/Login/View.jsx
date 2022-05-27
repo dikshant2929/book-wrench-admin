@@ -75,16 +75,26 @@ const View = (props) => {
     };
 
     return (
+        <div className="form-wrapper">
         <div className="p-3">
-            <h1 className="text-left font-medium text-4xl mb-6">Login</h1>
-            <div className="bg-white rounded-md  p-4 mb-4 w-600px">   
-                <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Login"></Form>
+            <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Sign In to BookWrench</h1>
+            
+            <div className="bg-white rounded-md ">  
+             
+                <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Sign In"></Form>
+                
             </div>
+            
             <ToastNotification
                 flag={toastState.visibility}
                 message={toastState.message}
                 isSuccess={toastState.isSuccess}
             />
+            
+        </div>
+        <div className="account-ref py-5">
+            <h1 className="text-base">Don't have an account <span className="text-blue-900"><strong>Sign Up Now</strong></span></h1>
+        </div>
         </div>
     );
 };
