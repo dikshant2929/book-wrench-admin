@@ -57,7 +57,7 @@ const Form = (props: any) => {
                     <Button
                         disabled={!state.isValidForm ?? false}
                         title={props.buttonTitle || 'Submit'}
-                        className={`rounded-full ml-1 ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
+                        className={`rounded-full ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
                         display="inline-flex"
                         width="w-full"
                         height="h-46px"

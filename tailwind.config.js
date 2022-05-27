@@ -153,7 +153,6 @@ module.exports = {
                     'border-radius':'50px',
                     'font-size':'16px',
                     'line-height':'50px',
-                    'box-shadow': '0px 8px 8px rgba(247, 93, 52, 0.2)',
                     'vertical-align': 'middle'
                 },
                 '.button-default': {
@@ -163,7 +162,6 @@ module.exports = {
                     'align-items': 'center',
                     'justify-content': 'center',
                     'border-radius':'4px',
-                    'box-shadow': '0px 8px 8px rgba(128, 128, 128, 0.1)',
                     'vertical-align': 'middle'
                 }
             };
