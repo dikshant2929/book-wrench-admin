@@ -5,7 +5,7 @@ const Dashboard = () => {
     return (
         <>
             <ShimmerEffect height={150} count={3} visible={false} type="grid" />
-            <h1>I am in Dashboard</h1>
+            <h1 className="pt-24">I am in Dashboard</h1>
         </>
     );
 };

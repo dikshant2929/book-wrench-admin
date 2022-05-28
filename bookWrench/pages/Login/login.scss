@@ -5,6 +5,9 @@
             border-radius: 0;
             padding: 0;
         }
+        .inputLogin:focus{
+            border-bottom: 1px solid #0052CC;
+        }
     
 .form-wrapper form{
     padding: 0 20px;

@@ -44,7 +44,7 @@ const Form = (props: any) => {
             <div className="flex flex-wrap">
                 <div className="remember-me order-3 flex justify-between w-full py-4 items-center">
                     {props.isRemember && <div className="flex items-center p-1 gap-2">
-                        <input type="checkbox" className="rounded"/>
+                        <input type="checkbox" className="rounded" id="above-checkbox"/>
                         <label htmlFor="above-checkbox" className="text-[#35324A] text-sm">Remember Me</label>
                     </div>}
                     {props.isForgotPassword && <div className="">
