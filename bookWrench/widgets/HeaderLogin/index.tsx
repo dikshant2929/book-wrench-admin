@@ -6,7 +6,7 @@ export default function HeaderLogin(props: any) {
             <header>
                 
                 <div className="h-15 bg-white shadow-lg shadow-cyan-500/50">
-                <img src="./bookWrench//assets/images/bookWrench_logo.svg" alt="logo"/>
+                <img className="m-auto py-3" src="./bookWrench//assets/images/bookWrench_logo.svg" alt="logo"/>
 
 
                 </div>

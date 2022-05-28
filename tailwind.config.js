@@ -139,9 +139,11 @@ module.exports = {
                     'background': 'rgba(36,39,44,.3) !important',
                     'align-items': 'center',
                     'justify-content': 'center',
-                    'border-radius':'4px',
+                    'border-radius':'50px',
                     'cursor': 'no-drop !important',
                     'box-shadow': 'none',
+                    'font-size':'16px',
+                    'line-height':'50px',
                     'vertical-align': 'middle'
                 },
                 '.button-primary': {
