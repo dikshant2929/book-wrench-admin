@@ -12,6 +12,7 @@ const {
     Home,
     Dashboard,
     Login,
+    ForgotPassword
 } = exposedPath;
 
 const ROUTE_PREFIX = Root;
@@ -19,6 +20,7 @@ const ROUTE_PREFIX = Root;
 const publicRouteConfig = [
     { name: 'home', path: Home, componentName: 'Home', exact: true },
     { name: 'login', path: Login, componentName: 'Login', exact: true },
+    { name: 'forgotpassword', path: ForgotPassword, componentName: 'ForgotPassword', exact: true },
 ];
 
 const privateRouteConfig = [
@@ -33,7 +35,9 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Login' */ '@pages/Login'));
         case 'Dashboard':
             return loadable(() => import(/* webpackChunkName: 'Dashboard' */ '@pages/Dashboard'));
-        ;
+        case 'ForgotPassword':
+            return loadable(() => import(/* webpackChunkName: 'ForgotPassword' */ '@pages/ForgotPassword'));
+        
     }
 };
 

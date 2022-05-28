@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import View from './View';
 import HeaderLogin from '@widgets/HeaderLogin';
 import FooterLogin from '@widgets/FooterLogin';
-import './login.scss';
+import './ForgotPassword.scss';
 
-const Login = (props) => {
+const ForgotPassword = (props) => {
 
     useEffect(() => {
             const header = document.getElementsByClassName("header")[0];
@@ -29,4 +29,4 @@ const Login = (props) => {
     );
 };
 
-export default Login;
+export default ForgotPassword;

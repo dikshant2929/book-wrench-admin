@@ -1,7 +1,12 @@
 'use strict';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function NotFoundPage() {
+
+    useEffect(() => {
+        const header = document.getElementsByClassName("header")[0];
+        header?.classList?.add("hidden")
+    },[])
     return (
         <main className="gsc_container notFoundOut">
             <div className="gsc_row notFound">

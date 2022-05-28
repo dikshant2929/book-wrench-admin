@@ -3,6 +3,11 @@ import { Renderer } from './Renderer';
 import FormHelper from '@common/widgets/Form/FormHelper';
 import Button from '@button';
 
+const defaultProps = {
+    isRemember:true,
+    isForgotPassword:true
+}
+
 const Form = (props: any) => {
     if (!props.formConfiguration || !Array.isArray(props.formConfiguration) || !props.formConfiguration.length) {
         throw new Error('You are calling Form with no config array : formConfiguration');
@@ -38,13 +43,13 @@ const Form = (props: any) => {
         <form onSubmit={onSubmit} className={`${props.className || ''}`}>
             <div className="flex flex-wrap">
                 <div className="remember-me order-3 flex justify-between w-full py-4 items-center">
-                    <div className="flex items-center p-1 gap-2">
+                    {props.isRemember && <div className="flex items-center p-1 gap-2">
                         <input type="checkbox" className="rounded"/>
                         <label htmlFor="above-checkbox" className="text-[#35324A] text-sm">Remember Me</label>
-                    </div>
-                    <div className="">
+                    </div>}
+                    {props.isForgotPassword && <div className="">
                         <p className="text-[#1C5A9C] text-sm"><a href="#" className="href">Forgot Password?</a></p>
-                    </div>
+                    </div>}
 
                 </div>
                 <Renderer config={config} />
@@ -69,5 +74,5 @@ const Form = (props: any) => {
         </form>
     );
 };
-
+Form.defaultProps = defaultProps;
 export default Form;
