@@ -63,8 +63,9 @@ export default function Header(props: any) {
                         </svg> */}
                     </div>
                     <ul className={`absolute w-44 -bottom-15 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block`}>
-                        <li>
-                        <GoogleLogout
+                        <li onClick={logout} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
+                            <span>Logout</span>
+                        {/* <GoogleLogout
                             className="cursor-pointer mr-0 ml-auto"
                             clientId={GOOGLE_CLIENT_ID}
                             onLogoutSuccess={logout}
@@ -79,7 +80,7 @@ export default function Header(props: any) {
                                     {isLoggedIn ? 'Logout' : 'Login'}
                                 </a>
                             )}
-                        ></GoogleLogout>
+                        ></GoogleLogout> */}
                         </li>
                     </ul>
                 </div>
