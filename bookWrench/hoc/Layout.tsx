@@ -23,7 +23,7 @@ export default function Layout(props: any) {
             {auth && auth.isUserAuthenticated() && (
                 <>
                     <Header isLoggedIn={isLoggedIn} auth={auth} />
-                    <SideMenu isLoggedIn={isLoggedIn} auth={auth}/>
+                    {/* <SideMenu isLoggedIn={isLoggedIn} auth={auth}/> */}
                 </>
             )}
             <div className="app-content font-poppins">
