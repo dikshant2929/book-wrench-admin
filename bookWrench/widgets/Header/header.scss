@@ -1,0 +1,17 @@
+
+//variables
+$nav-color: #091E42;
+
+@mixin header-logo-size {width: 137px;height: 25px;}
+
+@mixin nav-font-style {font-size: 13px;line-height: 16px;color: $nav-color;}
+
+.navbar ul li{
+        padding: 10px;
+        a {         
+         @include nav-font-style;
+        }
+}
+.main-header-logo{
+    @include header-logo-size;
+}

@@ -1,18 +1,16 @@
 .login-page{
-    .inputLogin{
-        border: 0;
-        border-bottom: 1px solid #80808038;
-        border-radius: 0;
-        padding: 0;
-    }
-    // .inputLogin:focus{
-    //     border: 1px solid #80808038;
-    // }
-    .form-wrapper form{
-        padding: 0 20px;
+        .inputLogin{
+            border: 0;
+            border-bottom: 1px solid #80808038;
+            border-radius: 0;
+            padding: 0;
+        }
+    
+.form-wrapper form{
+    padding: 0 20px;
         
-        input[type="checkbox"]:focus {
+    input[type="checkbox"]:focus {
             box-shadow:none;
-          }
+    }
     }
 }
