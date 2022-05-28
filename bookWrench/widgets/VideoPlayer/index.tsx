@@ -58,7 +58,7 @@ const VideoPlayer = ({ ...props }: any) => {
             </a>
             {
                 isPlayerVisible && 
-                <div id="popupContainer" tabIndex={-1} className="font-poppins absolute">
+                <div id="popupContainer" tabIndex={-1} className="font-inter absolute">
                     {/* 'tabIndex' to put the focus on the popup (so that listener could work) */}
                     <div className={overlayClasses} onClick={() => setPlayerVisibility(false)}></div>
                     <div style={{ transform: 'translate(-50%,-50%) scale(1)', overflow : "hidden"}} className={contentClasses}>

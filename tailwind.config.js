@@ -40,7 +40,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                poppins : "'Poppins', sans-serif"
+                inter : "'Inter', sans-serif"
             },
             fontSize: {
                 'tiny': '10px',

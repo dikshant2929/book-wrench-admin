@@ -168,7 +168,7 @@ const SideMenu = (props: any) => {
                             <li key={key} onClick={(e) => onItemClick(e, item)} className="my-4">
                                 {/* <a className={`py-3 px-5 block border-b border-gray-100 hover:bg-gray-200 ${item.isActive ? "bg-gray-200" : ""}`} href={item.link}>{item.title}</a> */}
                                 {!item.subMenu ? <UALink
-                                    className={`py-3 px-5 block font-poppins font-light rounded-tr-lg rounded-br-lg ${
+                                    className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg ${
                                         item.isActive ? 'bg-lightpink' : ''
                                     }`}
                                     title={item.title}
@@ -185,7 +185,7 @@ const SideMenu = (props: any) => {
                                 </UALink> :
                                 <Route render={({ history}) => (
                                    
-                                    <span className={`py-3 px-5 block font-poppins font-light rounded-tr-lg rounded-br-lg cursor-pointer ${
+                                    <span className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg cursor-pointer ${
                                     item.isActive ? 'bg-lightpink' : ''
                                 }`} onClick={() => { history.push(item.subMenu[0].link) }}>
                                     <span className={`flex text-gray-500 group hover:text-primary ${item.isActive ? 'text-primary font-medium' : ''}`}>
@@ -199,7 +199,7 @@ const SideMenu = (props: any) => {
                                 </span>
 
                                     )} />
-                                // <span className={`py-3 px-5 block font-poppins font-light rounded-tr-lg rounded-br-lg cursor-pointer ${
+                                // <span className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg cursor-pointer ${
                                 //     item.isActive ? 'bg-lightpink' : ''
                                 // }`} onClick={() => subMenuParentClick(item.subMenu[0].link)}>
                                 //     <span className={`flex text-gray-500 group hover:text-primary ${item.isActive ? 'text-primary font-medium' : ''}`}>
@@ -216,7 +216,7 @@ const SideMenu = (props: any) => {
                                     {item.subMenu.map((innerItem: any, innerKey: number) => (
                                         <li key={innerKey}>
                                             <UALink 
-                                                className={`py-3 px-12 block font-poppins font-light text-sm rounded-tr-lg rounded-br-lg ${innerKey == 0 ? 'highlight': ''} ${innerItem.isActive ? 'text-primary font-medium': ''}`}
+                                                className={`py-3 px-12 block font-inter font-light text-sm rounded-tr-lg rounded-br-lg ${innerKey == 0 ? 'highlight': ''} ${innerItem.isActive ? 'text-primary font-medium': ''}`}
                                                 title={innerItem.title} 
                                                 to={innerItem.link}>{innerItem.title}
                                             </UALink>

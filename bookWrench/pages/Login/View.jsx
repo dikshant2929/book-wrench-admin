@@ -14,7 +14,10 @@ const formConfiguration = [
             type: 'text',
             name: 'username',
             // maxLength : "3",
-            'data-gsv-err-msg': 'Username is required.',
+            'data-gsv-err-msg': 'User Name is required.',
+            placeHolder:"User Name",
+            classNameLabel:"hidden",
+            classNameInput:"inputLogin"
         },
         extraProps: {
             label: 'Username',
@@ -32,7 +35,10 @@ const formConfiguration = [
             type: 'password',
             name: 'password',
             maxLength: '50',
+            placeHolder:"Password",
             'data-gsv-err-msg': 'Password is required.',
+            classNameLabel:"hidden",
+            classNameInput:"inputLogin"
         },
         extraProps: {
             label: 'Password',
@@ -92,9 +98,9 @@ const View = (props) => {
             />
             
         </div>
-        <div className="account-ref py-5">
+        {/* <div className="account-ref py-5">
             <h1 className="text-base">Don't have an account <span className="text-blue-900"><strong>Sign Up Now</strong></span></h1>
-        </div>
+        </div> */}
         </div>
     );
 };

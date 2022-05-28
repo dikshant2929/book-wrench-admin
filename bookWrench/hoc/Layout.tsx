@@ -26,8 +26,8 @@ export default function Layout(props: any) {
                     {/* <SideMenu isLoggedIn={isLoggedIn} auth={auth}/> */}
                 </>
             )}
-            <div className="app-content font-poppins">
-                <div className={`max-w-full ${isLoggedIn ? 'pl-72' : 'pl-0'}`}>{props.children}</div>
+            <div className="app-content font-inter">
+                <div className="max-w-full">{props.children}</div>
             </div>
             <Popup />
             <ToastNotification />

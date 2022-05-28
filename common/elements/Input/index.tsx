@@ -96,7 +96,7 @@ class Input extends React.Component<PropsWithChildren<InputBoxProps>, InputState
             <div className={`p-1 min-w-1/4 mb-2 inline-block ${options.parentClass || 'w-full'}`} id={options.parentId || `parent-${props.name}`}>
                 <div className={`relative ${options.newInptClass}`}>
                     {this.state.IconName && <i className="connecto-icons">{this.state.IconName}</i>}
-                    <label className="block text-xs text-gray-700 mb-1 text-left truncate" htmlFor={options.id}>
+                    <label className={`${props.classNameLabel} block text-xs text-gray-700 mb-1 text-left truncate`} htmlFor={options.id}>
                         {options.label}
                     </label>
                     <input
@@ -114,7 +114,7 @@ class Input extends React.Component<PropsWithChildren<InputBoxProps>, InputState
                         }}
                         onKeyPress={(e) => validateUtility.stopDefault(e)}
                         ref={(node) => (this.el = node)}
-                        className="block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
+                        className={`${props.classNameInput} block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm`}
                         placeholder={props.placeholder}
                     />
                     

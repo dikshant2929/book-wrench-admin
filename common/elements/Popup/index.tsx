@@ -49,7 +49,7 @@ const Popup: any = (props: any) => {
 
     return (
         isVisible && (
-            <div id="popupContainer" tabIndex={-1} className="font-poppins">
+            <div id="popupContainer" tabIndex={-1} className="font-inter">
                 {' '}
                 {/* 'tabIndex' to put the focus on the popup (so that listener could work) */}
                 <div className={overlayClasses} onClick={() => setIsVisible(false)}></div>
