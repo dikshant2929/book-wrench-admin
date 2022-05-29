@@ -3,7 +3,9 @@ import Form from '@common/widgets/Form';
 import ToastNotification from '@common/elements/ToastNotification';
 import Service from "./Services/login.service";
 import exposedPath from '@ExposedPath';
-const { Dashboard } = exposedPath;
+import UALink from '@common/elements/UALink';
+
+const { Dashboard, ForgotPassword } = exposedPath;
 
 const formConfiguration = [
     {
@@ -80,15 +82,32 @@ const View = (props) => {
         Service.doLogin(request, (data) => showSuccessMessage(data));
     };
 
+    const AboveButton = () => {
+        return (
+            <div className="remember-me order-3 flex justify-between w-full py-4 items-center">
+                <div className="flex items-center p-1 gap-2">
+                    <input type="checkbox" className="rounded" id="above-checkbox" />
+                    <label htmlFor="above-checkbox" className="text-[#35324A] text-sm">Remember Me</label>
+                </div>
+                <div className="">
+                    <UALink 
+                        className={`text-[#1C5A9C] text-sm`}
+                        title="Forgot Password?"
+                        to={ForgotPassword}>
+                            Forgot Password?
+                    </UALink>
+                    {/* <p className="text-[#1C5A9C] text-sm"><a href="#" className="href">Forgot Password?</a></p> */}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="form-wrapper">
         <div className="p-3">
             <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Sign In to BookWrench</h1>
-            
             <div className="bg-white rounded-md ">  
-             
-                <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Sign In"></Form>
-                
+                <Form aboveButton={AboveButton} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Sign In"></Form>
             </div>
             
             <ToastNotification
