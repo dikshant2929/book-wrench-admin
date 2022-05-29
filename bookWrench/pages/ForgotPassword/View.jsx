@@ -3,7 +3,8 @@ import Form from '@common/widgets/Form';
 import ToastNotification from '@common/elements/ToastNotification';
 import Service from "./Services/forgotpassword.service";
 import exposedPath from '@ExposedPath';
-const { Dashboard } = exposedPath;
+const { Dashboard, Login } = exposedPath;
+import UALink from '@common/elements/UALink';
 
 const formConfiguration = [
     {
@@ -60,13 +61,28 @@ const View = (props) => {
         Service.doLogin(request, (data) => showSuccessMessage(data));
     };
 
+    const AboveButton = () => {
+        return (
+            <div className="remember-me order-3 flex justify-between w-full py-4 items-center">
+                <div className="">
+                    <UALink 
+                        className={`text-[#1C5A9C] text-sm`}
+                        title="Back to Login"
+                        to={Login}>
+                            Back to login
+                    </UALink>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="form-wrapper">
             <div className="p-3">
                 <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Forgot Password ?</h1>
 
                 <div className="bg-white rounded-md ">
-                    <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Reset Password"></Form>
+                    <Form aboveButton={AboveButton} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Reset Password"></Form>
                 </div>
 
                 <ToastNotification
