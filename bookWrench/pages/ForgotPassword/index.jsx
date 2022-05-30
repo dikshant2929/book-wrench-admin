@@ -13,11 +13,11 @@ const ForgotPassword = (props) => {
 
 
     return (
-        <div className="wrapper">
+        <div className="wrapper forgot-wrap">
                 <HeaderLogin/>
                 <div className="login-page">
                     <div className="mx-auto flex justify-center items-center sm:px-4">
-                        <div className="bg-white w-full  sm:w-[448px] border-solid border mx-auto text-center rounded-lg my-16">
+                        <div className="bg-white w-full  sm:w-[448px] border-solid border mx-auto text-center rounded-lg my-28">
                             <View {...props} />
                         </div>
                     </div>

@@ -45,7 +45,7 @@ const Form = (props: any) => {
             {React.Children.count(props.children) ? (
                 props.children
             ) : (
-                <div className="text-center my-6">
+                <div className="text-center">
 
                     <Button
                         disabled={!state.isValidForm ?? false}

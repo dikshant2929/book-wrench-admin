@@ -83,8 +83,8 @@ const View = (props) => {
 
     return (
         <div className="form-wrapper">
-        <div className="p-3">
-            <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Reset Password</h1>
+        <div className="p-10">
+            <h1 className="text-center text-[#35324A] font-medium text-2xl mb-6">Reset Password</h1>
             
             <div className="bg-white rounded-md ">  
                 <Form isRemember={false} isForgotPassword={false} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Update Password"></Form>

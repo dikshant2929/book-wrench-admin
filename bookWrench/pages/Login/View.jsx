@@ -84,8 +84,8 @@ const View = (props) => {
 
     const AboveButton = () => {
         return (
-            <div className="remember-me order-3 flex justify-between w-full py-4 items-center">
-                <div className="flex items-center p-1 gap-2">
+            <div className="remember-me order-3 flex justify-between w-full py-10 items-center">
+                <div className="flex items-center gap-2">
                     <input type="checkbox" className="rounded" id="above-checkbox" />
                     <label htmlFor="above-checkbox" className="text-[#35324A] text-sm">Remember Me</label>
                 </div>
@@ -104,8 +104,8 @@ const View = (props) => {
 
     return (
         <div className="form-wrapper">
-        <div className="p-3">
-            <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Sign In to BookWrench</h1>
+        <div className="p-10">
+            <h1 className="text-center text-[#35324A] font-medium text-2xl mb-6">Sign In to BookWrench</h1>
             <div className="bg-white rounded-md ">  
                 <Form aboveButton={AboveButton} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Sign In"></Form>
             </div>

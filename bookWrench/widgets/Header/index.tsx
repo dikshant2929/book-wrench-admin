@@ -28,7 +28,7 @@ export default function Header(props: any) {
     return (
         <>
             <header className="header top-0 left-0 w-full z-10 fixed bg-white h-15 shadow-md">
-                <div className="flex h-14 items-center px-5 justify-between ">
+                <div className="flex h-[4.75rem] items-center px-5 justify-between ">
                     {/* <div className="w-6 cursor-pointer mr-3">
                         <img src={menuicon} alt="" />
                     </div> */}

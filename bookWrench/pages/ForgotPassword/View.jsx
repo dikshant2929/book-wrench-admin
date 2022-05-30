@@ -5,6 +5,7 @@ import Service from "./Services/forgotpassword.service";
 import exposedPath from '@ExposedPath';
 const { Dashboard, Login } = exposedPath;
 import UALink from '@common/elements/UALink';
+import './ForgotPassword.scss';
 
 const formConfiguration = [
     {
@@ -63,8 +64,8 @@ const View = (props) => {
 
     return (
         <div className="form-wrapper">
-            <div className="p-3">
-                <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Forgot Password ?</h1>
+            <div className="p-10">
+                <h1 className="text-center text-[#35324A] font-medium text-2xl mb-6">Forgot Password ?</h1>
 
                 <div className="bg-white rounded-md ">
                     <Form  formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Reset Password"></Form>
@@ -72,10 +73,10 @@ const View = (props) => {
 
                 <div className="">
                        
-                       <div className="or">Or</div>
+                       <div className="or"><span>Or</span></div>
                         <div className="">
                             <UALink 
-                                className={`text-[#1C5A9C] text-sm`}
+                                className={`text-[#1C5A9C] text-base font-semibold`}
                                 title="Back to Login"
                                 to={Login}>
                                    Login
