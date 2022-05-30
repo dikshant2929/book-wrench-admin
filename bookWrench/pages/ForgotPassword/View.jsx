@@ -61,28 +61,26 @@ const View = (props) => {
         Service.doLogin(request, (data) => showSuccessMessage(data));
     };
 
-    const AboveButton = () => {
-        return (
-            <div className="remember-me order-3 flex justify-between w-full py-4 items-center">
-                <div className="">
-                    <UALink 
-                        className={`text-[#1C5A9C] text-sm`}
-                        title="Back to Login"
-                        to={Login}>
-                            Back to login
-                    </UALink>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <div className="form-wrapper">
             <div className="p-3">
                 <h1 className="text-center text-[#35324A] py-5 font-medium text-2xl mb-6">Forgot Password ?</h1>
 
                 <div className="bg-white rounded-md ">
-                    <Form aboveButton={AboveButton} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Reset Password"></Form>
+                    <Form  formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Reset Password"></Form>
+                </div>
+
+                <div className="">
+                       
+                       <div className="or">Or</div>
+                        <div className="">
+                            <UALink 
+                                className={`text-[#1C5A9C] text-sm`}
+                                title="Back to Login"
+                                to={Login}>
+                                   Login
+                            </UALink>
+                        </div>
                 </div>
 
                 <ToastNotification
