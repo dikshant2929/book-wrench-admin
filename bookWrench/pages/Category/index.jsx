@@ -31,84 +31,84 @@ const defaultProps = {
                 isShown: false,
             },
         ],
-        dataList: [ 
+        dataList: [
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             },
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
             ,
             {
-                sNo : 1,
-                title : "HVAC"
+                sNo: 1,
+                title: "HVAC"
             }
 
         ],
@@ -143,24 +143,27 @@ const Category = (props) => {
     };
 
     return (
-        <div className="">
-            
-            <h1 className="text-left font-medium text-4xl mb-6 inline-block">{config.title}</h1>
-            <div className="float-right inline-block">
-                <TableWidgets>
-                    <RedirectButton 
-                            title="New Category" 
-                            link={CategoryCreate} 
-                            className="button-primary ml-1" 
-                            display="inline-flex" 
-                            width="w-auto" 
-                            height="h-46px" 
-                            padding="px-20px" 
+        <div className="category mx-20 mt-11 mb-6">
+            <div className="flex justify-between items-center">
+                <h1 className="font-medium text-4xl">{config.title}</h1>
+                <div className="">
+                    <TableWidgets>
+                        <RedirectButton
+                            title="New Category"
+                            link={CategoryCreate}
+                            className="button-primary ml-1"
+                            display="inline-flex"
+                            width="w-auto"
+                            height="h-46px"
+                            padding="px-20px"
                             icon={`M12 4v16m8-8H4`}
-                            fontSize="text-sm" 
-                    />
-                </TableWidgets>
+                            fontSize="text-sm"
+                        />
+                    </TableWidgets>
+                </div>
             </div>
+
+
 
             <TableView
                 config={config}
