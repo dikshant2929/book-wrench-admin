@@ -3,7 +3,7 @@ const baseUrl = {
     dev : "http://localhost:4002/api/v1/",
     staging : "http://bookwrench.gswire.com/api/v1/"
 }
-const env = "staging" || process.env.NODE_ENV;
+const env = "dev" || process.env.NODE_ENV;
 
 const server = {
     proxy: {

@@ -73,7 +73,7 @@ const View = (props) => {
 
                 <div className="">
                        
-                       <div className="or"><span>Or</span></div>
+                       <div className="or"><span>OR</span></div>
                         <div className="">
                             <UALink 
                                 className={`text-[#1C5A9C] text-base font-semibold`}

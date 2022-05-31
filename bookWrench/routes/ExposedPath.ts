@@ -6,6 +6,8 @@ const path = {
     Dashboard: PREFIX + 'dashboard',
     ForgotPassword: PREFIX + 'forgotpassword',
     ResetPassword: PREFIX + 'resetpassword',
+    Category: PREFIX + 'category',
+    SubCategory: PREFIX + 'sub-category',
     // RMList: PREFIX + 'rm',
     // RMCreate: PREFIX + 'rm/create',
     // RMUpdate: PREFIX + 'rm/update',

@@ -18,9 +18,10 @@ export default function Layout(props: any) {
     //     console.log('isLoggedIn : '+isLoggedIn);
     // }, [isLoggedIn]);
 
+    const isAuthenticated = auth && auth.isUserAuthenticated();
     return (
         <div className="app-container Main">
-            {auth && auth.isUserAuthenticated() && (
+            {isAuthenticated && (
                 <>
                     <Header isLoggedIn={isLoggedIn} auth={auth} />
                     {/* <SideMenu isLoggedIn={isLoggedIn} auth={auth}/> */}

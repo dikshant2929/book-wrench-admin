@@ -1,10 +1,10 @@
 'use strict';
-import React, { useEffect } from 'react';
+import React from 'react';
 export default function FooterLogin(props: any) {
     return (
        
         <footer>
-            <div className="foot-item-wraper left-0 w-full flex bg-[#35324A] text-[#FFFFFF] justify-between items-baseline p-3 sm:p-4 md:p-8 ">
+            <div className="foot-item-wraper fixed bottom-0 left-0 w-full flex bg-[#35324A] text-[#FFFFFF] justify-between items-baseline p-3 sm:p-4 md:p-8 ">
             <div className="">
                     <ul className="text-sm flex flex-col text-center md:flex md:flex-row">
                         <li className="pr-3 sm:flex-grow[2]"><a href="#" className="">Copyright 2022 - BookWrench</a></li>

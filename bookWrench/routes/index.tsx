@@ -13,7 +13,8 @@ const {
     Dashboard,
     Login,
     ForgotPassword,
-    ResetPassword
+    ResetPassword,
+    Category
 } = exposedPath;
 
 const ROUTE_PREFIX = Root;
@@ -28,6 +29,7 @@ const publicRouteConfig = [
 
 const privateRouteConfig = [
     { name: 'dashboard', path: Dashboard, componentName: 'Dashboard' },
+    { name: 'category', path: Category, componentName: 'Category', exact: true },
 ];
 
 const asyncLoad = (component: any) => {
@@ -42,6 +44,8 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'ForgotPassword' */ '@pages/ForgotPassword'));
         case 'ResetPassword':
             return loadable(() => import(/* webpackChunkName: 'ResetPassword' */ '@pages/ResetPassword'));
+        case 'Category':
+            return loadable(() => import(/* webpackChunkName: 'Category' */ '@pages/Category'));
         
     }
 };
