@@ -86,10 +86,10 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
             ) : (
                 props.segmentCount > listPerPage && (
                     <div className="gsc_col-md-12">
-                        <div className="pagination flex justify-end mt-5">
+                        <div className="pagination flex justify-between mt-5">
                             <ul className="flex items-center mr-10">
                             {props.currentPage - 1 >= 1 && <li
-                                    className={`text-xs h-9 leading-9 mx-2 cursor-pointer rounded-sm px-2 text-gray-400`}
+                                    className={`text-xs h-9 leading-9 cursor-pointer rounded-sm px-2 text-gray-400`}
                                 >
                                     <span
                                             className="inline-block pt-1.5"
@@ -102,7 +102,7 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
                                         </span>
                                 </li>}
                                 {props.currentPage > 1 && <li
-                                    className={`text-xs h-9 leading-9 mx-2 cursor-pointer rounded-sm px-2 text-gray-400`}
+                                    className={`text-xs h-9 leading-9 cursor-pointer rounded-sm px-2 text-gray-400`}
                                 >
                                    <span onClick={(event) => handleClick(event, 1)} title="First Page">
                                             First
@@ -112,7 +112,7 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
                                     dataList.pages.map((item: any, index: number) => (
                                         <li
                                             key={index}
-                                            className={`text-xs h-9 leading-9 mx-2 cursor-pointer rounded-sm px-2 ${
+                                            className={`text-xs h-9 leading-9 cursor-pointer rounded-sm px-2 ${
                                                 item == props.currentPage ? 'text-gray-900' : 'text-gray-400'
                                             }`}
                                         >
@@ -125,7 +125,7 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
                                         </li>
                                     ))}
                                 {dataList && dataList.pageCount != props.currentPage && <li
-                                    className={`text-xs h-9 leading-9 mx-2 cursor-pointer rounded-sm px-2 text-gray-400`}
+                                    className={`text-xs h-9 leading-9 cursor-pointer rounded-sm px-2 text-gray-400`}
                                 >
                                     <span
                                             title="last Page"
@@ -135,7 +135,7 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
                                         </span>
                                 </li>}
                                 {dataList && dataList.pageCount != props.currentPage && <li
-                                    className={`text-xs h-9 leading-9 mx-2 cursor-pointer rounded-sm px-2 text-gray-400`}
+                                    className={`text-xs h-9 leading-9 cursor-pointer rounded-sm px-2 text-gray-400`}
                                 >
                                     <span
                                             className="inline-block pt-1.5"
@@ -149,7 +149,7 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
                                 </li>}
                             </ul>
                             <div className="flex items-center">
-                                <div className="mr-6 text-xs">Show rows</div>
+                                <div className="mr-6 text-sm text-lightgray">Show rows</div>
                                 {/* <Select
                                     className="w-24 leading-8 block rounded-md outline-none"
                                     classNamePrefix="custamSelectBox outline-none bg-gray-100 border-transparent border-none "

@@ -59,7 +59,8 @@ module.exports = {
                 '100px': '100px'
             },
             textColor: {
-                primary: '#0052cc'
+                primary: '#0052cc',
+                lightgray: '#454D59'
             },
             borderColor:{
                 primary: '#F75D34'
