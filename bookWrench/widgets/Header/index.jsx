@@ -109,7 +109,7 @@ export default function Header(props) {
             <header className="header top-0 left-0 w-full z-10 bg-white shadow-md">
                 <div className="flex h-[4.75rem] items-center px-5 justify-between ">
                     <div className="dash-logo">
-                        <img className="main-header-logo" src="./bookWrench//assets/images/bookWrench_logo.svg" alt="logo" />
+                        <img className="main-header-logo" src="/bookWrench/assets/images/bookWrench_logo.svg" alt="logo" />
                     </div>
                     <div className="navbar">
                         <ul className="flex">

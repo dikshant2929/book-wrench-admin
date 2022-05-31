@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import TableView from '@common/widgets/TableView';
 import TableWidgets from '@common/widgets/TableView/TableWidgets';
 import RedirectButton from '@common/elements/RedirectButton';
+import exposedPath from '@ExposedPath';
+const { CategoryCreate } = exposedPath;
+
 
 const defaultProps = {
     title: 'Categories',
@@ -147,7 +150,7 @@ const Category = (props) => {
                 <TableWidgets>
                     <RedirectButton 
                             title="New Category" 
-                            link={"/create-category"} 
+                            link={CategoryCreate} 
                             className="button-primary ml-1" 
                             display="inline-flex" 
                             width="w-auto" 
