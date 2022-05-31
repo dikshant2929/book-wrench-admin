@@ -3,6 +3,9 @@ import { Renderer } from './Renderer';
 import FormHelper from '@common/widgets/Form/FormHelper';
 import Button from '@button';
 
+const defaultProps = {
+    buttonClass : ""
+};
 const Form = (props: any) => {
     if (!props.formConfiguration || !Array.isArray(props.formConfiguration) || !props.formConfiguration.length) {
         throw new Error('You are calling Form with no config array : formConfiguration');
@@ -50,7 +53,7 @@ const Form = (props: any) => {
                     <Button
                         disabled={!state.isValidForm ?? false}
                         title={props.buttonTitle || 'Submit'}
-                        className={`rounded-full ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
+                        className={`${props.buttonClass} ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
                         display="inline-flex"
                         width="w-full"
                         height="h-46px"
@@ -63,4 +66,5 @@ const Form = (props: any) => {
     );
 };
 
+Form.defaultProps = defaultProps;
 export default Form;

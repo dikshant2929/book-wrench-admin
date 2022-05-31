@@ -139,7 +139,7 @@ module.exports = {
                     'background': 'rgba(36,39,44,.3) !important',
                     'align-items': 'center',
                     'justify-content': 'center',
-                    'border-radius':'50px',
+                    'border-radius':'10px',
                     'cursor': 'no-drop !important',
                     'box-shadow': 'none',
                     'font-size':'16px',
@@ -152,7 +152,7 @@ module.exports = {
                     'background': '#0052CC;',
                     'align-items': 'center',
                     'justify-content': 'center',
-                    'border-radius':'50px',
+                    'border-radius':'10px',
                     'font-size':'16px',
                     'line-height':'50px',
                     'vertical-align': 'middle'
