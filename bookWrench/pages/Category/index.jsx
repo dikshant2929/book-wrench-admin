@@ -3,9 +3,10 @@ import TableView from '@common/widgets/TableView';
 import TableWidgets from '@common/widgets/TableView/TableWidgets';
 import RedirectButton from '@common/elements/RedirectButton';
 import exposedPath from '@ExposedPath';
+import Services from './Services/category.service';
 import './Category.scss';
 const { CategoryCreate } = exposedPath;
-
+import TableEditViewExpire from './Helpers/Template';
 
 const defaultProps = {
     title: 'Categories',
@@ -31,88 +32,12 @@ const defaultProps = {
                 value: 'Update At',
                 isShown: false,
             },
-        ],
-        dataList: [
             {
-                sNo: 1,
-                title: "HVAC"
+                key: 'action',
+                value: 'Actions',
             },
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-            ,
-            {
-                sNo: 1,
-                title: "HVAC"
-            }
-
         ],
+        dataList: []
     },
 };
 
@@ -141,6 +66,34 @@ const Category = (props) => {
 
     const updateHeader = (data) => {
         setTableHeaders(data);
+    };
+
+    useEffect(() => {
+        Services.categoryList(data => {
+            const prevConfig = { ...config };
+            prevConfig.table.totalRecords = 0;
+            prevConfig.table.filteredRecords = 0;
+            prevConfig.table.dataList = data.map((item, index) => ({...item, sNo : (index + 1), actions : [ 'edit'] }));
+            setConfig({ ...prevConfig });
+        });
+    }, []);
+
+    const loadTableData = () => {
+        console.log('loadTableData');
+    };
+
+    const onRefreshButtonClicked = (data) => {
+        console.log('onRefreshButtonClicked');
+        console.log(data);
+    }
+
+    const tableCellView = ({ column, data }) => {
+        switch (column.key) {
+            case 'action':
+                return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
+            default:
+                return <p>{data[column.key]}</p>;
+        }
     };
 
     return (
@@ -174,6 +127,7 @@ const Category = (props) => {
                 onPaginationItemClick={onPaginationItemClick}
                 itemsPerPage={itemsPerPage}
                 tableHeaders={tableHeaders}
+                tableCellView={tableCellView}
                 updateHeader={updateHeader}
             />
 

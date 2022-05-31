@@ -8,6 +8,7 @@ const path = {
     ResetPassword: PREFIX + 'resetpassword',
     Category: PREFIX + 'category',
     CategoryCreate: PREFIX + 'category/create',
+    CategoryEdit: PREFIX + 'category/edit/:editCategory',
     SubCategory: PREFIX + 'sub-category',
     // RMList: PREFIX + 'rm',
     // RMCreate: PREFIX + 'rm/create',

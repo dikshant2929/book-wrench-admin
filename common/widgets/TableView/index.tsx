@@ -20,7 +20,7 @@ const TableView = (props: TableViewProps) => {
     const { tableHeaders, updateHeader } = props;
     //const [tableHeaders, setTableHeaders] = useState<HeaderProps[]>(props.config?.table?.heading);
 
-    const thClasses = `px-4 py-4 font-inter font-medium text-13px text-left ${props?.thClasses}`;
+    const thClasses = `bg-gray-300 px-4 py-4 font-inter font-medium text-13px text-left ${props?.thClasses}`;
     const tdClasses = `px-4 py-4 font-inter text-13px text-left min-w-100px ${props?.tdClasses}`;
 
     if (!props.config) {
@@ -37,7 +37,7 @@ const TableView = (props: TableViewProps) => {
     const onChangeColumn = (arg: any) => {
         updateHeader(arg);
     };
-
+    
     return (
         <>
             {React.Children.count(props.children) > 0 ? props.children : null}

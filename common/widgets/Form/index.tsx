@@ -37,8 +37,6 @@ const Form = (props: any) => {
         props.onSubmit({ ...state });
     };
 
-    console.log(props);
-
     return (
         <form onSubmit={onSubmit} className={`${props.className || ''}`}>
             <div className="flex flex-wrap">

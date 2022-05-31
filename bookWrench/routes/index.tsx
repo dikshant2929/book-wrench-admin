@@ -15,7 +15,8 @@ const {
     ForgotPassword,
     ResetPassword,
     Category,
-    CategoryCreate
+    CategoryCreate,
+    CategoryEdit
 } = exposedPath;
 
 const ROUTE_PREFIX = Root;
@@ -30,6 +31,7 @@ const publicRouteConfig = [
 
 const privateRouteConfig = [
     { name: 'dashboard', path: Dashboard, componentName: 'Dashboard' },
+    { name: 'category-edit', path: CategoryEdit, componentName: 'CategoryCreate'},
     { name: 'category-create', path: CategoryCreate, componentName: 'CategoryCreate', exact: true },
     { name: 'category', path: Category, componentName: 'Category', exact: true },
 ];
