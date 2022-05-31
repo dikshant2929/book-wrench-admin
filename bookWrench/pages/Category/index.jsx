@@ -3,6 +3,7 @@ import TableView from '@common/widgets/TableView';
 import TableWidgets from '@common/widgets/TableView/TableWidgets';
 import RedirectButton from '@common/elements/RedirectButton';
 import exposedPath from '@ExposedPath';
+import './Category.scss';
 const { CategoryCreate } = exposedPath;
 
 

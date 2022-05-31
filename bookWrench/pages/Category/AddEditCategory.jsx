@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Form from '@common/widgets/Form';
 import exposedPath from '@ExposedPath';
+import './Category.scss';
 
 const { Category } = exposedPath;
 const defaultProps = {
@@ -39,13 +40,13 @@ const AddEditCategory = (props) => {
     };
 
     return (
-        <div className="bg-white center m-20 p-20">
-            <center>
-                <h1 className="text-left font-medium text-4xl mb-6 inline-block">Create New Category</h1>
-                <div className="shadow rounded-md  p-4 mb-4 w-600px">   
+        <div className="addCategory bg-white center m-20 py-20">
+            <div className="w-600px mx-auto ">
+                <h1 className="font-medium text-2xl mb-2">Create New Category</h1>
+                <div className="add-catg-form-wrapper shadow rounded-md p-10">   
                     <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Save"></Form>
                 </div>
-            </center>
+            </div>
         </div>
     );
 };
