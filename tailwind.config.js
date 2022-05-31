@@ -59,7 +59,7 @@ module.exports = {
                 '100px': '100px'
             },
             textColor: {
-                primary: '#F75D34'
+                primary: '#0052cc'
             },
             borderColor:{
                 primary: '#F75D34'
@@ -96,9 +96,9 @@ module.exports = {
             backgroundColor:{
                 primary: '#F75D34',
                 secondary: '#7E72F2',
-                lightpink:'#fff5f3',
-                //lightpink:'#f7e4de',
-                newpink:'#f7e4de'
+                secondaryblue:'#3dd3e638',
+                //secondaryblue:'#f7e4de',
+                primaryblue:'#0052cc'
             },
             border:{
                 primary: '#F75D34'

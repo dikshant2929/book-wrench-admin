@@ -8,9 +8,10 @@ $nav-color: #091E42;
 
 .navbar ul li{
         padding: 10px;
-        a {         
+        a , div span{         
          @include nav-font-style;
         }
+       
 }
 .main-header-logo{
     @include header-logo-size;

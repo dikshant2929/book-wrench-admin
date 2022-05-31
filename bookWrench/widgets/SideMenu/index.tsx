@@ -169,7 +169,7 @@ const SideMenu = (props: any) => {
                                 {/* <a className={`py-3 px-5 block border-b border-gray-100 hover:bg-gray-200 ${item.isActive ? "bg-gray-200" : ""}`} href={item.link}>{item.title}</a> */}
                                 {!item.subMenu ? <UALink
                                     className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg ${
-                                        item.isActive ? 'bg-lightpink' : ''
+                                        item.isActive ? 'bg-secondaryblue' : ''
                                     }`}
                                     title={item.title}
                                     // exact
@@ -186,7 +186,7 @@ const SideMenu = (props: any) => {
                                 <Route render={({ history}) => (
                                    
                                     <span className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg cursor-pointer ${
-                                    item.isActive ? 'bg-lightpink' : ''
+                                    item.isActive ? 'bg-secondaryblue' : ''
                                 }`} onClick={() => { history.push(item.subMenu[0].link) }}>
                                     <span className={`flex text-gray-500 group hover:text-primary ${item.isActive ? 'text-primary font-medium' : ''}`}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 mr-2 group-hover:text-primary ${item.isActive ? 'text-primary' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -200,7 +200,7 @@ const SideMenu = (props: any) => {
 
                                     )} />
                                 // <span className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg cursor-pointer ${
-                                //     item.isActive ? 'bg-lightpink' : ''
+                                //     item.isActive ? 'bg-secondaryblue' : ''
                                 // }`} onClick={() => subMenuParentClick(item.subMenu[0].link)}>
                                 //     <span className={`flex text-gray-500 group hover:text-primary ${item.isActive ? 'text-primary font-medium' : ''}`}>
                                 //         <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 mr-2 group-hover:text-primary ${item.isActive ? 'text-primary' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -212,7 +212,7 @@ const SideMenu = (props: any) => {
 
                                 // </span>
                                 }
-                                {item.subMenu && <ul className={`bg-lightpink rounded-br-lg pt-4 -mt-4 ${userMenuCls}`}>
+                                {item.subMenu && <ul className={`bg-secondaryblue rounded-br-lg pt-4 -mt-4 ${userMenuCls}`}>
                                     {item.subMenu.map((innerItem: any, innerKey: number) => (
                                         <li key={innerKey}>
                                             <UALink 

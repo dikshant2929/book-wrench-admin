@@ -54,8 +54,8 @@ const defaultProps = {
             tag: 'MOD_OFFER',
             icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
             subMenu: [
-                {title: 'Category', link: Category, icon: '', isActive: true},
-                {title: 'Sub-Category', link: SubCategory, icon: '', isActive: false},
+                { title: 'Category', link: Category, icon: '', isActive: true },
+                { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
             ]
         },
     ]
@@ -69,7 +69,7 @@ export default function Header(props) {
 
     const [menuList, setMenuList] = useState(props.menuList);
     const [userMenuCls, setUserMenuCls] = useState('hidden');
-    const [isSubMenuVisible,setSubMenuItemVisibility] = useState(false);
+    const [isSubMenuVisible, setSubMenuItemVisibility] = useState(false);
 
     const { name: userName = null } = storage?.getUserInfo()?.config?.data ? JSON.parse(storage?.getUserInfo()?.config?.data) : {};
     const { auth, isLoggedIn } = props;
@@ -86,18 +86,18 @@ export default function Header(props) {
         !window.logout && (window.logout = logout);
     }, []);
 
-    const checkIsActive = (title, menuItem) => ({ ...menuItem, isActive : title === menuItem.title});
+    const checkIsActive = (title, menuItem) => ({ ...menuItem, isActive: title === menuItem.title });
 
     const onSubItem = (title, subMenuList) => subMenuList.map((menuItem) => checkIsActive(title, menuItem));
 
     const onMenuItemClick = (event, item) => {
-        
+
         setSubMenuItemVisibility(previous => (!(item.subMenu === undefined) && !previous));
 
         const menus = menuList.map((menuItem) => {
-            if(menuItem.subMenu && menuItem.subMenu.length > 0){
-                const title = e.target.innerText === item.title ? menuItem.subMenu[0].title : event.target.innerText;
-                menuItem.subMenu = onSubItem(title,  menuItem.subMenu);
+            if (menuItem.subMenu && menuItem.subMenu.length > 0) {
+                const title = event.target.innerText === item.title ? menuItem.subMenu[0].title : event.target.innerText;
+                menuItem.subMenu = onSubItem(title, menuItem.subMenu);
             }
             return checkIsActive(item.title, menuItem);
         });
@@ -114,43 +114,37 @@ export default function Header(props) {
                     <div className="navbar">
                         <ul className="flex">
                             {menuList.map((item, key) => (
-                                <li key={key} onClick={(e) => onMenuItemClick(e, item)} >
-                                    {!item.subMenu ? 
+                                <li className={key===menuList.length-1?'group':''} key={key} onClick={(e) => onMenuItemClick(e, item)} >
+                                    {!item.subMenu ?
                                         <UALink
-                                            className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg ${
-                                                item.isActive ? 'bg-lightpink' : ''
-                                            }`}
+                                            className={`hover:text-primary py-3 px-5 block font-inter rounded-tr-lg rounded-br-lg ${item.isActive ? 'text-primary' : ''
+                                                }`}
                                             title={item.title}
                                             to={!item.subMenu ? item.link : ''}>
-                                            <span className={`flex text-gray-500 group hover:text-primary ${item.isActive ? 'text-primary font-medium' : ''}`}>
-                                                {item.title}
-                                            </span>
-                                        
+                                            {item.title}
                                         </UALink> :
                                         <>
-                                            <div className='relative'>
-                                                <span className={`py-3 px-5 block font-inter font-light rounded-tr-lg rounded-br-lg cursor-pointer ${item.isActive ? 'bg-lightpink' : ''}`}>
-                                                    <span className={`flex text-gray-500 group hover:text-primary ${item.isActive ? 'text-primary font-medium' : ''}`}>
+                                            <div className='relative py-3 px-5'>                                             
+                                                    <span className="relative flex hover:text-primary cursor-pointer">
                                                         {item.title}
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-auto relative top-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                                     </span>
-                                                </span>
-                                                { isSubMenuVisible && 
-                                                    <ul className='absolute'>
-                                                        {item.subMenu.map((item, key) => <li key={`Inner_${key}`}>
-                                                            <UALink 
-                                                                    className=""
-                                                                    title={item.title} 
-                                                                    to={item.link}>{item.title}
-                                                                </UALink>
-                                                        </li>)}        
+                                                {
+                                                    <ul className='absolute w-44 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block'>
+                                                        {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
+                                                            <UALink
+                                                                className="hover:text-primary block"
+                                                                title={item.title}
+                                                                to={item.link}>{item.title}
+                                                            </UALink>
+                                                        </li>)}
                                                     </ul>
                                                 }
                                             </div>
                                         </>
-                                        
+
                                     }
-                                    
+
                                 </li>
                             ))}
                         </ul>
