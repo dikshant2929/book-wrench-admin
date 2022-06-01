@@ -21,3 +21,9 @@
 
     }
 }
+
+@media only screen and (max-width: 640px) {
+    .addCategory .add-catg-form-wrapper form input{
+        margin-bottom: 1.5rem;
+    }
+}

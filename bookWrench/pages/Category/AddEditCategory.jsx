@@ -64,10 +64,10 @@ const AddEditCategory = (props) => {
     }, [props]);
 
     return (
-        <div className="addCategory bg-white center mx-20 mt-12 mb-10 py-20  rounded-md">
-            <div className="w-600px mx-auto ">
-                <h1 className="font-medium text-2xl mb-2">{title}</h1>
-                <div className="add-catg-form-wrapper shadow-xl rounded-md p-10">   
+        <div className="addCategory bg-white center mx-8 sm:mx-20 mt-12 mb-10 py-20 rounded-md">
+            <div className="max-w-[600px] mx-4 md:mx-auto ">
+                <h1 className="text-center font-medium text-2xl mb-2 sm:text-left">{title}</h1>
+                <div className="p-6 add-catg-form-wrapper shadow-xl rounded-md sm:p-10">   
                     <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}></Form>
                 </div>
             </div>

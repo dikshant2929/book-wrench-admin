@@ -16,3 +16,9 @@ $nav-color: #091E42;
 .main-header-logo{
     @include header-logo-size;
 }
+
+@media only screen and (max-width: 572px) {
+    .navbar ul li{
+        padding: 3px;
+    }
+}

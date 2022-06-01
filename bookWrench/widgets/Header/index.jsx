@@ -107,7 +107,7 @@ export default function Header(props) {
     return (
         <>
             <header className="header top-0 left-0 w-full z-10 bg-white shadow-md">
-                <div className="flex h-[4.75rem] items-center px-5 justify-between ">
+                <div className="flex flex-col md:flex-row h-[9.75rem] md:h-[4.75rem] items-center lg:px-5 justify-between ">
                     <div className="dash-logo">
                         <img className="main-header-logo" src="/bookWrench/assets/images/bookWrench_logo.svg" alt="logo" />
                     </div>
@@ -117,14 +117,14 @@ export default function Header(props) {
                                 <li className={key===menuList.length-1?'group':''} key={key} onClick={(e) => onMenuItemClick(e, item)} >
                                     {!item.subMenu ?
                                         <UALink
-                                            className={`hover:text-primary py-3 px-5 block font-inter rounded-tr-lg rounded-br-lg ${item.isActive ? 'text-primary' : ''
+                                            className={`hover:text-primary lg:py-3 md:px-5 block font-inter rounded-tr-lg rounded-br-lg ${item.isActive ? 'text-primary' : ''
                                                 }`}
                                             title={item.title}
                                             to={!item.subMenu ? item.link : ''}>
                                             {item.title}
                                         </UALink> :
                                         <>
-                                            <div className='relative py-3 px-5'>                                             
+                                            <div className='relative lg:py-3 lg:px-5'>                                             
                                                     <span className="relative flex hover:text-primary cursor-pointer">
                                                         {item.title}
                                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
