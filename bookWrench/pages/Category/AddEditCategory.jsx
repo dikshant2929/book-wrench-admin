@@ -67,7 +67,7 @@ const AddEditCategory = (props) => {
         <div className="addCategory bg-white center m-20 py-20">
             <div className="w-600px mx-auto ">
                 <h1 className="font-medium text-2xl mb-2">{title}</h1>
-                <div className="add-catg-form-wrapper shadow rounded-md p-10">   
+                <div className="add-catg-form-wrapper shadow-xl rounded-md p-10">   
                     <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}></Form>
                 </div>
             </div>
