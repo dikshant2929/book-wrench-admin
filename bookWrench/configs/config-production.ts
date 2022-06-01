@@ -3,7 +3,7 @@ export default {
     cors: 1,
     logs: 1,
     isStackTrace: 1,
-    baseUrl : "http://13.59.238.228/api/v1/",
+    baseUrl : "http://3.145.83.133/api/v1/",
     // apiBaseUrl: 'http://app.connecto.io/newconnecto/',
     // apiServerBaseUrl: 'http://app.connecto.io/newconnecto/',
     apiBaseUrl: 'https://bookWrench-prod.cardekho.com/api/v1/',
