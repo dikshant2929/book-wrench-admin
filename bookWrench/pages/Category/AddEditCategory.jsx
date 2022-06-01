@@ -64,7 +64,7 @@ const AddEditCategory = (props) => {
     }, [props]);
 
     return (
-        <div className="addCategory bg-white center m-20 py-20">
+        <div className="addCategory bg-white center mx-20 mt-12 mb-10 py-20  rounded-md">
             <div className="w-600px mx-auto ">
                 <h1 className="font-medium text-2xl mb-2">{title}</h1>
                 <div className="add-catg-form-wrapper shadow-xl rounded-md p-10">   

@@ -1,15 +1,23 @@
-.add-catg-form-wrapper { 
-    box-shadow: 0 0 8px -3px grey;
-        form {                
-            label{
+.addCategory {
+    box-shadow: 0 0 15px -7px grey;
+    .add-catg-form-wrapper {
+        box-shadow: 0 0 8px -3px grey;
+
+        form {
+            label {
                 color: #000000;
                 font-size: 0.875rem;
                 line-height: 1.25rem;
                 margin-bottom: 0.5rem;
             }
-            input{
-                margin-bottom: 2.5rem;
-            } 
-} 
 
+            input {
+                margin-bottom: 2.5rem;
+            }
+            button{
+                width: 50%;
+            }
+        }
+
+    }
 }
