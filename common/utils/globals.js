@@ -60,7 +60,7 @@ const globals = {
             var expires = 'expires=' + d.toUTCString();
 
             document.cookie = `${cname}=${encodeFlag ? encodeURIComponent(cvalue) : cvalue};${
-                configs.env == 'production' ? '' : 'secure;'
+                ''// configs.env != 'production' ? '' : 'secure;'
             }${sessionCookieFlag ? '' : `${expires};`}${domain ? `domain=${domain};` : ''}path=/;SameSite=${sameSite};`;
         }
     },
