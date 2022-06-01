@@ -97,8 +97,8 @@ const Category = (props) => {
     };
 
     return (
-        <div className="category mx-20 mt-11 mb-6">
-            <div className="flex justify-between items-center">
+        <div className="category md:mx-20 mt-11 mb-6">
+            <div className=" flex justify-between items-center">
                 <h1 className="font-medium text-4xl mb-4">{config.title}</h1>
                 <div className="">
                     <TableWidgets>
