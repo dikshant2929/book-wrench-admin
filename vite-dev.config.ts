@@ -1,7 +1,7 @@
 import defineConfig, { plugins, build, resolver, jsx } from './vite.common';
 const baseUrl = {
     dev : "http://localhost:4002/api/v1/",
-    staging : "http://3.145.103.66/api/v1/"
+    staging : "http://13.59.238.228/api/v1/"
 }
 const env = "staging" || process.env.NODE_ENV;
 

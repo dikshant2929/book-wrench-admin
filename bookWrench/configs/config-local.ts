@@ -7,7 +7,7 @@ export default {
     isStackTrace: 1,
     // baseUrl: 'http://localhost:4002/api/v1/',
     // baseUrl: 'http://bookwrench.gswire.com/api/v1/',
-    baseUrl : "http://3.145.103.66/api/v1/",
+    baseUrl : "http://13.59.238.228/api/v1/",
     //apiBaseUrl: 'http://app.connecto.io/',
     //apiServerBaseUrl: 'http://app.connecto.io/',
     //apiBaseUrl: 'http://192.168.1.10:3005/',
