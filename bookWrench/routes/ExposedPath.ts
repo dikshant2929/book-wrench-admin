@@ -10,6 +10,11 @@ const path = {
     CategoryCreate: PREFIX + 'category/create',
     CategoryEdit: PREFIX + 'category/edit/:editCategory',
     SubCategory: PREFIX + 'sub-category',
+
+    Department: PREFIX + 'department',
+    DepartmentCreate: PREFIX + 'department/create',
+    DepartmentEdit: PREFIX + 'department/edit/:editDepartment',
+   
     // RMList: PREFIX + 'rm',
     // RMCreate: PREFIX + 'rm/create',
     // RMUpdate: PREFIX + 'rm/update',

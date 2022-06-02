@@ -16,7 +16,10 @@ const {
     ResetPassword,
     Category,
     CategoryCreate,
-    CategoryEdit
+    CategoryEdit,
+    Department,
+    DepartmentCreate,
+    DepartmentEdit
 } = exposedPath;
 
 const ROUTE_PREFIX = Root;
@@ -31,9 +34,14 @@ const publicRouteConfig = [
 
 const privateRouteConfig = [
     { name: 'dashboard', path: Dashboard, componentName: 'Dashboard' },
+    
     { name: 'category-edit', path: CategoryEdit, componentName: 'CategoryCreate'},
     { name: 'category-create', path: CategoryCreate, componentName: 'CategoryCreate', exact: true },
     { name: 'category', path: Category, componentName: 'Category', exact: true },
+
+    { name: 'department-edit', path: DepartmentEdit, componentName: 'DepartmentCreate'},
+    { name: 'department-create', path: DepartmentCreate, componentName: 'DepartmentCreate', exact: true },
+    { name: 'department', path: Department, componentName: 'Department', exact: true },
 ];
 
 const asyncLoad = (component: any) => {
@@ -52,6 +60,10 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Category' */ '@pages/Category'));
         case 'CategoryCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditCategory' */ '@pages/Category/AddEditCategory'));
+        case 'Department':
+            return loadable(() => import(/* webpackChunkName: 'Department' */ '@pages/Department'));
+        case 'DepartmentCreate':
+            return loadable(() => import(/* webpackChunkName: 'AddEditDepartment' */ '@pages/Department/AddEditDepartment'));
     }
 };
 
