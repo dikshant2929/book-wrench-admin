@@ -127,7 +127,7 @@ export default function Header(props) {
                     <div className="navbar">
                         <ul className="flex">
                             {menuList.map((item, key) => (
-                                <li className={key === menuList.length - 1 ? 'group' : ''} key={key} onClick={(e) => onMenuItemClick(e, item)} >
+                                <li className={key === menuList.length - 1 ? 'group p-[10px]' : 'p-[10px]'} key={key} onClick={(e) => onMenuItemClick(e, item)} >
                                     {!item.subMenu ?
                                         <UALink
                                             className={`hover:text-primary lg:py-3 md:px-5 block font-inter rounded-tr-lg rounded-br-lg ${item.isActive ? 'text-primary' : ''
@@ -143,20 +143,20 @@ export default function Header(props) {
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                                 </span>
                                                 {
-                                                    <ul className='absolute w-44 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block'>
-                                                        {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
+                                                    <ul className='masterBar absolute w-32 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block z-10'>
+                                                        {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="cursor-pointer mr-0 block py-3 px-5 text-sm">
                                                             {!item.subMenu ? <UALink
                                                                 className="hover:text-primary block"
                                                                 title={item.title}
                                                                 to={item.link}>{item.title}
                                                             </UALink> :
-                                                            <div className='relative lg:py-3 lg:px-5'>
-                                                            <span className="relative flex hover:text-primary cursor-pointer">
+                                                            <div className='relative'>
+                                                            <span className="relative flex hover:text-primary cursor-pointer justify-center h-8 items-center">
                                                                 {item.title}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative rotate-[272deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                                             </span>
                                                             {
-                                                                <ul className='absolute w-44 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block'>
+                                                                <ul className='rightBar absolute w-44 top-0 left-[7.5rem] bg-white shadow-sprade rounded-lg triangle-right hidden z-10'>
                                                                     {item.subMenu.map((itm, index) => <li key={`InnerSub_${index}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
                                                                          <UALink
                                                                             className="hover:text-primary block"
