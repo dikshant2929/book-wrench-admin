@@ -7,7 +7,7 @@ import UALink from '@common/elements/UALink';
 import { Route, useLocation } from 'react-router-dom';
 import './header.scss';
 
-const { Home, Dashboard, Category, SubCategory,Department } = exposedPath;
+const { Home, Dashboard, Category, SubCategory, Department } = exposedPath;
 
 
 const defaultProps = {
@@ -115,7 +115,7 @@ export default function Header(props) {
                     <div className="navbar">
                         <ul className="flex">
                             {menuList.map((item, key) => (
-                                <li className={key===menuList.length-1?'group':''} key={key} onClick={(e) => onMenuItemClick(e, item)} >
+                                <li className={key === menuList.length - 1 ? 'group' : ''} key={key} onClick={(e) => onMenuItemClick(e, item)} >
                                     {!item.subMenu ?
                                         <UALink
                                             className={`hover:text-primary lg:py-3 md:px-5 block font-inter rounded-tr-lg rounded-br-lg ${item.isActive ? 'text-primary' : ''
@@ -125,11 +125,11 @@ export default function Header(props) {
                                             {item.title}
                                         </UALink> :
                                         <>
-                                            <div className='relative lg:py-3 lg:px-5'>                                             
-                                                    <span className="relative flex hover:text-primary cursor-pointer">
-                                                        {item.title}
-                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                                                    </span>
+                                            <div className='relative lg:py-3 lg:px-5'>
+                                                <span className="relative flex hover:text-primary cursor-pointer">
+                                                    {item.title}
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                </span>
                                                 {
                                                     <ul className='absolute w-44 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block'>
                                                         {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
