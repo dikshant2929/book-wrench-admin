@@ -21,12 +21,16 @@ const formConfiguration = [
             name: 'title',
             // maxLength : "3",
             'data-gsv-err-msg': 'Title is required.',
+            classNameLabel: 'labelClass',
+            classNameInput: 'inputClass'
         },
         extraProps: {
             label: 'Category Title',
             validation: 'required,minLength',
             minLength: 1,
             parentId: 'title',
+            parentClass: '',
+            newInptClass: 'newClass'
         },
         isRequired: true,
     },
@@ -68,7 +72,7 @@ const AddEditCategory = (props) => {
             <div className="max-w-[600px] mx-4 md:mx-auto ">
                 <h1 className="text-center font-medium text-2xl mb-2 sm:text-left">{title}</h1>
                 <div className="p-6 add-catg-form-wrapper shadow-xl rounded-md sm:p-10">   
-                    <Form formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}></Form>
+                    <Form buttonClass="" buttonWidth='' className='categoryForm' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}></Form>
                 </div>
             </div>
         </div>

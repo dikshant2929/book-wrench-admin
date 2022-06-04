@@ -4,7 +4,8 @@ import FormHelper from '@common/widgets/Form/FormHelper';
 import Button from '@button';
 
 const defaultProps = {
-    buttonClass : ""
+    buttonClass : "",
+    buttonWidth: "w-full"
 };
 const Form = (props: any) => {
     if (!props.formConfiguration || !Array.isArray(props.formConfiguration) || !props.formConfiguration.length) {
@@ -53,7 +54,7 @@ const Form = (props: any) => {
                         title={props.buttonTitle || 'Submit'}
                         className={`${props.buttonClass} ${!state.isValidForm ?? false ? 'btn-disabled' : 'button-primary'}`}
                         display="inline-flex"
-                        width="w-full"
+                        width= {props.buttonWidth}
                         height="h-46px"
                         padding="px-20px"
                         fontSize="text-sm"

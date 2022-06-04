@@ -60,6 +60,7 @@ const FileUpload = (props: FileUploadArgs) => {
     const onFileInputChange = (event: any) => {
         const { files } = event.target;
         // do something with your files... 
+        console.log(URL.createObjectURL(files[0]));
         setSelectedFile(files);
     }
 
@@ -142,8 +143,9 @@ const FileUpload = (props: FileUploadArgs) => {
             selectedFile
                 ?
                 <div className='flex items-center my-5 border p-4'>
+                    {console.log(selectedFile)}
                     <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>
-                    <RightMark onClick={onPositiveClick}/>
+                    <RightMark onClick={onPositiveClick}/>                    
                     <CrossMark onClick={onCrossMarkStart}/>
                 </div>
                 :

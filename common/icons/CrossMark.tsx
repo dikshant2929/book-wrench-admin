@@ -1,19 +1,16 @@
 import React from 'react';
 
 const CrossMark = ({ onClick }: any,props:any) => (
-    <div 
-         className={`${props.className} ${props.disabled ? "btn-disabled" : ""} inline-block bg-red-500 text-white p-1 cursor-pointer mx-1 px-4 py-2 rounded-md text-sm`}
+    <div className={`${props.className} ${props.disabled ? "btn-disabled" : ""} inline-block bg-red-500 text-white cursor-pointer mx-1 px-5 py-2 rounded-md text-sm`}
          onClick={onClick}>
-             Cancel
-        {/* <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-        >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg> */}
+            
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times"
+        className="w-5 h-5" role="img" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 352 512">
+        <path strokeWidth={4} fill="currentColor"
+          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+        </path>
+      </svg>
     </div>
 );
 
