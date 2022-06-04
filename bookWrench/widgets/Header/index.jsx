@@ -53,10 +53,23 @@ const defaultProps = {
             isActive: false,
             tag: 'MOD_OFFER',
             icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
+           
+        },
+        {
+            title: 'More',
+            link: Dashboard,
+            isActive: false,
+            tag: 'MOD_OFFER',
+            icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
             subMenu: [
-                { title: 'Department', link: Department, icon: '', isActive: true },
-                { title: 'Category', link: Category, icon: '', isActive: true },
-                { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
+                { title: 'Master', link: Department, icon: '', isActive: true,
+                subMenu: [
+                    { title: 'Department', link: Department, icon: '', isActive: true },
+                    { title: 'Category', link: Category, icon: '', isActive: true },
+                    { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
+                ]
+            },
+                
             ]
         },
     ]
@@ -133,11 +146,29 @@ export default function Header(props) {
                                                 {
                                                     <ul className='absolute w-44 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block'>
                                                         {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
-                                                            <UALink
+                                                            {!item.subMenu ? <UALink
                                                                 className="hover:text-primary block"
                                                                 title={item.title}
                                                                 to={item.link}>{item.title}
-                                                            </UALink>
+                                                            </UALink> :
+                                                            <div className='relative lg:py-3 lg:px-5'>
+                                                            <span className="relative flex hover:text-primary cursor-pointer">
+                                                                {item.title}
+                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                            </span>
+                                                            {
+                                                                <ul className='absolute w-44 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block'>
+                                                                    {item.subMenu.map((itm, index) => <li key={`InnerSub_${index}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
+                                                                         <UALink
+                                                                            className="hover:text-primary block"
+                                                                            title={itm.title}
+                                                                            to={itm.link}>{itm.title}
+                                                                        </UALink> 
+                                                                    </li>)}
+                                                                </ul>
+                                                            }
+                                                        </div>
+                                                        }
                                                         </li>)}
                                                     </ul>
                                                 }

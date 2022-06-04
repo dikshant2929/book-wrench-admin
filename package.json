@@ -1,5 +1,5 @@
 {
-  "name": "BookWrench admin panel",
+  "name": "CarDekho-NCT-B2B-Framework",
   "version": "0.0.0",
   "scripts": {
     "test": "jest -u",
