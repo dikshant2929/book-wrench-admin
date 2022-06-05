@@ -80,7 +80,7 @@ const AddEditCategory = (props) => {
                     </div>
                 </div>
                 <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
-                <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Click</button>
+                <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Save</button>
                 </div>                
             </div>
         </div>

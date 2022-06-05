@@ -75,10 +75,9 @@ const AddEditDepartment = (props) => {
         <div className="q">           
             <div className="a">
                 
-                <div className="add-catg-form-wrapper">
-                    <FileUpload></FileUpload>
+                <div className="add-catg-form-wrapper">                    
                     <Form buttonClass="" buttonWidth='' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}>
-                        <div className='secondDiv'>
+                        <div className='secondDiv pl-10 mb-10'>
                             <div className='status mb-8'>
                             <label className=" block text-xs text-gray-700 mb-1 text-left">Status </label>
                             <div className="flex">
@@ -93,14 +92,15 @@ const AddEditDepartment = (props) => {
                             
                             </div>
                             </div>
-                            <div className='textArea'>
+                            <div className='textArea w-1/2'>
                             <label className=" block text-xs text-gray-700 mb-1 text-left">Description </label>
-                            <textarea className='w-full md:w-3/5 rounded-md border border-gray-200 focus:ring-0' rows="3"></textarea>
+                            <textarea className='w-full rounded-md border border-gray-200 focus:ring-0' rows="3"></textarea>
                             </div>
+                            <FileUpload></FileUpload>
                            
                         </div>
                         <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
-                        <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Click</button>
+                        <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Save</button>
                     </div>
                     </Form>
                      

@@ -4,6 +4,7 @@
         // box-shadow: 0 0 8px -3px grey;
 
         form {
+           
             label {
                 color: #000000;
                 font-size: 0.875rem;
@@ -15,6 +16,12 @@
             // }
             button{
                 width: 50%;
+            }
+            .newClass{
+                width: 50%;
+            }
+            .formInner{
+                padding-left: 2.5rem;
             }
         }
 

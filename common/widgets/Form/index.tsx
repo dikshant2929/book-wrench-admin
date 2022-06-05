@@ -40,7 +40,7 @@ const Form = (props: any) => {
 
     return (
         <form onSubmit={onSubmit} className={`${props.className || ''}`}>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap formInner">
                 { props.aboveButton &&  props.aboveButton()}
                 <Renderer config={config} />
             </div>
