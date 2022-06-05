@@ -7,7 +7,7 @@ import Service from "./Services/category.service";
 
 const { Category } = exposedPath;
 const defaultProps = {
-    
+
 };
 
 
@@ -45,17 +45,17 @@ const AddEditCategory = (props) => {
 
     console.log(props);
     const onFormSubmit = (data) => {
-        const { isValidForm, ...request} = data;
-        if(isEditMode){
-            Service.editCategory(request, () => props.history.push(Category), { }, editModeData.id);
-        }else{
+        const { isValidForm, ...request } = data;
+        if (isEditMode) {
+            Service.editCategory(request, () => props.history.push(Category), {}, editModeData.id);
+        } else {
             Service.addCategory(request, () => props.history.push(Category))
         }
     };
 
     useEffect(() => {
         const encryptedData = props?.match?.params?.editCategory;
-        if(encryptedData){
+        if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
             setTitle(`Edit Category (${data.title})`)
             formConfiguration[0].selectedValue = data.title;
@@ -68,14 +68,23 @@ const AddEditCategory = (props) => {
     }, [props]);
 
     return (
-        <div className="addCategory bg-white center mx-8 sm:mx-20 mt-12 mb-10 py-20 rounded-md">
-            <div className="max-w-[600px] mx-4 md:mx-auto ">
-                <h1 className="text-center font-medium text-2xl mb-2 sm:text-left">{title}</h1>
-                <div className="p-6 add-catg-form-wrapper shadow-xl rounded-md sm:p-10">   
-                    <Form buttonClass="" buttonWidth='' className='categoryForm' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}></Form>
+
+        <div className='addCategory mx-8 sm:mx-20 mt-12 '>
+            <h1 className="text-center bg-white px-10 py-8 font-medium text-2xl sm:text-left border-b-2 border-[#EDEFFB] rounded-t-md">{title}</h1>
+            <div className=" bg-white center rounded-b-md">
+                <div className="">
+                    <div className=" add-catg-form-wrapper p-10">
+                        <Form className='categoryForm' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}>
+                           <></> 
+                        </Form>
+                    </div>
                 </div>
+                <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
+                <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Click</button>
+                </div>                
             </div>
         </div>
+
     );
 };
 

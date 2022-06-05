@@ -70,10 +70,12 @@ const AddEditDepartment = (props) => {
     }, [props]);
 
     return (
-        <div className="addDepartment bg-white center mx-8 sm:mx-20 mt-12 mb-10 py-20 rounded-md">
-            <div className="max-w-[600px] mx-4 md:mx-auto ">
-                <h1 className="text-center font-medium text-2xl mb-2 sm:text-left">{title}</h1>
-                <div className="p-6 add-catg-form-wrapper shadow-xl rounded-md sm:p-10">
+        <div className="addDepartment bg-white center mx-8 sm:mx-20 mt-12 mb-10">
+         <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">{title}</h1>
+        <div className="q">           
+            <div className="a">
+                
+                <div className="add-catg-form-wrapper">
                     <FileUpload></FileUpload>
                     <Form buttonClass="" buttonWidth='' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}>
                         <div className='secondDiv'>
@@ -95,10 +97,16 @@ const AddEditDepartment = (props) => {
                             <label className=" block text-xs text-gray-700 mb-1 text-left">Description </label>
                             <textarea className='w-full md:w-3/5 rounded-md border border-gray-200 focus:ring-0' rows="3"></textarea>
                             </div>
+                           
                         </div>
+                        <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
+                        <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Click</button>
+                    </div>
                     </Form>
-                </div>
+                     
+                </div>                
             </div>
+        </div>
         </div>
     );
 };

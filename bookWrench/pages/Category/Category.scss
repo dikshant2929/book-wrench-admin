@@ -1,7 +1,7 @@
 .addCategory {
     box-shadow: 0 0 15px -7px grey;
     .add-catg-form-wrapper {
-        box-shadow: 0 0 8px -3px grey;
+        // box-shadow: 0 0 8px -3px grey;
 
         form {
             label {
@@ -12,9 +12,12 @@
             }
 
             input {
-                margin-bottom: 2.5rem;
+                // margin-bottom: 2.5rem;
             }
             button{
+                width: 50%;
+            }
+            .newClass{
                 width: 50%;
             }
         }
