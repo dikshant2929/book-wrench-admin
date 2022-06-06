@@ -17,6 +17,9 @@ const {
     Category,
     CategoryCreate,
     CategoryEdit,
+    SubCategory,
+    SubCategoryCreate,
+    SubCategoryEdit,
     Department,
     DepartmentCreate,
     DepartmentEdit
@@ -39,6 +42,10 @@ const privateRouteConfig = [
     { name: 'category-create', path: CategoryCreate, componentName: 'CategoryCreate', exact: true },
     { name: 'category', path: Category, componentName: 'Category', exact: true },
 
+    { name: 'sub-category-edit', path: SubCategoryEdit, componentName: 'SubCategoryCreate'},
+    { name: 'sub-category-create', path: SubCategoryCreate, componentName: 'SubCategoryCreate', exact: true },
+    { name: 'sub-category', path: SubCategory, componentName: 'SubCategory', exact: true },
+
     { name: 'department-edit', path: DepartmentEdit, componentName: 'DepartmentCreate'},
     { name: 'department-create', path: DepartmentCreate, componentName: 'DepartmentCreate', exact: true },
     { name: 'department', path: Department, componentName: 'Department', exact: true },
@@ -60,6 +67,10 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Category' */ '@pages/Category'));
         case 'CategoryCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditCategory' */ '@pages/Category/AddEditCategory'));
+        case 'SubCategory':
+            return loadable(() => import(/* webpackChunkName: 'SubCategory' */ '@pages/SubCategory'));
+        case 'SubCategoryCreate':
+                return loadable(() => import(/* webpackChunkName: 'AddEditSubCategory' */ '@pages/SubCategory/AddEditSubCategory'));
         case 'Department':
             return loadable(() => import(/* webpackChunkName: 'Department' */ '@pages/Department'));
         case 'DepartmentCreate':

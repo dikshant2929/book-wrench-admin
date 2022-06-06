@@ -9,7 +9,12 @@ const path = {
     Category: PREFIX + 'category',
     CategoryCreate: PREFIX + 'category/create',
     CategoryEdit: PREFIX + 'category/edit/:editCategory',
+
     SubCategory: PREFIX + 'sub-category',
+    SubCategoryCreate: PREFIX + 'sub-category/create',
+    SubCategoryEdit: PREFIX + 'sub-category/edit/:editSubCategory',
+
+    
 
     Department: PREFIX + 'department',
     DepartmentCreate: PREFIX + 'department/create',
