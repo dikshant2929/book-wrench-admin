@@ -49,10 +49,10 @@ const FileUpload = (props: FileUploadArgs) => {
     const [selectedFile, setSelectedFile] = useState<any>(null);
     const [tableConfig, setTableConfig] = useState<any>(defaultConfig);
     const [tableHeaders, setTableHeaders] = useState<HeaderProps[]>(tableConfig?.table?.heading);
-    const [ isYesSelected, setYesSelection] = useState(false);
-    const [ canContinue, setCanContinue] = useState(false);
-    const [ errorMsg, setErrorMsg] = useState(null);
-    const [ response, setResponse] = useState('');
+    const [isYesSelected, setYesSelection] = useState(false);
+    const [canContinue, setCanContinue] = useState(false);
+    const [errorMsg, setErrorMsg] = useState(null);
+    const [response, setResponse] = useState('');
 
     const fileInputRef = useRef<any>(null);
     const styles = { border: '2px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer' };
@@ -73,7 +73,7 @@ const FileUpload = (props: FileUploadArgs) => {
         setYesSelection(false);
     }
 
-    const onFileDropped = (files: any, event:any) => {
+    const onFileDropped = (files: any, event: any) => {
         setSelectedFile(files);
         event.preventDefault();
     }
@@ -84,23 +84,23 @@ const FileUpload = (props: FileUploadArgs) => {
 
     const resetData = () => {
         setErrorMsg(null);
-        const prevConfig = {...tableConfig};
+        const prevConfig = { ...tableConfig };
         prevConfig.table.dataList = [];
-        setTableConfig({...prevConfig});
+        setTableConfig({ ...prevConfig });
         setCanContinue(false);
     }
 
     const onPositiveClick = () => {
         resetData();
-        if(selectedFile[0]){
+        if (selectedFile[0]) {
             const formData = new FormData();
-            formData.append(props.requestFileName,selectedFile[0])
+            formData.append(props.requestFileName, selectedFile[0])
             setShimmer(true);
             Services.uploadInventoryFileValidation(props.fileValidationAPIKey, formData, (data) => {
-                const {affectedRowsDetails = [], canContinue = false, errorMsg = null} = data;
-                const exitingTableConfig = {...tableConfig};
+                const { affectedRowsDetails = [], canContinue = false, errorMsg = null } = data;
+                const exitingTableConfig = { ...tableConfig };
                 exitingTableConfig.table.dataList = affectedRowsDetails || [];
-                setTableConfig({...exitingTableConfig});
+                setTableConfig({ ...exitingTableConfig });
                 setCanContinue(canContinue);
                 setErrorMsg(errorMsg);
                 setResponse(data);
@@ -115,10 +115,10 @@ const FileUpload = (props: FileUploadArgs) => {
     }
 
     const continueButtonClick = () => {
-        
+
 
         const formData = new FormData();
-        formData.append(props.requestFileName,selectedFile[0]);
+        formData.append(props.requestFileName, selectedFile[0]);
         formData.append('validationdto', JSON.stringify(response));
         setShimmer(true);
         Services.createInventoryFromFile(props.fileUploadAPIKey, formData, (data) => {
@@ -127,7 +127,7 @@ const FileUpload = (props: FileUploadArgs) => {
             setShimmer(false);
             setTimeout(() => {
                 window.location.reload();
-            },3000)
+            }, 3000)
         }, (error) => {
             setErrorMsg(error);
             setShimmer(false);
@@ -135,7 +135,7 @@ const FileUpload = (props: FileUploadArgs) => {
 
     }
 
-    if(isShimmerVisible){
+    if (isShimmerVisible) {
         return <ShimmerEffect height={10} count={1} visible={isShimmerVisible} type="grid" />
     }
     return (<>
@@ -145,29 +145,32 @@ const FileUpload = (props: FileUploadArgs) => {
                 <div className='flex items-center my-5 border p-4'>
                     {console.log(selectedFile)}
                     <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>
-                    <RightMark onClick={onPositiveClick}/>                    
-                    <CrossMark onClick={onCrossMarkStart}/>
+                    <RightMark onClick={onPositiveClick} />
+                    <CrossMark onClick={onCrossMarkStart} />
                 </div>
                 :
-                <div className='flex items-center' >
-                    <input
-                        onChange={onFileInputChange}
-                        ref={fileInputRef}
-                        type="file"
-                        className='hidden'
-                    />
-                    <div style={styles}>
-                        <FileDrop
-                            onDrop={(files, event) => onFileDropped(files, event)}
-                            onTargetClick={onTargetClick}>
-                            {props.text}
-                        </FileDrop>
+                <div>
+                    <label className=" block text-xs text-gray-700 mb-1 text-left">Upload Department Icon</label>
+                    <div className='flex items-center w-4/12' >
+                        <input
+                            onChange={onFileInputChange}
+                            ref={fileInputRef}
+                            type="file"
+                            className='hidden'
+                        />
+                        <div style={styles}>
+                            <FileDrop
+                                onDrop={(files, event) => onFileDropped(files, event)}
+                                onTargetClick={onTargetClick}>
+                                {props.text}
+                            </FileDrop>
+                        </div>
                     </div>
                 </div>
         }
 
         {
-            isYesSelected && 
+            isYesSelected &&
             <>
                 <TableView
                     config={tableConfig}
@@ -177,9 +180,9 @@ const FileUpload = (props: FileUploadArgs) => {
                     updateHeader={updateHeader}
                 />
 
-                { errorMsg && <span className='text-red-500 block mb-3 text-sm mt-4'>{errorMsg}</span> }
-                { tableConfig.table.dataList.length === 0 && !errorMsg && <span className='text-green-500'>No Error Exists</span> }
-                { canContinue && <Button title="Continue" onClick={continueButtonClick}/>}
+                {errorMsg && <span className='text-red-500 block mb-3 text-sm mt-4'>{errorMsg}</span>}
+                {tableConfig.table.dataList.length === 0 && !errorMsg && <span className='text-green-500'>No Error Exists</span>}
+                {canContinue && <Button title="Continue" onClick={continueButtonClick} />}
             </>
         }
 

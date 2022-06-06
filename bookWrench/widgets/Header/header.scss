@@ -7,12 +7,25 @@ $nav-color: #091E42;
 @mixin nav-font-style {font-size: 13px;line-height: 16px;color: $nav-color;}
 
 .navbar ul li{
-        padding: 10px;
+        // padding: 10px;
         a , div span{         
          @include nav-font-style;
         }
        
 }
+.masterBar li:hover  .rightBar{
+    display: block;
+} 
+
+.triangle-right::before{
+    position: absolute;
+    content: " ";
+    width: 40px;
+    height: 85px;
+    left: -29px;
+    top: -11px;
+}
+
 .main-header-logo{
     @include header-logo-size;
 }
