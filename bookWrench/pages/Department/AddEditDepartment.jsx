@@ -70,7 +70,7 @@ const AddEditDepartment = (props) => {
     }, [props]);
 
     return (
-        <div className="addDepartment bg-white center mx-8 sm:mx-20 mt-12 mb-10">
+        <div className="addDepartment bg-white center mx-8 sm:mx-20 mt-12 mb-10 rounded-md">
          <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">{title}</h1>
         <div className="q">           
             <div className="a">
@@ -92,7 +92,7 @@ const AddEditDepartment = (props) => {
                             
                             </div>
                             </div>
-                            <div className='textArea w-1/2'>
+                            <div className='textArea w-4/12 mb-8'>
                             <label className=" block text-xs text-gray-700 mb-1 text-left">Description </label>
                             <textarea className='w-full rounded-md border border-gray-200 focus:ring-0' rows="3"></textarea>
                             </div>
