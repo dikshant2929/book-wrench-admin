@@ -2,10 +2,10 @@ import API from '@API';
 import { showToster } from '@common/elements/ToastNotification/new_index';
 
 export default class Services {
-    static async addCategory(dataObject, cb) {
+    static async addDepartment(dataObject, cb) {
         try {
-            const data = await API.post('category', dataObject);
-            showToster({ status: 'Success', msg: "Category has been added successfully" });
+            const data = await API.post('department', dataObject);
+            showToster({ status: 'Success', msg: "Department has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -15,10 +15,10 @@ export default class Services {
         }
     }  
     
-    static async editCategory(dataObject, cb, params = {}, id) {
+    static async editDepartment(dataObject, cb, params = {}, id) {
         try {
-            const data = await API.put('category', dataObject, params, id);
-            showToster({ status: 'Success', msg: "Category has been updated successfully" });
+            const data = await API.put('department', dataObject, params, id);
+            showToster({ status: 'Success', msg: "Department has been updated successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -28,10 +28,10 @@ export default class Services {
         }
     } 
 
-    static async categoryList(cb) {
+    static async DepartmentList(cb) {
         try {
-            const data = await API.get('category');
-            // showToster({ status: 'Success', msg: "Category has been added successfully" });
+            const data = await API.get('department');
+            // showToster({ status: 'Success', msg: "Department has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';

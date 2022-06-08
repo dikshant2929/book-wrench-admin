@@ -42,7 +42,7 @@ const defaultProps = {
 };
 
 const Department = (props) => {
-    console.log("Department")
+    
     const [isShimmerVisible, setShimmer] = useState(false);
     const [config, setConfig] = useState(props);
     const [tableHeaders, setTableHeaders] = useState(config?.table?.heading);
@@ -69,7 +69,8 @@ const Department = (props) => {
     };
 
     useEffect(() => {
-        Services.categoryList(data => {
+        Services.DepartmentList(data => {
+            console.log(data)
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;

@@ -11,4 +11,9 @@ export default {
         url: 'category/sub-category/',
         options: {},
     },
+    department: {
+        url: 'department',
+        options: {},
+    },
+    
 };
