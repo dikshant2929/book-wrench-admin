@@ -47,12 +47,19 @@ const AddEditDepartment = (props) => {
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState("Create New Department");
+    const [fieldValue,setFieldValue] = useState({
+        isActive:false,
+        description:""
+    })
 
     console.log(props);
     const onFormSubmit = (data) => {
         
         const { isValidForm, ...request } = data;
-        console.log(isValidForm,request)
+        request.isActive =  fieldValue.isActive || "";
+        request.description =  fieldValue.description || ""
+        
+        
         if (isEditMode) {
             Service.editDepartment(request, () => props.history.push(Department), {}, editModeData.id);
         } else {
@@ -62,11 +69,17 @@ const AddEditDepartment = (props) => {
 
     const radioValue = (name, val,key) => {
         console.log(name, val,key)
+        const prevState = fieldValue;
+        prevState.isActive = val === "active" ? true :false
+        setFieldValue(prevState)
 
     }
 
     const textareaValue = (name) => {
         console.log(name)
+        const prevState = fieldValue;
+        prevState.description = name
+        setFieldValue(prevState)
 
     }
 
@@ -78,6 +91,7 @@ const AddEditDepartment = (props) => {
             const data = JSON.parse(encrypt.decode(encryptedData));
             setTitle(`Edit Department (${data.title})`)
             formConfiguration[0].selectedValue = data.title;
+            console.log(data,"data");
             setEditModeData(data);
             setEditMode(true);
         }
@@ -99,7 +113,7 @@ const AddEditDepartment = (props) => {
                                <RadioBox defaultChecked="active" cb={radioValue}/>
                             </div>
                             <div className='textArea w-4/12 mb-8'>
-                                <Textarea value="test text" cb={textareaValue}/>
+                                <Textarea value="" cb={textareaValue}/>
                             </div>
                             <FileUpload/>
                            

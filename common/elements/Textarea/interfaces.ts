@@ -9,6 +9,8 @@ export interface TextareaProps {
     cols?:any;
     value?:string;
     onClick?: (field: string) => (event: any) => void;
+    onBlur?: (field: string) => (event: any) => void;
+    
 }
 
 

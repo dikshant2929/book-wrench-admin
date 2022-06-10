@@ -23,13 +23,13 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
         <div className={props.parentClass}>
             {props.titleClass && <div className={props.titleClass}>{props.title} </div>}
             <textarea  
-                onChange={(e) => handleClick(e)}  
+                onBlur={(e) => handleClick(e)}  
                 className={props.textareaClass}
                 rows={props.rows}
                 cols={props.cols}
                 name={props.name}
-                value={props.value}
                 >
+                {props.value}
              </textarea>
         </div>
     );

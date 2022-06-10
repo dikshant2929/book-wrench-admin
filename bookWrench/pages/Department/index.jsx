@@ -15,17 +15,13 @@ const defaultProps = {
         filteredRecords: 20,
         heading: [
             {
-                key: 'sNo',
-                value: 'Number#',
-            },
-            {
                 key: 'title',
                 value: 'Title',
             },
             {
-                key: 'createdAt',
-                value: 'Created At',
-                isShown: false,
+                key: 'description',
+                value: 'description',
+                isShown: true,
             },
             {
                 key: 'updatedAt',
@@ -33,8 +29,8 @@ const defaultProps = {
                 isShown: false,
             },
             {
-                key: 'action',
-                value: 'Actions',
+                key: 'status',
+                value: 'status',
             },
         ],
         dataList: []
@@ -90,8 +86,11 @@ const Department = (props) => {
 
     const tableCellView = ({ column, data }) => {
         switch (column.key) {
-            case 'action':
-                return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
+            case 'title':
+                return  <div>
+                        <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />
+                        <p>{data[column.key]}</p>
+                    </div>
             default:
                 return <p>{data[column.key]}</p>;
         }
