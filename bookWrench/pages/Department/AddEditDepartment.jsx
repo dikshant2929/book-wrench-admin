@@ -108,7 +108,7 @@ const AddEditDepartment = (props) => {
                                     <label htmlFor="checkbox_switch" className='mb-0'>
                                         <div className='pt-1.5 px-1.5'>
                                             <span className='text-white px-1 hidden switch_yes'>Yes</span>
-                                            <span className='text-white px-1 hidden switch_no'>No</span>
+                                            <span className='text-white px-7  switch_no'>No</span>
                                         </div>
 
                                     </label>
