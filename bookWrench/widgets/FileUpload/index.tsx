@@ -55,7 +55,7 @@ const FileUpload = (props: FileUploadArgs) => {
     const [response, setResponse] = useState('');
 
     const fileInputRef = useRef<any>(null);
-    const styles = { border: '1px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer', height: 80 };
+    const styles = { border: '2px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer', height: 80 };
 
     const onFileInputChange = (event: any) => {
         const { files } = event.target;
@@ -151,20 +151,24 @@ const FileUpload = (props: FileUploadArgs) => {
                 :
                 <div className='file_upload w-[28%]'>
                     <label className="text-xs text-gray-700 mb-1 text-left">Upload Department Icon</label>
+                    
                     <div className='flex items-center' >
+                                              
                         <input
                             onChange={onFileInputChange}
                             ref={fileInputRef}
                             type="file"
-                            className='hidden'
-                        />
+                            className='hidden'  />
+                        
                         <div style={styles}>
                             <FileDrop
                                 onDrop={(files, event) => onFileDropped(files, event)}
                                 onTargetClick={onTargetClick}>
                                 {props.text}
                             </FileDrop>
+                            
                         </div>
+                        
                     </div>
                 </div>
         }
