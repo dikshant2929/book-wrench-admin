@@ -68,13 +68,18 @@ const AddEditSubCategory = (props) => {
     }, [props]);
 
     return (
-        <div className="addCategory bg-white center mx-8 sm:mx-20 mt-12 mb-10 py-20 rounded-md">
-            <div className="max-w-[600px] mx-4 md:mx-auto ">
-                <h1 className="text-center font-medium text-2xl mb-2 sm:text-left">{title}</h1>
-                <div className="p-6 add-catg-form-wrapper shadow-xl rounded-md sm:p-10">   
-                    <Form buttonClass="" buttonWidth='' className='categoryForm' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}></Form>
-                </div>
-            </div>
+        <div className="add_Sub_Category bg-white center mx-8 sm:mx-20 mt-12 mb-10 rounded-md">
+           
+           <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">{title}</h1>
+                <div className="p-6 add-catg-form-wrapper rounded-md sm:px-10">   
+                    <Form buttonClass="" buttonWidth='' className='categoryForm' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}>
+                        <span></span>
+                    </Form>
+                   
+                </div> 
+                <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
+                            <button className="button-primary inline-flex px-12 py-5 text-sm h-46px ">Save</button>
+                        </div>           
         </div>
     );
 };

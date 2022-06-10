@@ -55,7 +55,7 @@ const FileUpload = (props: FileUploadArgs) => {
     const [response, setResponse] = useState('');
 
     const fileInputRef = useRef<any>(null);
-    const styles = { border: '2px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer' };
+    const styles = { border: '1px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer', height: 80 };
 
     const onFileInputChange = (event: any) => {
         const { files } = event.target;
@@ -142,16 +142,16 @@ const FileUpload = (props: FileUploadArgs) => {
         {
             selectedFile
                 ?
-                <div className='flex items-center my-5 border p-4'>
+                <div className='flex items-center my-5 border p-4 h-20'>
                     {console.log(selectedFile)}
                     <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>
                     <RightMark onClick={onPositiveClick} />
                     <CrossMark onClick={onCrossMarkStart} />
                 </div>
                 :
-                <div>
-                    <label className=" block text-xs text-gray-700 mb-1 text-left">Upload Department Icon</label>
-                    <div className='flex items-center w-4/12' >
+                <div className='file_upload w-[28%]'>
+                    <label className="text-xs text-gray-700 mb-1 text-left">Upload Department Icon</label>
+                    <div className='flex items-center' >
                         <input
                             onChange={onFileInputChange}
                             ref={fileInputRef}

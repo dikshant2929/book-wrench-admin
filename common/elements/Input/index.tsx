@@ -93,7 +93,7 @@ class Input extends React.Component<PropsWithChildren<InputBoxProps>, InputState
         const error = this.state.error;
         //let errorCls = this.state.errorCls ? this.state.errorCls :
         return (
-            <div className={`p-1 min-w-1/4 mb-2 inline-block ${options.parentClass || 'w-full'}`} id={options.parentId || `parent-${props.name}`}>
+            <div className={`p-1 min-w-1/4 mb-2 inline-block ${options.parentClass || 'w-[49%]'}`} id={options.parentId || `parent-${props.name}`}>
                 <div className={`relative ${options.newInptClass}`}>
                     {this.state.IconName && <i className="connecto-icons">{this.state.IconName}</i>}
                     <label className={`${props.classNameLabel} block text-xs text-gray-700 mb-1 text-left truncate`} htmlFor={options.id}>

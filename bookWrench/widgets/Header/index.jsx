@@ -119,7 +119,7 @@ export default function Header(props) {
 
     return (
         <>
-            <header className="header top-0 left-0 w-full z-10 bg-white shadow-md">
+            <header className="header top-0 left-0 w-full z-10 bg-white shadow-md font-semibold">
                 <div className="flex flex-col md:flex-row h-[9.75rem] md:h-[4.75rem] items-center lg:px-5 justify-between ">
                     <div className="dash-logo">
                         <img className="main-header-logo" src="/bookWrench/assets/images/bookWrench_logo.svg" alt="logo" />
