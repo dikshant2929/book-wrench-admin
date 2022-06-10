@@ -49,17 +49,15 @@ const AddEditDepartment = (props) => {
     const [title, setTitle] = useState("Create New Department");
     const [fieldValue,setFieldValue] = useState({
         isActive:false,
-        description:""
+        description:"",
+        icon:""
     })
 
-    console.log(props);
     const onFormSubmit = (data) => {
         
         const { isValidForm, ...request } = data;
-        request.isActive =  fieldValue.isActive || "";
-        request.description =  fieldValue.description || ""
-        
-        
+            request.isActive =  fieldValue.isActive;
+            request.description =  fieldValue.description
         if (isEditMode) {
             Service.editDepartment(request, () => props.history.push(Department), {}, editModeData.id);
         } else {
@@ -68,22 +66,18 @@ const AddEditDepartment = (props) => {
     };
 
     const radioValue = (name, val,key) => {
-        console.log(name, val,key)
         const prevState = fieldValue;
-        prevState.isActive = val === "active" ? true :false
+        prevState.isActive = (val === "active" ? true :false)
         setFieldValue(prevState)
 
     }
 
     const textareaValue = (name) => {
-        console.log(name)
         const prevState = fieldValue;
         prevState.description = name
         setFieldValue(prevState)
 
     }
-
-    
 
     useEffect(() => {
         const encryptedData = props?.match?.params?.editDepartment;
@@ -91,7 +85,6 @@ const AddEditDepartment = (props) => {
             const data = JSON.parse(encrypt.decode(encryptedData));
             setTitle(`Edit Department (${data.title})`)
             formConfiguration[0].selectedValue = data.title;
-            console.log(data,"data");
             setEditModeData(data);
             setEditMode(true);
         }
@@ -105,19 +98,15 @@ const AddEditDepartment = (props) => {
          <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">{title}</h1>
         <div className="q">           
             <div className="a">
-                
                 <div className="add-catg-form-wrapper">                    
                     <Form buttonClass="" buttonWidth='' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}>
-                        <div className='secondDiv pl-10 mb-10'>
-                            <div className='status mb-8'>
-                               <RadioBox defaultChecked="active" cb={radioValue}/>
+                    <div className='status mb-8'>
+                               <RadioBox  defaultValue={editModeData?.isActive ? "active" :"inactive"} cb={radioValue}/>
                             </div>
                             <div className='textArea w-4/12 mb-8'>
-                                <Textarea value="" cb={textareaValue}/>
+                                <Textarea value={editModeData?.description} cb={textareaValue}/>
                             </div>
                             <FileUpload/>
-                           
-                        </div>
                         <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
                         <button className="button-primary inline-flex w-1/3 px-20px text-sm h-46px ">Save</button>
                     </div>

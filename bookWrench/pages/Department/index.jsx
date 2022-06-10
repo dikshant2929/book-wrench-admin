@@ -7,6 +7,7 @@ import Services from './Services/department.service';
 import './Department.scss';
 const { DepartmentCreate } = exposedPath;
 import TableEditViewExpire from './Helpers/Template';
+import Switch from '@common/elements/Switch';
 
 const defaultProps = {
     title: 'Department',
@@ -20,7 +21,7 @@ const defaultProps = {
             },
             {
                 key: 'description',
-                value: 'description',
+                value: 'Description',
                 isShown: true,
             },
             {
@@ -30,7 +31,11 @@ const defaultProps = {
             },
             {
                 key: 'status',
-                value: 'status',
+                value: 'Status',
+            },
+            {
+                key: 'action',
+                value: 'Actions',
             },
         ],
         dataList: []
@@ -66,7 +71,6 @@ const Department = (props) => {
 
     useEffect(() => {
         Services.DepartmentList(data => {
-            console.log(data)
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
@@ -88,9 +92,13 @@ const Department = (props) => {
         switch (column.key) {
             case 'title':
                 return  <div>
-                        <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />
-                        <p>{data[column.key]}</p>
+                            <img className="" src="/bookWrench/assets/images/fav.png" alt="logo" />
+                            <p>{data[column.key]}</p> 
                     </div>
+            case 'status':
+                return  <Switch defaultValue={data.isActive} isDisable={true} />
+            case 'action':
+                return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
             default:
                 return <p>{data[column.key]}</p>;
         }
@@ -116,9 +124,6 @@ const Department = (props) => {
                     </TableWidgets>
                 </div>
             </div>
-
-
-
             <TableView
                 config={config}
                 isLoading={isShimmerVisible}
@@ -129,6 +134,7 @@ const Department = (props) => {
                 tableHeaders={tableHeaders}
                 tableCellView={tableCellView}
                 updateHeader={updateHeader}
+                showColumnPicker={false}
             />
 
         </div>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, PropsWithChildren } from 'react';
 import { RadioProps } from './interfaces';
 const defaultProps = {
-    defaultValue: true,
-    defaultChecked: false,
+    defaultValue: "",
     title:"Status",
     titleClass:"block text-xs text-gray-700 mb-1 text-left",
     parentClass:"",
@@ -18,9 +17,16 @@ const defaultProps = {
 
 const RadioBox = (props: PropsWithChildren<RadioProps>) => {
     
+    const [isChecked, setIsChecked] = useState(props.defaultValue);
+
     const handleClick = (e: any,val: any,key: any) => {
+        setIsChecked(val)
         props.cb(props.name, val,key);
     }
+
+    useEffect(() => {
+       setIsChecked(props.defaultValue)
+    }, [props]);
 
     return (
 
@@ -33,7 +39,7 @@ const RadioBox = (props: PropsWithChildren<RadioProps>) => {
                         onChange={(e) => handleClick(e, item.value, item.key)}
                         type="radio" 
                         className={props.inputClass} 
-                        defaultChecked={props.defaultChecked == item.value} 
+                        checked={isChecked === item.value} 
                         name={props.name} 
                         id={item.value} 
                         value={item.value} />

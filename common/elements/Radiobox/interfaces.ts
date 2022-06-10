@@ -1,6 +1,6 @@
 export interface RadioProps {
-    defaultChecked?: string;
-    defaultValue?: string;
+    defaultChecked?: any;
+    defaultValue?: any;
     isDisable?: boolean;
     id?: string | number;
     name?: string;

@@ -43,8 +43,7 @@ const Form = (props: any) => {
             <div className="flex flex-wrap formInner">
                 { props.aboveButton &&  props.aboveButton()}
                 <Renderer config={config} />
-            </div>
-            {React.Children.count(props.children) ? (
+                {React.Children.count(props.children) ? (
                 props.children
             ) : (
                 <div className="text-center">
@@ -61,6 +60,8 @@ const Form = (props: any) => {
                     />
                 </div>
             )}
+            </div>
+            
         </form>
     );
 };

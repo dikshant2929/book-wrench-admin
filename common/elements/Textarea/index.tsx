@@ -14,10 +14,17 @@ const defaultProps = {
 
 const Textarea = (props: PropsWithChildren<TextareaProps>) => {
     
+    const [value, setValue] = useState(props.value);
+
     const handleClick = (e: any) => {
-        const value = e?.target?.value;
-        props.cb(value);
+        const valuetextarea = e?.target?.value;
+        setValue(valuetextarea)
+        props.cb(valuetextarea);
     } 
+
+    useEffect(() => {
+        setValue(props.value)
+     }, [props]);
 
     return (
         <div className={props.parentClass}>
@@ -28,8 +35,8 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
                 rows={props.rows}
                 cols={props.cols}
                 name={props.name}
+                defaultValue={value}
                 >
-                {props.value}
              </textarea>
         </div>
     );
