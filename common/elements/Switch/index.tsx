@@ -7,7 +7,6 @@ const defaultProps = {
 
 const Switch = (props: PropsWithChildren<SwitchProps>) => {
     const id = `switch_${Math.random().toString(16).slice(2)}`;
-    console.log(props.defaultValue,"props.defaultValue")
     const [isChecked, setIsChecked] = useState(false);
 
     const handleOnChange = (field: any) => (event: any) => {
@@ -17,7 +16,6 @@ const Switch = (props: PropsWithChildren<SwitchProps>) => {
     };
 
     useEffect(() => {
-        console.log(props.defaultValue,"props.defaultValue sss")
         setIsChecked(props.defaultValue);
     }, [props.defaultValue]);
 

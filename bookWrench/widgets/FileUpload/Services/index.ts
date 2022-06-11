@@ -6,7 +6,7 @@ export default class Services {
     static async uploadInventoryFileValidation(key: string, formData: FormData, cb: (arg: any) => any, errorCallback: (arg: any) => any) {
         try {
             const data = await API.upload(key, formData);
-            return cb(data.data?.result);
+            return cb(data?.data?.data);
         } catch (error: any) {
             const msg = error?.response?.data?.errorResult?.error ||  error?.response?.data?.error || 'Something went wrong';
             showToster({ status: 'Error', msg });

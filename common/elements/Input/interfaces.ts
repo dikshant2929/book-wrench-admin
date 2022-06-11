@@ -8,6 +8,16 @@ export interface InputBoxProps {
     props: { name: string };
     blurCB?: any;
     tooltipData?: any;
+    toggleExpandCollapseCB?:any;
+    editId?:any;
+    autoFocusFlag?:any;
+    disabled?:any;
+    readonly?:any;
+    showMessage?:any;
+    isCustomValidate?:any;
+    pressEnter?:any;
+    toolTip?:any;
+    errCls?:any
 }
 
 export interface InputState {

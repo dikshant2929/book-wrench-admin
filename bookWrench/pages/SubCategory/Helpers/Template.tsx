@@ -28,7 +28,7 @@ const TableEditViewExpire = ({ data, history, reloadTable }: any) => {
         }
     };
 
-    console.log(data);
+  
     
     return (
         <div className="flex">

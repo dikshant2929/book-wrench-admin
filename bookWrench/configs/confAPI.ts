@@ -15,5 +15,10 @@ export default {
         url: 'department',
         options: {},
     },
+    uploadImage: {
+        url: 'uploadImage',
+        options: {},
+    },
+    
     
 };

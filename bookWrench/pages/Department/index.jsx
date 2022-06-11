@@ -92,7 +92,7 @@ const Department = (props) => {
         switch (column.key) {
             case 'title':
                 return  <div>
-                            <img className="" src="/bookWrench/assets/images/fav.png" alt="logo" />
+                            <img className="" src={data.icon} alt="logo" />
                             <p>{data[column.key]}</p> 
                     </div>
             case 'status':

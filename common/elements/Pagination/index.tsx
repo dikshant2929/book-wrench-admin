@@ -67,7 +67,7 @@ export default function Pagination(props: PropsWithChildren<PaginationProps>) {
     };
 
     const onPageChangeDropDown = (data: any) => {
-        console.log(data);
+       
         listPerPageSet(data.value);
         setSelectBoxItem(data);
         props?.numberOfRowOnPageCB?.(data.value);

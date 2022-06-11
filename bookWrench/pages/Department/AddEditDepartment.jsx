@@ -8,6 +8,7 @@ import encrypt from '@app/storage/encrypt';
 import './Department.scss';
 import Service from "./Services/department.service";
 import FileUpload from '@app/widgets/FileUpload';
+import Input from '@common/elements/Input';
 
 const { Department } = exposedPath;
 const defaultProps = {
@@ -15,31 +16,29 @@ const defaultProps = {
 };
 
 
-const formConfiguration = [
-    {
-        id: 'title',
-        componentType: 'InputBox',
-        selectedValue: '',
-        props: {
-            type: 'text',
-            name: 'title',
-            // maxLength : "3",
-            'data-gsv-err-msg': 'Title is required.',
-            classNameLabel: 'labelClass mt-8',
-            classNameInput: 'inputClass mb-6'
-        },
-        extraProps: {
-            label: 'Department Title',
-            validation: 'required,minLength',
-            minLength: 1,
-            parentId: 'title',
-            parentClass: '',
-            newInptClass: 'newClass'
-
-        },
-        isRequired: true,
+const formConfiguration = {
+    id: 'title',
+    componentType: 'InputBox',
+   
+    props: {
+        type: 'text',
+        name: 'title',
+        // maxLength : "3",
+        'data-gsv-err-msg': 'Title is required.',
+        classNameLabel: 'labelClass mt-8',
+        classNameInput: 'inputClass mb-6'
     },
-];
+    extraProps: {
+        label: 'Department Title',
+        validation: 'required,minLength',
+        minLength: 1,
+        parentId: 'title',
+        parentClass: '',
+        newInptClass: 'newClass'
+
+    },
+    isRequired: true,
+}
 
 
 const AddEditDepartment = (props) => {
@@ -48,35 +47,36 @@ const AddEditDepartment = (props) => {
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState("Create New Department");
     const [fieldValue, setFieldValue] = useState({
+        title:"",
         isActive: false,
         description: "",
         icon: ""
     })
 
     const onFormSubmit = (data) => {
-
-        const { isValidForm, ...request } = data;
-        request.isActive = fieldValue.isActive;
-        request.description = fieldValue.description
+    
+        //const { isValidForm=true, ...request } = data;
+    
         if (isEditMode) {
-            Service.editDepartment(request, () => props.history.push(Department), {}, editModeData.id);
+            Service.editDepartment({...fieldValue}, () => props.history.push(Department), {}, editModeData.id);
         } else {
-            Service.addDepartment(request, () => props.history.push(Department))
+            Service.addDepartment({...fieldValue}, () => props.history.push(Department))
         }
     };
 
     const radioValue = (name, val, key) => {
-        const prevState = fieldValue;
-        prevState.isActive = (val === "active" ? true : false)
-        setFieldValue(prevState)
-
+        setFieldValue(prevState => ({...prevState,isActive:(val === "active")}))
+    }
+    const titleName =(name,value,e) => {
+        setFieldValue(prevState => ({...prevState,title:value}))
     }
 
     const textareaValue = (name) => {
-        const prevState = fieldValue;
-        prevState.description = name
-        setFieldValue(prevState)
+        setFieldValue(prevState => ({...prevState,description:name}))
 
+    }
+    const imagePath = (path) => {
+        setFieldValue(prevState => ({...prevState,icon:path}))
     }
 
     useEffect(() => {
@@ -84,7 +84,7 @@ const AddEditDepartment = (props) => {
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
             setTitle(`Edit Department (${data.title})`)
-            formConfiguration[0].selectedValue = data.title;
+           // formConfiguration[0].selectedValue = data.title;
             setEditModeData(data);
             setEditMode(true);
         }
@@ -99,32 +99,16 @@ const AddEditDepartment = (props) => {
             <div className="">
                 <div className="">
                     <div className="add-catg-form-wrapper">
-                        <Form buttonClass="" buttonWidth='' formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle={`${isEditMode ? "Update" : "Save"}`}>
+                            <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
                             <div className='status p-1 min-w-1/4 mb-2 inline-block w-[49%]'>
-                                {/* <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} /> */}
-                                <label class="labelClass mt-8 block text-xs text-gray-700 mb-1 text-left truncate">Active?</label>
-                                <div className='switch flex items-center h-46px'>
-                                    <input type="checkbox" id="checkbox_switch" className='order-2' />
-                                    <label htmlFor="checkbox_switch" className='mb-0'>
-                                        <div className='pt-1.5 px-1.5'>
-                                            <span className='text-white px-1 hidden switch_yes'>Yes</span>
-                                            <span className='text-white px-7  switch_no'>No</span>
-                                        </div>
-
-                                    </label>
-                                </div>
-
-
+                            <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} />
                             </div>
                             <div className="file_upload_wrapper w-full flex gap-4">
                                 <Textarea value={editModeData?.description} cb={textareaValue} />
-                                <FileUpload />
+                                <FileUpload title="Upload Department Image" imagePath={imagePath}/>
                             </div>
-
-
-                        </Form>
-                        <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
-                            <button className="button-primary inline-flex px-12 py-5 text-sm h-46px ">Save</button>
+                            <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
+                            <button onClick={(e) => {e.preventDefault();onFormSubmit()}} className="button-primary inline-flex px-12 py-5 text-sm h-46px ">Save</button>
                         </div>
                     </div>
                 </div>
