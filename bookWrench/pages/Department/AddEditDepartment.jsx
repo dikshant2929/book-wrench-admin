@@ -99,11 +99,13 @@ const AddEditDepartment = (props) => {
             <div className="">
                 <div className="">
                     <div className="add-catg-form-wrapper">
+                            <div className='flex items-center w-full department__header m-10 gap-4'>
                             <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
-                            <div className='status p-1 min-w-1/4 mb-2 inline-block w-[49%]'>
+                            <div className='status'>
                             <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} />
                             </div>
-                            <div className="file_upload_wrapper w-full flex gap-4">
+                            </div>
+                            <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
                                 <Textarea value={editModeData?.description} cb={textareaValue} />
                                 <FileUpload title="Upload Department Image" imagePath={imagePath}/>
                             </div>

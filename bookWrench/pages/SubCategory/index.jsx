@@ -97,19 +97,19 @@ const SubCategory = (props) => {
     };
 
     return (
-        <div className="category md:mx-20 mt-11 mb-6">
+        <div className="sub-category md:mx-20 mt-11 mb-6">
             <div className=" flex justify-between items-center">
-                <h1 className="font-medium text-4xl mb-4">{config.title}</h1>
-                <div className="">
+                <h1 className="font-medium list-heading mb-4">{config.title}</h1>
+                <div className="btn-wrapper">
                     <TableWidgets>
                         <RedirectButton
                             title="New Sub-Category"
                             link={SubCategoryCreate}
-                            className="button-primary ml-1"
+                            className="button-primary ml-1 title-btns"
                             display="inline-flex"
                             width="w-auto"
-                            height="h-46px"
-                            padding="px-20px"
+                            height="h-10"
+                            padding="px-3.5"
                             icon={`M12 4v16m8-8H4`}
                             fontSize="text-sm"
                         />

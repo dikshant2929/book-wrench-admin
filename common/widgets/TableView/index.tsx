@@ -20,8 +20,8 @@ const TableView = (props: TableViewProps) => {
     const { tableHeaders, updateHeader } = props;
     //const [tableHeaders, setTableHeaders] = useState<HeaderProps[]>(props.config?.table?.heading);
 
-    const thClasses = `bg-gray-300 px-4 py-4 font-inter font-medium text-13px text-left ${props?.thClasses}`;
-    const tdClasses = `px-4 py-4 font-inter text-13px text-left min-w-100px ${props?.tdClasses}`;
+    const thClasses = `px-4 py-4 font-inter font-semibold text-sm text-left ${props?.thClasses}`;
+    const tdClasses = `px-4 py-2 font-inter font-medium text-sm text-left min-w-100px ${props?.tdClasses}`;
 
     if (!props.config) {
         return null;
@@ -51,8 +51,8 @@ const TableView = (props: TableViewProps) => {
                     />
                     <div className="overflow-auto bg-white mb-2">
                         <table className={tableClasses}>
-                            <thead>
-                                <tr>
+                            <thead className='border-b-2 border-[#DFE2E9]'>
+                                <tr className=''>
                                     {tableHeaders &&
                                         tableHeaders.map(({ value, isShown = true }: any, index: number) => (
                                             <th key={index} className={thClasses} hidden={!isShown}>
@@ -64,7 +64,7 @@ const TableView = (props: TableViewProps) => {
                             <tbody>
                                 {tableHeaders &&
                                     props.config?.table?.dataList.map((item: any, index: number) => (
-                                        <tr key={index} className="even:bg-gray-50 hover:bg-gray-200">
+                                        <tr key={index} className="hover:bg-gray-200 border-b border-[#DFE2E9]">
                                             {tableHeaders.map(({ key, isShown = true }: any, index: number) =>
                                                 props.tableCellView !== undefined ? (
                                                     // Cell View ONE

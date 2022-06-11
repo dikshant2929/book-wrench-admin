@@ -40,7 +40,7 @@ const Form = (props: any) => {
 
     return (
         <form onSubmit={onSubmit} className={`${props.className || ''}`}>
-            <div className="flex flex-wrap formInner justify-between mb-8">
+            <div className="formInner">
                 { props.aboveButton &&  props.aboveButton()}
                 <Renderer config={config} />
                 {React.Children.count(props.children) ? (

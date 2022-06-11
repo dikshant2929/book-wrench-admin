@@ -91,9 +91,9 @@ const Department = (props) => {
     const tableCellView = ({ column, data }) => {
         switch (column.key) {
             case 'title':
-                return  <div>
+                return  <div className='flex items-center justify-start gap-3'>
                             <img className="" src={data.icon} alt="logo" />
-                            <p>{data[column.key]}</p> 
+                            <p className='font-medium text-sm'>{data[column.key]}</p> 
                     </div>
             case 'status':
                 return  <Switch defaultValue={data.isActive} isDisable={true} />
@@ -106,18 +106,18 @@ const Department = (props) => {
 
     return (
         <div className="department md:mx-20 mt-11 mb-6">
-            <div className=" flex justify-between items-center">
-                <h1 className="font-medium text-4xl mb-4">{config.title}</h1>
-                <div className="">
+            <div className="flex justify-between items-center">
+                <h1 className="font-medium list-heading mb-4">{config.title}</h1>
+                <div className="btn-wrapper">
                     <TableWidgets>
                         <RedirectButton
                             title="New Department"
                             link={DepartmentCreate}
-                            className="button-primary ml-1"
+                            className="button-primary ml-1 title-btn"
                             display="inline-flex"
                             width="w-auto"
-                            height="h-46px"
-                            padding="px-20px"
+                            height="h-10"
+                            padding="px-3.5"
                             icon={`M12 4v16m8-8H4`}
                             fontSize="text-sm"
                         />

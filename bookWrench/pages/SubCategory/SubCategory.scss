@@ -26,3 +26,41 @@
         margin-bottom: 1.5rem;
     }
 }
+
+
+.sub-category {
+    .list-heading {
+      font-size: 1.75rem;
+      line-height: 2rem;
+    }
+  
+    .btn-wrapper {
+  
+      svg {
+        width: 1rem;
+        height: 1rem;
+      }
+      a{
+        font-size: 0.875rem;
+        line-height: 1rem;
+      }
+    }
+  }
+
+  .formInner{
+    label{
+      color: #000000;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    [type='text']{
+      width: 50%;
+      border-radius: 0.375rem;
+      border: 1px solid rgba(229, 231, 235, var(--tw-border-opacity));
+    }
+    [type='text']:focus {
+      box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+    }   
+  }

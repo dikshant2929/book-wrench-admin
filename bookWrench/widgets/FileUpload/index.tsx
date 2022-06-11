@@ -75,7 +75,7 @@ const FileUpload = (props: FileUploadArgs) => {
         {
             selectedFile
                 ?
-                <div className='flex items-center my-5 border p-4 h-20'>
+                <div className='flex items-center mt-7 border p-4 h-20'>
                     <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>
                     <RightMark onClick={onPositiveClick} />
                     <CrossMark onClick={onCrossMarkStart} />
@@ -84,7 +84,14 @@ const FileUpload = (props: FileUploadArgs) => {
                 <div className='file_upload w-[28%]'>
                     <label className="text-xs text-gray-700 mb-1 text-left">{props.title}</label>
                     
-                    <div className='flex items-center' >
+                    <div className='flex items-center relative' >
+                        <div className='file__details absolute inset-0 flex justify-evenly items-center'>
+                            <span className='icon rounded-md p-2.5 bg-gray-200 flex justify-center items-center text-gray-400'><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg></span>
+                            <div className='file_format_details'>
+                            <p className='text-[#555555] text-sm'>Drop your docs here or <strong>Browse</strong></p>
+                            <span className='text-gray-300 text-xs'>Support: jpg, jpeg,png</span>
+                            </div>
+                        </div>
                                               
                         <input
                             onChange={onFileInputChange}
