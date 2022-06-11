@@ -32,7 +32,7 @@ const Switch = (props: PropsWithChildren<SwitchProps>) => {
                     onChange={handleOnChange(props.id || props.name || id)}
                 />
                 <div className="block bg-gray-300 border border-gray-300 w-[3.5rem] h-[1.5rem] rounded-lg"></div>
-                <div className="dot absolute left-[4px] top-0.5 bg-white w-6 h-5 shadow-md rounded-lg transition"></div>
+                <div className="dot absolute left-[4px] top-1 bg-white w-6 h-4 shadow-md rounded-xl transition"></div>
             </div>
         </label>
     );
