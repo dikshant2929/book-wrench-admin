@@ -21,8 +21,8 @@ const formConfiguration = [
             name: 'title',
             // maxLength : "3",
             'data-gsv-err-msg': 'Title is required.',
-            className: 'form__input_w_height',
-            classNameInput: 'inputClass'
+            classNameLabel:"label__small",
+            classNameInput:"form__input_w_height"
         },
         extraProps: {
             label: 'Category Title',

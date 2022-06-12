@@ -5,7 +5,8 @@ import Button from '@button';
 
 const defaultProps = {
     buttonClass : "",
-    buttonWidth: "w-full"
+    buttonWidth: "w-full",
+    formClass : "formInner"
 };
 const Form = (props: any) => {
     if (!props.formConfiguration || !Array.isArray(props.formConfiguration) || !props.formConfiguration.length) {
@@ -40,9 +41,9 @@ const Form = (props: any) => {
 
     return (
         <form onSubmit={onSubmit} className={`${props.className || ''}`}>
-            <div className="formInner">
-                { props.aboveButton &&  props.aboveButton()}
+            <div className={props.formClass}>
                 <Renderer config={config} />
+                { props.aboveButton &&  props.aboveButton()}
                 {React.Children.count(props.children) ? (
                 props.children
             ) : (

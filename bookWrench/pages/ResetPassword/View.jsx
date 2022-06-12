@@ -16,8 +16,8 @@ const formConfiguration = [
             maxLength: '50',
             placeHolder:"New Password",
             'data-gsv-err-msg': 'Password is required.',
-            classNameLabel:"hidden",
-            classNameInput:"inputLogin"
+            classNameLabel:"hidden block text-xs text-gray-700 mb-1 text-left truncate",
+            classNameInput:"inputLogin block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
         },
         extraProps: {
             label: 'passwordNew',
@@ -37,8 +37,8 @@ const formConfiguration = [
             maxLength: '50',
             placeHolder:"Conform Password",
             'data-gsv-err-msg': 'Password is required.',
-            classNameLabel:"hidden",
-            classNameInput:"inputLogin"
+            classNameLabel:"hidden block text-xs text-gray-700 mb-1 text-left truncate",
+            classNameInput:"inputLogin block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
         },
         extraProps: {
             label: 'passwordConform',

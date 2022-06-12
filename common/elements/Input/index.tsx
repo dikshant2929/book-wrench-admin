@@ -12,10 +12,14 @@ const defaultProps = {
 	isCustomValidate: false,
 	errCls: '',
 	allowPaste: false,
-
+	props : {
+		classNameLabel:"label__small",
+		classNameInput:"form__input_w_height"
+	},
+	cls : "p-1 min-w-1/4 mb-2 inline-block w-full"
 }
 
- const Input = (props: PropsWithChildren<InputBoxProps>) => {
+const Input = (props: PropsWithChildren<InputBoxProps>) => {
 	let el;
 	const [state, setState] = useState({ ...props.extraProps, error: { status: true, message: "", }, selectedValue: props.selectedValue ? props.selectedValue : '' })
 
@@ -113,7 +117,7 @@ const defaultProps = {
 	
 	return (
 		<div className={` ${options.parentClass} ${!error.status && props.showMessage ? 'errorField' : ''} ${props.cls || ""} ${options.isActiveCls ? state.labelClass : ""}`} id={options.parentId ? options.parentId : ''}>
-			<label className='label__small' htmlFor={options.id}><HtmlTag>{options.label}</HtmlTag></label>
+			<label className={prps.classNameLabel} htmlFor={options.id}><HtmlTag>{options.label}</HtmlTag></label>
 			<input {...prps}
 				//value={state.selectedValue}
 				defaultValue={state.selectedValue ? state.selectedValue : ""}
@@ -129,6 +133,7 @@ const defaultProps = {
 				data-gsv-min-value={options.minValue}
 				onChange={(e) => handleChange(e)}
 				data-gsf-name={gsfName}
+				className={prps.classNameInput || prps.className}
 			//autoFocus={props.autoFocusFlag}
 			/>
 			{props.toolTip && <HtmlTag tag="span" className="icon-info "><div className="infoTxt">{props.toolTip}</div></HtmlTag>}

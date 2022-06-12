@@ -18,8 +18,8 @@ const formConfiguration = [
             // maxLength : "3",
             'data-gsv-err-msg': 'User Name is required.',
             placeHolder:"User Name",
-            classNameLabel:"hidden",
-            classNameInput:"inputLogin"
+            classNameLabel:"hidden block text-xs text-gray-700 mb-1 text-left truncate",
+            classNameInput:"inputLogin block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
         },
         extraProps: {
             label: 'Username',
@@ -39,8 +39,8 @@ const formConfiguration = [
             maxLength: '50',
             placeHolder:"Password",
             'data-gsv-err-msg': 'Password is required.',
-            classNameLabel:"hidden",
-            classNameInput:"inputLogin"
+            classNameLabel:"hidden block text-xs text-gray-700 mb-1 text-left truncate",
+            classNameInput:"inputLogin block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
         },
         extraProps: {
             label: 'Password',
@@ -107,7 +107,7 @@ const View = (props) => {
         <div className="p-10">
             <h1 className="text-center text-[#35324A] font-medium text-2xl mb-6">Sign In to BookWrench</h1>
             <div className="bg-white rounded-md ">  
-                <Form aboveButton={AboveButton} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Sign In"></Form>
+                <Form formClass="flex-col flex-wrap" aboveButton={AboveButton} formConfiguration={formConfiguration} onSubmit={onFormSubmit} buttonTitle="Sign In"></Form>
             </div>
             
             <ToastNotification

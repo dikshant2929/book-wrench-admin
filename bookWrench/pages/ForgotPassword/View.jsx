@@ -18,8 +18,8 @@ const formConfiguration = [
             // maxLength : "3",
             'data-gsv-err-msg': 'Enter your Email Address is required.',
             placeHolder: "Enter your Email Address",
-            classNameLabel: "hidden",
-            classNameInput: "inputLogin"
+            classNameLabel:"hidden block text-xs text-gray-700 mb-1 text-left truncate",
+            classNameInput:"inputLogin block w-full rounded-md border border-gray-200 h-46px focus:ring-0 text-sm"
         },
         extraProps: {
             label: 'ForgotPassword',

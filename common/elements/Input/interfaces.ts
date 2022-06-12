@@ -5,7 +5,7 @@ export interface InputBoxProps {
     cb?: any;
     noScrollFlag?: any;
     focusCB?: any;
-    props: { name: string };
+    props: { name: string, classNameLabel?: string, classNameInput?: string };
     blurCB?: any;
     tooltipData?: any;
     toggleExpandCollapseCB?:any;

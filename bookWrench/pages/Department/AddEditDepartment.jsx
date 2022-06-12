@@ -25,8 +25,8 @@ const formConfiguration = {
         name: 'title',
         // maxLength : "3",
         'data-gsv-err-msg': 'Title is required.',
-        className: 'form__input_w_height',
-        classNameInput: 'inputClass mb-6'
+        classNameLabel:"label__small",
+        classNameInput:"form__input_w_height"
     },
     extraProps: {
         label: 'Department Title',
@@ -98,7 +98,7 @@ const AddEditDepartment = (props) => {
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
                             <div className='flex items-center w-full department__header m-10 gap-4'>
-                             <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
+                            <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
                             <div className='status'>
                                 <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} />
                             </div>
