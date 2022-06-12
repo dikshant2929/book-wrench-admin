@@ -4,7 +4,7 @@ const defaultProps = {
     title:"Description",
     titleClass:"text-xs text-gray-700 mb-1 text-left",
     parentClass:"",
-    textareaClass:"w-full rounded-md border h-20 border-gray-200 focus:ring-0",
+    textareaClass:"w-full border-light h-20 focus:ring-0 placeholder-light resize-none",
     rows:"4",
     cols:"4",
     name:"description",

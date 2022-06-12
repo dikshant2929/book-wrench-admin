@@ -25,7 +25,7 @@ const formConfiguration = {
         name: 'title',
         // maxLength : "3",
         'data-gsv-err-msg': 'Title is required.',
-        classNameLabel: 'labelClass mt-8',
+        className: 'labelClass placeholder-light',
         classNameInput: 'inputClass mb-6'
     },
     extraProps: {
@@ -108,7 +108,7 @@ const AddEditDepartment = (props) => {
                                 <FileUpload title="Upload Department Image" imagePath={imagePath}/>
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
-                            <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary inline-flex px-12 py-5 text-sm h-46px ">{isEditMode ? "Update" : "Save"}</button>
+                            <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary inline-flex px-24 py-5 text-sm h-46px ">{isEditMode ? "Update" : "Save"}</button>
                         </div>
                     </div>
                 </div>

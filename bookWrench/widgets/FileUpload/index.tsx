@@ -16,17 +16,17 @@ interface FileUploadArgs {
     fileUploadAPIKey: string;
     requestFileName: string;
     text: string;
-    title:string
+    title: string
     imagePath: (args: any | {}) => any;
     onClose: (args: any | {}) => any;
-    
+
 }
 
 
 const FileUpload = (props: FileUploadArgs) => {
     const [imageUploadStatus, setImageUploadStatus] = useState(false);
     const [selectedFile, setSelectedFile] = useState<any>(null);
-   
+
     const fileInputRef = useRef<any>(null);
     const styles = { border: '2px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer', height: 80 };
 
@@ -43,7 +43,7 @@ const FileUpload = (props: FileUploadArgs) => {
 
     const onCrossMarkStart = () => {
         setSelectedFile(null);
-       
+
     }
 
     const onFileDropped = (files: any, event: any) => {
@@ -55,21 +55,21 @@ const FileUpload = (props: FileUploadArgs) => {
         if (selectedFile[0]) {
             const formData = new FormData();
             formData.append('file', selectedFile[0])
-           
+
             Services.uploadInventoryFileValidation('uploadImage', formData, (data) => {
-                if(data){
+                if (data) {
                     props?.imagePath?.(data.url);
                     setImageUploadStatus(true);
                 }
-                
+
             }, (error) => {
                 setImageUploadStatus(false);
             })
         }
-       
+
     }
 
-    
+
     return (<>
         {
             selectedFile
@@ -83,36 +83,38 @@ const FileUpload = (props: FileUploadArgs) => {
                 :
                 <div className='file_upload w-[28%]'>
                     <label className="text-xs text-gray-700 mb-1 text-left">{props.title}</label>
-                    
+
                     <div className='flex items-center relative' >
-                        <div className='file__details absolute inset-0 flex justify-evenly items-center'>
-                            <span className='icon rounded-md p-2.5 bg-gray-200 flex justify-center items-center text-gray-400'><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg></span>
+                        <div className='file__details absolute inset-0 flex items-center gap-4 pl-4'>
+                            <span className='icon rounded-md p-2.5 bg-gray-200 flex justify-center items-center text-gray-400'>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            </span>
                             <div className='file_format_details'>
-                            <p className='text-[#555555] text-sm'>Drop your docs here or <strong>Browse</strong></p>
-                            <span className='text-gray-300 text-xs'>Support: jpg, jpeg,png</span>
+                                <p className='text-[#555555] text-sm'>Drop your docs here or <strong>Browse</strong></p>
+                                <span className='text-gray-300 text-xs'>Support: jpg, jpeg,png</span>
                             </div>
                         </div>
-                                              
+
                         <input
                             onChange={onFileInputChange}
                             ref={fileInputRef}
                             type="file"
-                            className='hidden'  />
-                        
+                            className='hidden' />
+
                         <div style={styles}>
                             <FileDrop
                                 onDrop={(files, event) => onFileDropped(files, event)}
                                 onTargetClick={onTargetClick}>
                                 {props.text}
                             </FileDrop>
-                            
+
                         </div>
-                        
+
                     </div>
                 </div>
         }
 
-        
+
     </>)
 }
 
