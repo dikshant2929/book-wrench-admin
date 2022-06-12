@@ -25,6 +25,13 @@
       // }
       .formInner {
         padding-inline: 2.5rem;
+        .error{
+          color: #ee3f3f;
+          font-size: 0.75rem;
+          line-height: 1.125rem;
+          margin-left: 10px;
+        }  
+
       }
     }
 

@@ -107,7 +107,7 @@ const AddEditDepartment = (props) => {
                                 <Textarea value={editModeData?.description} cb={textareaValue} />
                                 <FileUpload title="Upload Department Image" imagePath={imagePath}/>
                             </div>
-                            <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
+                            <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
                             <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary inline-flex px-24 py-5 text-sm h-46px ">{isEditMode ? "Update" : "Save"}</button>
                         </div>
                     </div>

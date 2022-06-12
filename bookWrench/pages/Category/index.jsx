@@ -98,8 +98,8 @@ const Category = (props) => {
 
     return (
         <div className="category md:mx-20 mt-11 mb-6">
-            <div className=" flex justify-between items-center">
-                <h1 className="font-medium list-heading mb-4">{config.title}</h1>
+            <div className=" flex justify-between items-end mb-7">
+                <h1 className="font-medium list-heading">{config.title}</h1>
                 <div className="btn-wrapper">
                     <TableWidgets>
                         <RedirectButton

@@ -3,12 +3,12 @@
     .add-catg-form-wrapper {       
 
         form {
-            label {
-                color: #000000;
-                font-size: 0.875rem;
-                line-height: 1.25rem;
-                margin-bottom: 0.5rem;
-            }
+            // label {
+            //     color: #000000;
+            //     font-size: 0.875rem;
+            //     line-height: 1.25rem;
+            //     margin-bottom: 0.5rem;
+            // }
 
             input {
                 margin-bottom: 2.5rem;
@@ -48,10 +48,10 @@
   }
 
   .formInner{
-    label{
+    label {
       color: #000000;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
       margin-bottom: 0.5rem;
       display: block;
     }
@@ -62,5 +62,31 @@
     }
     [type='text']:focus {
       box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-    }   
+      border: 0;
+    } 
+    .error{
+      color: #ee3f3f;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      margin-left: 10px;
+    }  
   }
+
+
+  .border-light{
+    border-radius: 8px;
+    border: 1px solid #D6D6D6;
+  }
+  
+  // input height
+  
+  .h-48{
+    height: 48px;
+  }
+  
+  .placeholder-light{
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: #000000;
+  }
+  
