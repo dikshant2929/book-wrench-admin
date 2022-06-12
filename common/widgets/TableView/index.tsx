@@ -20,8 +20,8 @@ const TableView = (props: TableViewProps) => {
     const { tableHeaders, updateHeader } = props;
     //const [tableHeaders, setTableHeaders] = useState<HeaderProps[]>(props.config?.table?.heading);
 
-    const thClasses = `px-4 py-4 font-inter font-semibold text-sm text-left ${props?.thClasses}`;
-    const tdClasses = `px-4 py-2 font-inter font-medium text-sm text-left min-w-100px ${props?.tdClasses}`;
+    const thClasses = `table__head ${props?.thClasses}`;
+    const tdClasses = `table__data ${props?.tdClasses}`;
 
     if (!props.config) {
         return null;

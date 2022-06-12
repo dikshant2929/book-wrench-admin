@@ -46,7 +46,18 @@
         @apply inline-flex px-24 py-5 text-sm h-46px;
     }
 
+    .icon__plus__small{
+        @apply w-4 h-4;
+    }
 
+     //------------------ table classes ------------------
+
+    .table__head{
+        @apply px-4 py-4 font-inter font-semibold text-sm text-left;
+    }
+    .table__data{
+        @apply px-4 py-2 font-inter font-medium text-sm text-left min-w-105px;
+    }
 
 
 }
