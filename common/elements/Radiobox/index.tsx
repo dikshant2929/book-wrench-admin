@@ -3,7 +3,7 @@ import { RadioProps } from './interfaces';
 const defaultProps = {
     defaultValue: "",
     title:"Status",
-    titleClass:"block text-xs text-gray-700 text-left",
+    titleClass:"label__small text-left",
     parentClass:"",
     childClass:"form-check-inline  pr-8 mt-[0.312rem]",
     inputClass:"text-green-300 outline-green-300 form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-green-300 bg-green checked:bg-green-300 checked:border-green-300 focus:outline transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer focus:ring-green-300",

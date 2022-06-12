@@ -21,7 +21,7 @@ const formConfiguration = [
             name: 'title',
             // maxLength : "3",
             'data-gsv-err-msg': 'Title is required.',
-            className: 'labelClass border-light h-48 placeholder-light',
+            className: 'form__input_w_height',
             classNameInput: 'inputClass'
         },
         extraProps: {
@@ -78,7 +78,7 @@ const AddEditSubCategory = (props) => {
                    
                 </div> 
                 <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
-                            <button className="button-primary inline-flex px-24 py-5 text-sm h-46px ">Save</button>
+                            <button className="button-primary form__button">Save</button>
                         </div>           
         </div>
     );

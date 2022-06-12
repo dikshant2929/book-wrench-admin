@@ -82,7 +82,7 @@ const FileUpload = (props: FileUploadArgs) => {
                 </div>
                 :
                 <div className='file_upload w-[28%]'>
-                    <label className="text-xs text-gray-700 mb-1 text-left">{props.title}</label>
+                    <label className="label__small text-left">{props.title}</label>
 
                     <div className='flex items-center relative' >
                         <div className='file__details absolute inset-0 flex items-center gap-4 pl-4'>

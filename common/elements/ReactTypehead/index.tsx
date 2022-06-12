@@ -55,7 +55,7 @@ function ReactTypeHead(props: PropsWithChildren<any>) {
         <div className={`${props.parentClass}`}>
             {props.header && (
                 <label
-                    className="block text-xs text-gray-700 mb-1 text-left truncate"
+                    className="label__small text-left truncate"
                     htmlFor={props.header}
                 >
                     {" "}

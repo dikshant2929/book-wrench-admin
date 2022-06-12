@@ -112,8 +112,8 @@ const defaultProps = {
 	}
 	
 	return (
-		<div className={`${options.parentClass} ${!error.status && props.showMessage ? 'errorField' : ''} ${props.cls || ""} ${options.isActiveCls ? state.labelClass : ""}`} id={options.parentId ? options.parentId : ''}>
-			<label htmlFor={options.id}><HtmlTag>{options.label}</HtmlTag></label>
+		<div className={` ${options.parentClass} ${!error.status && props.showMessage ? 'errorField' : ''} ${props.cls || ""} ${options.isActiveCls ? state.labelClass : ""}`} id={options.parentId ? options.parentId : ''}>
+			<label className='label__small' htmlFor={options.id}><HtmlTag>{options.label}</HtmlTag></label>
 			<input {...prps}
 				//value={state.selectedValue}
 				defaultValue={state.selectedValue ? state.selectedValue : ""}
@@ -132,7 +132,7 @@ const defaultProps = {
 			//autoFocus={props.autoFocusFlag}
 			/>
 			{props.toolTip && <HtmlTag tag="span" className="icon-info "><div className="infoTxt">{props.toolTip}</div></HtmlTag>}
-			{!error.status && props.showMessage && <HtmlTag tag="span" data-gsv-error="1" className={`error ${props.errCls}`}>{error.message}</HtmlTag>}
+			{!error.status && props.showMessage && <HtmlTag tag="span" data-gsv-error="1" className={`error error_msg_red ${props.errCls}`}>{error.message}</HtmlTag>}
 			{props.children}
 		</div>
 	);

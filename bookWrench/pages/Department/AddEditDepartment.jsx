@@ -25,7 +25,7 @@ const formConfiguration = {
         name: 'title',
         // maxLength : "3",
         'data-gsv-err-msg': 'Title is required.',
-        className: 'labelClass placeholder-light',
+        className: 'form__input_w_height',
         classNameInput: 'inputClass mb-6'
     },
     extraProps: {
@@ -94,8 +94,8 @@ const AddEditDepartment = (props) => {
     return (
         <div className="addDepartment bg-white center mx-8 sm:mx-20 mt-12 mb-10 rounded-md">
             <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">{title}</h1>
-            <div className="">
-                <div className="">
+            <div className="wrapper__1">
+                <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
                             <div className='flex items-center w-full department__header m-10 gap-4'>
                              <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
@@ -108,7 +108,7 @@ const AddEditDepartment = (props) => {
                                 <FileUpload title="Upload Department Image" imagePath={imagePath}/>
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
-                            <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary inline-flex px-24 py-5 text-sm h-46px ">{isEditMode ? "Update" : "Save"}</button>
+                            <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary form__button">{isEditMode ? "Update" : "Save"}</button>
                         </div>
                     </div>
                 </div>

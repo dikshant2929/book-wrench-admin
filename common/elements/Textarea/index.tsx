@@ -2,9 +2,9 @@ import React, { useState, useEffect, PropsWithChildren } from 'react';
 import { TextareaProps } from './interfaces';
 const defaultProps = {
     title:"Description",
-    titleClass:"text-xs text-gray-700 mb-1 text-left",
+    titleClass:"label__small text-left",
     parentClass:"",
-    textareaClass:"w-full border-light h-20 focus:ring-0 placeholder-light resize-none",
+    textareaClass:"w-full form__input__border text-sm h-20 focus:ring-0 resize-none",
     rows:"4",
     cols:"4",
     name:"description",
