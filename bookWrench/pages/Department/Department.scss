@@ -2,101 +2,23 @@
   box-shadow: 0 0 15px -7px grey;
 
   .add-catg-form-wrapper {
-    // box-shadow: 0 0 8px -3px grey;
-
-    form {
-
-      // label {
-      //   color: #000000;
-      //   font-size: 0.875rem;
-      //   line-height: 1.25rem;
-      //   margin-bottom: 0.5rem;
-      // }
-
-      // [type='radio']:focus{
-      //     color: green;
-      // }
-      // button {
-      //   width: 50%;
-      // }
-
-      // .newClass{
-      //     width: 50%;
-      // }
+    form {     
       .formInner {
-        padding-inline: 2.5rem;
-        // .error{
-        //   color: #ee3f3f;
-        //   font-size: 0.75rem;
-        //   line-height: 1.125rem;
-        //   margin-left: 10px;
-        // }  
-
+        padding-inline: 2.5rem;       
       }
     }
 
   }
+} 
 
-  .department__header,
-  .file_upload_wrapper {
-    // label {
-    //   color: #000000;
-    //   font-size: 0.75rem;
-    //   line-height: 1.125rem;
-    //   margin-bottom: 0.5rem;
-    //   display: block;
-    // }
-  }
-
-  .department__header {
-    // [type='text'] {
-    //   width: 100%;
-    //   border-radius: 8px;
-    //   height: 48px;
-    //   border: 1px solid #D6D6D6;
-    //   font-size: 0.875rem;
-    //   line-height: 1.5rem;
-    //   color: #000000;
-    // }
-
-    // [type='text']:focus {
-    //   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-    //   border: 0;
-    // }    
-  }
-}
+  
 
 @media only screen and (max-width: 640px) {
   .addDepartment .add-catg-form-wrapper form input {
     margin-bottom: 1.5rem;
   }
 }
-
-// Border classes
-
-// .border-light{
-//   border-radius: 8px;
-//   border: 1px solid #D6D6D6;
-// }
-
-// input height
-
-// .h-48{
-//   height: 48px;
-// }
-
-// .placeholder-light{
-//     font-size: 0.875rem;
-//     line-height: 1.5rem;
-//     color: #000000;
-// }
-
-
-.department {
-  // .list-heading {
-  //   font-size: 1.75rem;
-  //   line-height: 2rem;
-  // }
+.department { 
 
   .btn-wrapper {
 

@@ -7,12 +7,16 @@
     .switchBtn:checked ~ .dot {
         @apply transform translate-x-full bg-green-500;
     }
-    // typography
+    // ------------------ typography ------------------
+
     .list-heading{
         font-size: 1.75rem;
         line-height: 2rem;
     }
-    // form input classes
+
+    //------------------ form input classes ------------------
+
+
     .form__input_w_height{
         @apply h-12 w-full rounded-lg border border-[#D6D6D6] text-sm text-black;
     }
@@ -22,15 +26,27 @@
     .form__input__border{
         @apply rounded-lg border border-[#D6D6D6]
     }
-    // form label classes
+
+
+    //------------------ form label classes ------------------
+
+
     .label__small{
         @apply text-xs mb-2 block text-[#555555];
     }
     .error_msg_red{
         @apply text-red-400 text-xs ml-2.5;
     }
-    // form buttons classes
+
+
+    //------------------ form buttons classes ------------------
+
+
     .form__button{
         @apply inline-flex px-24 py-5 text-sm h-46px;
     }
+
+
+
+
 }
