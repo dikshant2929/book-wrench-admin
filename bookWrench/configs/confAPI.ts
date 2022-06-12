@@ -12,7 +12,7 @@ export default {
         options: {},
     },
     department: {
-        url: 'department',
+        url: 'department/',
         options: {},
     },
     uploadImage: {

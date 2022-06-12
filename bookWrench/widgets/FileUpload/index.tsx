@@ -24,7 +24,7 @@ interface FileUploadArgs {
 
 
 const FileUpload = (props: FileUploadArgs) => {
-    const [isShimmerVisible, setShimmer] = useState(false);
+    const [imageUploadStatus, setImageUploadStatus] = useState(false);
     const [selectedFile, setSelectedFile] = useState<any>(null);
    
     const fileInputRef = useRef<any>(null);
@@ -55,22 +55,21 @@ const FileUpload = (props: FileUploadArgs) => {
         if (selectedFile[0]) {
             const formData = new FormData();
             formData.append('file', selectedFile[0])
-            setShimmer(true);
+           
             Services.uploadInventoryFileValidation('uploadImage', formData, (data) => {
                 if(data){
-                    props?.imagePath?.(data.url)
+                    props?.imagePath?.(data.url);
+                    setImageUploadStatus(true);
                 }
                 
             }, (error) => {
-                setShimmer(false);
+                setImageUploadStatus(false);
             })
         }
        
     }
 
-    if (isShimmerVisible) {
-        return <ShimmerEffect height={10} count={1} visible={isShimmerVisible} type="grid" />
-    }
+    
     return (<>
         {
             selectedFile
@@ -79,6 +78,7 @@ const FileUpload = (props: FileUploadArgs) => {
                     <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>
                     <RightMark onClick={onPositiveClick} />
                     <CrossMark onClick={onCrossMarkStart} />
+                    {imageUploadStatus && <div className="ImageStatus">Image Added Successfully !!!</div>}
                 </div>
                 :
                 <div className='file_upload w-[28%]'>

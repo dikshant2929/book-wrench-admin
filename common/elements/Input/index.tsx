@@ -115,8 +115,8 @@ const defaultProps = {
 		<div className={`${options.parentClass} ${!error.status && props.showMessage ? 'errorField' : ''} ${props.cls || ""} ${options.isActiveCls ? state.labelClass : ""}`} id={options.parentId ? options.parentId : ''}>
 			<label htmlFor={options.id}><HtmlTag>{options.label}</HtmlTag></label>
 			<input {...prps}
-				value={state.selectedValue}
-				//defaultValue={props.value ? props.value : ""}
+				//value={state.selectedValue}
+				defaultValue={state.selectedValue ? state.selectedValue : ""}
 				ref={(node) => el = node}
 				autoComplete='new-password'
 				onKeyUp={(e) => { !props.isCustomValidate && validateUtility.validate(e.target, { setState: setState }, state) }}

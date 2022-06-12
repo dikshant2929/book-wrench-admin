@@ -92,7 +92,7 @@ const Department = (props) => {
         switch (column.key) {
             case 'title':
                 return  <div className='flex items-center justify-start gap-3'>
-                            <img className="" src={data.icon} alt="logo" />
+                            {data.icon && <img src={data.icon} alt="logo" />}
                             <p className='font-medium text-sm'>{data[column.key]}</p> 
                     </div>
             case 'status':

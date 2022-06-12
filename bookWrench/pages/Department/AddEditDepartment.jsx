@@ -53,11 +53,8 @@ const AddEditDepartment = (props) => {
         icon: ""
     })
 
-    const onFormSubmit = (data) => {
-    
-        //const { isValidForm=true, ...request } = data;
-    
-        if (isEditMode) {
+    const onFormSubmit = (fieldValue) => {
+     if (isEditMode) {
             Service.editDepartment({...fieldValue}, () => props.history.push(Department), {}, editModeData.id);
         } else {
             Service.addDepartment({...fieldValue}, () => props.history.push(Department))
@@ -84,12 +81,13 @@ const AddEditDepartment = (props) => {
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
             setTitle(`Edit Department (${data.title})`)
-           // formConfiguration[0].selectedValue = data.title;
             setEditModeData(data);
             setEditMode(true);
+            const {title,isActive,description,icon} = data
+            setFieldValue({title,isActive,description,icon})
         }
         return () => {
-            formConfiguration[0].selectedValue = "";
+            setFieldValue(prevState => ({...prevState,title:""}))
         }
     }, [props]);
 
@@ -100,9 +98,9 @@ const AddEditDepartment = (props) => {
                 <div className="">
                     <div className="add-catg-form-wrapper">
                             <div className='flex items-center w-full department__header m-10 gap-4'>
-                            <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
+                             <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
                             <div className='status'>
-                            <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} />
+                                <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} />
                             </div>
                             </div>
                             <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
@@ -110,7 +108,7 @@ const AddEditDepartment = (props) => {
                                 <FileUpload title="Upload Department Image" imagePath={imagePath}/>
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-8'>
-                            <button onClick={(e) => {e.preventDefault();onFormSubmit()}} className="button-primary inline-flex px-12 py-5 text-sm h-46px ">Save</button>
+                            <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary inline-flex px-12 py-5 text-sm h-46px ">{isEditMode ? "Update" : "Save"}</button>
                         </div>
                     </div>
                 </div>
