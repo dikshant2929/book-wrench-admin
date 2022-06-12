@@ -48,8 +48,6 @@ function ReactTypeHead(props: PropsWithChildren<any>) {
         }
     };
 
-    // console.log(props);
-
     return (
         
         <div className={`${props.parentClass}`}>
