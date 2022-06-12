@@ -51,7 +51,7 @@ const TableView = (props: TableViewProps) => {
                     />
                     <div className="overflow-auto bg-white mb-2">
                         <table className={tableClasses}>
-                            <thead className='border-b-2 border-[#DFE2E9]'>
+                            <thead className='border-b border-[#DFE2E9]'>
                                 <tr className=''>
                                     {tableHeaders &&
                                         tableHeaders.map(({ value, isShown = true }: any, index: number) => (

@@ -42,7 +42,7 @@ function GridColumnPicker(props: ColChooserProps): ReactElement {
     };
 
     return (
-        <div className="mb-4 gridColumnPicker">
+        <div className="mb-7 gridColumnPicker">
             {props.isVisible && (
                 <ReactTypehead
                     isClearable
