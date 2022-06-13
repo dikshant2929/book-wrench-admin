@@ -87,7 +87,7 @@ const FileUpload = (props: FileUploadArgs) => {
                     {!imageUploadStatus && <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>}
                     {!imageUploadStatus && <RightMark onClick={onPositiveClick} />}
                     {!imageUploadStatus && <CrossMark onClick={onCrossMarkStart} />}
-                    { imageUploadStatus && imageURL && <img src={imageURL}></img>}
+                    { imageUploadStatus && imageURL && <div className='edited__image w-9 h-12'><img className='w-12 h-12' src={imageURL}></img></div>}
                     {imageUploadStatus && <div className="ImageStatus text-green-500 text-xs ml-2">Image Added Successfully !!!</div>}
 
                 </div>

@@ -109,7 +109,7 @@ const Category = (props) => {
 
             case 'title':
                 return  <div className='flex items-center justify-start gap-3'>
-                        {data.icon && <img className="w-9 h-9" src={data.icon} alt="logo" />}
+                        {data.icon && <img className="w-7 h-7" src={data.icon} alt="logo" />}
                         <p className='font-medium text-sm'>{data[column.key]}</p> 
                 </div>;
             case 'action':
