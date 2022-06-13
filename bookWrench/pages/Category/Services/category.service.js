@@ -19,7 +19,7 @@ export default class Services {
         try {
             const data = await API.put('category', dataObject, params, id);
             showToster({ status: 'Success', msg: "Category has been updated successfully" });
-            return cb(data?.data);
+            return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
             showToster({ status: 'Error', msg: msg });
@@ -32,6 +32,20 @@ export default class Services {
         try {
             const data = await API.get('category');
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
+            return cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    }  
+
+
+    static async departmentList(cb) {
+        try {
+            const data = await API.get('department');
+            // showToster({ status: 'Success', msg: "Department has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';

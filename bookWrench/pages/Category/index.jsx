@@ -7,6 +7,7 @@ import Services from './Services/category.service';
 import './Category.scss';
 const { CategoryCreate } = exposedPath;
 import TableEditViewExpire from './Helpers/Template';
+import Switch from '@common/elements/Switch';
 
 const defaultProps = {
     title: 'Categories',
@@ -20,7 +21,23 @@ const defaultProps = {
             },
             {
                 key: 'title',
-                value: 'Title',
+                value: 'Name',
+            },
+            {
+                key: 'industry',
+                value: 'Industry',
+            },
+            {
+                key: 'numberOfProducts',
+                value: 'No Of Products',
+            },
+            {
+                key: 'numberOfServices',
+                value: 'No of Services',
+            },
+            {
+                key: 'status',
+                value: 'Status',
             },
             {
                 key: 'createdAt',
@@ -73,7 +90,7 @@ const Category = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({...item, sNo : (index + 1), actions : [ 'edit'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({...item, industry: item?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit'] }));
             setConfig({ ...prevConfig });
         });
     }, []);
@@ -89,13 +106,26 @@ const Category = (props) => {
 
     const tableCellView = ({ column, data }) => {
         switch (column.key) {
+
+            case 'title':
+                return  <div className='flex items-center justify-start gap-3'>
+                        {data.icon && <img className="w-9 h-9" src={data.icon} alt="logo" />}
+                        <p className='font-medium text-sm'>{data[column.key]}</p> 
+                </div>;
             case 'action':
                 return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
+            case 'status':
+                console.log(data);
+                const onChange = (key) => ({value}) => updateStatus(key, {isActive: value});
+                return  <Switch defaultValue={data.isActive} id={data.id} onChange={onChange}/>
             default:
                 return <p>{data[column.key]}</p>;
         }
     };
 
+    const updateStatus = (id, data) => {
+        Services.editCategory(data, null, {}, id);
+    }
     return (
         <div className="category md:mx-20 mt-11 mb-6">
             <div className=" flex justify-between items-end mb-7">

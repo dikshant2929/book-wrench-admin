@@ -25,9 +25,9 @@ const RadioBox = (props: PropsWithChildren<RadioProps>) => {
     }
 
     useEffect(() => {
-       setIsChecked(props.defaultValue)
+        setIsChecked(props.defaultValue)
     }, [props]);
-
+    
     return (
 
         <div className={props.parentClass}>
@@ -39,8 +39,8 @@ const RadioBox = (props: PropsWithChildren<RadioProps>) => {
                         onChange={(e) => handleClick(e, item.value, item.key)}
                         type="radio" 
                         className={props.inputClass} 
-                        //checked={isChecked == item.value} 
-                        defaultChecked={isChecked == item.value}
+                        checked={isChecked == item.value} 
+                        // defaultChecked={isChecked == item.value}
                         name={props.name} 
                         id={item.value} 
                         value={item.value} />

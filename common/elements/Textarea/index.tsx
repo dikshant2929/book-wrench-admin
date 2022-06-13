@@ -19,13 +19,18 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
     const handleClick = (e: any) => {
         const valuetextarea = e?.target?.value;
         setValue(valuetextarea)
-        props.cb(valuetextarea);
+        props.cb && props.cb(valuetextarea);
     } 
 
     useEffect(() => {
         setValue(props.value)
      }, [props]);
 
+    const onChange = (event : any) => {
+        const value = event.target.value;
+        setValue(value);
+        props.onChange && props.onChange(value);
+    }
     return (
         <div className={props.parentClass ? '' : 'textArea w-[28%]'}>
             {props.titleClass && <label className={props.titleClass}>{props.title} </label>}
@@ -36,6 +41,7 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
                 cols={props.cols}
                 name={props.name}
                 defaultValue={value}
+                onChange={onChange}
                 >
              </textarea>
         </div>

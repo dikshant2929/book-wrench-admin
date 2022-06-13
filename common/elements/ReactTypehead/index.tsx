@@ -47,7 +47,7 @@ function ReactTypeHead(props: PropsWithChildren<any>) {
             setDefaultValue(defaultValue);
         }
     };
-
+    
     return (
         
         <div className={`${props.parentClass}`}>

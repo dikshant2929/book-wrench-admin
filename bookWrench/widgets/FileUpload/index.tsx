@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop';
 import './file_upload.css';
 import TableView from '@common/widgets/TableView';
@@ -19,17 +19,25 @@ interface FileUploadArgs {
     title: string
     imagePath: (args: any | {}) => any;
     onClose: (args: any | {}) => any;
-
+    imageURL?: string;
 }
 
 
 const FileUpload = (props: FileUploadArgs) => {
     const [imageUploadStatus, setImageUploadStatus] = useState(false);
+    const [imageURL, setImageURL] = useState('');
     const [selectedFile, setSelectedFile] = useState<any>(null);
 
     const fileInputRef = useRef<any>(null);
     const styles = { border: '2px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer', height: 80 };
 
+    useEffect(() => {
+        if(props.imageURL){
+            setImageURL(props.imageURL);
+            setImageUploadStatus(true);
+            setSelectedFile([{ name : "image"}]);
+        }
+    }, [props.imageURL])
     const onFileInputChange = (event: any) => {
         const { files } = event.target;
         // do something with your files... 
@@ -59,6 +67,7 @@ const FileUpload = (props: FileUploadArgs) => {
             Services.uploadInventoryFileValidation('uploadImage', formData, (data) => {
                 if (data) {
                     props?.imagePath?.(data.url);
+                    setImageURL(data.url);
                     setImageUploadStatus(true);
                 }
 
@@ -75,10 +84,12 @@ const FileUpload = (props: FileUploadArgs) => {
             selectedFile
                 ?
                 <div className='flex items-center mt-7 border p-4 h-20'>
-                    <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>
-                    <RightMark onClick={onPositiveClick} />
-                    <CrossMark onClick={onCrossMarkStart} />
+                    {!imageUploadStatus && <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>}
+                    {!imageUploadStatus && <RightMark onClick={onPositiveClick} />}
+                    {!imageUploadStatus && <CrossMark onClick={onCrossMarkStart} />}
+                    { imageUploadStatus && imageURL && <img src={imageURL}></img>}
                     {imageUploadStatus && <div className="ImageStatus text-green-500 text-xs ml-2">Image Added Successfully !!!</div>}
+
                 </div>
                 :
                 <div className='file_upload w-[28%]'>

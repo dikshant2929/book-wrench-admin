@@ -4,6 +4,7 @@ export interface TextareaProps {
     titleClass?: string;
     parentClass?: string;
     cb?:any;
+    onChange? : any;
     rows?:string;
     name?:any;
     cols?:any;
