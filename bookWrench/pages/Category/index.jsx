@@ -115,7 +115,6 @@ const Category = (props) => {
             case 'action':
                 return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
             case 'status':
-                console.log(data);
                 const onChange = (key) => ({value}) => updateStatus(key, {isActive: value});
                 return  <Switch defaultValue={data.isActive} id={data.id} onChange={onChange}/>
             default:
@@ -124,7 +123,13 @@ const Category = (props) => {
     };
 
     const updateStatus = (id, data) => {
-        Services.editCategory(data, null, {}, id);
+        Services.editCategory(data, (data) => {
+            let existingTable = config.table.dataList;
+            existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {})}));
+            config.table.dataList = existingTable;
+            setConfig({...config})
+        }, {}, id);
+
     }
     return (
         <div className="category md:mx-20 mt-11 mb-6">

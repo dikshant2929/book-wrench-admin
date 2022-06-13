@@ -88,10 +88,7 @@ const AddEditCategory = (props) => {
         setButtonEnable(isValidForm);
     }, [fieldValue]);
 
-    // console.log(props);
     const onFormSubmit = (data) => {
-        console.log(fieldValue);
-        // const { isValidForm, ...request } = data;
         if (isEditMode) {
             Service.editCategory(fieldValue, () => props.history.push(Category), {}, editModeData.id);
         } else {
@@ -125,10 +122,8 @@ const AddEditCategory = (props) => {
     const fetchDepartmentList = (departmentId) => {
         Service.departmentList(data => {
             setDepartmentList(data);
-            console.log(departmentId);
             if(departmentId){
                 const selectedData = data.find(item => item.id === departmentId);
-                console.log(selectedData);
                 setDropdownValue({...selectedData, label : selectedData.title, value: selectedData.id})
             }
             
@@ -137,7 +132,6 @@ const AddEditCategory = (props) => {
     
 
     const handleOnChange = (key) => (value) => {
-        console.log(value);
         setDropdownValue(value);
         setFieldValue(previous => ({...previous, [key] : value.id }))
     };
