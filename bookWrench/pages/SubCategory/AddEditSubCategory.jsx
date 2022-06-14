@@ -30,7 +30,7 @@ const formConfiguration = {
         classNameInput: 'form__input_w_height',
     },
     extraProps: {
-        label: 'Category Title',
+        label: 'Sub Category Title',
         validation: 'required,minLength',
         minLength: 1,
         parentId: 'title',
