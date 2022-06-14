@@ -108,6 +108,18 @@ const API = {
             headers: { ..._headers, ...headers },
         });
     },
+    delete: (key: any, id = '', headers = {}) => {
+        console.log(conf_api[key].url);
+        // const tokenHeader = {
+        //     'Cookie' : `Cookie_2=value; X-Authorization=${storage.getToken()||''}`
+        // }
+
+        return instance({
+            method: 'DELETE',
+            url: conf_api[key].url.concat(id),
+            headers: { ..._headers, ...headers },
+        });
+    },
 };
 
 export default API;

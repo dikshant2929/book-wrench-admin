@@ -19,6 +19,9 @@ export default {
         url: 'uploadImage',
         options: {},
     },
-    
-    
+    removeImage: {
+        url: 'deleteImageByName/',
+        options: {},
+    },
+     
 };

@@ -1,14 +1,9 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { FileDrop } from 'react-file-drop';
 import './file_upload.css';
-import TableView from '@common/widgets/TableView';
 import RightMark from '@common/icons/Right';
 import CrossMark from '@common/icons/CrossMark';
-import Button from '@common/elements/Button';
 import Services from './Services';
-import { showToster } from '@common/elements/ToastNotification/new_index';
-import ShimmerEffect from '@common/elements/ShimmerEffect';
-import { HeaderProps } from '@common/widgets/TableView/interfaces';
 
 
 interface FileUploadArgs {
@@ -27,9 +22,13 @@ const FileUpload = (props: FileUploadArgs) => {
     const [imageUploadStatus, setImageUploadStatus] = useState(false);
     const [imageURL, setImageURL] = useState('');
     const [selectedFile, setSelectedFile] = useState<any>(null);
+    
 
     const fileInputRef = useRef<any>(null);
     const styles = { border: '2px dashed rgba(0,0,0,.2)', width: 570, color: 'black', padding: 5, cursor: 'pointer', height: 80 };
+
+
+    const getImageName = (url:string) => url.split('/').pop();
 
     useEffect(() => {
         if(props.imageURL){
@@ -79,6 +78,16 @@ const FileUpload = (props: FileUploadArgs) => {
     }
 
     const onCrossDeleteImage = () => {
+        const imgName = getImageName(imageURL);
+        Services.removefile('removeImage', imgName, () => {
+            setImageURL("");
+            setImageUploadStatus(false);
+            setSelectedFile(null);
+            props?.imagePath?.("");
+
+        }, (error) => {
+            console.log(error)
+        })
         
     }
 
