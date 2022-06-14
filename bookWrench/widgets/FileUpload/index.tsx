@@ -78,6 +78,10 @@ const FileUpload = (props: FileUploadArgs) => {
 
     }
 
+    const onCrossDeleteImage = () => {
+        
+    }
+
 
     return (<>
         {
@@ -87,7 +91,7 @@ const FileUpload = (props: FileUploadArgs) => {
                     {!imageUploadStatus && <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>}
                     {!imageUploadStatus && <RightMark onClick={onPositiveClick} />}
                     {!imageUploadStatus && <CrossMark onClick={onCrossMarkStart} />}
-                    { imageUploadStatus && imageURL && <div className='edited__image w-20'><img className='w-8 h-8 mx-auto' src={imageURL}></img>
+                    { imageUploadStatus && imageURL && <div onClick={onCrossDeleteImage} className='edited__image w-20'><img className='w-8 h-8 mx-auto' src={imageURL}></img>
                     <span className='absolute top-1 right-1 hover:bg-red-200 hover:fill-[#DE350B]'><svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" className=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg></span></div>}
                     {imageUploadStatus && <div className="ImageStatus text-red-500 text-xs font-semibold bg-white py-1.5 px-2 cursor-pointer rounded">Remove</div>}
 

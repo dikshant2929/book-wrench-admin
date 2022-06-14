@@ -64,9 +64,9 @@ const AddEditSubCategory = (props) => {
    
     const onFormSubmit = (data) => {
         if (isEditMode) {
-            Service.editCategory(fieldValue, () => props.history.push(Category), {}, editModeData.id);
+            Service.subeditCategory(fieldValue, () => props.history.push(SubCategory), {}, editModeData.id);
         } else {
-            Service.addCategory(fieldValue, () => props.history.push(Category));
+            Service.subaddCategory(fieldValue, () => props.history.push(SubCategory));
         }
     };
 

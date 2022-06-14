@@ -38,18 +38,6 @@ export default class Services {
             return error;
         }
     }  
-    static async departmentList(cb) {
-        try {
-            const data = await API.get('department');
-            // showToster({ status: 'Success', msg: "Department has been added successfully" });
-            return cb(data?.data);
-        } catch (error) {
-            const msg = error?.response?.data?.message || 'Something went wrong';
-            showToster({ status: 'Error', msg: msg });
-            console.log(error);
-            return error;
-        }
-    }
     static async categoriesList(cb) {
         try {
             const data = await API.get('category');

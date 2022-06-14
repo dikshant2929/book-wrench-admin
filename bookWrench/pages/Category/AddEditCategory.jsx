@@ -157,7 +157,7 @@ const AddEditCategory = (props) => {
                                 handleSelect={handleOnChange('departmentId')}
                                 dataList={departmentList}
                                 fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Industry"
+                                placeholder="Select Industry" 
                                 value={selectedDropdownValue} 
                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                             />
