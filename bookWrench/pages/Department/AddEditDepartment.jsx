@@ -9,7 +9,7 @@ import './Department.scss';
 import Service from "./Services/department.service";
 import FileUpload from '@app/widgets/FileUpload';
 import Input from '@common/elements/Input';
-
+import Button from '@button';
 const { Department } = exposedPath;
 const defaultProps = {
 
@@ -42,16 +42,22 @@ const formConfiguration = {
 
 
 const AddEditDepartment = (props) => {
-
+    const  mandatoryFields = ["title"];
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState("Create New Department");
+    const [ isButtonEnable, setButtonEnable] = useState(false);
     const [fieldValue, setFieldValue] = useState({
         title:"",
         isActive: false,
         description: "",
         icon: ""
     })
+
+    useEffect(() => {
+        const isValidForm = mandatoryFields.every(item => Boolean(fieldValue[item]))
+        setButtonEnable(isValidForm);
+    }, [fieldValue]);
 
     const onFormSubmit = (fieldValue) => {
      if (isEditMode) {
@@ -61,19 +67,11 @@ const AddEditDepartment = (props) => {
         }
     };
 
-    const radioValue = (name, val, key) => {
-        setFieldValue(prevState => ({...prevState,isActive:(val === "active")}))
-    }
-    const titleName =(name,value,e) => {
-        setFieldValue(prevState => ({...prevState,title:value}))
-    }
-
-    const textareaValue = (name) => {
-        setFieldValue(prevState => ({...prevState,description:name}))
-
-    }
-    const imagePath = (path) => {
-        setFieldValue(prevState => ({...prevState,icon:path}))
+    const onTextChange = (key) => (...data) => {
+        if(Array.isArray(data)){
+            const value = key === "isActive" ? (data[1] === "active") : ( key === "title" ? data[1] : data[0]);
+            setFieldValue(previous => ({...previous, [key] : value }))
+        }
     }
 
     useEffect(() => {
@@ -98,17 +96,25 @@ const AddEditDepartment = (props) => {
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
                             <div className='flex items-center w-full department__header m-10 gap-4'>
-                            <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={titleName}/>
+                            <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')}/>
                             <div className='status'>
-                                <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={radioValue} />
+                                <RadioBox defaultValue={editModeData?.isActive ? "active" : "inactive"} cb={onTextChange('isActive')} />
                             </div>
                             </div>
                             <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
-                                <Textarea value={editModeData?.description} cb={textareaValue} />
-                                <FileUpload title="Upload Department Image" imagePath={imagePath}/>
+                                <Textarea value={editModeData?.description} cb={onTextChange('description')} />
+                                <FileUpload title="Upload Department Image" imagePath={onTextChange('icon')}/>
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
-                            <button onClick={(e) => {e.preventDefault();onFormSubmit(fieldValue)}} className="button-primary form__button">{isEditMode ? "Update" : "Save"}</button>
+                            <Button                            
+                                disabled={!isButtonEnable ?? false}  
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    onFormSubmit(fieldValue);
+                                }}
+                                className={`form__button ${!isButtonEnable ?? false ? 'btn-disabled' : 'button-primary'}`}
+                                title = {isEditMode ? 'Update' : 'Save'}
+                            />
                         </div>
                     </div>
                 </div>

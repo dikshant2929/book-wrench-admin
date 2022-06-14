@@ -11,7 +11,7 @@ import './Category.scss';
 import Service from './Services/category.service';
 import Button from '@button';
 
-const { Category } = exposedPath;
+const { Category } = exposedPath; 
 const defaultProps = {};
 
 const formConfiguration = {
@@ -158,7 +158,7 @@ const AddEditCategory = (props) => {
                                 dataList={departmentList}
                                 fields={{ key: 'id', value: 'title' }}
                                 placeholder="Select Industry"
-                                value={selectedDropdownValue}
+                                value={selectedDropdownValue} 
                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                             />
                             <Input selectedValue={editModeData?.title} {...formConfiguration} cls="p-1 min-w-1/4 inline-block" cb={onTextChange('title')} />

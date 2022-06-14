@@ -8,7 +8,7 @@ export default {
         options: {},
     },
     subCategory: {
-        url: 'category/sub-category/',
+        url: 'sub-category/',
         options: {},
     },
     department: {

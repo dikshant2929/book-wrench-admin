@@ -17,7 +17,7 @@ const defaultProps = {
         heading: [
             {
                 key: 'title',
-                value: 'Title',
+                value: 'Name',
             },
             {
                 key: 'description',
@@ -88,6 +88,16 @@ const Department = (props) => {
         console.log(data);
     }
 
+    const updateStatus = (id, data) => {
+        Services.editDepartment(data, (data) => {
+            let existingTable = config.table.dataList;
+            existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {})}));
+            config.table.dataList = existingTable;
+            setConfig({...config})
+        }, {}, id);
+
+    } 
+
     const tableCellView = ({ column, data }) => {
         switch (column.key) {
             case 'title':
@@ -96,7 +106,8 @@ const Department = (props) => {
                             <p className='font-medium text-sm'>{data[column.key]}</p> 
                     </div>
             case 'status':
-                return  <Switch defaultValue={data.isActive} isDisable={true} />
+                        const onChange = (key) => ({value}) => updateStatus(key, {isActive: value});
+                return  <Switch defaultValue={data.isActive} id={data.id} onChange={onChange}/>
             case 'action':
                 return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
             default:

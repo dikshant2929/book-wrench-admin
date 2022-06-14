@@ -15,10 +15,7 @@ const defaultProps = {
         totalRecords: 0,
         filteredRecords: 20,
         heading: [
-            {
-                key: 'sNo',
-                value: 'Number#',
-            },
+            
             {
                 key: 'title',
                 value: 'Name',
@@ -123,7 +120,7 @@ const Category = (props) => {
     };
 
     const updateStatus = (id, data) => {
-        Services.editCategory(data, (data) => {
+        Services.editCategory(data, (data) => { 
             let existingTable = config.table.dataList;
             existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {})}));
             config.table.dataList = existingTable;

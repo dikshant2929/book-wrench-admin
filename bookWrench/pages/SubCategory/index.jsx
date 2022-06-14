@@ -7,6 +7,7 @@ import Services from './Services/SubCategory.service';
 import './SubCategory.scss';
 const { SubCategoryCreate } = exposedPath;
 import TableEditViewExpire from './Helpers/Template';
+import Switch from '@common/elements/Switch';
 
 const defaultProps = {
     title: 'Sub-Categories',
@@ -14,13 +15,31 @@ const defaultProps = {
         totalRecords: 0,
         filteredRecords: 20,
         heading: [
-            {
-                key: 'sNo',
-                value: 'Number#',
-            },
+            
             {
                 key: 'title',
-                value: 'Title',
+                value: 'Name',
+            },
+            {
+                key: 'category',
+                value: 'Category',
+            },
+            {
+                key: 'industry',
+                value: 'Industry',
+            },
+            
+            {
+                key: 'numberOfProducts',
+                value: 'No Of Products',
+            },
+            {
+                key: 'numberOfServices',
+                value: 'No of Services',
+            },
+            {
+                key: 'status',
+                value: 'Status',
             },
             {
                 key: 'createdAt',
@@ -73,10 +92,12 @@ const SubCategory = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({...item, sNo : (index + 1), actions : [ 'edit'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({...item,category: item?.categoryId?.title || "NA", industry: item?.categoryId?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit'] }));
             setConfig({ ...prevConfig });
         });
     }, []);
+
+  
 
     const loadTableData = () => {
         console.log('loadTableData');
@@ -87,10 +108,29 @@ const SubCategory = (props) => {
         console.log(data);
     }
 
+    const updateStatus = (id, data) => {
+        Services.subeditCategory(data, (data) => {
+            let existingTable = config.table.dataList;
+            existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {})}));
+            config.table.dataList = existingTable;
+            setConfig({...config})
+        }, {}, id);
+
+    } 
+
     const tableCellView = ({ column, data }) => {
         switch (column.key) {
+
+            case 'title':
+                return  <div className='flex items-center justify-start gap-3'>
+                        {data.icon && <img className="w-7 h-7" src={data.icon} alt="logo" />}
+                        <p className='font-medium text-sm'>{data[column.key]}</p> 
+                </div>;
             case 'action':
                 return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
+            case 'status':
+                const onChange = (key) => ({value}) => updateStatus(key, {isActive: value});
+                return  <Switch defaultValue={data.isActive} id={data.id} onChange={onChange}/>
             default:
                 return <p>{data[column.key]}</p>;
         }
@@ -129,6 +169,7 @@ const SubCategory = (props) => {
                 tableHeaders={tableHeaders}
                 tableCellView={tableCellView}
                 updateHeader={updateHeader}
+                showColumnPicker={false}
             />
 
         </div>
