@@ -29,7 +29,7 @@ const formConfiguration = {
         classNameInput:"form__input_w_height"
     },
     extraProps: {
-        label: 'Department Title',
+        label: 'Department Title (*)',
         validation: 'required,minLength',
         minLength: 1,
         parentId: 'title',
@@ -42,14 +42,14 @@ const formConfiguration = {
 
 
 const AddEditDepartment = (props) => {
-    const  mandatoryFields = ["title"];
+    const  mandatoryFields = ["title", "icon"];
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState("Create New Department");
     const [ isButtonEnable, setButtonEnable] = useState(false);
     const [fieldValue, setFieldValue] = useState({
         title:"",
-        isActive: false,
+        isActive: true,
         description: "",
         icon: ""
     })
@@ -103,7 +103,7 @@ const AddEditDepartment = (props) => {
                             </div>
                             <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
                                 <Textarea value={editModeData?.description} cb={onTextChange('description')} />
-                                <FileUpload imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')}/>
+                                <FileUpload imageURL={fieldValue.icon} title="Upload Department Image (*)" imagePath={onTextChange('icon')}/>
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
                             <Button                            

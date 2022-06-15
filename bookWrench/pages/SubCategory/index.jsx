@@ -118,12 +118,14 @@ const SubCategory = (props) => {
 
     } 
 
+    const getImageUrl = (data) => data?.icon || data?.categoryId?.icon || data?.categoryId?.departmentId?.icon || "";
+    
     const tableCellView = ({ column, data }) => {
         switch (column.key) {
-
             case 'title':
+                const icon = getImageUrl(data);
                 return  <div className='flex items-center justify-start gap-3'>
-                        {data.icon && <img className="w-7 h-7" src={data.icon} alt="logo" />}
+                        {icon && <img className="w-7 h-7" src={icon} alt="logo" />}
                         <p className='font-medium text-sm'>{data[column.key]}</p> 
                 </div>;
             case 'action':
