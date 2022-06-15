@@ -8,6 +8,7 @@ import './Category.scss';
 const { CategoryCreate } = exposedPath;
 import TableEditViewExpire from './Helpers/Template';
 import Switch from '@common/elements/Switch';
+import Input from '@common/elements/Input';
 
 const defaultProps = {
     title: 'Categories',
@@ -64,6 +65,8 @@ const Category = (props) => {
         page: 1,
         size: 10,
     });
+    const [searchParameters, setSearchParameters] = useState("");
+    const [dataList, setDataList] = useState([]);
 
     const onPaginationItemClick = (pageNo) => {
         const prevFilter = { ...filters };
@@ -82,12 +85,38 @@ const Category = (props) => {
         setTableHeaders(data);
     };
 
+    const onChangeSearchValue = (_ , value) => {
+        setSearchParameters(value || "");
+        if(value.length){
+            const searchedData = [];
+            dataList.forEach(data => {
+                for(const item of Object.values(data)){
+                    if(typeof item === "string" && item.toLowerCase().includes(value.toLowerCase())){
+                        searchedData.push(data);
+                        break;
+                    }
+                }
+            });
+            config.table.dataList = searchedData;
+            setConfig({...config})
+        }else{
+            config.table.dataList = dataList;
+            setConfig({...config})
+        }
+    };
+
+    const resetSearch = () => {
+        setSearchParameters("");
+        onChangeSearchValue("", "")
+    };
+
     useEffect(() => {
         Services.categoryList(data => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
             prevConfig.table.dataList = data.map((item, index) => ({...item, industry: item?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit','expire'] }));
+            setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });
     }, []);
@@ -138,6 +167,14 @@ const Category = (props) => {
                 <h1 className="font-medium list-heading">{config.title}</h1>
                 <div className="btn-wrapper">
                     <TableWidgets>
+                        <Input  
+                            props = {{
+                                placeHolder: 'Search',
+                                value : searchParameters
+                            }}
+                            cb={onChangeSearchValue}>
+                                <span onClick={resetSearch}>X</span>
+                        </Input>
                         <RedirectButton
                             title="New Category"
                             link={CategoryCreate}

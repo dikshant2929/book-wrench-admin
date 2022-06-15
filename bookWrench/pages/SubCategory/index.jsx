@@ -8,6 +8,7 @@ import './SubCategory.scss';
 const { SubCategoryCreate } = exposedPath;
 import TableEditViewExpire from './Helpers/Template';
 import Switch from '@common/elements/Switch';
+import Input from '@common/elements/Input';
 
 const defaultProps = {
     title: 'Sub-Categories',
@@ -70,6 +71,10 @@ const SubCategory = (props) => {
         size: 10,
     });
 
+    const [searchParameters, setSearchParameters] = useState("");
+    const [dataList, setDataList] = useState([]);
+
+
     const onPaginationItemClick = (pageNo) => {
         const prevFilter = { ...filters };
         prevFilter.page = pageNo;
@@ -93,6 +98,7 @@ const SubCategory = (props) => {
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
             prevConfig.table.dataList = data.map((item, index) => ({...item,category: item?.categoryId?.title || "NA", industry: item?.categoryId?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit','expire'] }));
+            setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });
     }, []);
@@ -139,12 +145,45 @@ const SubCategory = (props) => {
         }
     };
 
+    const onChangeSearchValue = (_ , value) => {
+        setSearchParameters(value || "");
+        if(value.length){
+            const searchedData = [];
+            dataList.forEach(data => {
+                for(const item of Object.values(data)){
+                    if(typeof item === "string" && item.toLowerCase().includes(value.toLowerCase())){
+                        searchedData.push(data);
+                        break;
+                    }
+                }
+            });
+            config.table.dataList = searchedData;
+            setConfig({...config})
+        }else{
+            config.table.dataList = dataList;
+            setConfig({...config})
+        }
+    };
+
+    const resetSearch = () => {
+        setSearchParameters("");
+        onChangeSearchValue("", "")
+    };
+
     return (
         <div className="sub-category md:mx-20 mt-11 mb-6">
             <div className=" flex justify-between items-end mb-7">
                 <h1 className="font-medium list-heading">{config.title}</h1>
                 <div className="btn-wrapper">
                     <TableWidgets>
+                        <Input  
+                            props = {{
+                                placeHolder: 'Search',
+                                value : searchParameters
+                            }}
+                            cb={onChangeSearchValue}>
+                                <span onClick={resetSearch}>X</span>
+                        </Input>
                         <RedirectButton
                             title="New Sub-Category"
                             link={SubCategoryCreate}
