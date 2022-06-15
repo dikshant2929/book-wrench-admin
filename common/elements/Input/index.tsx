@@ -29,7 +29,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 			setState((prevState:any) => ({
 				...state,
 				...prevState,
-				placeHolder: props.extraProps.placeHolder,
+				placeHolder: props.extraProps?.placeHolder || {},
 				//labelClass: '',
 				error: error
 			}));
@@ -45,7 +45,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 
 	useEffect(() => {
 		// let placeHolder = state.selectedValue ? props.extraProps.label : state.placeHolder;
-		let placeHolder = state.selectedValue ? props.extraProps.label : props.extraProps.placeHolder ? props.extraProps.placeHolder : state.placeHolder;
+		let placeHolder = state.selectedValue ? props.extraProps?.label : props.extraProps?.placeHolder ? props.extraProps.placeHolder : state.placeHolder;
 		let labelClass = (state.selectedValue || state.labelClass) ? 'active' : "";
 		setState((prevState:any) => ({ ...state, ...prevState, ...props, ...{ placeHolder: placeHolder, labelClass: labelClass } }));
 		if (props.autoFocusFlag) {
@@ -65,7 +65,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 		setState((prevState:any) => ({
 			...state,
 			...prevState,
-			placeHolder: props.extraProps.label,
+			placeHolder: props.extraProps?.label || "",
 			//labelClass: 'active'
 		}));
 
@@ -83,7 +83,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 			setState((prevState:any) => ({
 				...state,
 				...prevState,
-				placeHolder: props.extraProps.label,
+				placeHolder: props.extraProps?.label || "",
 				//labelClass: 'active',
 				selectedValue: val,
 			}));
@@ -105,7 +105,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 	let gsfName = globals.cloneObject(prps.name);
 	let error = state.error;
 	prps.name = prps.defaultName ? prps.name : `${prps.name}${Math.random().toString(16).slice(2)}`
-	let options = props.extraProps;
+	let options = props.extraProps || {};
 	
 	if (props.disabled) {
 		prps.disabled = 'disabled';
