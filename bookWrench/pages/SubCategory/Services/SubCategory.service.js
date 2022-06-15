@@ -51,5 +51,18 @@ export default class Services {
         }
     }
 
+    static async deleteSubCategory(dataObject,params = {}, id,cb) {
+        try {
+            const data = await API.delete('subCategory', dataObject, params, id);
+           // showToster({ status: 'Success', msg: "Category has been updated successfully" });
+            return cb && cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+           // showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    }
+
     
 }

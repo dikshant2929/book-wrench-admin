@@ -87,13 +87,14 @@ const Category = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({...item, industry: item?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({...item, industry: item?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit','expire'] }));
             setConfig({ ...prevConfig });
         });
     }, []);
 
     const loadTableData = () => {
         console.log('loadTableData');
+        window.location.reload();
     };
 
     const onRefreshButtonClicked = (data) => {
