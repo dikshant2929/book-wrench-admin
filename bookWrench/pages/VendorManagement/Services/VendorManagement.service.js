@@ -2,10 +2,10 @@ import API from '@API';
 import { showToster } from '@common/elements/ToastNotification/new_index';
 
 export default class Services {
-    static async addDepartment(dataObject, cb) {
+    static async addVendorManagement(dataObject, cb) {
         try {
-            const data = await API.post('department', dataObject);
-            showToster({ status: 'Success', msg: "Department has been added successfully" });
+            const data = await API.post('vendor', dataObject);
+            showToster({ status: 'Success', msg: "Vendor has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -15,10 +15,10 @@ export default class Services {
         }
     }  
     
-    static async editDepartment(dataObject, cb, params = {}, id) {
+    static async editVendorManagement(dataObject, cb, params = {}, id) {
         try {
-            const data = await API.put('department', dataObject, params, id);
-            showToster({ status: 'Success', msg: "Department has been updated successfully" });
+            const data = await API.put('vendor', dataObject, params, id);
+            showToster({ status: 'Success', msg: "Vendor has been updated successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -28,9 +28,9 @@ export default class Services {
         }
     } 
 
-    static async DepartmentList(cb) {
+    static async VendorManagementList(cb) {
         try {
-            const data = await API.get('department');
+            const data = await API.get('vendor');
             // showToster({ status: 'Success', msg: "Department has been added successfully" });
             return cb(data?.data);
         } catch (error) {
@@ -40,9 +40,9 @@ export default class Services {
             return error;
         }
     }  
-    static async deleteDepartment(dataObject,params = {}, id,cb) {
+    static async deleteVendorManagement(dataObject,params = {}, id,cb) {
         try {
-            const data = await API.delete('department', dataObject, params, id);
+            const data = await API.delete('vendor', dataObject, params, id);
             //showToster({ status: 'Success', msg: "Department has been updated successfully" });
             return cb(data?.data);
         } catch (error) {

@@ -74,7 +74,7 @@ const defaultProps = {
                     { title: 'Department', link: Department, icon: '', isActive: true },
                     { title: 'Category', link: Category, icon: '', isActive: true },
                     { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
-                    { title: 'Vendor-Management', link: VendorManagement, icon: '', isActive: false },
+                    { title: 'Vendors', link: VendorManagement, icon: '', isActive: false },
                 ]
             },
                 

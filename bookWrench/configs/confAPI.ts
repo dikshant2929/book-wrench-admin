@@ -23,5 +23,11 @@ export default {
         url: 'deleteImageByName/',
         options: {},
     },
+    vendor: {
+        url: 'vendor/',
+        options: {},
+    },
+
+    
      
 };

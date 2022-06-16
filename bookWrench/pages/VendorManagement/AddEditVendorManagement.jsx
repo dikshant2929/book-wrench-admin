@@ -10,7 +10,7 @@ import Service from "./Services/VendorManagement.service";
 import FileUpload from '@app/widgets/FileUpload';
 import Input from '@common/elements/Input';
 import Button from '@button';
-const { Department } = exposedPath;
+const { VendorManagement } = exposedPath;
 const defaultProps = {
 
 };
@@ -29,7 +29,7 @@ const formConfiguration = {
         classNameInput:"form__input_w_height"
     },
     extraProps: {
-        label: 'Vendor Management Title (*)',
+        label: 'Vendors Title (*)',
         validation: 'required,minLength',
         minLength: 1,
         parentId: 'title',
@@ -42,16 +42,15 @@ const formConfiguration = {
 
 
 const AddEditVendorManagement = (props) => {
-    const  mandatoryFields = ["title", "icon"];
+    const  mandatoryFields = ["title"];
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
-    const [title, setTitle] = useState("Create New Vendor Management");
+    const [title, setTitle] = useState("Create New Vendors");
     const [ isButtonEnable, setButtonEnable] = useState(false);
     const [fieldValue, setFieldValue] = useState({
         title:"",
         isActive: true,
         description: "",
-        icon: ""
     })
 
     useEffect(() => {
@@ -61,9 +60,9 @@ const AddEditVendorManagement = (props) => {
 
     const onFormSubmit = (fieldValue) => {
      if (isEditMode) {
-            Service.editDepartment({...fieldValue}, () => props.history.push(VendorManagement), {}, editModeData.id);
+            Service.editVendorManagement({...fieldValue}, () => props.history.push(VendorManagement), {}, editModeData.id);
         } else {
-            Service.addDepartment({...fieldValue}, () => props.history.push(VendorManagement))
+            Service.addVendorManagement({...fieldValue}, () => props.history.push(VendorManagement))
         }
     };
 
@@ -75,10 +74,10 @@ const AddEditVendorManagement = (props) => {
     }
 
     useEffect(() => {
-        const encryptedData = props?.match?.params?.editDepartment;
+        const encryptedData = props?.match?.params?.editVendorManagement;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            setTitle(`Edit Vendor Management (${data.title})`)
+            setTitle(`Edit Vendors (${data.title})`)
             setEditModeData(data);
             setEditMode(true);
             const {title,isActive,description,icon} = data
@@ -97,13 +96,10 @@ const AddEditVendorManagement = (props) => {
                     <div className="add-catg-form-wrapper">
                             <div className='flex items-center w-full department__header m-10 gap-4'>
                             <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')}/>
-                            <div className='status'>
-                                <RadioBox defaultValue={(fieldValue.isActive) ? "active" : "inactive"} cb={onTextChange('isActive')} />
-                            </div>
+                            
                             </div>
                             <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
                                 <Textarea value={editModeData?.description} cb={onTextChange('description')} />
-                                <FileUpload imageURL={fieldValue.icon} title="Upload Department Image (*)" imagePath={onTextChange('icon')}/>
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
                             <Button                            

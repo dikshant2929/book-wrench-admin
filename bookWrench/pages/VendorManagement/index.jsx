@@ -11,14 +11,14 @@ import Switch from '@common/elements/Switch';
 import Input from '@common/elements/Input';
 
 const defaultProps = {
-    title: 'Vendor Management',
+    title: 'Vendors',
     table: {
         totalRecords: 0,
         filteredRecords: 20,
         heading: [
             {
                 key: 'title',
-                value: 'Name',
+                value: 'Vendors Name',
             },
             {
                 key: 'description',
@@ -30,10 +30,10 @@ const defaultProps = {
                 value: 'Update At',
                 isShown: false,
             },
-            {
-                key: 'status',
-                value: 'Status',
-            },
+            // {
+            //     key: 'status',
+            //     value: 'Status',
+            // },
             {
                 key: 'action',
                 value: 'Actions',
@@ -74,7 +74,7 @@ const VendorManagement = (props) => {
     };
 
     useEffect(() => {
-        Services.DepartmentList(data => {
+        Services.VendorManagementList(data => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
@@ -94,7 +94,7 @@ const VendorManagement = (props) => {
     }
 
     const updateStatus = (id, data) => {
-        Services.editDepartment(data, (data) => {
+        Services.editVendorManagement(data, (data) => {
             let existingTable = config.table.dataList;
             existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {}) }));
             config.table.dataList = existingTable;
@@ -175,7 +175,7 @@ const VendorManagement = (props) => {
                         </div>
 
                         <RedirectButton
-                            title="New Vendor Management"
+                            title="New Vendors"
                             link={VendorManagementCreate}
                             className="button-primary ml-1 title-btn rounded-5px"
                             display="inline-flex"
