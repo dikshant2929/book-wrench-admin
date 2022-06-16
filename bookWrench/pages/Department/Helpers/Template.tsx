@@ -18,6 +18,9 @@ export const ExpireCampaignYesPopup = (props: any) => {
             }, 500);
         });
     };
+    const onClickNo = () => {
+        popupToggler(); 
+    };
  return (
         <>
             <p className="text-sm">
@@ -27,6 +30,7 @@ export const ExpireCampaignYesPopup = (props: any) => {
             <span onClick={onClickYes} className="inline-block bg-green-500 text-white p-1 cursor-pointer px-4 py-2 rounded-md text-sm">
                 Yes
             </span>
+            <span className="inline-block ml-2 bg-gray-200 text-black p-1 cursor-pointer px-4 py-2 rounded-md text-sm" onClick={onClickNo}>No</span>
         </>
     );
 };
