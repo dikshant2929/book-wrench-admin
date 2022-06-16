@@ -16,7 +16,7 @@ const defaultProps = {
         totalRecords: 0,
         filteredRecords: 20,
         heading: [
-            
+
             {
                 key: 'title',
                 value: 'Name',
@@ -85,23 +85,23 @@ const Category = (props) => {
         setTableHeaders(data);
     };
 
-    const onChangeSearchValue = (_ , value) => {
+    const onChangeSearchValue = (_, value) => {
         setSearchParameters(value || "");
-        if(value.length){
+        if (value.length) {
             const searchedData = [];
             dataList.forEach(data => {
-                for(const item of Object.values(data)){
-                    if(typeof item === "string" && item.toLowerCase().includes(value.toLowerCase())){
+                for (const item of Object.values(data)) {
+                    if (typeof item === "string" && item.toLowerCase().includes(value.toLowerCase())) {
                         searchedData.push(data);
                         break;
                     }
                 }
             });
             config.table.dataList = searchedData;
-            setConfig({...config})
-        }else{
+            setConfig({ ...config })
+        } else {
             config.table.dataList = dataList;
-            setConfig({...config})
+            setConfig({ ...config })
         }
     };
 
@@ -115,7 +115,7 @@ const Category = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({...item, industry: item?.departmentId?.title || "NA", sNo : (index + 1), actions : [ 'edit','expire'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({ ...item, industry: item?.departmentId?.title || "NA", sNo: (index + 1), actions: ['edit', 'expire'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });
@@ -138,26 +138,26 @@ const Category = (props) => {
 
             case 'title':
                 const icon = getImageUrl(data);
-                return  <div className='flex items-center justify-start gap-3'>
-                        {icon && <img className="w-7 h-7" src={icon} alt="logo" />}
-                        <p className='font-medium text-sm'>{data[column.key]}</p> 
+                return <div className='flex items-center justify-start gap-3'>
+                    {icon && <img className="w-7 h-7" src={icon} alt="logo" />}
+                    <p className='font-medium text-sm'>{data[column.key]}</p>
                 </div>;
             case 'action':
-                return <TableEditViewExpire data={data} onRefreshClicked = {onRefreshButtonClicked} reloadTable={loadTableData} />;
+                return <TableEditViewExpire data={data} onRefreshClicked={onRefreshButtonClicked} reloadTable={loadTableData} />;
             case 'status':
-                const onChange = (key) => ({value}) => updateStatus(key, {isActive: value});
-                return  <Switch defaultValue={data.isActive} id={data.id} onChange={onChange}/>
+                const onChange = (key) => ({ value }) => updateStatus(key, { isActive: value });
+                return <Switch defaultValue={data.isActive} id={data.id} onChange={onChange} />
             default:
                 return <p>{data[column.key]}</p>;
         }
     };
 
     const updateStatus = (id, data) => {
-        Services.editCategory(data, (data) => { 
+        Services.editCategory(data, (data) => {
             let existingTable = config.table.dataList;
-            existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {})}));
+            existingTable = existingTable.map(item => ({ ...item, ...(item.id === id && data || {}) }));
             config.table.dataList = existingTable;
-            setConfig({...config})
+            setConfig({ ...config })
         }, {}, id);
 
     }
@@ -167,18 +167,33 @@ const Category = (props) => {
                 <h1 className="font-medium list-heading">{config.title}</h1>
                 <div className="btn-wrapper">
                     <TableWidgets>
-                        <Input  
-                            props = {{
-                                placeHolder: 'Search',
-                                value : searchParameters
-                            }}
-                            cb={onChangeSearchValue}>
-                                <span onClick={resetSearch}>X</span>
-                        </Input>
+                        <div className='table__header flex items-center relative'>
+                            <Input
+                                props={{
+                                    placeHolder: 'Search',
+                                    value: searchParameters,
+                                    classNameInput: "h-full p-2 pr-11 pl-8 rounded-[5px] focus:border-0"
+                                }}
+                                cb={onChangeSearchValue}>
+
+                            </Input>
+                            <div className='px-2 py-1 h-full absolute right-0'>
+                                <span className='h-full bg-gray-100 cursor-pointer flex items-center p-2 rounded' onClick={resetSearch}>
+                                    <svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
+                                </span>
+                            </div>
+                            <span className='p-2 absolute'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
+                                        <path d="M6.81964 12.2639C9.8265 12.2639 12.264 9.82631 12.264 6.81944C12.264 3.81256 9.8265 1.375 6.81964 1.375C3.81278 1.375 1.37524 3.81256 1.37524 6.81944C1.37524 9.82631 3.81278 12.2639 6.81964 12.2639Z" stroke="#A5A9C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.6252 13.625L10.6648 10.6646" stroke="#A5A9C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                        </div>
+
                         <RedirectButton
                             title="New Category"
                             link={CategoryCreate}
-                            className="button-primary ml-1 title-btn"
+                            className="button-primary ml-1 title-btn rounded-5px"
                             display="inline-flex"
                             width="w-auto"
                             height="h-10"
