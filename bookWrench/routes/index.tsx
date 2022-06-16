@@ -26,7 +26,14 @@ const {
 
     Service,
     ServiceCreate,
-    ServiceEdit
+    ServiceEdit,
+
+    VendorManagement,
+    VendorManagementCreate,
+    VendorManagementEdit,
+
+
+    
 
 } = exposedPath;
 
@@ -54,10 +61,14 @@ const privateRouteConfig = [
     { name: 'department-edit', path: DepartmentEdit, componentName: 'DepartmentCreate'},
     { name: 'department-create', path: DepartmentCreate, componentName: 'DepartmentCreate', exact: true },
     { name: 'department', path: Department, componentName: 'Department', exact: true },
-
+    
     { name: 'service-edit', path: ServiceEdit, componentName: 'ServiceCreate'},
     { name: 'service-create', path: ServiceCreate, componentName: 'ServiceCreate', exact: true },
     { name: 'service', path: Service, componentName: 'Service', exact: true },
+
+    { name: 'vendor-management-edit', path: VendorManagementEdit, componentName: 'VendorManagementCreate'},
+    { name: 'vendor-management-create', path: VendorManagementCreate, componentName: 'VendorManagementCreate', exact: true },
+    { name: 'vendor-management', path: VendorManagement, componentName: 'VendorManagement', exact: true },
 ];
 
 const asyncLoad = (component: any) => {
@@ -88,6 +99,10 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Service' */ '@pages/Service'));
         case 'ServiceCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditService' */ '@pages/Service/AddEditService'));
+        case 'VendorManagement':
+            return loadable(() => import(/* webpackChunkName: 'VendorManagement' */ '@pages/VendorManagement'));
+        case 'VendorManagementCreate':
+            return loadable(() => import(/* webpackChunkName: 'AddEditVendorManagement' */ '@pages/VendorManagement/AddEditVendorManagement'));
     }
 };
 

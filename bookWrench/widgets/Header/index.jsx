@@ -7,7 +7,7 @@ import UALink from '@common/elements/UALink';
 import { Route, useLocation } from 'react-router-dom';
 import './header.scss';
 
-const { Home, Dashboard, Category, SubCategory, Department,Service } = exposedPath;
+const { Home, Dashboard, Category, SubCategory, Department,Service,VendorManagement } = exposedPath;
 
 
 const defaultProps = {
@@ -74,6 +74,7 @@ const defaultProps = {
                     { title: 'Department', link: Department, icon: '', isActive: true },
                     { title: 'Category', link: Category, icon: '', isActive: true },
                     { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
+                    { title: 'Vendor-Management', link: VendorManagement, icon: '', isActive: false },
                 ]
             },
                 

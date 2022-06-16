@@ -1,0 +1,38 @@
+.addDepartment {
+  box-shadow: 0 0 15px -7px grey;
+
+  .add-catg-form-wrapper {
+    form {     
+      .formInner {
+        padding-inline: 2.5rem;       
+      }
+    }
+
+  }
+} 
+
+  
+
+@media only screen and (max-width: 640px) {
+  .addDepartment .add-catg-form-wrapper form input {
+    margin-bottom: 1.5rem;
+  }
+}
+.department { 
+
+  .btn-wrapper {
+
+    a {
+      font-size: 0.875rem;
+      line-height: 1rem;
+    }
+  }
+}
+
+.department__header > div:first-of-type {
+  width: 28%;
+}
+.form-check-label{
+  display: inline-block !important;
+}
+

@@ -63,7 +63,7 @@ const formConfiguration = {
     // },
 ;
 
-const AddEditCategory = (props) => {
+const AddEditService = (props) => {
 
     const  mandatoryFields = ["departmentId", "title"];
 
@@ -191,5 +191,5 @@ const AddEditCategory = (props) => {
     );
 };
 
-AddEditCategory.defaultProps = defaultProps;
-export default AddEditCategory;
+AddEditService.defaultProps = defaultProps;
+export default AddEditService;
