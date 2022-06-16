@@ -22,7 +22,12 @@ const {
     SubCategoryEdit,
     Department,
     DepartmentCreate,
-    DepartmentEdit
+    DepartmentEdit,
+
+    Service,
+    ServiceCreate,
+    ServiceEdit
+
 } = exposedPath;
 
 const ROUTE_PREFIX = Root;
@@ -49,6 +54,10 @@ const privateRouteConfig = [
     { name: 'department-edit', path: DepartmentEdit, componentName: 'DepartmentCreate'},
     { name: 'department-create', path: DepartmentCreate, componentName: 'DepartmentCreate', exact: true },
     { name: 'department', path: Department, componentName: 'Department', exact: true },
+
+    { name: 'service-edit', path: ServiceEdit, componentName: 'ServiceCreate'},
+    { name: 'service-create', path: ServiceCreate, componentName: 'ServiceCreate', exact: true },
+    { name: 'service', path: Service, componentName: 'Service', exact: true },
 ];
 
 const asyncLoad = (component: any) => {
@@ -75,6 +84,10 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Department' */ '@pages/Department'));
         case 'DepartmentCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditDepartment' */ '@pages/Department/AddEditDepartment'));
+        case 'Service':
+            return loadable(() => import(/* webpackChunkName: 'Service' */ '@pages/Service'));
+        case 'ServiceCreate':
+            return loadable(() => import(/* webpackChunkName: 'AddEditService' */ '@pages/Service/AddEditService'));
     }
 };
 

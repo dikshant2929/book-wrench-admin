@@ -19,6 +19,11 @@ const path = {
     Department: PREFIX + 'department',
     DepartmentCreate: PREFIX + 'department/create',
     DepartmentEdit: PREFIX + 'department/edit/:editDepartment',
+
+
+    Service: PREFIX + 'service',
+    ServiceCreate: PREFIX + 'service/create',
+    ServiceEdit: PREFIX + 'service/edit/:editService',
    
     // RMList: PREFIX + 'rm',
     // RMCreate: PREFIX + 'rm/create',
