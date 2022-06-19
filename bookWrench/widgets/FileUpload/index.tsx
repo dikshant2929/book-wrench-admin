@@ -15,6 +15,11 @@ interface FileUploadArgs {
     imagePath: (args: any | {}) => any;
     onClose: (args: any | {}) => any;
     imageURL?: string;
+    parentClass? : string;
+}
+
+const defaultProps = {
+    parentClass : "file_upload w-[28%]"
 }
 
 
@@ -106,7 +111,7 @@ const FileUpload = (props: FileUploadArgs) => {
 
                 </div>                
                 :
-                <div className='file_upload w-[28%]'>
+                <div className={props.parentClass}>
                     <label className="label__small text-left">{props.title}</label>
 
                     <div className='flex items-center relative' >
@@ -143,4 +148,5 @@ const FileUpload = (props: FileUploadArgs) => {
     </>)
 }
 
+FileUpload.defaultProps = defaultProps;
 export default FileUpload;

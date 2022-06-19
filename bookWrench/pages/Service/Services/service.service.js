@@ -41,6 +41,18 @@ export default class Services {
         }
     }  
 
+    static async subCategoryList(parameters = {}, cb) {
+        try {
+            const data = await API.get('subCategory',parameters);
+            // showToster({ status: 'Success', msg: "Category has been added successfully" });
+            return cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    }  
 
     static async departmentList(cb) {
         try {

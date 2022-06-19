@@ -3,7 +3,7 @@ import { TextareaProps } from './interfaces';
 const defaultProps = {
     title:"Description",
     titleClass:"label__small text-left",
-    parentClass:"",
+    parentClass:"textArea w-[28%]",
     textareaClass:"w-full form__input__border text-sm h-20 focus:ring-0 resize-none",
     rows:"4",
     cols:"4",
@@ -24,7 +24,7 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
 
     useEffect(() => {
         setValue(props.value)
-     }, [props]);
+    }, [props]);
 
     const onChange = (event : any) => {
         const value = event.target.value;
@@ -32,7 +32,7 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
         props.onChange && props.onChange(value);
     }
     return (
-        <div className={props.parentClass ? '' : 'textArea w-[28%]'}>
+        <div className={props.parentClass}>
             {props.titleClass && <label className={props.titleClass}>{props.title} </label>}
             <textarea  
                 onBlur={(e) => handleClick(e)}  

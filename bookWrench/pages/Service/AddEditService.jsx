@@ -22,59 +22,65 @@ const formConfiguration = {
             type: 'text',
             name: 'title',
             // maxLength : "3",
-            'data-gsv-err-msg': 'Title is required.',
+            'data-gsv-err-msg': 'Name is required.',
             classNameLabel: 'label__small',
             classNameInput: 'form__input_w_height',
         },
         extraProps: {
-            label: 'Service Title',
+            label: 'Service Name',
             validation: 'required,minLength',
             minLength: 1,
             parentId: 'title',
-            parentClass: '',
+            parentClass: 'w-full',
             newInptClass: 'newClass',
         },
         isRequired: true,
+        cls : "p-1"
     }
-    // {
-    //     id: "qualitification",
-    //     componentType: "Dropdown",
-    //     selectedValue : "",
-    //     className: "mb-6 leading-8 block w-full rounded-md outline-none",
-    //     classNamePrefix: "outline-none bg-gray-100 border-transparent border-none ",
-    //     options : [
-    //         {
-    //             value : "tenth",
-    //             label : "Secondary",
-    //         },
-    //         {
-    //             value : "twelth",
-    //             label : "Senior Secendory",
-    //         },
-    //         {
-    //             value : "bachelors",
-    //             label : "Graduation",
-    //         },
-    //         {
-    //             value : "masters",
-    //             label : "Post Graduation",
-    //         }
-    //     ]
-    // },
 ;
+
+const costInputFieldConfiguration = (keyOfInput, label) => {
+    return {
+        id: keyOfInput,
+        componentType: 'InputBox',
+        selectedValue: '',
+        props: {
+            type: 'number',
+            name: keyOfInput,
+            // maxLength : "3",
+            'data-gsv-err-msg': label +' is required.',
+            classNameLabel: 'label__small',
+            classNameInput: 'form__input_w_height',
+        },
+        extraProps: {
+            label,
+            validation: 'required,minLength',
+            minLength: 1,
+            parentId: keyOfInput,
+            parentClass: 'w-auto',
+            newInptClass: 'newClass',
+        },
+        isRequired: true,
+        cls : "p-1"
+    }
+}
+    ;
 
 const AddEditService = (props) => {
 
-    const  mandatoryFields = ["departmentId", "title"];
+    const  mandatoryFields = ["categoryId", "title"];
 
     const [isShimmerVisible, setShimmer] = useState(false);
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState('Create New Service');
     const [selectedDropdownValue, setDropdownValue] = useState(null);
+    const [selectedSubCategoryDropdownValue, setSubCategoryDropdownValue] = useState(null);
+
     const [ isButtonEnable, setButtonEnable] = useState(false);
 
-    const [departmentList, setDepartmentList] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
+    const [subCategoryList, setSubCategoryList] = useState([]);
 
     const [fieldValue, setFieldValue] = useState({
         title:"",
@@ -98,42 +104,66 @@ const AddEditService = (props) => {
 
     useEffect(() => {
 
-        let departmentId = null;
+        let categoryId = null;
 
         const encryptedData = props?.match?.params?.editCategory;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
             
             const { title, isActive, description, icon } = data;
-            setFieldValue({ title, isActive, description, icon, departmentId : data.departmentId.id });
+            setFieldValue({ title, isActive, description, icon, categoryId : data.categoryId.id });
             
-            departmentId = data.departmentId.id;
+            categoryId = data.categoryId.id;
             setTitle(`Edit Service (${data.title})`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
             setEditMode(true);
         }
 
-        fetchDepartmentList(departmentId);
+        fetchCategoryList(categoryId);
 
         return () => formConfiguration.selectedValue = null;
     }, [props]);
 
-    const fetchDepartmentList = (departmentId) => {
-        Service.departmentList(data => {
-            setDepartmentList(data);
-            if(departmentId){
-                const selectedData = data.find(item => item.id === departmentId);
+    const fetchCategoryList = (categoryId) => {
+        Service.categoryList(data => {
+            setCategoryList(data);
+            if(categoryId){
+                const selectedData = data.find(item => item.id === categoryId);
                 setDropdownValue({...selectedData, label : selectedData.title, value: selectedData.id})
             }
             
         })
     }
     
+    const fetchSubCategoryList = (categoryId, subCategoryId) => {
+        Service.subCategoryList({categoryId} , data => {
+            setSubCategoryList(data);
+            if(subCategoryId){
+                const selectedData = data.find(item => item.id === subCategoryId);
+                setSubCategoryDropdownValue({...selectedData, label : selectedData.title, value: selectedData.id})
+            }
+            
+        })
+    }
 
     const handleOnChange = (key) => (value) => {
-        setDropdownValue(value);
-        setFieldValue(previous => ({...previous, [key] : value.id }))
+        setFieldValue(previous => ({...previous, [key] : value.id }));
+
+        switch(key){
+            case "categoryId":
+                setSubCategoryList([])
+                setSubCategoryDropdownValue(null);
+                setDropdownValue(value);
+                fetchSubCategoryList(value.id);
+                setFieldValue(previous => ({...previous, subCategoryId: undefined}));
+                break;
+            case "subCategoryId":
+                setSubCategoryDropdownValue(value);
+                break;
+            default:
+                break;
+        }
     };
 
     const onTextChange = (key) => (...data) => {
@@ -151,27 +181,61 @@ const AddEditService = (props) => {
             <div className="wrapper__1">
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
-                        <div className="flex items-center w-full department__header m-10 gap-4">
+                        <div className="flex items-center w-full category__header m-10 gap-4">
+                            <label>Category</label>
                             <ReactTypeHead
-                                header="Industry"
-                                handleSelect={handleOnChange('departmentId')}
-                                dataList={departmentList}
+                                header="Category"
+                                handleSelect={handleOnChange('categoryId')}
+                                dataList={categoryList}
                                 fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Industry" 
+                                placeholder="Select Category" 
                                 value={selectedDropdownValue} 
                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                             />
-                            <Input selectedValue={editModeData?.title} {...formConfiguration} cls="p-1 min-w-1/4 inline-block" cb={onTextChange('title')} />
+
+                            <ReactTypeHead
+                                header="Sub Category"
+                                handleSelect={handleOnChange('subCategoryId')}
+                                dataList={subCategoryList}
+                                fields={{ key: 'id', value: 'title' }}
+                                placeholder="Select Sub-Category" 
+                                value={selectedSubCategoryDropdownValue} 
+                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                            />
+
+                            {/* 
                             <div className="status">
                                 <RadioBox
                                     defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
                                     cb={onTextChange('isActive')}
                                 />
-                            </div>
+                            </div> */}
                         </div>
-                        <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
-                            <Textarea value={editModeData?.description} onChange={onTextChange('description')} />
-                            <FileUpload imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                        <hr/>
+                        <div className="flex file_upload_wrapper items-center w-full category__header m-10 gap-4">
+                            <label>Service</label>
+                            <div className='flex-col w-1/2'>
+                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                                <div className='flex gap-2'>
+                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription"/>
+                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription"/>
+                                </div>
+                            </div>
+                            <FileUpload parentClass='file_upload w-[36%] self-start' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                            
+                        </div>
+                        <hr/>
+                        <div className="w-auto flex gap-4 m-10">
+                            <label>Cost</label>
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("constOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
+                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
+                            <label><input type="checkbox" />Taxeable</label>
+                            <label><input type="checkbox" />Discountable</label>
                         </div>
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
                             <Button                            
