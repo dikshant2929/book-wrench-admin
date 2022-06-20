@@ -221,7 +221,7 @@ const AddEditService = (props) => {
                             </div>
                             <div className='flex-col w-1/2'>
                                 <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
-                                <div className='flex gap-2 mt-5'>
+                                <div className='flex gap-4 mt-5'>
                                     <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription" />
                                     <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
                                 </div>
