@@ -182,7 +182,7 @@ const AddEditService = (props) => {
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
                         <div className="flex items-center category__header m-10 gap-4">
-                            <div className='basis__10 '>
+                            <div className='basis__10'>
                                 <label className='text-base font-bold'>Category</label>
                             </div>
 
@@ -215,13 +215,13 @@ const AddEditService = (props) => {
                             </div> */}
                         </div>
                         <hr />
-                        <div className="flex file_upload_wrapper items-baseline category__header m-10 gap-4">
+                        <div className="flex file_upload_wrapper items-start category__header m-10 gap-4">
                             <div className='basis__10'>
                                 <label className='text-base font-bold'>Service</label>
                             </div>
                             <div className='flex-col w-1/2'>
                                 <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
-                                <div className='flex gap-2'>
+                                <div className='flex gap-2 mt-5'>
                                     <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription" />
                                     <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
                                 </div>
@@ -234,15 +234,27 @@ const AddEditService = (props) => {
                             <div className='basis__10'>
                                 <label className='text-base font-bold'>Cost</label>
                             </div>
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("constOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
-                            <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
-                            <label><input type="checkbox" />Taxeable</label>
-                            <label><input type="checkbox" />Discountable</label>
+                            <div className=''>
+                            <div className='flex basis-wrapper gap-4'>
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("constOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
+                            </div>
+                            <div className='flex items-center basis-wrapper gap-4 mt-5'>
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
+                                <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
+                                
+                                <label className='mt-5 flex items-center label__small'><input className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' type="checkbox" />Taxeable</label>
+                                
+                                
+                                <label className='mt-5 flex items-center label__small'><input type="checkbox" className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' />Discountable</label>
+
+                            </div>
+                            </div>
+                           
+
                         </div>
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
                             <Button

@@ -21,3 +21,12 @@
       width: 50%;     
     }   
   } 
+
+  .basis-wrapper > div{
+    flex-basis: 12%;
+  }
+  
+  .no-outline:focus{
+    box-shadow: none;
+    
+}
