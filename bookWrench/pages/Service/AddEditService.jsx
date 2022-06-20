@@ -11,33 +11,33 @@ import './Service.scss';
 import Service from './Services/service.service';
 import Button from '@button';
 
-const { Category } = exposedPath; 
+const { Category } = exposedPath;
 const defaultProps = {};
 
 const formConfiguration = {
-        id: 'title',
-        componentType: 'InputBox',
-        selectedValue: '',
-        props: {
-            type: 'text',
-            name: 'title',
-            // maxLength : "3",
-            'data-gsv-err-msg': 'Name is required.',
-            classNameLabel: 'label__small',
-            classNameInput: 'form__input_w_height',
-        },
-        extraProps: {
-            label: 'Service Name',
-            validation: 'required,minLength',
-            minLength: 1,
-            parentId: 'title',
-            parentClass: 'w-full',
-            newInptClass: 'newClass',
-        },
-        isRequired: true,
-        cls : "p-1"
-    }
-;
+    id: 'title',
+    componentType: 'InputBox',
+    selectedValue: '',
+    props: {
+        type: 'text',
+        name: 'title',
+        // maxLength : "3",
+        'data-gsv-err-msg': 'Name is required.',
+        classNameLabel: 'label__small',
+        classNameInput: 'form__input_w_height',
+    },
+    extraProps: {
+        label: 'Service Name',
+        validation: 'required,minLength',
+        minLength: 1,
+        parentId: 'title',
+        parentClass: 'w-full',
+        newInptClass: 'newClass',
+    },
+    isRequired: true,
+    cls: "p-1"
+}
+    ;
 
 const costInputFieldConfiguration = (keyOfInput, label) => {
     return {
@@ -48,7 +48,7 @@ const costInputFieldConfiguration = (keyOfInput, label) => {
             type: 'number',
             name: keyOfInput,
             // maxLength : "3",
-            'data-gsv-err-msg': label +' is required.',
+            'data-gsv-err-msg': label + ' is required.',
             classNameLabel: 'label__small',
             classNameInput: 'form__input_w_height',
         },
@@ -61,14 +61,14 @@ const costInputFieldConfiguration = (keyOfInput, label) => {
             newInptClass: 'newClass',
         },
         isRequired: true,
-        cls : "p-1"
+        cls: "p-1"
     }
 }
     ;
 
 const AddEditService = (props) => {
 
-    const  mandatoryFields = ["categoryId", "title"];
+    const mandatoryFields = ["categoryId", "title"];
 
     const [isShimmerVisible, setShimmer] = useState(false);
     const [isEditMode, setEditMode] = useState(false);
@@ -77,13 +77,13 @@ const AddEditService = (props) => {
     const [selectedDropdownValue, setDropdownValue] = useState(null);
     const [selectedSubCategoryDropdownValue, setSubCategoryDropdownValue] = useState(null);
 
-    const [ isButtonEnable, setButtonEnable] = useState(false);
+    const [isButtonEnable, setButtonEnable] = useState(false);
 
     const [categoryList, setCategoryList] = useState([]);
     const [subCategoryList, setSubCategoryList] = useState([]);
 
     const [fieldValue, setFieldValue] = useState({
-        title:"",
+        title: "",
         isActive: true,
         description: "",
         icon: ""
@@ -109,10 +109,10 @@ const AddEditService = (props) => {
         const encryptedData = props?.match?.params?.editCategory;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            
+
             const { title, isActive, description, icon } = data;
-            setFieldValue({ title, isActive, description, icon, categoryId : data.categoryId.id });
-            
+            setFieldValue({ title, isActive, description, icon, categoryId: data.categoryId.id });
+
             categoryId = data.categoryId.id;
             setTitle(`Edit Service (${data.title})`);
             formConfiguration.selectedValue = data.title;
@@ -128,35 +128,35 @@ const AddEditService = (props) => {
     const fetchCategoryList = (categoryId) => {
         Service.categoryList(data => {
             setCategoryList(data);
-            if(categoryId){
+            if (categoryId) {
                 const selectedData = data.find(item => item.id === categoryId);
-                setDropdownValue({...selectedData, label : selectedData.title, value: selectedData.id})
+                setDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
             }
-            
+
         })
     }
-    
+
     const fetchSubCategoryList = (categoryId, subCategoryId) => {
-        Service.subCategoryList({categoryId} , data => {
+        Service.subCategoryList({ categoryId }, data => {
             setSubCategoryList(data);
-            if(subCategoryId){
+            if (subCategoryId) {
                 const selectedData = data.find(item => item.id === subCategoryId);
-                setSubCategoryDropdownValue({...selectedData, label : selectedData.title, value: selectedData.id})
+                setSubCategoryDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
             }
-            
+
         })
     }
 
     const handleOnChange = (key) => (value) => {
-        setFieldValue(previous => ({...previous, [key] : value.id }));
+        setFieldValue(previous => ({ ...previous, [key]: value.id }));
 
-        switch(key){
+        switch (key) {
             case "categoryId":
                 setSubCategoryList([])
                 setSubCategoryDropdownValue(null);
                 setDropdownValue(value);
                 fetchSubCategoryList(value.id);
-                setFieldValue(previous => ({...previous, subCategoryId: undefined}));
+                setFieldValue(previous => ({ ...previous, subCategoryId: undefined }));
                 break;
             case "subCategoryId":
                 setSubCategoryDropdownValue(value);
@@ -167,9 +167,9 @@ const AddEditService = (props) => {
     };
 
     const onTextChange = (key) => (...data) => {
-        if(Array.isArray(data)){
-            const value = key === "isActive" ? (data[1] === "active") : ( key === "title" ? data[1] : data[0]);
-            setFieldValue(previous => ({...previous, [key] : value }))
+        if (Array.isArray(data)) {
+            const value = key === "isActive" ? (data[1] === "active") : (key === "title" ? data[1] : data[0]);
+            setFieldValue(previous => ({ ...previous, [key]: value }))
         }
     }
 
@@ -181,15 +181,18 @@ const AddEditService = (props) => {
             <div className="wrapper__1">
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
-                        <div className="flex items-center w-full category__header m-10 gap-4">
-                            <label>Category</label>
+                        <div className="flex items-center category__header m-10 gap-4">
+                            <div className='basis__10 '>
+                                <label className='text-base font-bold'>Category</label>
+                            </div>
+
                             <ReactTypeHead
                                 header="Category"
                                 handleSelect={handleOnChange('categoryId')}
                                 dataList={categoryList}
                                 fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Category" 
-                                value={selectedDropdownValue} 
+                                placeholder="Select Category"
+                                value={selectedDropdownValue}
                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                             />
 
@@ -198,8 +201,8 @@ const AddEditService = (props) => {
                                 handleSelect={handleOnChange('subCategoryId')}
                                 dataList={subCategoryList}
                                 fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Sub-Category" 
-                                value={selectedSubCategoryDropdownValue} 
+                                placeholder="Select Sub-Category"
+                                value={selectedSubCategoryDropdownValue}
                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                             />
 
@@ -211,22 +214,26 @@ const AddEditService = (props) => {
                                 />
                             </div> */}
                         </div>
-                        <hr/>
-                        <div className="flex file_upload_wrapper items-center w-full category__header m-10 gap-4">
-                            <label>Service</label>
+                        <hr />
+                        <div className="flex file_upload_wrapper items-baseline category__header m-10 gap-4">
+                            <div className='basis__10'>
+                                <label className='text-base font-bold'>Service</label>
+                            </div>
                             <div className='flex-col w-1/2'>
                                 <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
                                 <div className='flex gap-2'>
-                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription"/>
-                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription"/>
+                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription" />
+                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
                                 </div>
                             </div>
-                            <FileUpload parentClass='file_upload w-[36%] self-start' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
-                            
+                            <FileUpload parentClass='file_upload w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+
                         </div>
-                        <hr/>
+                        <hr />
                         <div className="w-auto flex gap-4 m-10">
-                            <label>Cost</label>
+                            <div className='basis__10'>
+                                <label className='text-base font-bold'>Cost</label>
+                            </div>
                             <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("constOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
                             <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
                             <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
@@ -238,14 +245,14 @@ const AddEditService = (props) => {
                             <label><input type="checkbox" />Discountable</label>
                         </div>
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
-                            <Button                            
-                                disabled={!isButtonEnable ?? false}  
+                            <Button
+                                disabled={!isButtonEnable ?? false}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     onFormSubmit(fieldValue);
                                 }}
                                 className={`form__button ${!isButtonEnable ?? false ? 'btn-disabled' : 'button-primary'}`}
-                                title = {isEditMode ? 'Update' : 'Save'}
+                                title={isEditMode ? 'Update' : 'Save'}
                             />
                         </div>
                     </div>
