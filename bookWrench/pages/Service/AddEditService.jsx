@@ -267,7 +267,7 @@ const AddEditService = (props) => {
                                     <label className='label__small'>Documents</label>
                                     <div className='flex gap-5'>
                                         <div className='attached__docs flex bg-[#F2F3F7] basis__33 justify-around py-6 rounded-lg'>
-                                            <div className='flex gap-6'>
+                                            <div className='flex gap-6 items-center'>
                                                 <span className='docs__icon__name'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
                                                         <path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
@@ -284,7 +284,7 @@ const AddEditService = (props) => {
                                             </span>
                                         </div>
                                         <div className='attachment flex bg-[#F2F3F7] basis__33 justify-around py-6 rounded-lg'>
-                                            <div className='flex gap-6'>
+                                            <div className='flex gap-6 items-center'>
                                                 <span className='docs__icon__name'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
                                                         <path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
@@ -301,7 +301,7 @@ const AddEditService = (props) => {
                                             </span>
                                         </div>
                                         <div className='attachment flex bg-[#F2F3F7] basis__33 justify-around py-6 rounded-lg'>
-                                            <div className='flex gap-6'>
+                                            <div className='flex gap-6 items-center'>
                                                 <span className='docs__icon__name'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
                                                         <path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
