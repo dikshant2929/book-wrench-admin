@@ -96,7 +96,12 @@ const AddEditVendorManagement = (props) => {
                     <div className="add-catg-form-wrapper">
                             <div className='flex items-center w-full department__header m-10 gap-4'>
                             <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')}/>
-                            
+                            <div className="status">
+                                <RadioBox
+                                    defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
+                                    cb={onTextChange('isActive')}
+                                />
+                            </div>
                             </div>
                             <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
                                 <Textarea value={editModeData?.description} cb={onTextChange('description')} />

@@ -30,10 +30,10 @@ const defaultProps = {
                 value: 'Update At',
                 isShown: false,
             },
-            // {
-            //     key: 'status',
-            //     value: 'Status',
-            // },
+            {
+                key: 'status',
+                value: 'Status',
+            },
             {
                 key: 'action',
                 value: 'Actions',
