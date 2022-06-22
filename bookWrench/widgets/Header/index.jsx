@@ -131,7 +131,7 @@ export default function Header(props) {
 
     return (
         <>
-            <header className="top-0 left-0 z-10 w-full font-semibold bg-white shadow-md header mb-72">
+            <header className={isNavExpanded ? "top-0 left-0 z-10 w-full font-semibold bg-white shadow-md header margin-bottom" : "top-0 left-0 z-10 w-full font-semibold bg-white shadow-md header"}>
                 <div className="flex items-center justify-between lg:px-5 ">
                     <div className="dash-logo">
                         <img className="main-header-logo" src="/bookWrench/assets/images/bookWrench_logo.svg" alt="logo" />
@@ -153,7 +153,7 @@ export default function Header(props) {
                                         </svg>
                                     </button>
                     <div className="navbar">
-                        <ul className={ isNavExpanded ? "navbar collapse flex expanded" : "navbar collapse flex"}>
+                        <ul className={ isNavExpanded ? "collapse flex expanded" : "collapse flex"}>
                             {menuList.map((item, key) => (
                                 <li className={key === menuList.length - 1 ? 'group p-[10px]' : 'p-[10px]'} key={key} onClick={(e) => onMenuItemClick(e, item)} >
                                     {!item.subMenu ?

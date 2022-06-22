@@ -30,8 +30,7 @@ $nav-color: #091E42;
     @include header-logo-size;
 }
 
-.hamburger {
-    // order: 4;
+.hamburger {    
     border: 0;
     height: 40px;
     width: 40px;
@@ -48,38 +47,38 @@ $nav-color: #091E42;
     background-color: #2642af;
   }
 
-  margin-bottom{
-    
-  }
+  
 
 @media only screen and (max-width: 1024px) {
     .hamburger {
         display: block;
       }
-      .navbar .collapse {
-              display: none;
+      .navbar .collapse {        
+        display: none;
     }
-
     .navbar .collapse{
         position: absolute;
         text-align: center;
         top: 60px;
         left: 0;
-        // flex-direction: column;
         width: 100%;
-        // height: calc(100vh - 77px);
         background-color: white;
         border-top: 1px solid black;
         z-index: 10;
+        transition: all 2s ease-out;
       }
       .category__collapse{
         left: 42%;
+        top: 30px;
       }
       .collapse__center{
         justify-content: center;
       }
-
-      .navbar.expanded {
-        display: block;
-      }   
+      .navbar .expanded {
+        display: block;       
+      }  
+      .margin-bottom{
+        transition: margin 0.5s;
+        margin-bottom: 300px;
+      } 
 }
