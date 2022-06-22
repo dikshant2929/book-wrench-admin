@@ -7,11 +7,7 @@ import UALink from '@common/elements/UALink';
 import { Route, useLocation } from 'react-router-dom';
 import './header.scss';
 
-<<<<<<< HEAD
-const { Home, Dashboard, Category, SubCategory, Department, Service, VendorManagement } = exposedPath;
-=======
-const { Home, Dashboard, Category, SubCategory, Department,Service,VendorManagement,Product } = exposedPath;
->>>>>>> 74fc20bf0cdcdc1462d2f956e9c4040c329534fd
+const { Home, Dashboard, Category, SubCategory, Department, Service, VendorManagement, Product } = exposedPath;
 
 
 const defaultProps = {
