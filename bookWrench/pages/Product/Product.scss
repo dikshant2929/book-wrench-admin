@@ -1,0 +1,32 @@
+.addCategory {
+    box-shadow: 0 0 15px -7px grey;   
+}
+
+@media only screen and (max-width: 640px) {
+    .addCategory .add-catg-form-wrapper form input{
+        margin-bottom: 1.5rem;
+    }
+}
+
+.category {   
+    .btn-wrapper {  
+      a{
+        font-size: 0.875rem;
+        line-height: 1rem;
+      }
+    }
+  }
+  .formInner{    
+    [type='text']{
+      width: 50%;     
+    }   
+  } 
+
+  .basis-wrapper > div{
+    flex-basis: 12%;
+  }
+  
+  .no-outline:focus{
+    box-shadow: none;
+    
+}
