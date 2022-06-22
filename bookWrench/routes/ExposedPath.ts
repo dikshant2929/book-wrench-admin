@@ -25,6 +25,12 @@ const path = {
     ServiceCreate: PREFIX + 'service/create',
     ServiceEdit: PREFIX + 'service/edit/:editService',
 
+    Product: PREFIX + 'product',
+    ProductCreate: PREFIX + 'product/create',
+    ProductEdit: PREFIX + 'product/edit/:editproduct',
+
+    
+
 
     VendorManagement: PREFIX + 'vendor-management',
     VendorManagementCreate: PREFIX + 'vendor-management/create',
