@@ -136,24 +136,24 @@ export default function Header(props) {
                     <div className="dash-logo">
                         <img className="main-header-logo" src="/bookWrench/assets/images/bookWrench_logo.svg" alt="logo" />
                     </div>
-                    <button className='hamburger' onClick={() => {
-          setIsNavExpanded(!isNavExpanded);
-        }}>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="w-5 h-5"
-                                            viewBox="0 0 20 20"
-                                            fill="white"
-                                        >
-                                            <path
-                                                fillRule="evenodd"
-                                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                                clipRule="evenodd"
-                                            />
-                                        </svg>
-                                    </button>
+                    {/* <button className='hamburger' onClick={() => {
+                        setIsNavExpanded(!isNavExpanded);
+                    }}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-5 h-5"
+                            viewBox="0 0 20 20"
+                            fill="white"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </button> */}
                     <div className="navbar">
-                        <ul className={ isNavExpanded ? "collapse flex expanded" : "collapse flex"}>
+                        <ul className={isNavExpanded ? "collapse flex expanded" : "collapse flex"}>
                             {menuList.map((item, key) => (
                                 <li className={key === menuList.length - 1 ? 'group p-[10px]' : 'p-[10px]'} key={key} onClick={(e) => onMenuItemClick(e, item)} >
                                     {!item.subMenu ?
@@ -218,7 +218,7 @@ export default function Header(props) {
                                     <i><svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                     </svg></i>
-                                   
+
                                 </div>
                             </div>
                             <ul className={`absolute w-44 -bottom-15 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block`}>
@@ -228,6 +228,22 @@ export default function Header(props) {
                             </ul>
                         </div>
                     </div>
+                    <button className='hamburger' onClick={() => {
+                        setIsNavExpanded(!isNavExpanded);
+                    }}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-5 h-5"
+                            viewBox="0 0 20 20"
+                            fill="white"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </button>
                 </div>
             </header>
         </>
