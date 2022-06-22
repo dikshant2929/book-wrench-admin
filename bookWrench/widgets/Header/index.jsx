@@ -7,7 +7,7 @@ import UALink from '@common/elements/UALink';
 import { Route, useLocation } from 'react-router-dom';
 import './header.scss';
 
-const { Home, Dashboard, Category, SubCategory, Department,Service,VendorManagement } = exposedPath;
+const { Home, Dashboard, Category, SubCategory, Department, Service, VendorManagement } = exposedPath;
 
 
 const defaultProps = {
@@ -52,15 +52,15 @@ const defaultProps = {
             link: Dashboard,
             isActive: false,
             tag: 'MOD_OFFER',
-            icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',           
+            icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
         },
         {
             title: 'Service',
             link: Service,
             isActive: false,
             tag: 'MOD_OFFER',
-            icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',           
-           
+            icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
+
         },
         {
             title: 'More',
@@ -69,15 +69,16 @@ const defaultProps = {
             tag: 'MOD_OFFER',
             icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',
             subMenu: [
-                { title: 'Master', link: Department, icon: '', isActive: true,
-                subMenu: [
-                    { title: 'Department', link: Department, icon: '', isActive: true },
-                    { title: 'Category', link: Category, icon: '', isActive: true },
-                    { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
-                    { title: 'Vendors', link: VendorManagement, icon: '', isActive: false },
-                ]
-            },
-                
+                {
+                    title: 'Master', link: Department, icon: '', isActive: true,
+                    subMenu: [
+                        { title: 'Department', link: Department, icon: '', isActive: true },
+                        { title: 'Category', link: Category, icon: '', isActive: true },
+                        { title: 'Sub-Category', link: SubCategory, icon: '', isActive: false },
+                        { title: 'Vendors', link: VendorManagement, icon: '', isActive: false },
+                    ]
+                },
+
             ]
         },
     ]
@@ -95,6 +96,8 @@ export default function Header(props) {
 
     const { name: userName = null } = storage?.getUserInfo()?.config?.data ? JSON.parse(storage?.getUserInfo()?.config?.data) : {};
     const { auth, isLoggedIn } = props;
+
+    const [isNavExpanded, setIsNavExpanded] = useState(false);
 
     const logout = () => {
         auth.signout(() => {
@@ -128,13 +131,29 @@ export default function Header(props) {
 
     return (
         <>
-            <header className="header top-0 left-0 w-full z-10 bg-white shadow-md font-semibold">
-                <div className="flex flex-col md:flex-row h-[9.75rem] md:h-[4.75rem] items-center lg:px-5 justify-between ">
+            <header className="top-0 left-0 z-10 w-full font-semibold bg-white shadow-md header mb-72">
+                <div className="flex items-center justify-between lg:px-5 ">
                     <div className="dash-logo">
                         <img className="main-header-logo" src="/bookWrench/assets/images/bookWrench_logo.svg" alt="logo" />
                     </div>
+                    <button className='hamburger' onClick={() => {
+          setIsNavExpanded(!isNavExpanded);
+        }}>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="w-5 h-5"
+                                            viewBox="0 0 20 20"
+                                            fill="white"
+                                        >
+                                            <path
+                                                fillRule="evenodd"
+                                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                                clipRule="evenodd"
+                                            />
+                                        </svg>
+                                    </button>
                     <div className="navbar">
-                        <ul className="flex">
+                        <ul className={ isNavExpanded ? "navbar collapse flex expanded" : "navbar collapse flex"}>
                             {menuList.map((item, key) => (
                                 <li className={key === menuList.length - 1 ? 'group p-[10px]' : 'p-[10px]'} key={key} onClick={(e) => onMenuItemClick(e, item)} >
                                     {!item.subMenu ?
@@ -147,36 +166,36 @@ export default function Header(props) {
                                         </UALink> :
                                         <>
                                             <div className='relative lg:py-3 lg:px-5'>
-                                                <span className="relative flex hover:text-primary cursor-pointer">
+                                                <span className="relative flex cursor-pointer hover:text-primary collapse__center">
                                                     {item.title}
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="relative w-4 h-4 mt-px ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                                                 </span>
                                                 {
-                                                    <ul className='masterBar absolute w-32 top-11 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block z-10'>
-                                                        {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="cursor-pointer mr-0 block py-3 px-5 text-sm">
+                                                    <ul className='absolute right-0 z-10 hidden w-32 bg-white rounded-lg masterBar top-11 shadow-sprade triangle-top group-hover:block category__collapse'>
+                                                        {item.subMenu.map((item, key) => <li key={`Inner_${key}`} className="block px-5 py-3 mr-0 text-sm cursor-pointer">
                                                             {!item.subMenu ? <UALink
-                                                                className="hover:text-primary block"
+                                                                className="block hover:text-primary"
                                                                 title={item.title}
                                                                 to={item.link}>{item.title}
                                                             </UALink> :
-                                                            <div className='relative'>
-                                                            <span className="relative flex hover:text-primary cursor-pointer justify-center h-8 items-center">
-                                                                {item.title}
-                                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative rotate-[272deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                                                            </span>
-                                                            {
-                                                                <ul className='rightBar absolute w-44 top-0 left-[7.5rem] bg-white shadow-sprade rounded-lg triangle-right hidden z-10'>
-                                                                    {item.subMenu.map((itm, index) => <li key={`InnerSub_${index}`} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
-                                                                         <UALink
-                                                                            className="hover:text-primary block"
-                                                                            title={itm.title}
-                                                                            to={itm.link}>{itm.title}
-                                                                        </UALink> 
-                                                                    </li>)}
-                                                                </ul>
+                                                                <div className='relative'>
+                                                                    <span className="relative flex items-center justify-center h-8 cursor-pointer hover:text-primary">
+                                                                        {item.title}
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mt-px ml-1 relative rotate-[272deg]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                                    </span>
+                                                                    {
+                                                                        <ul className='rightBar absolute w-44 top-0 left-[7.5rem] bg-white shadow-sprade rounded-lg triangle-right hidden z-10'>
+                                                                            {item.subMenu.map((itm, index) => <li key={`InnerSub_${index}`} className="block px-5 py-3 ml-auto mr-0 text-sm cursor-pointer">
+                                                                                <UALink
+                                                                                    className="block hover:text-primary"
+                                                                                    title={itm.title}
+                                                                                    to={itm.link}>{itm.title}
+                                                                                </UALink>
+                                                                            </li>)}
+                                                                        </ul>
+                                                                    }
+                                                                </div>
                                                             }
-                                                        </div>
-                                                        }
                                                         </li>)}
                                                     </ul>
                                                 }
@@ -192,17 +211,18 @@ export default function Header(props) {
                     </div>
                     <div className="user-img">
                         <div className="relative group">
-                            <div className="h-16 py-3 relative ">
+                            <div className="relative h-16 py-3 ">
                                 <div className="flex items-center mt-1">
-                                    <span className="w-8 h-8 order-3 rounded-full bg-gray-200 mx-2 inline-flex items-center justify-center text-black">{userName?.[0]?.toUpperCase() || "U"}</span>
+                                    <span className="inline-flex items-center justify-center order-3 w-8 h-8 mx-2 text-black bg-gray-200 rounded-full">{userName?.[0]?.toUpperCase() || "U"}</span>
                                     <span>{userName || "User"}</span>
-                                    <i><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                     </svg></i>
+                                   
                                 </div>
                             </div>
                             <ul className={`absolute w-44 -bottom-15 right-0 bg-white shadow-sprade rounded-lg triangle-top hidden group-hover:block`}>
-                                <li onClick={logout} className="cursor-pointer mr-0 ml-auto block py-3 px-5 text-sm">
+                                <li onClick={logout} className="block px-5 py-3 ml-auto mr-0 text-sm cursor-pointer">
                                     <span>Logout</span>
                                 </li>
                             </ul>
