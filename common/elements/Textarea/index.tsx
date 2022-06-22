@@ -3,7 +3,7 @@ import { TextareaProps } from './interfaces';
 const defaultProps = {
     title:"Description",
     titleClass:"label__small text-left",
-    parentClass:"textArea w-[28%]",
+    parentClass:"textArea w-full md:w-[45%] lg:w-[28%]",
     textareaClass:"w-full form__input__border text-sm h-20 focus:ring-0 resize-none",
     rows:"4",
     cols:"4",

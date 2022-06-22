@@ -16,7 +16,7 @@ const defaultProps = {
 		classNameLabel:"label__small",
 		classNameInput:"form__input_w_height"
 	},
-	cls : "p-1 min-w-1/4 mb-2 inline-block w-full"
+	cls : "md:p-1 min-w-1/4 mb-2 inline-block w-full"
 }
 
 const Input = (props: PropsWithChildren<InputBoxProps>) => {

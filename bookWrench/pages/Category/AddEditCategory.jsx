@@ -151,7 +151,7 @@ const AddEditCategory = (props) => {
             <div className="wrapper__1">
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
-                        <div className="flex items-center w-full department__header m-10 gap-4">
+                        <div className="flex flex-col md:flex-row items-center w-full department__header md:m-10 gap-4">
                             <ReactTypeHead
                                 header="Industry"
                                 handleSelect={handleOnChange('departmentId')}
@@ -159,9 +159,9 @@ const AddEditCategory = (props) => {
                                 fields={{ key: 'id', value: 'title' }}
                                 placeholder="Select Industry" 
                                 value={selectedDropdownValue} 
-                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                parentClass={"min-w-1/4 leading-8 block w-full md:w-auto rounded-md outline-none"}
                             />
-                            <Input selectedValue={editModeData?.title} {...formConfiguration} cls="p-1 min-w-1/4 inline-block" cb={onTextChange('title')} />
+                            <Input selectedValue={editModeData?.title} {...formConfiguration} cls="md:p-1 min-w-1/4 w-full md:w-auto inline-block" cb={onTextChange('title')} />
                             <div className="status">
                                 <RadioBox
                                     defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
@@ -169,7 +169,7 @@ const AddEditCategory = (props) => {
                                 />
                             </div>
                         </div>
-                        <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
+                        <div className="file_upload_wrapper w-full flex flex-col md:flex-row gap-4 md:mx-10 mb-10">
                             <Textarea value={editModeData?.description} onChange={onTextChange('description')} />
                             <FileUpload imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
                         </div>

@@ -94,7 +94,7 @@ const AddEditVendorManagement = (props) => {
             <div className="wrapper__1">
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
-                            <div className='flex items-center w-full department__header m-10 gap-4'>
+                            <div className='flex flex-col md:flex-row items-center w-full department__header md:m-10 gap-4'>
                             <Input  selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')}/>
                             <div className="status">
                                 <RadioBox
@@ -103,7 +103,7 @@ const AddEditVendorManagement = (props) => {
                                 />
                             </div>
                             </div>
-                            <div className="file_upload_wrapper w-full flex gap-4 mx-10 mb-10">
+                            <div className="file_upload_wrapper w-full flex flex-col md:flex-row gap-4 md:mx-10 mb-10">
                                 <Textarea value={editModeData?.description} cb={onTextChange('description')} />
                             </div>
                             <div className='btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6'>
