@@ -17,6 +17,12 @@ const defaultProps = {
         filteredRecords: 20,
         heading: [
 
+             
+            {
+                key: 'id',
+                value: 'Service ID',
+            },
+
             {
                 key: 'title',
                 value: 'Name',
@@ -217,6 +223,7 @@ const Service = (props) => {
                 tableHeaders={tableHeaders}
                 tableCellView={tableCellView}
                 updateHeader={updateHeader}
+                showColumnPicker={false}
             />
 
         </div>

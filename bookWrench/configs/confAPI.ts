@@ -27,6 +27,10 @@ export default {
         url: 'vendor/',
         options: {},
     },
+    service: {
+        url: 'service/',
+        options: {},
+    },
 
     
      

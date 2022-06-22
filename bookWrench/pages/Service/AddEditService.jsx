@@ -96,9 +96,9 @@ const AddEditService = (props) => {
 
     const onFormSubmit = (data) => {
         if (isEditMode) {
-            Service.editCategory(fieldValue, () => props.history.push(Category), {}, editModeData.id);
+            Service.editService(fieldValue, () => props.history.push(Category), {}, editModeData.id);
         } else {
-            Service.addCategory(fieldValue, () => props.history.push(Category));
+            Service.addService(fieldValue, () => props.history.push(Category));
         }
     };
 
@@ -106,10 +106,10 @@ const AddEditService = (props) => {
 
         let categoryId = null;
 
-        const encryptedData = props?.match?.params?.editCategory;
+        const encryptedData = props?.match?.params?.editService;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-
+            console.log(data,"data")
             const { title, isActive, description, icon } = data;
             setFieldValue({ title, isActive, description, icon, categoryId: data.categoryId.id });
 
@@ -246,7 +246,10 @@ const AddEditService = (props) => {
                                     <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
                                     <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
 
-                                    <label className='mt-5 flex items-center label__small'><input className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' type="checkbox" />Taxeable</label>
+                                    <label className='mt-5 flex items-center label__small'>
+                                        <input className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' type="checkbox" />
+                                    Taxeable
+                                    </label>
 
 
                                     <label className='mt-5 flex items-center label__small'><input type="checkbox" className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' />Discountable</label>
@@ -364,9 +367,38 @@ const AddEditService = (props) => {
                                         <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
                                         <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
                                     </div>
-                                    <div className='flex justify-between px-4 items-center mt-4'>
-                                        <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
-                                        <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
+                                    </div>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
+                                    </div>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='product basis__25 basis__48 rounded-lg border border-[#DFE2E9] py-4'>
