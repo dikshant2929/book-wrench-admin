@@ -21,6 +21,7 @@ const defaultProps = {
 
 const Input = (props: PropsWithChildren<InputBoxProps>) => {
 	let el;
+	console.log(props)
 	const [state, setState] = useState({ ...props.extraProps, error: { status: true, message: "", }, selectedValue: props.selectedValue ? props.selectedValue : '' })
 
 	function onBlur(event:any) {

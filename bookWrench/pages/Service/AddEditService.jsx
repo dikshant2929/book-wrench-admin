@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Input from '@common/elements/Input';
 import RadioBox from '@common/elements/Radiobox';
+import CheckBox from '@common/elements/CheckBox';
+
 import Textarea from '@common/elements/Textarea';
 import ReactTypeHead from '@common/elements/ReactTypehead';
 import FileUpload from '@app/widgets/FileUpload';
@@ -8,10 +10,10 @@ import FileUpload from '@app/widgets/FileUpload';
 import exposedPath from '@ExposedPath';
 import encrypt from '@app/storage/encrypt';
 import './Service.scss';
-import Service from './Services/service.service';
+import Services from './Services/service.service';
 import Button from '@button';
 
-const { Category } = exposedPath;
+const { Service } = exposedPath;
 const defaultProps = {};
 
 const formConfiguration = {
@@ -95,25 +97,72 @@ const AddEditService = (props) => {
     }, [fieldValue]);
 
     const onFormSubmit = (data) => {
+        const payload = {
+            cost: {
+                isTaxable:data.isTaxable || "",
+                isDiscountable: data.isDiscountable || "",
+                addOnPrice:data.addOnPrice || "",
+                commission:data.commission || "",
+                costOfMaterial:data.costOfMaterial || "",
+                costOfService:data.costOfService || "",
+                labourCost:data.labourCost || "",
+                labourMinuites:data.labourMinuites || "",
+                memberPrice:data.memberPrice || ""
+            },
+            attachments: {
+                documents: [],
+                images: [],
+                videos: []
+            },
+            categoryId: data.categoryId || "",
+            icon: data.icon || "",
+            isActive: data.isActive || "",
+            description: data.description || "",
+            subCategoryId: data.subCategoryId || "",
+            title: data.title || "",
+            warrentyDescription:data.warrentyDescription || "" 
+        }
+
         if (isEditMode) {
-            Service.editService(fieldValue, () => props.history.push(Category), {}, editModeData.id);
+            Services.editService(payload, () => props.history.push(Service), {}, editModeData.id);
         } else {
-            Service.addService(fieldValue, () => props.history.push(Category));
+            Services.addService(payload, () => props.history.push(Service));
         }
     };
 
     useEffect(() => {
 
         let categoryId = null;
+        let subCategoryId = null;
 
         const encryptedData = props?.match?.params?.editService;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            console.log(data,"data")
+            console.log(data)
             const { title, isActive, description, icon } = data;
-            setFieldValue({ title, isActive, description, icon, categoryId: data.categoryId.id });
+            setFieldValue(
+                { 
+                    title, 
+                    isActive, 
+                    description, 
+                    icon,
+                    subCategoryId:data.subCategoryId, 
+                    categoryId:data.categoryId,
+                    isTaxable:data.cost.isTaxable,
+                    isDiscountable: data.cost.isDiscountable,
+                    addOnPrice:data.cost.addOnPrice,
+                    commission:data.cost.commission,
+                    costOfMaterial:data.cost.costOfMaterial,
+                    costOfService:data.costOfService,
+                    labourCost:data.cost.labourCost,
+                    labourMinuites:data.cost.labourMinutes,
+                    memberPrice:data.cost.memberPrice,
+                    warrentyDescription:data.warrentyDescription
+                }
+            );
 
-            categoryId = data.categoryId.id;
+            categoryId = data.categoryId;
+            subCategoryId = data.subCategoryId
             setTitle(`Edit Service (${data.title})`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
@@ -121,12 +170,13 @@ const AddEditService = (props) => {
         }
 
         fetchCategoryList(categoryId);
+        fetchSubCategoryList(categoryId,subCategoryId)
 
         return () => formConfiguration.selectedValue = null;
     }, [props]);
 
     const fetchCategoryList = (categoryId) => {
-        Service.categoryList(data => {
+        Services.categoryList(data => {
             setCategoryList(data);
             if (categoryId) {
                 const selectedData = data.find(item => item.id === categoryId);
@@ -137,7 +187,7 @@ const AddEditService = (props) => {
     }
 
     const fetchSubCategoryList = (categoryId, subCategoryId) => {
-        Service.subCategoryList({ categoryId }, data => {
+        Services.subCategoryList({ categoryId }, data => {
             setSubCategoryList(data);
             if (subCategoryId) {
                 const selectedData = data.find(item => item.id === subCategoryId);
@@ -168,10 +218,14 @@ const AddEditService = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const value = key === "isActive" ? (data[1] === "active") : (key === "title" ? data[1] : data[0]);
+            console.log(data)
+            const fields = ['title','costOfService','costOfMaterial','commission','labourMinuites','labourCost','memberPrice','addOnPrice','isTaxable','isDiscountable']
+            const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
     }
+
+    console.log(fieldValue)
 
     return (
         <div className="addCategory bg-white center mx-8 sm:mx-20 mt-12 mb-10 rounded-md">
@@ -220,10 +274,10 @@ const AddEditService = (props) => {
                                 <label className='text-base font-bold'>Service</label>
                             </div>
                             <div className='flex-col w-1/2'>
-                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                                <Input selectedValue={fieldValue?.title} {...formConfiguration} cb={onTextChange('title')} />
                                 <div className='flex gap-4 mt-5'>
-                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription" />
-                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
+                                    <Textarea parentClass="textArea w-1/2" value={fieldValue?.description} onChange={onTextChange('description')} title="Service Description" name="serviceDescription" />
+                                    <Textarea parentClass="textArea w-1/2" value={fieldValue?.warrentyDescription} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
                                 </div>
                             </div>
                             <FileUpload parentClass='file_upload w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
@@ -236,24 +290,17 @@ const AddEditService = (props) => {
                             </div>
                             <div className=''>
                                 <div className='flex basis-wrapper gap-4'>
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("constOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
+                                    <Input selectedValue={fieldValue?.costOfService} {...costInputFieldConfiguration("costOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
+                                    <Input selectedValue={fieldValue?.costOfMaterial} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
+                                    <Input selectedValue={fieldValue?.commission} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
+                                    <Input selectedValue={fieldValue?.labourMinuites} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
+                                    <Input selectedValue={fieldValue?.labourCost} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
                                 </div>
                                 <div className='flex items-center basis-wrapper gap-4 mt-5'>
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
-                                    <Input selectedValue={editModeData?.title} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
-
-                                    <label className='mt-5 flex items-center label__small'>
-                                        <input className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' type="checkbox" />
-                                    Taxeable
-                                    </label>
-
-
-                                    <label className='mt-5 flex items-center label__small'><input type="checkbox" className='no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2' />Discountable</label>
-
+                                    <Input selectedValue={fieldValue?.memberPrice} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
+                                    <Input selectedValue={fieldValue?.addOnPrice} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
+                                    <CheckBox value="Taxeable" defaultValue={(fieldValue?.isTaxable) ? true : false} cb={onTextChange('isTaxable')} />
+                                    <CheckBox value="Discountable" defaultValue={(fieldValue?.isDiscountable) ? true : false} cb={onTextChange('isDiscountable')} />
                                 </div>
                             </div>
 

@@ -25,24 +25,40 @@ const defaultProps = {
 
             {
                 key: 'title',
-                value: 'Name',
+                value: 'Service Name',
             },
             {
-                key: 'industry',
-                value: 'Industry',
+                key: 'department',
+                value: 'Department',
             },
             {
                 key: 'numberOfProducts',
-                value: 'No Of Products',
+                value: 'Category',
             },
             {
                 key: 'numberOfServices',
-                value: 'No of Services',
+                value: 'Sub Category',
             },
             {
-                key: 'status',
-                value: 'Status',
+                key: 'costOfService',
+                value: 'Cost of Service',
             },
+            {
+                key: 'costOfMaterial',
+                value: 'Cost of material',
+            },
+            {
+                key: 'labourMinutes',
+                value: 'Labour Mins',
+            },
+            {
+                key: 'commission',
+                value: 'Commission',
+            },
+         // {
+            //     key: 'status',
+            //     value: 'Status',
+            // },
             {
                 key: 'createdAt',
                 value: 'Created At',
@@ -117,11 +133,11 @@ const Service = (props) => {
     };
 
     useEffect(() => {
-        Services.categoryList(data => {
+        Services.serviceList(data => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({ ...item, industry: item?.departmentId?.title || "NA", sNo: (index + 1), actions: ['edit', 'expire'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({ ...item, costOfService: item?.cost?.costOfService || "NA", costOfMaterial: item?.cost?.costOfMaterial || "NA", labourMinutes: item?.cost?.labourMinutes || "NA", commission: item?.cost?.commission || "NA", actions: ['edit', 'expire'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });
