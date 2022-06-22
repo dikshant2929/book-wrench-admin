@@ -181,11 +181,11 @@ const AddEditProduct = (props) => {
             <div className="wrapper__1">
                 <div className="wrapper__2">
                     <div className="add-catg-form-wrapper">
-                        <div className="flex items-center category__header m-10 gap-4">
-                            <div className='basis__10'>
+                        <div className="flex flex-col lg:flex-row lg:items-center category__header m-10 gap-4">
+                            <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Category</label>
                             </div>
-
+                            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 w-full'>
                             <ReactTypeHead
                                 header="Category"
                                 handleSelect={handleOnChange('categoryId')}
@@ -206,6 +206,20 @@ const AddEditProduct = (props) => {
                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                             />
 
+                            <ReactTypeHead
+                                header="service"
+                                handleSelect={handleOnChange('subCategoryId')}
+                                dataList={subCategoryList}
+                                fields={{ key: 'id', value: 'title' }}
+                                placeholder="Repair iteam"
+                                value={selectedSubCategoryDropdownValue}
+                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                            />
+
+                            </div>
+
+                           
+
                             {/* 
                             <div className="status">
                                 <RadioBox
@@ -215,21 +229,36 @@ const AddEditProduct = (props) => {
                             </div> */}
                         </div>
                         <hr />
-                        <div className="flex file_upload_wrapper items-start category__header m-10 gap-4">
-                            <div className='basis__10'>
-                                <label className='text-base font-bold'>Service</label>
+                        <div className="flex flex-col lg:flex-row file_upload_wrapper lg:items-start category__header m-10 gap-4">
+                            <div className='basis__10 border-light'>
+                                <label className='text-base font-bold'>Products</label>
                             </div>
-                            <div className='flex-col w-1/2'>
+                            <div className='md:grid md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 lg:grid-rows-4 gap-4 w-full product__selecter'>
                                 <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
-                                <div className='flex gap-4 mt-5'>
-                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription" />
-                                    <Textarea parentClass="textArea w-1/2" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
-                                </div>
+                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                                <Input selectedValue={editModeData?.title} {...formConfiguration} cb={onTextChange('title')} />
+                               
+                                 
+                            <div className="status">
+                                <RadioBox
+                                    defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
+                                    cb={onTextChange('isActive')}
+                                />
                             </div>
-                            <FileUpload parentClass='file_upload w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                             <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+
+                              {/* <div className='flex gap-4 mt-5'> */}
+                                    <Textarea parentClass="textArea p-1" value={editModeData?.description} onChange={onTextChange('serviceDescription')} title="Service Description" name="serviceDescription" />
+                                    <Textarea parentClass="textArea p-1" value={editModeData?.description} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
+                                {/* </div> */}
+                            </div>
+                           
 
                         </div>
-                        <hr />
+                        {/* <hr />
                         <div className="w-auto flex gap-4 m-10">
                             <div className='basis__10'>
                                 <label className='text-base font-bold'>Cost</label>
@@ -255,18 +284,18 @@ const AddEditProduct = (props) => {
                             </div>
 
 
-                        </div>
+                        </div> */}
                         <hr />
-                        <div className="w-auto flex gap-4 m-10">
-                            <div className='basis__10'>
+                        <div className="w-auto flex flex-col lg:flex-row gap-4 m-10">
+                            <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Attachments</label>
                             </div>
 
                             <div className='attachment__wrapper w-full flex flex-col gap-y-5'>
                                 <div className='attached__docs__wrapper'>
                                     <label className='label__small'>Documents</label>
-                                    <div className='flex gap-5'>
-                                        <div className='attached__docs flex bg-[#F2F3F7] basis__33 justify-around py-6 rounded-lg'>
+                                    <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap gap-5'>
+                                        <div className='attached__docs flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
                                             <div className='flex gap-6 items-center'>
                                                 <span className='docs__icon__name'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
@@ -283,7 +312,7 @@ const AddEditProduct = (props) => {
                                                 <svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
                                             </span>
                                         </div>
-                                        <div className='attachment flex bg-[#F2F3F7] basis__33 justify-around py-6 rounded-lg'>
+                                        <div className='attachment flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
                                             <div className='flex gap-6 items-center'>
                                                 <span className='docs__icon__name'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
@@ -300,7 +329,7 @@ const AddEditProduct = (props) => {
                                                 <svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
                                             </span>
                                         </div>
-                                        <div className='attachment flex bg-[#F2F3F7] basis__33 justify-around py-6 rounded-lg'>
+                                        <div className='attachment flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
                                             <div className='flex gap-6 items-center'>
                                                 <span className='docs__icon__name'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
@@ -320,11 +349,11 @@ const AddEditProduct = (props) => {
                                     </div>
                                 </div>
                                 <div className='pb-7 border-b-2 border-gray-100'>
-                                    <FileUpload parentClass='file_upload w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                                    <FileUpload parentClass='file_upload md:w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
                                 </div>
-                                <div className='image__wrapper'>
+                                <div className='image__wrapper pb-7 border-b-2 border-gray-100'>
                                     <label className='label__small'>Images</label>
-                                    <div className='img__thumbnail flex gap-3'>
+                                    <div className='img__thumbnail flex gap-3 flex-wrap'>
                                         <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
                                         <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
                                         <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
@@ -340,7 +369,7 @@ const AddEditProduct = (props) => {
                                 <div className='video__wrapper'>
                                     <label className='label__small'>Videos</label>
                                     <div className='flex items-center gap-3'>
-                                        <input className='form__input_w_height w-1/2' type="text" placeholder="youtube.com/watch?v=Vowek3_420o" />
+                                        <input className='form__input_w_height md:w-1/2' type="text" placeholder="youtube.com/watch?v=Vowek3_420o" />
                                         <span className='bg-[#E1F3EA] p-3.5 rounded-lg cursor-pointer'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                                 <path d="M9 9V5H11V9H15V11H11V15H9V11H5V9H9ZM10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18Z" fill="#00875A" />
@@ -351,63 +380,63 @@ const AddEditProduct = (props) => {
 
                             </div>
                         </div>
-                        <hr />
+                        {/* <hr />
                         <div className="w-auto flex gap-4 m-10">
                             <div className='basis__10'>
                                 <label className='text-base font-bold'>Associated Products</label>
                             </div>
                             <div className='flex gap-y-6 flex-col'>
-                            <div className='products__wrapper flex gap-4'>
-                                <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
-                                    <div className='px-8'>
-                                        <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
-                                        <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
-                                        <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                <div className='products__wrapper flex gap-4'>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
                                     </div>
-                                    <div className='flex justify-between px-4 items-center mt-4'>
-                                        <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
-                                        <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
+                                    </div>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
+                                    </div>
+                                    <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
+                                        <div className='px-8'>
+                                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
+                                            <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
+                                            <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
+                                        </div>
+                                        <div className='flex justify-between px-4 items-center mt-4'>
+                                            <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
+                                            <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
-                                    <div className='px-8'>
-                                        <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
-                                        <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
-                                        <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
-                                    </div>
-                                    <div className='flex justify-between px-4 items-center mt-4'>
-                                        <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
-                                        <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
-                                    </div>
-                                </div>
-                                <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
-                                    <div className='px-8'>
-                                        <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
-                                        <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
-                                        <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
-                                    </div>
-                                    <div className='flex justify-between px-4 items-center mt-4'>
-                                        <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
-                                        <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
-                                    </div>
-                                </div>
-                                <div className='product basis__25 rounded-lg border border-[#DFE2E9] py-4'>
-                                    <div className='px-8'>
-                                        <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'></div>
-                                        <p className='text-center text-sm font-semibold mb-3'>Replace Pilot Safety Sensor</p>
-                                        <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
-                                    </div>
-                                    <div className='flex justify-between px-4 items-center mt-4'>
-                                        <span className='text-[#B8B0B0]'>Qty <span className='text-black font-bold'>10</span></span>
-                                        <span className='bg-[#E1F3EA] text-[#00875A] text-base font-semibold px-3 py-1.5 rounded-lg'>240$</span>
-                                    </div>
+                                <div>
+                                    <button className='py-3 px-14 text-sm font-medium text-[#646982] bg-[#E4E6F1] rounded-md'>Show all</button>
                                 </div>
                             </div>
-                            <div>
-                                <button className='py-3 px-14 text-sm font-medium text-[#646982] bg-[#E4E6F1] rounded-md'>Show all</button>
-                            </div>
-                            </div>
-                        </div>
+                        </div> */}
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
                             <Button
                                 disabled={!isButtonEnable ?? false}
