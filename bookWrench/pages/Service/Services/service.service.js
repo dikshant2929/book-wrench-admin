@@ -2,10 +2,10 @@ import API from '@API';
 import { showToster } from '@common/elements/ToastNotification/new_index';
 
 export default class Services {
-    static async addCategory(dataObject, cb) {
+    static async addService(dataObject, cb) {
         try {
-            const data = await API.post('category', dataObject);
-            showToster({ status: 'Success', msg: "Category has been added successfully" });
+            const data = await API.post('service', dataObject);
+            showToster({ status: 'Success', msg: "service has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -15,10 +15,10 @@ export default class Services {
         }
     }  
     
-    static async editCategory(dataObject, cb, params = {}, id) {
+    static async editService(dataObject, cb, params = {}, id) {
         try {
-            const data = await API.put('category', dataObject, params, id);
-            showToster({ status: 'Success', msg: "Category has been updated successfully" });
+            const data = await API.put('service', dataObject, params, id);
+            showToster({ status: 'Success', msg: "service has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -30,7 +30,7 @@ export default class Services {
 
     static async categoryList(cb) {
         try {
-            const data = await API.get('category');
+            const data = await API.get('service');
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
@@ -66,9 +66,9 @@ export default class Services {
             return error;
         }
     } 
-    static async deleteCategory(dataObject,params = {}, id,cb) {
+    static async deleteService(dataObject,params = {}, id,cb) {
         try {
-            const data = await API.delete('category', dataObject, params, id);
+            const data = await API.delete('service', dataObject, params, id);
            // showToster({ status: 'Success', msg: "Category has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
