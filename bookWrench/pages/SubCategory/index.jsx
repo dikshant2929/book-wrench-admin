@@ -172,7 +172,7 @@ const SubCategory = (props) => {
 
     return (
         <div className="sub-category md:mx-20 mt-11 mb-6">
-            <div className=" flex justify-between items-end mb-7">
+            <div className=" flex flex-col md:flex-row gap-y-4 justify-between items-center md:items-end mb-7">
                 <h1 className="font-medium list-heading">{config.title}</h1>
                 <div className="btn-wrapper">
                     <TableWidgets>

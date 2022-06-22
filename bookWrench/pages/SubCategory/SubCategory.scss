@@ -12,11 +12,6 @@
     }
 }
 
-@media only screen and (max-width: 640px) {
-    .addCategory .add-catg-form-wrapper form input{
-        margin-bottom: 1.5rem;
-    }
-}
 
 .sub-category {    
   
@@ -34,3 +29,19 @@
       width: 50%;     
     }  
   } 
+  @media only screen and (max-width: 640px) {
+    .addCategory .add-catg-form-wrapper form input{
+        margin-bottom: 1.5rem;
+    }
+}
+
+
+  @media only screen and (max-width: 768px) {
+   
+    .status{
+      width: 100%;
+    }  
+    .department__header, .file_upload_wrapper{
+      padding: 0.75rem;
+    }
+  }

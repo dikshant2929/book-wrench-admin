@@ -19,7 +19,7 @@ interface FileUploadArgs {
 }
 
 const defaultProps = {
-    parentClass : "file_upload w-[28%]"
+    parentClass : "file_upload w-full md:w-[45%] lg:w-[28%]"
 }
 
 

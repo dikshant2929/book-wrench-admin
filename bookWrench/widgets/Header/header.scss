@@ -30,8 +30,61 @@ $nav-color: #091E42;
     @include header-logo-size;
 }
 
-@media only screen and (max-width: 572px) {
-    .navbar ul li{
-        padding: 3px;
+.hamburger {    
+    border: 0;
+    height: 40px;
+    width: 40px;
+    padding: 0.5rem;
+    border-radius: 50%;
+    background-color: #283b8b;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    position: absolute;
+    right: 130px;    
+    display: none;
+  }
+  .hamburger:hover {
+    background-color: #2642af;
+  }
+
+  
+
+@media only screen and (max-width: 1024px) {
+    .hamburger {
+        display: block;
+      }
+      .navbar .collapse {        
+        display: none;
     }
+    .navbar .collapse{
+        position: absolute;
+        text-align: center;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        border-top: 1px solid black;
+        z-index: 10;
+        transition: all 2s ease-out;
+      }
+      .category__collapse{
+        left: 42%;
+        top: 30px;
+      }
+      .collapse__center{
+        justify-content: center;
+      }
+      .navbar .expanded {
+        display: block;       
+      }  
+      .margin-bottom{
+        transition: margin 0.5s;
+        margin-bottom: 300px;
+      } 
+}
+
+
+
+@media only screen and (max-width: 500px) {
+
 }
