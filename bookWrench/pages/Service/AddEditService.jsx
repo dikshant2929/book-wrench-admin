@@ -314,11 +314,12 @@ const AddEditService = (props) => {
 
                         </div>
                         <hr /> 
-                        <div className="w-auto flex flex-col lg:flex-row gap-4 m-10">
+                        <div className="w-auto flex flex-col md:flex-row gap-4 m-10">
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Attachments</label>
                             </div>
-                            <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap gap-5'>
+                            <div>
+                            <div className=''>
                             <MultipleDocUploader list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
                             </div>
                             
@@ -326,6 +327,7 @@ const AddEditService = (props) => {
                                <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")}/>
                             </div>
                             <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
+                            </div>                            
                         </div>
                         <hr />
                         <div className="w-auto flex flex-col lg:flex-row gap-4 m-10">

@@ -62,7 +62,7 @@ const MultipleDocUploader = (props) => {
 				)}
             </div>
 			{isFileUploaderVisible && <div className='pb-7 border-b-2 border-gray-100'>
-                	<FileUpload supportType="txt,pdf,doc,docx" acceptType=".txt,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" parentClass='file_upload md:w-[36%]' imageURL="" title="" imagePath={onTextChange} />
+                	<FileUpload supportType="txt,pdf,doc,docx" acceptType=".txt,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" parentClass='file_upload' imageURL="" title="" imagePath={onTextChange} />
              </div>}
 	 </>
     );
