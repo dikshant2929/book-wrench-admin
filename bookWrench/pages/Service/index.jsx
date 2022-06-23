@@ -247,7 +247,7 @@ const Service = (props) => {
                 tableHeaders={tableHeaders}
                 tableCellView={tableCellView}
                 updateHeader={updateHeader}
-                showColumnPicker={false}
+                //showColumnPicker={false}
             />
 
         </div>
