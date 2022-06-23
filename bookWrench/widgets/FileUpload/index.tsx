@@ -16,10 +16,15 @@ interface FileUploadArgs {
     onClose: (args: any | {}) => any;
     imageURL?: string;
     parentClass? : string;
+    acceptType?:string,
+    supportType?:string
 }
 
 const defaultProps = {
-    parentClass : "file_upload w-full md:w-[45%] lg:w-[28%]"
+    parentClass : "file_upload w-full md:w-[45%] lg:w-[28%]",
+    acceptType:"*",
+    supportType:"jpg, jpeg,png"
+
 }
 
 
@@ -121,7 +126,7 @@ const FileUpload = (props: FileUploadArgs) => {
                             </span>
                             <div className='file_format_details'>
                                 <p className='text-[#555555] text-sm'>Drop your docs here or <strong>Browse</strong></p>
-                                <span className='text-gray-300 text-xs'>Support: jpg, jpeg,png</span>
+                                <span className='text-gray-300 text-xs'>Support: {props.supportType}</span>
                             </div>
                         </div>
 
@@ -129,7 +134,9 @@ const FileUpload = (props: FileUploadArgs) => {
                             onChange={onFileInputChange}
                             ref={fileInputRef}
                             type="file"
-                            className='hidden' />
+                            className='hidden'
+                            accept={props.acceptType}
+                            />
 
                         <div style={styles}>
                             <FileDrop

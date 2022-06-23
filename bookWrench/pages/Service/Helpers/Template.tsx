@@ -11,7 +11,7 @@ const { Service } = exposedPath;
 
 export const ExpireCampaignYesPopup = (props: any) => {
     const onClickYes = () => {
-        Services.deleteCategory(props.data.id,{}, props.data.id,(res:any) => {
+        Services.deleteService(props.data.id,{}, props.data.id,(res:any) => {
             showToster({ status: 'Success', msg: res.msg || 'Service Delete Successfully' });
             popupToggler(); 
             setTimeout(() => {
