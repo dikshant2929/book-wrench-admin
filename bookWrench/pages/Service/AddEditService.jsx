@@ -15,6 +15,8 @@ import encrypt from '@app/storage/encrypt';
 import './Service.scss';
 import Services from './Services/service.service';
 import Button from '@button';
+import MultipleDocUploader from '../../../common/elements/MultipleDocUploader';
+import MultipleImageUploader from '../../../common/elements/MultipleImageUploader';
 
 const { Service } = exposedPath;
 const defaultProps = {};
@@ -75,7 +77,7 @@ const AddEditService = (props) => {
 
     const mandatoryFields = ["categoryId", "title"];
 
-    const [isShimmerVisible, setShimmer] = useState(false);
+   
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState('Create New Service');
@@ -113,9 +115,9 @@ const AddEditService = (props) => {
                 memberPrice:data.memberPrice || ""
             },
             attachments: {
-                documents: [],
-                images: [],
-                videos: []
+                documents: data.documents || [],
+                images: data.images || [],
+                videos: data.videos || []
             },
             categoryId: data.categoryId || "",
             icon: data.icon || "",
@@ -160,7 +162,10 @@ const AddEditService = (props) => {
                     labourCost:data.cost.labourCost,
                     labourMinuites:data.cost.labourMinutes,
                     memberPrice:data.cost.memberPrice,
-                    warrentyDescription:data.warrentyDescription
+                    warrentyDescription:data.warrentyDescription,
+                    documents: data.attachments.documents || [],
+                    images: data.attachments.images || [],
+                    videos: data.attachments.videos || []
                 }
             );
 
@@ -229,11 +234,6 @@ const AddEditService = (props) => {
     }
 
     console.log(fieldValue)
-
-    const uploadVideo = (list) => {
-        setFieldValue(previous => ({ ...previous, videos:list }))
-    }
-
     return (
         <div className="addCategory bg-white center mx-8 md:mx-20 mt-12 mb-10 rounded-md">
             <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">
@@ -313,91 +313,19 @@ const AddEditService = (props) => {
 
 
                         </div>
-                        <hr />
+                        <hr /> 
                         <div className="w-auto flex flex-col lg:flex-row gap-4 m-10">
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Attachments</label>
                             </div>
-
-                            <div className='attachment__wrapper w-full flex flex-col gap-y-5'>
-                                <div className='attached__docs__wrapper'>
-                                    <label className='label__small'>Documents</label>
-                                    <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap gap-5'>
-                                        <div className='attached__docs flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
-                                            <div className='flex gap-6 items-center'>
-                                                <span className='docs__icon__name'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
-                                                        <path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
-                                                        <path d="M14.5 5.75911V1.40369C14.5 1.23811 14.6897 1.14425 14.8213 1.24468L20.5295 5.60011C20.6816 5.7162 20.5995 5.95911 20.4082 5.95911H14.7C14.5895 5.95911 14.5 5.86957 14.5 5.75911Z" fill="#2268D1" />
-                                                        <line x1="5" y1="11.0923" x2="16" y2="11.0923" stroke="white" stroke-width="2" />
-                                                        <line x1="5" y1="15.2251" x2="16" y2="15.2251" stroke="white" stroke-width="2" />
-                                                        <line x1="5" y1="19.3584" x2="13" y2="19.3584" stroke="white" stroke-width="2" />
-                                                    </svg>
-                                                </span>
-                                                <span className='text-[#7D829F] font-semibold text-sm'>Demo documents 1</span>
-                                            </div>
-                                            <span className='cross__icon bg-[#DBDDE3] fill-[#989FAD] p-1.5 rounded-full cursor-pointer'>
-                                                <svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
-                                            </span>
-                                        </div>
-                                        <div className='attachment flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
-                                            <div className='flex gap-6 items-center'>
-                                                <span className='docs__icon__name'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
-                                                        <path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
-                                                        <path d="M14.5 5.75911V1.40369C14.5 1.23811 14.6897 1.14425 14.8213 1.24468L20.5295 5.60011C20.6816 5.7162 20.5995 5.95911 20.4082 5.95911H14.7C14.5895 5.95911 14.5 5.86957 14.5 5.75911Z" fill="#2268D1" />
-                                                        <line x1="5" y1="11.0923" x2="16" y2="11.0923" stroke="white" stroke-width="2" />
-                                                        <line x1="5" y1="15.2251" x2="16" y2="15.2251" stroke="white" stroke-width="2" />
-                                                        <line x1="5" y1="19.3584" x2="13" y2="19.3584" stroke="white" stroke-width="2" />
-                                                    </svg>
-                                                </span>
-                                                <span className='text-[#7D829F] font-semibold text-sm'>Demo documents 1</span>
-                                            </div>
-                                            <span className='cross__icon bg-[#DBDDE3] fill-[#989FAD] p-1.5 rounded-full cursor-pointer'>
-                                                <svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
-                                            </span>
-                                        </div>
-                                        <div className='attachment flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
-                                            <div className='flex gap-6 items-center'>
-                                                <span className='docs__icon__name'>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
-                                                        <path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
-                                                        <path d="M14.5 5.75911V1.40369C14.5 1.23811 14.6897 1.14425 14.8213 1.24468L20.5295 5.60011C20.6816 5.7162 20.5995 5.95911 20.4082 5.95911H14.7C14.5895 5.95911 14.5 5.86957 14.5 5.75911Z" fill="#2268D1" />
-                                                        <line x1="5" y1="11.0923" x2="16" y2="11.0923" stroke="white" stroke-width="2" />
-                                                        <line x1="5" y1="15.2251" x2="16" y2="15.2251" stroke="white" stroke-width="2" />
-                                                        <line x1="5" y1="19.3584" x2="13" y2="19.3584" stroke="white" stroke-width="2" />
-                                                    </svg>
-                                                </span>
-                                                <span className='text-[#7D829F] font-semibold text-sm'>Demo documents 1</span>
-                                            </div>
-                                            <span className='cross__icon bg-[#DBDDE3] fill-[#989FAD] p-1.5 rounded-full cursor-pointer'>
-                                                <svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='pb-7 border-b-2 border-gray-100'>
-                                    <FileUpload parentClass='file_upload md:w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
-                                </div>
-                                <div className='image__wrapper pb-7 border-b-2 border-gray-100'>
-                                    <label className='label__small'>Images</label>
-                                    <div className='img__thumbnail flex flex-wrap gap-3'>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                        <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
-                                    </div>
-                                </div>
-                                <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={uploadVideo} />
-                                
-
+                            <div className='flex flex-col md:flex-row flex-wrap lg:flex-nowrap gap-5'>
+                            <MultipleDocUploader list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
                             </div>
+                            
+                            <div className='attachment__wrapper w-full flex flex-col gap-y-5'>
+                               <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")}/>
+                            </div>
+                            <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
                         </div>
                         <hr />
                         <div className="w-auto flex flex-col lg:flex-row gap-4 m-10">

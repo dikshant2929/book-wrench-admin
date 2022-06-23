@@ -28,15 +28,15 @@ const defaultProps = {
                 value: 'Service Name',
             },
             {
-                key: 'department',
+                key: 'departmentId',
                 value: 'Department',
             },
             {
-                key: 'numberOfProducts',
+                key: 'categoryId',
                 value: 'Category',
             },
             {
-                key: 'numberOfServices',
+                key: 'subCategoryId',
                 value: 'Sub Category',
             },
             {
@@ -48,7 +48,7 @@ const defaultProps = {
                 value: 'Cost of material',
             },
             {
-                key: 'labourMinutes',
+                key: 'labourMinuites',
                 value: 'Labour Mins',
             },
             {
@@ -137,10 +137,11 @@ const Service = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({ ...item, costOfService: item?.cost?.costOfService || "NA", costOfMaterial: item?.cost?.costOfMaterial || "NA", labourMinutes: item?.cost?.labourMinutes || "NA", commission: item?.cost?.commission || "NA", actions: ['edit', 'expire'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({ ...item,subCategoryId:item?.subCategoryId?.title || "NA", categoryId:item?.categoryId?.title || "NA", departmentId:item?.categoryId?.departmentId?.title || "NA", costOfService: item?.cost?.costOfService || "NA", costOfMaterial: item?.cost?.costOfMaterial || "NA", labourMinuites: item?.cost?.labourMinuites || "NA", commission: item?.cost?.commission || "NA", actions: ['edit', 'expire'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });
+        
     }, []);
 
     const loadTableData = () => {
