@@ -33,6 +33,10 @@ const MultipleVideoUploader = (props) => {
 		setAddButtonActive(true)
 	}
 
+	useEffect(() => {
+		setList(props.list || [])
+	},[props.list])
+
 	return (
 		<div>
 

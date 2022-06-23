@@ -21,7 +21,6 @@ const CheckBox = (props: PropsWithChildren<RadioProps>) => {
        // console.log($(e.target).is(':checked'))
 
         const val = e.target.checked;
-        console.log(val)
         setIsChecked(val)
         props.cb(props.value, val);
     }
@@ -41,7 +40,7 @@ const CheckBox = (props: PropsWithChildren<RadioProps>) => {
                         onChange={(e) => handleClick(e)}
                         type="checkbox" 
                         className={props.inputClass} 
-                        //checked={isChecked == props.value} 
+                        checked={isChecked} 
                         // defaultChecked={isChecked == item.value}
                         name={props.value} 
                         id={props.id} 

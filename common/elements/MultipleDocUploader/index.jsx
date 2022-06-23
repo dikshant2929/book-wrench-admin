@@ -38,6 +38,10 @@ const MultipleDocUploader = (props) => {
 		setFileUploaderVisible(true)
 	}
 
+	useEffect(() => {
+		setList(props.list || [])
+	},[props.list])
+
     return (
        <>
 		<div className='video__wrapper'>

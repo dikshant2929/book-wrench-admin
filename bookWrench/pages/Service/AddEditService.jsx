@@ -104,14 +104,14 @@ const AddEditService = (props) => {
     const onFormSubmit = (data) => {
         const payload = {
             cost: {
-                isTaxable:data.isTaxable || "",
-                isDiscountable: data.isDiscountable || "",
+                isTaxable:data.isTaxable,
+                isDiscountable: data.isDiscountable,
                 addOnPrice:data.addOnPrice || "",
                 commission:data.commission || "",
                 costOfMaterial:data.costOfMaterial || "",
                 costOfService:data.costOfService || "",
                 labourCost:data.labourCost || "",
-                labourMinuites:data.labourMinuites || "",
+                labourMinuites:data.labourMinuites,
                 memberPrice:data.memberPrice || ""
             },
             attachments: {
@@ -143,7 +143,6 @@ const AddEditService = (props) => {
         const encryptedData = props?.match?.params?.editService;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            console.log(data)
             const { title, isActive, description, icon } = data;
             setFieldValue(
                 { 
@@ -151,8 +150,8 @@ const AddEditService = (props) => {
                     isActive, 
                     description, 
                     icon,
-                    subCategoryId:data.subCategoryId, 
-                    categoryId:data.categoryId,
+                    subCategoryId:data.subCategoryId.id, 
+                    categoryId:data.categoryId.id,
                     isTaxable:data.cost.isTaxable,
                     isDiscountable: data.cost.isDiscountable,
                     addOnPrice:data.cost.addOnPrice,
@@ -160,7 +159,7 @@ const AddEditService = (props) => {
                     costOfMaterial:data.cost.costOfMaterial,
                     costOfService:data.costOfService,
                     labourCost:data.cost.labourCost,
-                    labourMinuites:data.cost.labourMinutes,
+                    labourMinuites:data.cost.labourMinuites,
                     memberPrice:data.cost.memberPrice,
                     warrentyDescription:data.warrentyDescription,
                     documents: data.attachments.documents || [],
@@ -169,8 +168,8 @@ const AddEditService = (props) => {
                 }
             );
 
-            categoryId = data.categoryId;
-            subCategoryId = data.subCategoryId
+            categoryId = data.categoryId.id;
+            subCategoryId = data.subCategoryId.id
             setTitle(`Edit Service (${data.title})`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
@@ -226,14 +225,13 @@ const AddEditService = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            console.log(data)
             const fields = ['title','costOfService','costOfMaterial','commission','labourMinuites','labourCost','memberPrice','addOnPrice','isTaxable','isDiscountable']
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
     }
 
-    console.log(fieldValue)
+   
     return (
         <div className="addCategory bg-white center mx-8 md:mx-20 mt-12 mb-10 rounded-md">
             <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">
@@ -297,15 +295,15 @@ const AddEditService = (props) => {
                             </div>
                             <div className=''>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
-                                    <Input selectedValue={fieldValue?.costOfService} {...costInputFieldConfiguration("costOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
-                                    <Input selectedValue={fieldValue?.costOfMaterial} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
-                                    <Input selectedValue={fieldValue?.commission} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
-                                    <Input selectedValue={fieldValue?.labourMinuites} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
-                                    <Input selectedValue={fieldValue?.labourCost} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
+                                    <Input  {...costInputFieldConfiguration("costOfService", "Cost Of Service")} selectedValue={fieldValue?.costOfService} cb={onTextChange('costOfService')} />
+                                    <Input  {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} selectedValue={fieldValue?.costOfMaterial} cb={onTextChange('costOfMaterial')} />
+                                    <Input  {...costInputFieldConfiguration("commission", "Commission")} selectedValue={fieldValue?.commission} cb={onTextChange('commission')} />
+                                    <Input {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")}  selectedValue={fieldValue?.labourMinuites} cb={onTextChange('labourMinuites')} />
+                                    <Input {...costInputFieldConfiguration("labourCost", "Labour Cost")}  selectedValue={fieldValue?.labourCost} cb={onTextChange('labourCost')} />
                                 </div>
                                 <div className='flex items-center flex-wrap lg:flex-nowrap basis-wrapper gap-4 mt-5'>
-                                    <Input selectedValue={fieldValue?.memberPrice} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
-                                    <Input selectedValue={fieldValue?.addOnPrice} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
+                                    <Input  {...costInputFieldConfiguration("memberPrice", "Member Price")} selectedValue={fieldValue?.memberPrice} cb={onTextChange('memberPrice')} />
+                                    <Input  {...costInputFieldConfiguration("addOnPrice", "Add On Price")} selectedValue={fieldValue?.addOnPrice} cb={onTextChange('addOnPrice')} />
                                     <CheckBox value="Taxeable" defaultValue={(fieldValue?.isTaxable) ? true : false} cb={onTextChange('isTaxable')} />
                                     <CheckBox value="Discountable" defaultValue={(fieldValue?.isDiscountable) ? true : false} cb={onTextChange('isDiscountable')} />
                                 </div>
