@@ -316,12 +316,12 @@ const AddEditService = (props) => {
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Attachments</label>
                             </div>
-                            <div>
+                            <div className=''>
                             <div className=''>
                             <MultipleDocUploader list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
                             </div>
                             
-                            <div className='attachment__wrapper w-full flex flex-col gap-y-5'>
+                            <div className='attachment__wrapper w-full flex flex-col'>
                                <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")}/>
                             </div>
                             <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
