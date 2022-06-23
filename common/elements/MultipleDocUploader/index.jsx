@@ -58,7 +58,7 @@ const MultipleDocUploader = (props) => {
 									<line x1="5" y1="19.3584" x2="13" y2="19.3584" stroke="white" stroke-width="2" />
 								</svg>
 							</span>
-							<span className='text-[#7D829F] font-semibold text-sm'>{getImageName(item)}</span>
+							<a className="text-[#7D829F] font-semibold text-sm" href={item} target="_blank" download>{getImageName(item)}</a>
 						</div>
 						<span onClick={() => onItemRemove(item)} className='cross__icon bg-[#DBDDE3] fill-[#989FAD] p-1.5 rounded-full cursor-pointer'>
 							<svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
