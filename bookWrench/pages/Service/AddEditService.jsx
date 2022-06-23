@@ -280,7 +280,7 @@ const AddEditService = (props) => {
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Service</label>
                             </div>
-                            <div className='flex-col w-1/2'>
+                            <div className='flex-col w-full md:w-1/2'>
                                 <Input selectedValue={fieldValue?.title} {...formConfiguration} cb={onTextChange('title')} />
                                 <div className='flex gap-4 mt-5'>
                                     <Textarea parentClass="textArea w-1/2" value={fieldValue?.description} onChange={onTextChange('description')} title="Service Description" name="serviceDescription" />
@@ -296,14 +296,14 @@ const AddEditService = (props) => {
                                 <label className='text-base font-bold'>Cost</label>
                             </div>
                             <div className=''>
-                                <div className='flex basis-wrapper gap-4'>
+                                <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
                                     <Input selectedValue={fieldValue?.costOfService} {...costInputFieldConfiguration("costOfService", "Cost Of Service")} cb={onTextChange('costOfService')} />
                                     <Input selectedValue={fieldValue?.costOfMaterial} {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} cb={onTextChange('costOfMaterial')} />
                                     <Input selectedValue={fieldValue?.commission} {...costInputFieldConfiguration("commission", "Commission")} cb={onTextChange('commission')} />
                                     <Input selectedValue={fieldValue?.labourMinuites} {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")} cb={onTextChange('labourMinuites')} />
                                     <Input selectedValue={fieldValue?.labourCost} {...costInputFieldConfiguration("labourCost", "Labour Cost")} cb={onTextChange('labourCost')} />
                                 </div>
-                                <div className='flex items-center basis-wrapper gap-4 mt-5'>
+                                <div className='flex items-center flex-wrap lg:flex-nowrap basis-wrapper gap-4 mt-5'>
                                     <Input selectedValue={fieldValue?.memberPrice} {...costInputFieldConfiguration("memberPrice", "Member Price")} cb={onTextChange('memberPrice')} />
                                     <Input selectedValue={fieldValue?.addOnPrice} {...costInputFieldConfiguration("addOnPrice", "Add On Price")} cb={onTextChange('addOnPrice')} />
                                     <CheckBox value="Taxeable" defaultValue={(fieldValue?.isTaxable) ? true : false} cb={onTextChange('isTaxable')} />
