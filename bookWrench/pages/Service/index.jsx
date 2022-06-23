@@ -154,13 +154,11 @@ const Service = (props) => {
     }, []);
 
     const loadTableData = () => {
-        console.log('loadTableData');
         window.location.reload();
     };
 
     const onRefreshButtonClicked = (data) => {
         console.log('onRefreshButtonClicked');
-        console.log(data);
     }
 
     const getImageUrl = (data) => data?.icon || data?.departmentId?.icon || "";
