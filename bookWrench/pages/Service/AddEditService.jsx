@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Input from '@common/elements/Input';
 import RadioBox from '@common/elements/Radiobox';
 import CheckBox from '@common/elements/CheckBox';
+import MultipleVideoUploader from '@common/elements/MultipleVideoUploader';
+
+
 
 import Textarea from '@common/elements/Textarea';
 import ReactTypeHead from '@common/elements/ReactTypehead';
@@ -227,6 +230,10 @@ const AddEditService = (props) => {
 
     console.log(fieldValue)
 
+    const uploadVideo = (list) => {
+        setFieldValue(previous => ({ ...previous, videos:list }))
+    }
+
     return (
         <div className="addCategory bg-white center mx-8 md:mx-20 mt-12 mb-10 rounded-md">
             <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">
@@ -387,17 +394,8 @@ const AddEditService = (props) => {
                                         <span className='bg-[#DFE2E9] p-9 rounded-lg'></span>
                                     </div>
                                 </div>
-                                <div className='video__wrapper'>
-                                    <label className='label__small'>Videos</label>
-                                    <div className='flex items-center gap-3'>
-                                        <input className='form__input_w_height md:w-1/2' type="text" placeholder="youtube.com/watch?v=Vowek3_420o" />
-                                        <span className='bg-[#E1F3EA] p-3.5 rounded-lg cursor-pointer'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                <path d="M9 9V5H11V9H15V11H11V15H9V11H5V9H9ZM10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18Z" fill="#00875A" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </div>
+                                <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={uploadVideo} />
+                                
 
                             </div>
                         </div>
