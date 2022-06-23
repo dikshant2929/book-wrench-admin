@@ -18,10 +18,10 @@ const defaultProps = {
         heading: [
 
              
-            {
-                key: 'id',
-                value: 'Service ID',
-            },
+            // {
+            //     key: 'id',
+            //     value: 'Service ID',
+            // },
 
             {
                 key: 'title',
