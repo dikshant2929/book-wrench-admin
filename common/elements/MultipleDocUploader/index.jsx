@@ -46,6 +46,7 @@ const MultipleDocUploader = (props) => {
        <>
 		<div className='video__wrapper'>
 			<label className='label__small'>Documents</label>
+			<div className='flex'>
 			{list.map((item, key) =>  <div key={key} className='attached__docs flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 rounded-lg'>
 						<div className='flex gap-6 items-center'>
 							<span className='docs__icon__name'>
@@ -64,6 +65,7 @@ const MultipleDocUploader = (props) => {
 						</span>
 					</div> 
 				)}
+				</div>
             </div>
 			{isFileUploaderVisible && <div className='pb-7 border-b-2 border-gray-100'>
                 	<FileUpload supportType="txt,pdf,doc,docx" acceptType=".txt,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" parentClass='file_upload' imageURL="" title="" imagePath={onTextChange} />
