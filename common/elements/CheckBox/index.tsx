@@ -4,10 +4,10 @@ const defaultProps = {
     defaultValue: "",
     title:"",
     titleClass:"label__small text-left",
-    parentClass:"",
-    childClass:"form-check-inline  pr-8 mt-[0.312rem]",
+    parentClass:" w-auto  p-1 ",
+    childClass:"form-check-inline flex items-center pr-8 mt-[0.312rem]",
     inputClass:"no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2",
-    labelClass:"mt-5 flex items-center label__small",
+    labelClass:"label__small m-0",
     name:"checkbox",
     
 };
@@ -33,7 +33,7 @@ const CheckBox = (props: PropsWithChildren<RadioProps>) => {
 
         <div className={props.parentClass}>
             {props.titleClass && <div className={props.titleClass}>{props.title}</div>}
-            <div className="flex h-46px ">
+            <div className="flex items-center h-46px ">
             <div className={props.childClass}>
                     <input 
                         onClick={(e) => handleClick(e)} 

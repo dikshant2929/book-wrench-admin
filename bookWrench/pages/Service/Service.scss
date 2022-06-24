@@ -26,6 +26,14 @@
     box-shadow: none;
     
 }
+#commission span:nth-child(1){
+    position: absolute;
+    width: 30px;
+    height: 48px;
+    right: 0;
+    border-radius: 0px 8px 8px 0px;
+    background-color: lightgray;
+}
 
 @media only screen and (max-width: 768px) {
   .addCategory .add-catg-form-wrapper form input{

@@ -118,6 +118,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 	return (
 		<div className={` ${options.parentClass} ${!error.status && props.showMessage ? 'errorField' : ''} ${props.cls || ""} ${options.isActiveCls ? state.labelClass : ""}`} id={options.parentId ? options.parentId : ''}>
 			<label className={prps.classNameLabel} htmlFor={options.id}><HtmlTag>{options.label}</HtmlTag></label>
+			<span></span>
 			<input {...prps}
 				//value={state.selectedValue}
 				defaultValue={state.selectedValue ? state.selectedValue : ""}
