@@ -42,7 +42,7 @@ const formConfiguration = {
         newInptClass: 'newClass',
     },
     isRequired: true,
-    cls: "p-1"
+    cls: "p-0"
 }
     ;
 
@@ -289,11 +289,11 @@ const AddEditService = (props) => {
 
                         </div>
                         <hr />
-                        <div className="w-auto flex flex-col md:flex-row gap-4 m-10">
+                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Cost</label>
                             </div>
-                            <div className=''>
+                            <div className='w-auto md:w-full'>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
                                     <Input  {...costInputFieldConfiguration("costOfService", "Cost Of Service")} selectedValue={fieldValue?.costOfService} cb={onTextChange('costOfService')} />
                                     <Input  {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} selectedValue={fieldValue?.costOfMaterial} cb={onTextChange('costOfMaterial')} />
