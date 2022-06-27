@@ -7,12 +7,12 @@ import { popupContents, popupToggler } from '@common/elements/Popup';
 import Services from '../Services/Product.service';
 import { showToster } from '@common/elements/ToastNotification/new_index';
 
-const { Service } = exposedPath;
+const { Product } = exposedPath;
 
 export const ExpireCampaignYesPopup = (props: any) => {
     const onClickYes = () => {
-        Services.deleteCategory(props.data.id,{}, props.data.id,(res:any) => {
-            showToster({ status: 'Success', msg: res.msg || 'Service Delete Successfully' });
+        Services.deleteProduct(props.data.id,{}, props.data.id,(res:any) => {
+            showToster({ status: 'Success', msg: res.msg || 'Product Delete Successfully' });
             popupToggler(); 
             setTimeout(() => {
                 props.reloadTable();
@@ -25,7 +25,7 @@ export const ExpireCampaignYesPopup = (props: any) => {
  return (
         <>
             <p className="text-sm">
-                Do you really want to delete <span className="font-bold">{props.data.title}</span> Service ?{' '}
+                Do you really want to delete <span className="font-bold">{props.data.title}</span> Product ?{' '}
             </p>
             <br />
             <span onClick={onClickYes} className="inline-block bg-green-500 text-white p-1 cursor-pointer px-4 py-2 rounded-md text-sm">
@@ -45,7 +45,7 @@ const TableEditViewExpire = ({ data, history, reloadTable }: any) => {
         // return;
         switch (eventId) {
             case edit.id: //Edit Campaign
-                const editPath = `${Service}/edit/${encrypt.encode(JSON.stringify({ ...data, type : "Edit" }))}`;
+                const editPath = `${Product}/edit/${encrypt.encode(JSON.stringify({ ...data, type : "Edit" }))}`;
                 history.push(editPath, data);
                 break;
             case expire.id: // Expire Campaign
