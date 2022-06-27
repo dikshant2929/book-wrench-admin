@@ -22,25 +22,25 @@ const defaultProps = {
                 value: 'Name',
             },
             {
-                key: 'industry',
-                value: 'Industry',
+                key: 'departmentName',
+                value: 'Department',
             },
             {
-                key: 'numberOfProducts',
-                value: 'No Of Products',
+                key: 'categoryName',
+                value: 'Category',
             },
             {
-                key: 'numberOfServices',
-                value: 'No of Services',
+                key: 'subCategoryName',
+                value: 'Sub Category',
             },
             {
-                key: 'status',
-                value: 'Status',
+                key: 'serviceName',
+                value: 'Service Name',
+                isShown: true,
             },
             {
-                key: 'createdAt',
-                value: 'Created At',
-                isShown: false,
+                key: 'costOfProduct',
+                value: 'Cost of Product',
             },
             {
                 key: 'updatedAt',
@@ -115,7 +115,7 @@ const Product = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({ ...item, industry: item?.departmentId?.title || "NA", sNo: (index + 1), actions: ['edit', 'expire'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({ ...item, departmentName: item?.categoryId?.departmentId?.title || "NA", categoryName:item?.categoryId?.title || "NA", subCategoryName:item?.subCategoryId?.title || "NA",serviceName:item?.serviceIds[0]?.title || "NA", costOfProduct:item?.price || "NA", sNo: (index + 1), actions: ['edit', 'expire'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });

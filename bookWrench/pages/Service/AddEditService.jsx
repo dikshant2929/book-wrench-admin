@@ -177,7 +177,7 @@ const AddEditService = (props) => {
         }
 
         fetchCategoryList(categoryId);
-        fetchSubCategoryList(categoryId,subCategoryId)
+        fetchSubCategoryList(categoryId,subCategoryId) 
 
         return () => formConfiguration.selectedValue = null;
     }, [props]);

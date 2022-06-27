@@ -31,6 +31,12 @@ export default {
         url: 'service/',
         options: {},
     },
+    products: {
+        url: 'product/',
+        options: {},
+    },
+
+    
 
     
      
