@@ -106,7 +106,7 @@ const FileUpload = (props: FileUploadArgs) => {
         {
             selectedFile
                 ?
-                <div className='flex items-center mt-6 border rounded-lg p-4 h-20 relative bg-[#E4E6F1] w-full lg:w-3/4'>
+                <div className='flex items-center mt-6 border rounded-lg p-4 h-20 relative bg-[#E4E6F1] w-full md:w-auto'>
                     {!imageUploadStatus && <span className="text-sm mr-2">{selectedFile?.[0]?.name}</span>}
                     {!imageUploadStatus && <RightMark onClick={onPositiveClick} />}
                     {!imageUploadStatus && <CrossMark onClick={onCrossMarkStart} />}

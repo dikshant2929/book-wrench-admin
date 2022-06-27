@@ -45,7 +45,7 @@ const MultipleVideoUploader = (props) => {
 				<label className='label__small'>Videos</label>
 					<div className='flex gap-3 flex-wrap'>
 				{list.map((item, key) =>
-						<div key={key}  className='flex gap-3 mb-4'>
+						<div key={key}  className='flex gap-3 mb-4 w-full md:w-auto'>
 							<input disabled value={item} className='form__input_w_height ' type="text" />
 							<span className="bg-[#FFEBE6] fill-[#E1F3EA] p-3.5 rounded-lg cursor-pointer" onClick={() => onItemRemove(item)}>
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
