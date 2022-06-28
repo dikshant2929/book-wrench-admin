@@ -21,6 +21,8 @@ const AssociatedProducts = (props) => {
     if (globals.isEmptyObject(state)) return null;
 
     return (
+        <>
+        <hr/>
         <div className="w-auto flex flex-col lg:flex-row gap-4 m-10">
             <div className='basis__10 border-light'>
                 <label className='text-base font-bold'>Associated Products</label>
@@ -46,6 +48,7 @@ const AssociatedProducts = (props) => {
                 </div> */}
             </div>
         </div>
+        </>
     );
 };
 
