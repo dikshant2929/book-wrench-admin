@@ -346,7 +346,7 @@ const AddEditProduct = (props) => {
                                     <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
                                     <div>
 
-                                        <div className='flex flex-col gap-4 my-5'>
+                                        <div className='flex flex-col p-1 upload__icon'>
                                             <div className="status basis__33">
                                                 <RadioBox
                                                     defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
@@ -357,10 +357,10 @@ const AddEditProduct = (props) => {
                                         </div>
 
                                     </div>
-                                    <div>
+                                    <div className='ta__with-height'>
                                         <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
                                     </div>
-                                    <div>
+                                    <div className='ta__with-height'>
                                         <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" />
                                     </div>
                                 </div>
