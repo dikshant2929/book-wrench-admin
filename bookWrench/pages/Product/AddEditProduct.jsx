@@ -87,7 +87,7 @@ const AddEditProduct = (props) => {
     const [selectedVendorDropdownValue, setVendorDropdownValue] = useState(null);
 
     const [isButtonEnable, setButtonEnable] = useState(false);
-    
+
     const [categoryList, setCategoryList] = useState([]);
     const [serviceList, setServiceList] = useState([]);
     const [subCategoryList, setSubCategoryList] = useState([]);
@@ -119,13 +119,13 @@ const AddEditProduct = (props) => {
             description: data.description || "",
             subCategoryId: data.subCategoryId || "",
             title: data.title || "",
-            warrantyDescription:data.warrantyDescription || "" ,
-            code:data.code || "",
-            brand:data.brand || "",
-            vendorId:data.vendorId || "",
-            serviceIds:[data.serviceId],
-            quantity:data.quantity || "",
-            price:data.price || "",
+            warrantyDescription: data.warrantyDescription || "",
+            code: data.code || "",
+            brand: data.brand || "",
+            vendorId: data.vendorId || "",
+            serviceIds: data.serviceIds || [],
+            quantity: data.quantity || "",
+            price: data.price || "",
         }
         if (isEditMode) {
             Services.editProduct(payload, () => props.history.push(Product), {}, editModeData.id);
@@ -138,30 +138,28 @@ const AddEditProduct = (props) => {
 
         let categoryId = null;
         let subCategoryId = null;
-        let serviceId = null;
+        let serviceIds = null;
         let vendorId = null;
-       
         const encryptedData = props?.match?.params?.editproduct;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-           
             const { title, isActive, description, icon } = data;
-          
+            serviceIds = Array.isArray(data.serviceIds) && data.serviceIds.map(item => item.id) || [];
             setFieldValue(
-                { 
-                    title, 
-                    isActive, 
-                    description, 
+                {
+                    title,
+                    isActive,
+                    description,
                     icon,
-                    subCategoryId:data.subCategoryId.id || [], 
-                    categoryId:data.categoryId.id,
+                    subCategoryId: data.subCategoryId.id || [],
+                    categoryId: data.categoryId.id,
                     documents: data.attachments.documents || [],
                     images: data.attachments.images || [],
                     videos:data.attachments.videos || [],
                     code:data.code || "",
                     brand:data.brand || "",
                     vendorId:data.vendorId.id || [],
-                    serviceId:data.serviceIds[0].id || [],
+                    serviceIds,
                     quantity:data.quantity || "",
                     price:data.price || "",
                     warrantyDescription:data.warrantyDescription,
@@ -170,7 +168,6 @@ const AddEditProduct = (props) => {
 
             categoryId = data.categoryId.id;
             subCategoryId = data.subCategoryId.id;
-            serviceId = data.serviceIds[0].id;
             vendorId = data.vendorId.id;
             setTitle(`Edit Product (${data.title})`);
             formConfiguration.selectedValue = data.title;
@@ -178,10 +175,10 @@ const AddEditProduct = (props) => {
             setEditMode(true);
         }
 
-       
+
         fetchCategoryList(categoryId);
-        fetchSubCategoryList(categoryId,subCategoryId)
-        fetchServiceList(serviceId);
+        fetchSubCategoryList(categoryId, subCategoryId)
+        fetchServiceList(serviceIds);
         fetchVendorList(vendorId);
         return () => formConfiguration.selectedValue = null;
     }, [props]);
@@ -208,12 +205,13 @@ const AddEditProduct = (props) => {
         })
     }
 
-    const fetchServiceList = (serviceId) => {
+    const fetchServiceList = (serviceIds) => {
         Services.serviceList(data => {
             setServiceList(data);
-            if (serviceId) {
-                const selectedData = data.find(item => item.id === serviceId);
-                setServiceDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            if (serviceIds && Array.isArray(serviceIds) && serviceIds.length) {
+                let selectedDataList = data.filter(item => serviceIds.some(serviceId => serviceId === item.id));
+                selectedDataList = selectedDataList.map(item => ({ ...item, label: item.title, value: item.id }))
+                setServiceDropdownValue([...selectedDataList]);
             }
 
         })
@@ -245,7 +243,9 @@ const AddEditProduct = (props) => {
                 setSubCategoryDropdownValue(value);
                 break;
             case "serviceId":
+                const ids = Array.isArray(value) && value.map(item => item.id) || [];
                 setServiceDropdownValue(value);
+                setFieldValue(previous => ({ ...previous, serviceIds: ids }));
                 break;
             case "vendorId":
                 setVendorDropdownValue(value);
@@ -257,7 +257,7 @@ const AddEditProduct = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const fields = ['title','code','brand','vendor','quantity','price']
+            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'price']
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
@@ -276,39 +276,40 @@ const AddEditProduct = (props) => {
                                 <label className='text-base font-bold'>Category</label>
                             </div>
                             <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4 w-full'>
-                            <ReactTypeHead
-                                header="Category"
-                                handleSelect={handleOnChange('categoryId')}
-                                dataList={categoryList}
-                                fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Category"
-                                value={selectedDropdownValue}
-                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                            />
+                                <ReactTypeHead
+                                    header="Category"
+                                    handleSelect={handleOnChange('categoryId')}
+                                    dataList={categoryList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select Category"
+                                    value={selectedDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                />
 
-                            <ReactTypeHead
-                                header="Sub Category"
-                                handleSelect={handleOnChange('subCategoryId')}
-                                dataList={subCategoryList}
-                                fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Sub-Category"
-                                value={selectedSubCategoryDropdownValue}
-                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                            />
+                                <ReactTypeHead
+                                    header="Sub Category"
+                                    handleSelect={handleOnChange('subCategoryId')}
+                                    dataList={subCategoryList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select Sub-Category"
+                                    value={selectedSubCategoryDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                />
 
-                            <ReactTypeHead
-                                header="Service"
-                                handleSelect={handleOnChange('serviceId')}
-                                dataList={serviceList}
-                                fields={{ key: 'id', value: 'title' }}
-                                placeholder="Select Service"
-                                value={selectedServiceDropdownValue}
-                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                            />
+                                <ReactTypeHead
+                                    header="Service"
+                                    handleSelect={handleOnChange('serviceId')}
+                                    dataList={serviceList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select Service"
+                                    value={selectedServiceDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                    isMulti
+                                />
 
                             </div>
 
-                           
+
 
                             {/* 
                             <div className="status">
@@ -323,37 +324,41 @@ const AddEditProduct = (props) => {
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Products</label>
                             </div>
-                            <div className='md:grid md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 lg:grid-rows-4 gap-4 w-full product__selecter'>
-                                <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
-                                <Input  {...formConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
-                                <Input  {...formConfiguration("brand","Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
-                                {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
-                                <ReactTypeHead
-                                    header="Vendor"
-                                    handleSelect={handleOnChange('vendorId')}
-                                    dataList={vendorList}
-                                    fields={{ key: 'id', value: 'title' }}
-                                    placeholder="Select Vendor"
-                                    value={selectedVendorDropdownValue}
-                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                                />
-                               
-                                <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
-                                <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
-                               
-                                 
-                            <div className="status">
-                                <RadioBox
-                                    defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
-                                    cb={onTextChange('isActive')}
-                                />
-                            </div>
-                             <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
-                            <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
-                            <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
-                             </div>
-                           
+                            <div className='flex flex-col w-full'>
+                                <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-4 w-full product__selecter'>
 
+                                    <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
+                                    <Input  {...formConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
+                                    <Input  {...formConfiguration("brand", "Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
+                                    {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
+
+                                    <ReactTypeHead
+                                        header="Vendor"
+                                        handleSelect={handleOnChange('vendorId')}
+                                        dataList={vendorList}
+                                        fields={{ key: 'id', value: 'title' }}
+                                        placeholder="Select Vendor"
+                                        value={selectedVendorDropdownValue}
+                                        parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none p-1"}
+                                    />
+                                    <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
+                                    <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
+                                </div>
+                                <div className='flex flex-col md:flex-row  gap-4 my-5'>
+                                    <div className="status basis__33">
+                                        <RadioBox
+                                            defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
+                                            cb={onTextChange('isActive')}
+                                        />
+                                    </div>
+                                    <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                                </div>
+                                <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                                    <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
+                                    <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
+                                </div>
+
+                            </div>
                         </div>
                         <hr />
                         <div className="w-auto flex flex-col md:flex-row gap-4 m-10">
@@ -361,17 +366,21 @@ const AddEditProduct = (props) => {
                                 <label className='text-base font-bold'>Attachments</label>
                             </div>
                             <div className=''>
-                            <div className=''>
-                            <MultipleDocUploader list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
+                                <div className=''>
+                                    <MultipleDocUploader list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
+                                </div>
+
+                                <div className='attachment__wrapper w-full flex flex-col'>
+                                    <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")} />
+                                </div>
+                                <div className='attachment__wrapper w-full flex flex-col'>
+                                <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
+                                </div>
                             </div>
                             
-                            <div className='attachment__wrapper w-full flex flex-col'>
-                               <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")}/>
-                            </div>
-                            <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
                             </div>                            
-                        </div>
-                       
+                        
+                            
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
                             <Button
                                 disabled={!isButtonEnable ?? false}

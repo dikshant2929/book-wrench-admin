@@ -48,7 +48,7 @@ const MultipleDocUploader = (props) => {
 			<label className='label__small'>Documents</label>
 			<div className='flex flex-wrap gap-4 mb-4'>
 			{list.map((item, key) =>  <div key={key} className='attached__docs flex bg-[#F2F3F7] basis__33 basis__48 justify-around py-6 px-4 rounded-lg'>
-						<div className='flex gap-6 items-center w-[300px] overflow-hidden mr-4'>
+						<div className='flex gap-6 items-center w-[300px] max-h-8 overflow-hidden mr-4'>
 							<span className='docs__icon__name'>
 								<svg xmlns="http://www.w3.org/2000/svg" width="21" height="27" viewBox="0 0 21 27" fill="none">
 									<path d="M13.7503 0.520508H2.2C0.984974 0.520508 0 1.50548 0 2.72051V24.4019C0 25.617 0.984971 26.6019 2.2 26.6019H18.5273C19.7423 26.6019 20.7273 25.617 20.7273 24.4019V7.08006C20.7273 6.4617 20.467 5.87189 20.0103 5.45505L15.2333 1.0955C14.828 0.725587 14.2991 0.520508 13.7503 0.520508Z" fill="#77ABFA" />
@@ -58,7 +58,7 @@ const MultipleDocUploader = (props) => {
 									<line x1="5" y1="19.3584" x2="13" y2="19.3584" stroke="white" stroke-width="2" />
 								</svg>
 							</span>
-							<div className='w-full overflow-hidden'>
+							<div className='w-full overflow-hidden flex'>
 							<a className="text-[#7D829F] font-semibold text-sm" href={item} target="_blank" download>{getImageName(item)}</a>
 							</div>
 							

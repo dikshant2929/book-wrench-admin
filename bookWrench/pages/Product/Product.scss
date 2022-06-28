@@ -30,12 +30,16 @@
     box-shadow: none;
     
 }
+.reactTypehead{
+  height: 48px;
+}
+
 @media only screen and (min-width: 1024px){
 
-  .product__selecter div:nth-child(6){
-    grid-column: 3 / 4;
-    grid-row: 2 / 4;
-  }
+  // .product__selecter div:nth-child(6){
+  //   grid-column: 3 / 4;
+  //   grid-row: 2 / 4;
+  // }
 }
 
 
