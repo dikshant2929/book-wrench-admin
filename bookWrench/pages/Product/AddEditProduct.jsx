@@ -322,8 +322,7 @@ const AddEditProduct = (props) => {
                                 <label className='text-base font-bold'>Products</label>
                             </div>
                             <div className='flex flex-col w-full'>
-                                <div className='grid grid-cols-3  gap-4 w-full product__selecter'>
-
+                                <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-4 w-full product__selecter'>
 
                                     <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
                                     <Input  {...costInputFieldConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
@@ -342,7 +341,7 @@ const AddEditProduct = (props) => {
                                     <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
                                     <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
                                 </div>
-                                <div className='flex  gap-4 my-5'>
+                                <div className='flex flex-col md:flex-row  gap-4 my-5'>
                                     <div className="status basis__33">
                                         <RadioBox
                                             defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
@@ -351,8 +350,7 @@ const AddEditProduct = (props) => {
                                     </div>
                                     <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
                                 </div>
-                                <div className='grid grid-cols-3  gap-4'>
-
+                                <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
                                     <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
                                     <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
                                 </div>
