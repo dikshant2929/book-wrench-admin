@@ -282,7 +282,7 @@ const AddEditService = (props) => {
                                 <Input selectedValue={fieldValue?.title} {...formConfiguration} cb={onTextChange('title')} />
                                 <div className='flex gap-4 mt-5'>
                                     <Textarea parentClass="textArea w-1/2 ta__with-height" value={fieldValue?.description} onChange={onTextChange('description')} title="Service Description" name="serviceDescription" />
-                                    <Textarea parentClass="textArea w-1/2 ta__with-height" value={fieldValue?.warrentyDescription} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
+                                    <Textarea parentClass="textArea w-1/2 ta__with-height" value={fieldValue?.warrentyDescription} onChange={onTextChange('warrentyDescription')} title="Warranty Description" name="serviceDescription" />
                                 </div>
                             </div>
                             <FileUpload parentClass='file_upload w-full md:w-[48%] lg:w-[36%]' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
