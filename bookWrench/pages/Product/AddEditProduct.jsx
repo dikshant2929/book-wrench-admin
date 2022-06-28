@@ -321,41 +321,43 @@ const AddEditProduct = (props) => {
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Products</label>
                             </div>
-                            <div className='md:grid md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 lg:grid-rows-4 gap-4 w-full product__selecter'>
-                               
+                            <div className='flex flex-col w-full'>
+                                <div className='grid grid-cols-3  gap-4 w-full product__selecter'>
 
-                                <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
-                                <Input  {...costInputFieldConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
-                                <Input  {...formConfiguration("brand", "Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
-                                {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
-                                <ReactTypeHead
-                                    header="Vendor"
-                                    handleSelect={handleOnChange('vendorId')}
-                                    dataList={vendorList}
-                                    fields={{ key: 'id', value: 'title' }}
-                                    placeholder="Select Vendor"
-                                    value={selectedVendorDropdownValue}
-                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+
+                                    <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
+                                    <Input  {...costInputFieldConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
+                                    <Input  {...formConfiguration("brand", "Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
+                                    {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
+
+                                    <ReactTypeHead
+                                        header="Vendor"
+                                        handleSelect={handleOnChange('vendorId')}
+                                        dataList={vendorList}
+                                        fields={{ key: 'id', value: 'title' }}
+                                        placeholder="Select Vendor"
+                                        value={selectedVendorDropdownValue}
+                                        parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none p-1"}
                                     />
-                                <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
-                                <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
-
-                                <div className="status">
-                                    <RadioBox
-                                        defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
-                                        cb={onTextChange('isActive')}
+                                    <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
+                                    <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
+                                </div>
+                                <div className='flex  gap-4 my-5'>
+                                    <div className="status basis__33">
+                                        <RadioBox
+                                            defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
+                                            cb={onTextChange('isActive')}
                                         />
-                                </div>                                
-                                <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
-                                        
+                                    </div>
+                                    <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                                </div>
+                                <div className='grid grid-cols-3  gap-4'>
 
+                                    <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
+                                    <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
+                                </div>
 
-
-                                <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
-                                <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
                             </div>
-
-
                         </div>
                         <hr />
                         <div className="w-auto flex flex-col md:flex-row gap-4 m-10">
