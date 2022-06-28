@@ -111,7 +111,7 @@ const AddEditProduct = (props) => {
             attachments: {
                 documents: data.documents || [],
                 images: data.images || [],
-                videos:data.videos || []
+                videos: data.videos || []
             },
             categoryId: data.categoryId || "",
             icon: data.icon || "",
@@ -155,14 +155,14 @@ const AddEditProduct = (props) => {
                     categoryId: data.categoryId.id,
                     documents: data.attachments.documents || [],
                     images: data.attachments.images || [],
-                    videos:data.attachments.videos || [],
-                    code:data.code || "",
-                    brand:data.brand || "",
-                    vendorId:data.vendorId.id || [],
+                    videos: data.attachments.videos || [],
+                    code: data.code || "",
+                    brand: data.brand || "",
+                    vendorId: data.vendorId.id || [],
                     serviceIds,
-                    quantity:data.quantity || "",
-                    price:data.price || "",
-                    warrantyDescription:data.warrantyDescription,
+                    quantity: data.quantity || "",
+                    price: data.price || "",
+                    warrantyDescription: data.warrantyDescription,
                 }
             );
 
@@ -327,7 +327,7 @@ const AddEditProduct = (props) => {
                             <div className='flex flex-col w-full'>
                                 <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-4 w-full product__selecter'>
 
-                                    <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
+                                    <Input   {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
                                     <Input  {...formConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
                                     <Input  {...formConfiguration("brand", "Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
                                     {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
@@ -343,8 +343,27 @@ const AddEditProduct = (props) => {
                                     />
                                     <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
                                     <Input  {...costInputFieldConfiguration("price", "Price")} selectedValue={fieldValue?.price} cb={onTextChange('price')} />
+                                    <div>
+
+                                        <div className='flex flex-col gap-4 my-5'>
+                                            <div className="status basis__33">
+                                                <RadioBox
+                                                    defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
+                                                    cb={onTextChange('isActive')}
+                                                />
+                                            </div>
+                                            <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
+                                    </div>
+                                    <div>
+                                        <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" />
+                                    </div>
                                 </div>
-                                <div className='flex flex-col md:flex-row  gap-4 my-5'>
+                                {/* <div className='flex flex-col gap-4 my-5'>
                                     <div className="status basis__33">
                                         <RadioBox
                                             defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
@@ -354,9 +373,9 @@ const AddEditProduct = (props) => {
                                     <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
                                 </div>
                                 <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                                    <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
-                                    <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
-                                </div>
+                                    
+                                    
+                                </div> */}
 
                             </div>
                         </div>
@@ -374,13 +393,13 @@ const AddEditProduct = (props) => {
                                     <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")} />
                                 </div>
                                 <div className='attachment__wrapper w-full flex flex-col'>
-                                <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
+                                    <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
                                 </div>
                             </div>
-                            
-                            </div>                            
-                        
-                            
+
+                        </div>
+
+
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
                             <Button
                                 disabled={!isButtonEnable ?? false}

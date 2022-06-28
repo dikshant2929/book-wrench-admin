@@ -135,6 +135,7 @@ const Input = (props: PropsWithChildren<InputBoxProps>) => {
 				onChange={(e) => handleChange(e)}
 				data-gsf-name={gsfName}
 				className={prps.classNameInput || prps.className}
+				placeHolder={ props.extraProps?.label || ""}
 			//autoFocus={props.autoFocusFlag}
 			/>
 			{props.toolTip && <HtmlTag tag="span" className="icon-info "><div className="infoTxt">{props.toolTip}</div></HtmlTag>}

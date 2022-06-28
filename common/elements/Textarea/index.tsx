@@ -42,6 +42,7 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
                 name={props.name}
                 defaultValue={value}
                 onChange={onChange}
+                placeholder={"Enter " + props.title}
                 >
              </textarea>
         </div>
