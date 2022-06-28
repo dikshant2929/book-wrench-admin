@@ -29,10 +29,10 @@ const AssociatedProducts = (props) => {
             </div>
             <div className='flex gap-y-6 flex-col w-full'>
                 <div className='products__wrapper flex-wrap lg:flex-nowrap flex flex-col md:flex-row gap-4'>
-                    {state && state.map((item, key) => <div key={key} className='product basis__22 basis__48 rounded-lg border border-[#DFE2E9] py-4'>
-                        <div className='px-8'>
-                            <div className='bg-[#DFE2E9] p-9 rounded-lg w-14 mx-auto mb-3.5'>
-                                <img src={item.icon} alt={item.title} />
+                    {state && state.map((item, key) => <div key={key} className='product w-[199px]  basis__48 rounded-lg border border-[#DFE2E9] py-[1.2rem]'>
+                        <div className=''>
+                            <div className='rounded-lg  mx-auto mb-3.5 w-[73px] h-[73px]'>
+                                <img className='w-full h-full rounded-lg' src={item.icon} alt={item.title} />
                             </div>
                             <p className='text-center text-sm font-semibold mb-3'>{item.title}</p>
                             <p className='text-center font-medium text-xs text-[#B8B0B0]'>(#56933)</p>
