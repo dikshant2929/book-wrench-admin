@@ -19,7 +19,7 @@
   } 
 
   .basis-wrapper > div{
-    flex-basis: 12%;
+    flex-basis: 13%;
   }
   
   .no-outline:focus{
@@ -35,7 +35,7 @@
       position: absolute;
       width: 55px;
       height: 48px;
-      right: 0;
+      right: 4px;
       border-radius: 0px 8px 8px 0px;
       background-color: lightgray;
     }
@@ -71,7 +71,7 @@
       position: absolute;
       width: 70px;
       height: 48px;
-      right: 0;
+      right: 4px;
       border-radius: 0px 8px 8px 0px;
       background-color: lightgray;
     }
@@ -100,6 +100,30 @@
     }
 }
 
+#costOfService .label__small::after{
+  content: "*";
+  color: red;
+  font-size: 14px;
+  margin-left: 2px;
+}
+.ta__with-height textarea{
+  height: 136px;
+  margin-top: 14px;
+}
+
+.errorField{
+  position: relative;
+}
+
+.error_msg_red{
+font-size: 9px;
+// margin: 0;
+position: absolute;
+// bottom: 0px;
+top: 100%;
+left: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .addCategory .add-catg-form-wrapper form input{
       margin-bottom: 1.5rem;
@@ -124,3 +148,5 @@
     border-color: rgba(243, 244, 246, var(--tw-border-opacity));
   }
 }
+
+

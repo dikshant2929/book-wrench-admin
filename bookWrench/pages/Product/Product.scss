@@ -33,6 +33,26 @@
 .reactTypehead{
   height: 48px;
 }
+.upload__icon .uploaded__file{
+  max-width: fit-content;
+}
+.ta__with-height textarea{
+  height: 136px;
+  margin-top: 14px;
+}
+
+.errorField{
+  position: relative;
+}
+
+.error_msg_red{
+font-size: 9px;
+// margin: 0;
+position: absolute;
+// bottom: 0px;
+top: 100%;
+left: 0;
+}
 
 @media only screen and (min-width: 1024px){
 
@@ -67,3 +87,6 @@
     border-color: rgba(243, 244, 246, var(--tw-border-opacity));
   }
 }
+
+
+
