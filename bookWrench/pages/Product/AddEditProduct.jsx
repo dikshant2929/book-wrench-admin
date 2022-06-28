@@ -12,6 +12,7 @@ import Services from './Services/Product.service';
 import Button from '@button';
 import MultipleDocUploader from '../../../common/elements/MultipleDocUploader';
 import MultipleImageUploader from '../../../common/elements/MultipleImageUploader';
+import MultipleVideoUploader from '@common/elements/MultipleVideoUploader';
 
 
 const { Product } = exposedPath;
@@ -26,7 +27,7 @@ const formConfiguration = (keyOfInput, label) => {
             type: 'text',
             name: 'title',
             // maxLength : "3",
-            'data-gsv-err-msg': 'Name is required.',
+            'data-gsv-err-msg': label + ' is required.',
             classNameLabel: 'label__small',
             classNameInput: 'form__input_w_height',
         },
@@ -110,6 +111,7 @@ const AddEditProduct = (props) => {
             attachments: {
                 documents: data.documents || [],
                 images: data.images || [],
+                videos:data.videos || []
             },
             categoryId: data.categoryId || "",
             icon: data.icon || "",
@@ -155,6 +157,7 @@ const AddEditProduct = (props) => {
                     categoryId:data.categoryId.id,
                     documents: data.attachments.documents || [],
                     images: data.attachments.images || [],
+                    videos:data.attachments.videos || [],
                     code:data.code || "",
                     brand:data.brand || "",
                     vendorId:data.vendorId.id || [],
@@ -322,7 +325,7 @@ const AddEditProduct = (props) => {
                             </div>
                             <div className='md:grid md:grid-cols-2 lg:grid-cols-3 md:grid-rows-3 lg:grid-rows-4 gap-4 w-full product__selecter'>
                                 <Input  {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
-                                <Input  {...costInputFieldConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
+                                <Input  {...formConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
                                 <Input  {...formConfiguration("brand","Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
                                 {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
                                 <ReactTypeHead
@@ -345,7 +348,7 @@ const AddEditProduct = (props) => {
                                     cb={onTextChange('isActive')}
                                 />
                             </div>
-                             <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                             <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
                             <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
                             <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="warranty Description" name="warrantyDescription" />
                              </div>
@@ -365,6 +368,7 @@ const AddEditProduct = (props) => {
                             <div className='attachment__wrapper w-full flex flex-col'>
                                <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")}/>
                             </div>
+                            <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
                             </div>                            
                         </div>
                        

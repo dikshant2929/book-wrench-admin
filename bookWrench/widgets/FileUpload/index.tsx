@@ -125,7 +125,7 @@ const FileUpload = (props: FileUploadArgs) => {
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                             </span>
                             <div className='file_format_details'>
-                                <p className='text-[#555555] text-sm'>Drop your docs here or <strong>Browse</strong></p>
+                                <p className='text-[#555555] text-sm'>Drop your file here or <strong>Browse</strong></p>
                                 <span className='text-gray-300 text-xs'>Support: {props.supportType}</span>
                             </div>
                         </div>

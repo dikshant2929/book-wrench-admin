@@ -285,7 +285,7 @@ const AddEditService = (props) => {
                                     <Textarea parentClass="textArea w-1/2" value={fieldValue?.warrentyDescription} onChange={onTextChange('warrentyDescription')} title="Warrenty Description" name="serviceDescription" />
                                 </div>
                             </div>
-                            <FileUpload parentClass='file_upload w-full md:w-[48%] lg:w-[36%]' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                            <FileUpload parentClass='file_upload w-full md:w-[48%] lg:w-[36%]' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
 
                         </div>
                         <hr />
