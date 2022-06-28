@@ -17,6 +17,7 @@ import Services from './Services/service.service';
 import Button from '@button';
 import MultipleDocUploader from '../../../common/elements/MultipleDocUploader';
 import MultipleImageUploader from '../../../common/elements/MultipleImageUploader';
+import AssociatedProducts from '../../widgets/AssociatedProducts';
 
 const { Service } = exposedPath;
 const defaultProps = {};
@@ -231,6 +232,7 @@ const AddEditService = (props) => {
         }
     }
 
+    
    
     return (
         <div className="addCategory bg-white center mx-8 md:mx-20 mt-12 mb-10 rounded-md">
@@ -327,6 +329,10 @@ const AddEditService = (props) => {
                             <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
                             </div>                            
                         </div>
+                        
+                        {editModeData?.id && isEditMode && <AssociatedProducts serviceId={editModeData?.id}/>}
+                        
+
                         <hr />
                        
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">

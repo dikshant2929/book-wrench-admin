@@ -15,6 +15,7 @@ import MultipleImageUploader from '../../../common/elements/MultipleImageUploade
 import MultipleVideoUploader from '@common/elements/MultipleVideoUploader';
 
 
+
 const { Product } = exposedPath;
 const defaultProps = {};
 
@@ -352,7 +353,7 @@ const AddEditProduct = (props) => {
                                                     cb={onTextChange('isActive')}
                                                 />
                                             </div>
-                                            <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Department Image" imagePath={onTextChange('icon')} />
+                                            <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
                                         </div>
 
                                     </div>
@@ -398,6 +399,8 @@ const AddEditProduct = (props) => {
                             </div>
 
                         </div>
+
+                       
 
 
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
