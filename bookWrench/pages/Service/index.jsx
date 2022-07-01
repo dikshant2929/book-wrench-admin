@@ -28,7 +28,7 @@ const defaultProps = {
                 value: 'Service Name',
             },
             {
-                key: 'departmentTilte',
+                key: 'departmentTitle',
                 value: 'Department',
             },
             {

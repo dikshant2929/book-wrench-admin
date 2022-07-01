@@ -42,7 +42,7 @@ const MultipleVideoUploader = (props) => {
 
 
 			<div className='video__wrapper mt-4'>
-				<label className='label__small'>Videos</label>
+				<label className='label__small'>Web Links</label>
 					<div className='flex gap-3 flex-wrap'>
 				{list.map((item, key) =>
 						<div key={key}  className='flex gap-3 mb-4 w-full md:w-auto'>
