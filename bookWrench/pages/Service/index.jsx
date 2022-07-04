@@ -146,7 +146,7 @@ const Service = (props) => {
                 costOfMaterial: item?.cost?.costOfMaterial || "NA", 
                 labourMinuites: item?.cost?.labourMinuites || "NA", 
                 commission: item?.cost?.commission || "NA", 
-                actions: ['edit', 'expire'] }));
+                actions: ['edit', 'expire','view'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });

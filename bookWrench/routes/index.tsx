@@ -27,6 +27,7 @@ const {
     Service,
     ServiceCreate,
     ServiceEdit,
+    ServiceView,
 
     VendorManagement,
     VendorManagementCreate,
@@ -71,6 +72,7 @@ const privateRouteConfig = [
     
     { name: 'service-edit', path: ServiceEdit, componentName: 'ServiceCreate'},
     { name: 'service-create', path: ServiceCreate, componentName: 'ServiceCreate', exact: true },
+    { name: 'service-view', path: ServiceView, componentName: 'ServiceView', exact: true },
     { name: 'service', path: Service, componentName: 'Service', exact: true },
 
     { name: 'product-edit', path: ProductEdit, componentName: 'ProductCreate'},
@@ -112,7 +114,9 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Service' */ '@pages/Service'));
         case 'ServiceCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditService' */ '@pages/Service/AddEditService'));
-        case 'Product':
+        case 'ServiceView':
+            return loadable(() => import(/* webpackChunkName: 'ServiceView' */ '@pages/Service/ViewService'));
+      case 'Product':
             return loadable(() => import(/* webpackChunkName: 'Product' */ '@pages/Product'));
         case 'ProductCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditProduct' */ '@pages/Product/AddEditProduct'));
