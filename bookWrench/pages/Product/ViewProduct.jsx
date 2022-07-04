@@ -329,7 +329,7 @@ const ViewProduct = (props) => {
                                     <Input disabled {...costInputFieldConfiguration("retailPrice", "Retail Price")} selectedValue={fieldValue?.retailPrice} cb={onTextChange('retailPrice')} />
                                     <Input disabled {...formConfiguration("unitOfMessure", "Unit Of Messure")} selectedValue={fieldValue?.unitOfMessure} cb={onTextChange('unitOfMessure')} />
                                     <Input disabled {...costInputFieldConfiguration("vendorCost", "Vendor Cost")} selectedValue={fieldValue?.vendorCost} cb={onTextChange('vendorCost')} />
-                                    <div>
+                                    
 
                                     <div className='flex flex-col p-1'>
                                         <div className="status basis__33">
