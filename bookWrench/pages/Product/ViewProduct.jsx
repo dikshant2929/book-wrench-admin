@@ -73,7 +73,7 @@ const costInputFieldConfiguration = (keyOfInput, label) => {
 }
     ;
 
-const AddEditProduct = (props) => {
+const ViewProduct = (props) => {
 
     const mandatoryFields = ["categoryId", "title"];
 
@@ -103,38 +103,13 @@ const AddEditProduct = (props) => {
 
     useEffect(() => {
         const isValidForm = mandatoryFields.every(item => Boolean(fieldValue[item]))
-        setButtonEnable(isValidForm);
+        setButtonEnable(true);
     }, [fieldValue]);
 
     const onFormSubmit = (data) => {
-
-        const payload = {
-            attachments: {
-                documents: data.documents || [],
-                images: data.images || [],
-                videos: data.videos || []
-            },
-            categoryId: data.categoryId || "",
-            icon: data.icon || "",
-            isActive: data.isActive || "",
-            description: data.description || "",
-            subCategoryId: data.subCategoryId || "",
-            title: data.title || "",
-            warrantyDescription: data.warrantyDescription || "",
-            code: data.code || "",
-            brand: data.brand || "",
-            vendorId: data.vendorId || "",
-            serviceIds: data.serviceIds || [],
-            quantity: data.quantity || "",
-            retailPrice: data.retailPrice || "",
-            vendorCost:data.vendorCost,  
-            unitOfMessure:data.unitOfMessure || ""
-        }
-        if (isEditMode) {
-            Services.editProduct(payload, () => props.history.push(Product), {}, editModeData.id);
-        } else {
-            Services.addProduct(payload, () => props.history.push(Product));
-        }
+        const encryptedData = props?.match?.params?.editproduct;
+        const editPath = `${Product}/edit/${encryptedData}`;
+        props.history.push(editPath);
     };
 
     useEffect(() => {
@@ -165,8 +140,8 @@ const AddEditProduct = (props) => {
                     serviceIds,
                     quantity: data.quantity || "",
                     retailPrice: data.retailPrice || "",
-                    vendorCost:data.vendorCost || "",
                     unitOfMessure:data.unitOfMessure || "",
+                    vendorCost:data.vendorCost || "",
                     warrantyDescription: data.warrantyDescription,
                 }
             );
@@ -174,7 +149,7 @@ const AddEditProduct = (props) => {
             categoryId = data.categoryId.id;
             subCategoryId = data.subCategoryId.id;
             vendorId = data.vendorId.id;
-            setTitle(`Edit Product (${data.title})`);
+            setTitle(`${data.title}`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
             setEditMode(true);
@@ -262,7 +237,7 @@ const AddEditProduct = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'retailPrice','vendorCost','unitOfMessure']
+            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'retailPrice','unitOfMessure','vendorCost']
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
@@ -288,6 +263,7 @@ const AddEditProduct = (props) => {
                                     fields={{ key: 'id', value: 'title' }}
                                     placeholder="Select Category"
                                     value={selectedDropdownValue}
+                                    disabled={true}
                                     parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                                 />
 
@@ -298,6 +274,7 @@ const AddEditProduct = (props) => {
                                     fields={{ key: 'id', value: 'title' }}
                                     placeholder="Select Sub-Category"
                                     value={selectedSubCategoryDropdownValue}
+                                    disabled={true}
                                     parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                                 />
 
@@ -308,6 +285,7 @@ const AddEditProduct = (props) => {
                                     fields={{ key: 'id', value: 'title' }}
                                     placeholder="Select Service"
                                     value={selectedServiceDropdownValue}
+                                    disabled={true}
                                     parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                                     isMulti
                                 />
@@ -332,9 +310,9 @@ const AddEditProduct = (props) => {
                             <div className='flex flex-col w-full'>
                                 <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-4 w-full product__selecter'>
 
-                                    <Input   {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
-                                    <Input  {...formConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
-                                    <Input  {...formConfiguration("brand", "Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
+                                    <Input disabled   {...formConfiguration("title", "Product Name")} selectedValue={fieldValue?.title} cb={onTextChange('title')} />
+                                    <Input disabled  {...formConfiguration("code", "Product Code")} selectedValue={fieldValue?.code} cb={onTextChange('code')} />
+                                    <Input disabled {...formConfiguration("brand", "Brand")} selectedValue={fieldValue?.brand} cb={onTextChange('brand')} />
                                     {/* <Input  {...formConfiguration("vendor","Vendor")} cb={onTextChange('vendor')}  selectedValue={fieldValue?.vendor} cb={onTextChange('vendor')} /> */}
 
                                     <ReactTypeHead
@@ -344,9 +322,10 @@ const AddEditProduct = (props) => {
                                         fields={{ key: 'id', value: 'title' }}
                                         placeholder="Select Vendor"
                                         value={selectedVendorDropdownValue}
+                                        disabled={true}
                                         parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none p-1"}
                                     />
-                                    <Input  {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
+                                    <Input disabled {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
                                     <Input  {...costInputFieldConfiguration("retailPrice", "Retail Price")} selectedValue={fieldValue?.retailPrice} cb={onTextChange('retailPrice')} />
                                     <Input  {...formConfiguration("unitOfMessure", "Unit Of Messure")} selectedValue={fieldValue?.unitOfMessure} cb={onTextChange('unitOfMessure')} />
                                     <Input  {...costInputFieldConfiguration("vendorCost", "Vendor Cost")} selectedValue={fieldValue?.vendorCost} cb={onTextChange('vendorCost')} />
@@ -357,17 +336,18 @@ const AddEditProduct = (props) => {
                                                 <RadioBox
                                                     defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
                                                     cb={onTextChange('isActive')}
+                                                    disabled={true}
                                                 />
                                             </div>
-                                            <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
+                                            <FileUpload  disabled={true} parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
                                         </div>
 
                                     </div>
                                     <div className='ta__with-height'>
-                                        <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
+                                        <Textarea  parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" disabled={true} />
                                     </div>
                                     <div className='ta__with-height'>
-                                        <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" />
+                                        <Textarea  parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" disabled={true} />
                                     </div>
                                 </div>
                                 {/* <div className='flex flex-col gap-4 my-5'>
@@ -393,14 +373,14 @@ const AddEditProduct = (props) => {
                             </div>
                             <div className=''>
                                 <div className=''>
-                                    <MultipleDocUploader list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
+                                    <MultipleDocUploader  disabled={true} list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
                                 </div>
 
                                 <div className='attachment__wrapper w-full flex flex-col'>
-                                    <MultipleImageUploader list={fieldValue?.images} onListUpdate={onTextChange("images")} />
+                                    <MultipleImageUploader disabled={true} list={fieldValue?.images} onListUpdate={onTextChange("images")} />
                                 </div>
                                 <div className='attachment__wrapper w-full flex flex-col'>
-                                    <MultipleVideoUploader list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
+                                    <MultipleVideoUploader disabled={true} list={fieldValue?.videos} onListUpdate={onTextChange("videos")} />
                                 </div>
                             </div>
 
@@ -419,7 +399,7 @@ const AddEditProduct = (props) => {
                                     onFormSubmit(fieldValue);
                                 }}
                                 className={`form__button ${!isButtonEnable ?? false ? 'btn-disabled' : 'button-primary'}`}
-                                title={isEditMode ? 'Update' : 'Save'}
+                                title="Edit"
                             />
                         </div>
                     </div>
@@ -429,5 +409,5 @@ const AddEditProduct = (props) => {
     );
 };
 
-AddEditProduct.defaultProps = defaultProps;
-export default AddEditProduct;
+ViewProduct.defaultProps = defaultProps;
+export default ViewProduct;

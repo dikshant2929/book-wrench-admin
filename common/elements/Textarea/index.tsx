@@ -8,7 +8,8 @@ const defaultProps = {
     rows:"4",
     cols:"4",
     name:"description",
-    value:""
+    value:"",
+    disabled:false
     
 };
 
@@ -43,6 +44,7 @@ const Textarea = (props: PropsWithChildren<TextareaProps>) => {
                 defaultValue={value}
                 onChange={onChange}
                 placeholder={"Enter " + props.title}
+                disabled={props.disabled}
                 >
              </textarea>
         </div>

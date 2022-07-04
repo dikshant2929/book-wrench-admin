@@ -37,6 +37,7 @@ const {
     Product,
     ProductCreate,
     ProductEdit,
+    ProductView
 
 
     
@@ -74,7 +75,9 @@ const privateRouteConfig = [
 
     { name: 'product-edit', path: ProductEdit, componentName: 'ProductCreate'},
     { name: 'product-create', path: ProductCreate, componentName: 'ProductCreate', exact: true },
+    { name: 'product-view', path: ProductView, componentName: 'ProductView', exact: true },
     { name: 'product', path: Product, componentName: 'Product', exact: true },
+    
 
     { name: 'vendor-management-edit', path: VendorManagementEdit, componentName: 'VendorManagementCreate'},
     { name: 'vendor-management-create', path: VendorManagementCreate, componentName: 'VendorManagementCreate', exact: true },
@@ -113,6 +116,8 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Product' */ '@pages/Product'));
         case 'ProductCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditProduct' */ '@pages/Product/AddEditProduct'));
+        case 'ProductView':
+            return loadable(() => import(/* webpackChunkName: 'ProductView' */ '@pages/Product/ViewProduct'));
         case 'VendorManagement':
             return loadable(() => import(/* webpackChunkName: 'VendorManagement' */ '@pages/VendorManagement'));
         case 'VendorManagementCreate':

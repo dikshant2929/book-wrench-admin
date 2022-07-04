@@ -28,6 +28,8 @@ const path = {
     Product: PREFIX + 'product',
     ProductCreate: PREFIX + 'product/create',
     ProductEdit: PREFIX + 'product/edit/:editproduct',
+    ProductView: PREFIX + 'product/view/:editproduct',
+    
 
     
 

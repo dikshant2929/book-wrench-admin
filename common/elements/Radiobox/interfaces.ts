@@ -14,6 +14,7 @@ export interface RadioProps {
     labelClass?: string;
     title?:string;
     options?:Array<T>;
+    disabled?:boolean;
     cb?:any;
     onClick?: (field: string) => (event: any) => void;
 }

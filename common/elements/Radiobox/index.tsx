@@ -12,7 +12,8 @@ const defaultProps = {
     options:[
         { key: 'Active', value: 'active' },
         { key: 'InActive', value: 'inactive' },
-    ]
+    ],
+    disabled:false
 };
 
 const RadioBox = (props: PropsWithChildren<RadioProps>) => {
@@ -25,7 +26,8 @@ const RadioBox = (props: PropsWithChildren<RadioProps>) => {
     }
 
     useEffect(() => {
-        setIsChecked(props.defaultValue)
+        setIsChecked(props.defaultValue);
+       
     }, [props]);
     
     return (
@@ -43,7 +45,9 @@ const RadioBox = (props: PropsWithChildren<RadioProps>) => {
                         // defaultChecked={isChecked == item.value}
                         name={props.name} 
                         id={item.value} 
-                        value={item.value} />
+                        value={item.value} 
+                        disabled={props.disabled}
+                        />
                     <label className={props.labelClass} htmlFor={item.value}>{item.key}</label>
                 </div>
             )}

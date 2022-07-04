@@ -115,7 +115,7 @@ const Product = (props) => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
-            prevConfig.table.dataList = data.map((item, index) => ({ ...item, departmentName: item?.categoryId?.departmentId?.title || "NA", categoryName:item?.categoryId?.title || "NA", subCategoryName:item?.subCategoryId?.title || "NA",serviceName:item?.serviceIds[0]?.title || "NA", costOfProduct:item?.price || "NA", sNo: (index + 1), actions: ['edit', 'expire'] }));
+            prevConfig.table.dataList = data.map((item, index) => ({ ...item, departmentName: item?.categoryId?.departmentId?.title || "NA", categoryName:item?.categoryId?.title || "NA", subCategoryName:item?.subCategoryId?.title || "NA",serviceName:item?.serviceIds[0]?.title || "NA", costOfProduct:item?.price || "NA", sNo: (index + 1), actions: ['edit', 'expire','view'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });

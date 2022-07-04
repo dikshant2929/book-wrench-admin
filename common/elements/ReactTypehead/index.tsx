@@ -16,6 +16,8 @@ const defaultProps = {
     classNamePrefix:
         "custamSelectBox outline-none bg-gray-100 border-transparent border-none ",
     insertDummyValue: false,
+    disabled:false
+    
 };
 
 function ReactTypeHead(props: PropsWithChildren<any>) {
@@ -66,6 +68,7 @@ function ReactTypeHead(props: PropsWithChildren<any>) {
                     value={props.value || defaultValue}
                     options={dataList}
                     onChange={props.handleSelect}
+                    isDisabled={props.disabled}
                     {...props}
                 />
             </div>

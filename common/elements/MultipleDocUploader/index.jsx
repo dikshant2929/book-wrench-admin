@@ -63,15 +63,15 @@ const MultipleDocUploader = (props) => {
 							</div>
 							
 						</div>
-						<span onClick={() => onItemRemove(item)} className='cross__icon bg-[#DBDDE3] fill-[#989FAD] p-1.5 rounded-full cursor-pointer'>
+						{!props.disabled &&<span onClick={() => onItemRemove(item)} className='cross__icon bg-[#DBDDE3] fill-[#989FAD] p-1.5 rounded-full cursor-pointer'>
 							<svg height="18" width="18" viewBox="0 0 20 20" aria-hidden="true" focusable="false" class=""><path d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"></path></svg>
-						</span>
+						</span>}
 					</div> 
 				)}
 				</div>
             </div>
-			{isFileUploaderVisible && <div className='pb-7 border-b-2 border-gray-100'>
-                	<FileUpload supportType="txt,pdf,doc,docx" acceptType=".txt,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" parentClass='file_upload' imageURL="" title="" imagePath={onTextChange} />
+			{isFileUploaderVisible && !props.disabled && <div className='pb-7 border-b-2 border-gray-100'>
+                	<FileUpload disabled={props.disabled} supportType="txt,pdf,doc,docx" acceptType=".txt,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" parentClass='file_upload' imageURL="" title="" imagePath={onTextChange} />
              </div>}
 	 </>
     );
