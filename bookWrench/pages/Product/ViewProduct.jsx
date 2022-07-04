@@ -140,8 +140,8 @@ const ViewProduct = (props) => {
                     serviceIds,
                     quantity: data.quantity || "",
                     retailPrice: data.retailPrice || "",
-                    unitOfMessure:data.unitOfMessure || "",
-                    vendorCost:data.vendorCost || "",
+                    unitOfMessure: data.unitOfMessure || "",
+                    vendorCost: data.vendorCost || "",
                     warrantyDescription: data.warrantyDescription,
                 }
             );
@@ -237,7 +237,7 @@ const ViewProduct = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'retailPrice','unitOfMessure','vendorCost']
+            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'retailPrice', 'unitOfMessure', 'vendorCost']
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
@@ -329,25 +329,26 @@ const ViewProduct = (props) => {
                                     <Input  {...costInputFieldConfiguration("retailPrice", "Retail Price")} selectedValue={fieldValue?.retailPrice} cb={onTextChange('retailPrice')} />
                                     <Input  {...formConfiguration("unitOfMessure", "Unit Of Messure")} selectedValue={fieldValue?.unitOfMessure} cb={onTextChange('unitOfMessure')} />
                                     <Input  {...costInputFieldConfiguration("vendorCost", "Vendor Cost")} selectedValue={fieldValue?.vendorCost} cb={onTextChange('vendorCost')} />
-                                    <div>
 
-                                        <div className='flex flex-col p-1 upload__icon'>
-                                            <div className="status basis__33">
-                                                <RadioBox
-                                                    defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
-                                                    cb={onTextChange('isActive')}
-                                                    disabled={true}
-                                                />
-                                            </div>
-                                            <FileUpload  disabled={true} parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
+                                    <div className='flex flex-col p-1'>
+                                        <div className="status basis__33">
+                                            <RadioBox
+                                                defaultValue={(fieldValue.isActive) ? 'active' : 'inactive'}
+                                                cb={onTextChange('isActive')}
+                                                disabled={true}
+                                            />
                                         </div>
 
                                     </div>
+
                                     <div className='ta__with-height'>
-                                        <Textarea  parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" disabled={true} />
+                                        <Textarea parentClass="textArea" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" disabled={true} />
                                     </div>
                                     <div className='ta__with-height'>
-                                        <Textarea  parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" disabled={true} />
+                                        <Textarea parentClass="textArea" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" disabled={true} />
+                                    </div>
+                                    <div className='upload__icon'>
+                                        <FileUpload disabled={true} parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
                                     </div>
                                 </div>
                                 {/* <div className='flex flex-col gap-4 my-5'>
@@ -373,7 +374,7 @@ const ViewProduct = (props) => {
                             </div>
                             <div className=''>
                                 <div className=''>
-                                    <MultipleDocUploader  disabled={true} list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
+                                    <MultipleDocUploader disabled={true} list={fieldValue?.documents} onListUpdate={onTextChange("documents")} />
                                 </div>
 
                                 <div className='attachment__wrapper w-full flex flex-col'>
@@ -386,9 +387,9 @@ const ViewProduct = (props) => {
 
                         </div>
 
-                        
-                        
-                       
+
+
+
 
 
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">

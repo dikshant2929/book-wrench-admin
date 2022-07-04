@@ -127,8 +127,8 @@ const AddEditProduct = (props) => {
             serviceIds: data.serviceIds || [],
             quantity: data.quantity || "",
             retailPrice: data.retailPrice || "",
-            vendorCost:data.vendorCost,  
-            unitOfMessure:data.unitOfMessure || ""
+            vendorCost: data.vendorCost,
+            unitOfMessure: data.unitOfMessure || ""
         }
         if (isEditMode) {
             Services.editProduct(payload, () => props.history.push(Product), {}, editModeData.id);
@@ -165,8 +165,8 @@ const AddEditProduct = (props) => {
                     serviceIds,
                     quantity: data.quantity || "",
                     retailPrice: data.retailPrice || "",
-                    vendorCost:data.vendorCost || "",
-                    unitOfMessure:data.unitOfMessure || "",
+                    vendorCost: data.vendorCost || "",
+                    unitOfMessure: data.unitOfMessure || "",
                     warrantyDescription: data.warrantyDescription,
                 }
             );
@@ -262,7 +262,7 @@ const AddEditProduct = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'retailPrice','vendorCost','unitOfMessure']
+            const fields = ['title', 'code', 'brand', 'vendor', 'quantity', 'retailPrice', 'vendorCost', 'unitOfMessure']
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
@@ -359,15 +359,18 @@ const AddEditProduct = (props) => {
                                                     cb={onTextChange('isActive')}
                                                 />
                                             </div>
-                                            <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
+
                                         </div>
 
                                     </div>
                                     <div className='ta__with-height'>
-                                        <Textarea parentClass="textArea p-1" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
+                                        <Textarea parentClass="textArea" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
                                     </div>
                                     <div className='ta__with-height'>
-                                        <Textarea parentClass="textArea p-1" value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" />
+                                        <Textarea parentClass="textArea " value={fieldValue?.warrantyDescription} onChange={onTextChange('warrantyDescription')} title="Warranty Description" name="warrantyDescription" />
+                                    </div>
+                                    <div className='upload__icon'>
+                                        <FileUpload parentClass='file_upload' imageURL={fieldValue.icon} title="Upload Icon" imagePath={onTextChange('icon')} />
                                     </div>
                                 </div>
                                 {/* <div className='flex flex-col gap-4 my-5'>
@@ -406,9 +409,9 @@ const AddEditProduct = (props) => {
 
                         </div>
 
-                        
-                        
-                       
+
+
+
 
 
                         <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
