@@ -38,7 +38,7 @@ export const ExpireCampaignYesPopup = (props: any) => {
 
 // Campaign List Table Action Buttons (Edit, View, Expire)
 const TableEditViewExpire = ({ data, history, reloadTable }: any) => {
-    const { edit, expire } = constant; // Buttons
+    const { edit, expire,view } = constant; // Buttons
 
     const onClickHandaler = (eventId: any, data: any) => {
         // console.log({ eventId, data });
@@ -47,6 +47,10 @@ const TableEditViewExpire = ({ data, history, reloadTable }: any) => {
             case edit.id: //Edit Campaign
                 const editPath = `${Service}/edit/${encrypt.encode(JSON.stringify({ ...data, type : "Edit" }))}`;
                 history.push(editPath, data);
+                break;
+            case view.id: //Edit Campaign
+                const viewPath = `${Service}/view/${encrypt.encode(JSON.stringify({ ...data, type : "View" }))}`;
+                history.push(viewPath, data);
                 break;
             case expire.id: // Expire Campaign
               //  const expireCampaign = new ExpireCampaign(data.id, 'expire');
@@ -74,6 +78,17 @@ const TableEditViewExpire = ({ data, history, reloadTable }: any) => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
                     </span>
+            )}
+            {data.actions.includes(view.id) && (
+                    <span
+                        onClick={() => onClickHandaler(view.id, data)}
+                        title={view.name}
+                        className="cursor-pointer  p-[0.312rem] border border-gray-300 rounded-md">
+                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </span>
+                
             )}
             {data.actions.includes(expire.id) && (
                     <span

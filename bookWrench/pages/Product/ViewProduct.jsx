@@ -326,9 +326,9 @@ const ViewProduct = (props) => {
                                         parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none p-1"}
                                     />
                                     <Input disabled {...costInputFieldConfiguration("quantity", "Quantity")} selectedValue={fieldValue?.quantity} cb={onTextChange('quantity')} />
-                                    <Input  {...costInputFieldConfiguration("retailPrice", "Retail Price")} selectedValue={fieldValue?.retailPrice} cb={onTextChange('retailPrice')} />
-                                    <Input  {...formConfiguration("unitOfMessure", "Unit Of Messure")} selectedValue={fieldValue?.unitOfMessure} cb={onTextChange('unitOfMessure')} />
-                                    <Input  {...costInputFieldConfiguration("vendorCost", "Vendor Cost")} selectedValue={fieldValue?.vendorCost} cb={onTextChange('vendorCost')} />
+                                    <Input disabled {...costInputFieldConfiguration("retailPrice", "Retail Price")} selectedValue={fieldValue?.retailPrice} cb={onTextChange('retailPrice')} />
+                                    <Input disabled {...formConfiguration("unitOfMessure", "Unit Of Messure")} selectedValue={fieldValue?.unitOfMessure} cb={onTextChange('unitOfMessure')} />
+                                    <Input disabled {...costInputFieldConfiguration("vendorCost", "Vendor Cost")} selectedValue={fieldValue?.vendorCost} cb={onTextChange('vendorCost')} />
                                     <div>
 
                                         <div className='flex flex-col p-1 upload__icon'>

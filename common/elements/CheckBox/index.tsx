@@ -9,8 +9,9 @@ const defaultProps = {
     inputClass:"no-outline border-2 border-[#D6D6D6] rounded w-5 h-5 mr-2",
     labelClass:"label__small m-0",
     name:"checkbox",
+    disabled:false
     
-};
+}
 
 
 const CheckBox = (props: PropsWithChildren<RadioProps>) => {
@@ -44,6 +45,7 @@ const CheckBox = (props: PropsWithChildren<RadioProps>) => {
                         // defaultChecked={isChecked == item.value}
                         name={props.value} 
                         id={props.id} 
+                        disabled={props.disabled}
                         value={props.value} />
                     <label className={props.labelClass} htmlFor={props.id}>{props.value}</label>
                 </div>
