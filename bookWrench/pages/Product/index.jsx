@@ -147,6 +147,8 @@ const Product = (props) => {
             case 'status':
                 const onChange = (key) => ({ value }) => updateStatus(key, { isActive: value });
                 return <Switch defaultValue={data.isActive} id={data.id} onChange={onChange} />
+            case 'costOfProduct':
+                return  <p className='font-medium text-sm'>$ {data[column.key]}</p>;
             default:
                 return <p>{data[column.key]}</p>;
         }
