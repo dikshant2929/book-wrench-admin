@@ -190,7 +190,7 @@ const ViewProduct = (props) => {
             setServiceList(data);
             if (serviceIds && Array.isArray(serviceIds) && serviceIds.length) {
                 let selectedDataList = data.filter(item => serviceIds.some(serviceId => serviceId === item.id));
-                selectedDataList = selectedDataList.map(item => ({ ...item, label: item.title, value: item.id }))
+                selectedDataList = selectedDataList.map(item => ({ ...item, label: item.title, value: item.id, isDisabled: true }))
                 setServiceDropdownValue([...selectedDataList]);
             }
 
@@ -285,7 +285,8 @@ const ViewProduct = (props) => {
                                     fields={{ key: 'id', value: 'title' }}
                                     placeholder="Select Service"
                                     value={selectedServiceDropdownValue}
-                                    disabled={true}
+                                    disabled
+                                    isOptionDisabled
                                     parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                                     isMulti
                                 />

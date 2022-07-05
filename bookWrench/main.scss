@@ -4,70 +4,84 @@
 @import 'tailwindcss/utilities';
 
 @layer components {
-    .switchBtn:checked ~ .dot {
+    .switchBtn:checked~.dot {
         @apply transform translate-x-full bg-green-500;
     }
 
     // ------------------ utilities classes ------------------
 
-    .basis__10{
+    .basis__10 {
         flex-basis: 10%;
     }
 
-    .basis__25{
+    .basis__25 {
         flex-basis: 25%;
     }
-    .basis__22{
+
+    .basis__22 {
         flex-basis: 22%;
     }
-    .basis__20{
+
+    .basis__20 {
         flex-basis: 20%;
     }
 
-    .basis__33{
+    .basis__33 {
         flex-basis: 33%;
     }
 
 
     // ------------------ typography ------------------
 
-    .list-heading{
+    .list-heading {
         font-size: 1.75rem;
         line-height: 2rem;
     }
 
-    .rounded-5px{
+    .rounded-5px {
         border-radius: 5px !important;
     }
 
     //------------------ form input classes ------------------
 
 
-    .form__input_w_height{
+    .form__input_w_height {
         @apply h-12 w-full rounded-lg border border-[#D6D6D6] text-sm text-black;
     }
-    .form__input_w_height:focus{
+
+    .form__input_w_height:focus {
         @apply ring-1 ring-[#2563eb] border-0;
     }
-    .form__input__border{
+
+    .form__input__border {
         @apply rounded-lg border border-[#D6D6D6]
     }
 
-    .table__header div:first-child{
+    .table__header div:first-child {
         width: auto;
         padding: 0;
         margin: 0;
         height: 100%;
     }
 
+    input:disabled,
+    textarea:disabled {
+        color: hsl(0, 0%, 60%);
+    }
+
+    .__multi-value--is-disabled .custamSelectBox.__multi-value__label {
+        color: hsl(0, 0%, 60%);
+    }
+
 
     //------------------ form label classes ------------------
 
 
-    .label__small{
+    .label__small {
         @apply text-xs mb-2 block text-[#555555];
     }
-    .error_msg_red{
+
+    .error_msg_red {
         @apply text-red-400 text-xs ml-2.5;
     }
 
@@ -75,20 +89,21 @@
     //------------------ form buttons classes ------------------
 
 
-    .form__button{
+    .form__button {
         @apply inline-flex px-24 py-5 text-sm h-46px;
     }
 
-    .icon__plus__small{
+    .icon__plus__small {
         @apply w-4 h-4;
     }
 
-     //------------------ table classes ------------------
+    //------------------ table classes ------------------
 
-    .table__head{
+    .table__head {
         @apply px-4 py-4 font-inter font-semibold text-sm text-left;
     }
-    .table__data{
+
+    .table__data {
         @apply px-4 py-2 font-inter font-medium text-sm text-left min-w-105px;
     }
 
