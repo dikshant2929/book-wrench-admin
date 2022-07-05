@@ -177,6 +177,14 @@ const Service = (props) => {
             case 'status':
                 const onChange = (key) => ({ value }) => updateStatus(key, { isActive: value });
                 return <Switch defaultValue={data.isActive} id={data.id} onChange={onChange} />
+            case 'costOfService':
+                return <p>${data[column.key]}</p>;
+            
+            case 'costOfMaterial':
+                return <p>${data[column.key]}</p>;
+            
+            case 'commission':
+                return <p>${data[column.key]}</p>;
             default:
                 return <p>{data[column.key]}</p>;
         }
