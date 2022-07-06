@@ -79,6 +79,7 @@
 
     .label__small {
         @apply text-xs mb-2 block text-[#555555];
+        text-transform: capitalize;
     }
 
     .error_msg_red {

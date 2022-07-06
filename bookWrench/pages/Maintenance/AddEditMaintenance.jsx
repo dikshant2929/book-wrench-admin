@@ -38,6 +38,45 @@ const priorityList = [
     },
 ]
 
+const intervalList = [
+    {
+        id:"days",
+        title:"Days"
+    },
+    {
+        id:"month",
+        title:"Month"
+    },
+    {
+        id:"season",
+        title:"Season"
+    },
+]
+
+
+const durationList = [
+    {
+        id:"180 days",
+        title:"6 Months"
+    },
+    {
+        id:"364 days",
+        title:"12 Months"
+    },
+    {
+        id:"738 days",
+        title:"2 Years"
+    },
+    {
+        id:"1820 days",
+        title:"5 Months"
+    },
+    {
+        id:"continue",
+        title:"continue"
+    }
+]
+
 const formConfiguration = (keyOfInput, label) => {
     return {
     id: keyOfInput,
@@ -103,12 +142,17 @@ const AddEditMaintenance = (props) => {
     const [selectedDropdownValue, setDropdownValue] = useState(null);
     const [selectedSubCategoryDropdownValue, setSubCategoryDropdownValue] = useState(null);
     const [selectedPriorityDropdownValue, setSelectedPriorityDropdownValue] = useState(null);
-    
-
+    const [selectedDurationDropdownValue, setSelectedDurationDropdownValue] = useState(null);
+    const [selectedIntervalDropdownValue, setSelectedIntervalDropdownValue] = useState(null);
     const [isButtonEnable, setButtonEnable] = useState(false);
-
     const [categoryList, setCategoryList] = useState([]);
     const [subCategoryList, setSubCategoryList] = useState([]);
+
+    const [productList, setProductList] = useState([]);
+    const [selectedProductDropdownValue, setProductDropdownValue] = useState(null);
+
+    const [servicesList, setServicesList] = useState([]);
+    const [selectedServicesDropdownValue, setServicesDropdownValue] = useState(null);
 
     const [fieldValue, setFieldValue] = useState({
         title: "",
@@ -125,15 +169,22 @@ const AddEditMaintenance = (props) => {
     const onFormSubmit = (data) => {
         const payload = {
             cost: {
-                isTaxable:data.isTaxable,
-                isDiscountable: data.isDiscountable,
-                addOnPrice:data.addOnPrice || "",
-                commission:data.commission || "",
-                costOfMaterial:data.costOfMaterial || "",
-                costOfService:data.costOfService || "",
-                labourCost:data.labourCost || "",
-                labourMinuites:data.labourMinuites,
-                memberPrice:data.memberPrice || ""
+                duration:data.duration,
+                packageCost:data.packageCost || "",
+                costPerVisit:data.costPerVisit || "",
+                renewalCost: data.renewalCost,
+               
+            },
+            expense:{
+                expense:data.expense,
+                additionalCost:data.additionalCost,
+                commission:data.commission,
+                ticketTimeMinutes:data.ticketTimeMinutes,
+                laborCost:data.laborCost,
+            },
+            frequency:{
+                interval:data.interval,
+                intervalValue:data.intervalValue
             },
             attachments: {
                 documents: data.documents || [],
@@ -145,7 +196,9 @@ const AddEditMaintenance = (props) => {
             icon: data.icon || "",
             isActive: data.isActive || "",
             description: data.description || "",
-            subCategoryId: data.subCategoryId || "",
+            subCategoryIds: data.subCategoryIds || "",
+            servicesIds: data.servicesIds || "",
+            productsIds: data.productsIds || "",
             title: data.title || "",
             packageDescription:data.packageDescription || "" 
         }
@@ -161,31 +214,48 @@ const AddEditMaintenance = (props) => {
 
         let categoryId = null;
         let subCategoryIds = null;
+        let productIds = null;
+        let servicesIds = null;
 
-        const encryptedData = props?.match?.params?.editService;
+        
+
+        const encryptedData = props?.match?.params?.editmaintenance;
+       
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            const { title, isActive, description, icon } = data;
+            console.log(data)
+            const { title, isActive, packageDescription, icon } = data;
             subCategoryIds = Array.isArray(data.subCategoryIds) && data.subCategoryIds.map(item => item.id) || [];
+            productIds = Array.isArray(data.productIds) && data.productIds.map(item => item.id) || [];
+            servicesIds = Array.isArray(data.servicesIds) && data.servicesIds.map(item => item.id) || [];
             setFieldValue(
                 { 
                     title, 
                     isActive, 
-                    description, 
+                    packageDescription, 
                     icon,
                     subCategoryIds, 
+                    productIds,
+                    servicesIds,
                     categoryId:data.categoryId.id,
                     priority:data.priority,
-                    isTaxable:data.cost.isTaxable,
-                    isDiscountable: data.cost.isDiscountable,
-                    addOnPrice:data.cost.addOnPrice,
-                    commission:data.cost.commission,
-                    costOfMaterial:data.cost.costOfMaterial,
-                    costOfService:data.costOfService,
-                    labourCost:data.cost.labourCost,
-                    labourMinuites:data.cost.labourMinuites,
-                    memberPrice:data.cost.memberPrice,
-                    packageDescription:data.packageDescription,
+                   
+                    duration:data.cost.duration,
+                    packageCost:data.cost.packageCost,
+                    costPerVisit:data.cost.costPerVisit,
+                    renewalCost: data.cost.renewalCost,
+
+                    expense:data.expense.expense,
+                    additionalCost:data.expense.additionalCost,
+                    commission:data.expense.commission,
+                    ticketTimeMinutes:data.expense.ticketTimeMinutes,
+                    laborCost:data.expense.laborCost,
+
+                    interval:data.frequency.interval,
+                    intervalValue:data.frequency.intervalValue,
+                   
+                    
+                    
                     documents: data.attachments.documents || [],
                     images: data.attachments.images || [],
                     videos: data.attachments.videos || []
@@ -202,10 +272,40 @@ const AddEditMaintenance = (props) => {
 
         fetchCategoryList(categoryId);
         fetchSubCategoryList(categoryId,subCategoryIds) 
+        fetchProductList(productIds);
+        fetchServicesList(servicesIds);
+
+        
+        
 
         return () => formConfiguration.selectedValue = null;
     }, [props]);
 
+    
+    
+    const fetchProductList = (productIds) => {
+        Services.productList(data => {
+            setProductList(data);
+            if (productIds) {
+                const selectedData = data.find(item => item.id === productId);
+                setProductDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
+
+        })
+    }
+
+    const fetchServicesList = (servicesIds) => {
+        Services.servicesList(data => {
+            setServicesList(data);
+            if (servicesIds) {
+                const selectedData = data.find(item => item.id === servicesId);
+                setServicesDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
+
+        })
+    }
+    
+    
     const fetchCategoryList = (categoryId) => {
         Services.categoryList(data => {
             setCategoryList(data);
@@ -243,15 +343,30 @@ const AddEditMaintenance = (props) => {
             case "subCategoryId":
                 const ids = Array.isArray(value) && value.map(item => item.id) || [];
                 setSubCategoryDropdownValue(value);
-                setFieldValue(previous => ({ ...previous, subCategoryId: ids }));
+                setFieldValue(previous => ({ ...previous, subCategoryIds: ids }));
                 break;
             case "priority":
                 setSelectedPriorityDropdownValue(value);
                 setFieldValue(previous => ({ ...previous}));
                 break;
-
-
-                
+            case "duration":
+                setSelectedDurationDropdownValue(value);
+                setFieldValue(previous => ({ ...previous}));
+                break;
+            case "interval":
+                setSelectedIntervalDropdownValue(value);
+                setFieldValue(previous => ({ ...previous}));
+                break;
+            case "productsId":
+                const id = Array.isArray(value) && value.map(item => item.id) || [];
+                setProductDropdownValue(value);
+                setFieldValue(previous => ({ ...previous, productsIds: id }));
+                break;
+            case "servicesId":
+                const sid = Array.isArray(value) && value.map(item => item.id) || [];
+                setServicesDropdownValue(value);
+                setFieldValue(previous => ({ ...previous, servicesIds: sid }));
+                break;
             default:
                 break;
         }
@@ -259,7 +374,7 @@ const AddEditMaintenance = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const fields = ['title','costOfService','costOfMaterial','commission','labourMinuites','labourCost','memberPrice','addOnPrice','isTaxable','isDiscountable']
+            const fields = ['title','packageCost','costPerVisit','renewalCost','expense','additionalCost','commission','ticketTimeMinutes','laborCost','intervalValue']
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
@@ -331,18 +446,98 @@ const AddEditMaintenance = (props) => {
                             </div>
                             <div className='w-auto md:w-full'>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
-                                    <Input  {...costInputFieldConfiguration("costOfService", "Cost Of Service")} selectedValue={fieldValue?.costOfService} cb={onTextChange('costOfService')} />
-                                    <Input  {...costInputFieldConfiguration("costOfMaterial", "Cost Of Material")} selectedValue={fieldValue?.costOfMaterial} cb={onTextChange('costOfMaterial')} />
-                                    <Input  {...costInputFieldConfiguration("commission", "Commission")} selectedValue={fieldValue?.commission} cb={onTextChange('commission')} />
-                                    <Input {...costInputFieldConfiguration("labourMinuites", "Labour Minuites")}  selectedValue={fieldValue?.labourMinuites} cb={onTextChange('labourMinuites')} />
-                                    <Input {...costInputFieldConfiguration("labourCost", "Labour Cost")}  selectedValue={fieldValue?.labourCost} cb={onTextChange('labourCost')} />
+                                <ReactTypeHead
+                                    header="Duration"
+                                    handleSelect={handleOnChange('duration')}
+                                    dataList={durationList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select duration"
+                                    value={selectedDurationDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                 />
+                                    <Input  {...costInputFieldConfiguration("packageCost", "Package Cost")} selectedValue={fieldValue?.packageCost} cb={onTextChange('packageCost')} />
+                                    <Input  {...costInputFieldConfiguration("costPerVisit", "Cost Per Visit")} selectedValue={fieldValue?.costPerVisit} cb={onTextChange('costPerVisit')} />
+                                    <Input  {...costInputFieldConfiguration("renewalCost", "Renewal Cost")} selectedValue={fieldValue?.renewalCost} cb={onTextChange('renewalCost')} />
                                 </div>
-                                <div className='flex items-center flex-wrap lg:flex-nowrap basis-wrapper gap-4 mt-5'>
-                                    <Input  {...costInputFieldConfiguration("memberPrice", "Member Price")} selectedValue={fieldValue?.memberPrice} cb={onTextChange('memberPrice')} />
-                                    <Input  {...costInputFieldConfiguration("addOnPrice", "Add On Price")} selectedValue={fieldValue?.addOnPrice} cb={onTextChange('addOnPrice')} />
-                                    <CheckBox value="Taxeable" defaultValue={(fieldValue?.isTaxable) ? true : false} cb={onTextChange('isTaxable')} />
-                                    <CheckBox value="Discountable" defaultValue={(fieldValue?.isDiscountable) ? true : false} cb={onTextChange('isDiscountable')} />
+                               
+                            </div>
+
+
+                        </div>
+                        <hr /> 
+                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
+                            <div className='basis__10 border-light'>
+                                <label className='text-base font-bold'>Expense (Internal)</label>
+                            </div>
+                            <div className='w-auto md:w-full'>
+                                <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
+                                    <Input  {...costInputFieldConfiguration("expense", "Expense")} selectedValue={fieldValue?.expense} cb={onTextChange('expense')} />
+                                    <Input  {...costInputFieldConfiguration("additionalCost", "Additional Cost")} selectedValue={fieldValue?.additionalCost} cb={onTextChange('additionalCost')} />
+                                    <Input  {...costInputFieldConfiguration("commission", "commission (if any)")} selectedValue={fieldValue?.commission} cb={onTextChange('commission')} />
+                                    <Input  {...costInputFieldConfiguration("ticketTimeMinutes", "Ticket Time Minutes")} selectedValue={fieldValue?.ticketTimeMinutes} cb={onTextChange('ticketTimeMinutes')} />
+                                    <Input  {...costInputFieldConfiguration("laborCost", "Labor Cost")} selectedValue={fieldValue?.laborCost} cb={onTextChange('laborCost')} />
+                                    
+                               
                                 </div>
+                               
+                            </div>
+
+
+                        </div>
+                        <hr /> 
+                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
+                            <div className='basis__10 border-light'>
+                                <label className='text-base font-bold'>Frequency</label>
+                            </div>
+                            <div className='w-auto md:w-full'>
+                                <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
+                                <ReactTypeHead
+                                    header="Interval"
+                                    handleSelect={handleOnChange('interval')}
+                                    dataList={intervalList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select Interval"
+                                    value={selectedIntervalDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                 />
+                                    <Input  {...costInputFieldConfiguration("intervalValue", (fieldValue?.interval || "Days"))} selectedValue={fieldValue?.intervalValue} cb={onTextChange('intervalValue')} />
+                                </div>
+                               
+                            </div>
+
+
+                        </div>
+                        <hr /> 
+                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
+                            <div className='basis__10 border-light'>
+                                <label className='text-base font-bold'>Products & Services</label>
+                            </div>
+                            <div className='w-auto md:w-full'>
+                                <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
+                                <ReactTypeHead
+                                    header="Products"
+                                    handleSelect={handleOnChange('productsId')}
+                                    dataList={productList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select Products"
+                                    value={selectedProductDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                    isMulti
+                                />
+
+                                <ReactTypeHead
+                                    header="Services"
+                                    handleSelect={handleOnChange('servicesId')}
+                                    dataList={servicesList}
+                                    fields={{ key: 'id', value: 'title' }}
+                                    placeholder="Select Services"
+                                    value={selectedServicesDropdownValue}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                    isMulti
+                                />
+
+                                </div>
+                               
                             </div>
 
 

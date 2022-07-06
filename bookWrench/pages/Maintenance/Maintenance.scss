@@ -28,7 +28,7 @@
 }
 
 
-#commission {
+#packageCost,#costPerVisit,#renewalCost,#expense,#additionalCost,#commission,#laborCost {
   position: relative;
 
       span:nth-of-type(1){
@@ -46,24 +46,24 @@
       color: #555555;
       font-weight: 500;
       font-size: 14px;
-      top: 12px;
-      left: 10px;
+      top: 14px;
+      left: 22px;
     }
-    span:nth-of-type(1)::before{
-      content: " ";
-      position: absolute;
-      transform: translate(100%, 41%);
-      width: 8px;
-      height: 8px;
-      border: 2px solid #555555;
-      border-top: none;
-      border-right: none;
-      top: 17px;
-      right: 14px;
-      transform: rotate(315deg);
-    }
+    // span:nth-of-type(1)::before{
+    //   content: " ";
+    //   position: absolute;
+    //   transform: translate(100%, 41%);
+    //   width: 8px;
+    //   height: 8px;
+    //   border: 2px solid #555555;
+    //   border-top: none;
+    //   border-right: none;
+    //   top: 17px;
+    //   right: 14px;
+    //   transform: rotate(315deg);
+    // }
 }
-#labourMinuites{
+#ticketTimeMinutes{
   position: relative;
   flex-basis: 13%;
 
@@ -82,22 +82,22 @@
       color: #555555;
       font-weight: 500;
       font-size: 14px;
-      top: 10px;
-      left: 8px;
+      top: 14px;
+      left: 18px;
     }
-    span:nth-of-type(1)::before{
-      content: " ";
-      position: absolute;
-      transform: translate(100%, 41%);
-      width: 8px;
-      height: 8px;
-      border: 2px solid #555555;
-      border-top: none;
-      border-right: none;
-      top: 16px;
-      right: 14px;
-      transform: rotate(315deg);
-    }
+    // span:nth-of-type(1)::before{
+    //   content: " ";
+    //   position: absolute;
+    //   transform: translate(100%, 41%);
+    //   width: 8px;
+    //   height: 8px;
+    //   border: 2px solid #555555;
+    //   border-top: none;
+    //   border-right: none;
+    //   top: 16px;
+    //   right: 14px;
+    //   transform: rotate(315deg);
+    // }
 }
 
 #costOfService .label__small::after{

@@ -65,12 +65,12 @@ export default class Services {
             console.log(error);
             return error;
         }
-    }  
-
-    static async departmentList(cb) {
+    } 
+    
+    static async productList(cb) {
         try {
-            const data = await API.get('department');
-            // showToster({ status: 'Success', msg: "Department has been added successfully" });
+            const data = await API.get('products');
+            // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -78,7 +78,23 @@ export default class Services {
             console.log(error);
             return error;
         }
-    } 
+    }
+    
+    static async servicesList(cb) {
+        try {
+            const data = await API.get('service');
+            // showToster({ status: 'Success', msg: "Category has been added successfully" });
+            return cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    }
+
+    
+
     static async deleteMaintenance(dataObject,params = {}, id,cb) {
         try {
             const data = await API.delete('maintenance', dataObject, params, id);
