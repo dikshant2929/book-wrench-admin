@@ -33,6 +33,13 @@ const path = {
     ProductEdit: PREFIX + 'product/edit/:editproduct',
     ProductView: PREFIX + 'product/view/:editproduct',
     
+    Maintenance: PREFIX + 'maintenance',
+    MaintenanceCreate: PREFIX + 'maintenance/create',
+    MaintenanceEdit: PREFIX + 'maintenance/edit/:editmaintenance',
+    MaintenanceView: PREFIX + 'maintenance/view/:editmaintenance',
+    
+
+    
 
     
 

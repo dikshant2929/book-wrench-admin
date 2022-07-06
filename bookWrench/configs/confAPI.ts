@@ -35,9 +35,8 @@ export default {
         url: 'product/',
         options: {},
     },
-
-    
-
-    
-     
+    maintenance: {
+        url: 'maintenance/',
+        options: {},
+    },
 };

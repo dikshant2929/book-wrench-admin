@@ -38,7 +38,13 @@ const {
     Product,
     ProductCreate,
     ProductEdit,
-    ProductView
+    ProductView,
+
+    Maintenance,
+    MaintenanceCreate,
+    MaintenanceEdit,
+    MaintenanceView,
+    
 
 
     
@@ -79,6 +85,12 @@ const privateRouteConfig = [
     { name: 'product-create', path: ProductCreate, componentName: 'ProductCreate', exact: true },
     { name: 'product-view', path: ProductView, componentName: 'ProductView', exact: true },
     { name: 'product', path: Product, componentName: 'Product', exact: true },
+
+
+    { name: 'maintenance-edit', path: MaintenanceEdit, componentName: 'MaintenanceCreate'},
+    { name: 'maintenance-create', path: MaintenanceCreate, componentName: 'MaintenanceCreate', exact: true },
+    { name: 'maintenance-view', path: MaintenanceView, componentName: 'MaintenanceView', exact: true },
+    { name: 'maintenance', path: Maintenance, componentName: 'Maintenance', exact: true },
     
 
     { name: 'vendor-management-edit', path: VendorManagementEdit, componentName: 'VendorManagementCreate'},
@@ -116,12 +128,20 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'AddEditService' */ '@pages/Service/AddEditService'));
         case 'ServiceView':
             return loadable(() => import(/* webpackChunkName: 'ServiceView' */ '@pages/Service/ViewService'));
-      case 'Product':
+        case 'Product':
             return loadable(() => import(/* webpackChunkName: 'Product' */ '@pages/Product'));
         case 'ProductCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditProduct' */ '@pages/Product/AddEditProduct'));
         case 'ProductView':
             return loadable(() => import(/* webpackChunkName: 'ProductView' */ '@pages/Product/ViewProduct'));
+
+        case 'Maintenance':
+            return loadable(() => import(/* webpackChunkName: 'Maintenance' */ '@pages/Maintenance'));
+        case 'MaintenanceCreate':
+            return loadable(() => import(/* webpackChunkName: 'AddEditMaintenance' */ '@pages/Maintenance/AddEditMaintenance'));
+        case 'MaintenanceView':
+            return loadable(() => import(/* webpackChunkName: 'MaintenanceView' */ '@pages/Maintenance/ViewMaintenance'));
+
         case 'VendorManagement':
             return loadable(() => import(/* webpackChunkName: 'VendorManagement' */ '@pages/VendorManagement'));
         case 'VendorManagementCreate':
