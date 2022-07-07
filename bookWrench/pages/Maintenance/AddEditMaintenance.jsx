@@ -38,14 +38,20 @@ const intervalList = [
         title:"Days"
     },
     {
-        id:"month",
-        title:"Month"
+        id:"weeks",
+        title:"Weeks"
     },
     {
-        id:"season",
-        title:"Season"
+        id:"months",
+        title:"Months"
+    },
+    {
+        id:"seasons",
+        title:"Seasons"
     },
 ]
+
+
 
 
 const durationList = [
@@ -62,14 +68,20 @@ const durationList = [
         title:"2 Years"
     },
     {
-        id:"1820 days",
-        title:"5 Months"
+        id:"1092 days",
+        title:"3 Years"
     },
     {
-        id:"continue",
-        title:"continue"
+        id:"1820 days",
+        title:"5 Years"
+    },
+    {
+        id:"continous",
+        title:"Ongoing & Continous"
     }
 ]
+
+
 
 const formConfiguration = (keyOfInput, label) => {
     return {
