@@ -25,7 +25,7 @@ const defaultProps = {
 
             {
                 key: 'title',
-                value: 'Service Name',
+                value: 'Package Name',
             },
             {
                 key: 'departmentTitle',
@@ -40,21 +40,18 @@ const defaultProps = {
                 value: 'Sub Category',
             },
             {
-                key: 'costOfService',
-                value: 'Cost of Service',
+                key: 'duration',
+                value: 'Duration',
             },
             {
-                key: 'costOfMaterial',
-                value: 'Cost of material',
+                key: 'price',
+                value: 'Price',
             },
             {
-                key: 'labourMinuites',
-                value: 'Labour Mins',
+                key: 'activeUser',
+                value: 'Active User',
             },
-            {
-                key: 'commission',
-                value: 'Commission',
-            },
+            
          // {
             //     key: 'status',
             //     value: 'Status',
@@ -139,13 +136,12 @@ const Maintenance = (props) => {
             prevConfig.table.filteredRecords = 0;
             prevConfig.table.dataList = data.map((item, index) => (
                 { ...item,
-                subCategoryTitle:item?.subCategoryId?.title || "NA", 
+                subCategoryTitle:item?.subCategoryIds[0]?.title || "NA", 
                 categoryTitle:item?.categoryId?.title || "NA", 
                 departmentTitle:item?.categoryId?.departmentId?.title || "NA", 
-                costOfService: item?.cost?.costOfService || "NA", 
-                costOfMaterial: item?.cost?.costOfMaterial || "NA", 
-                labourMinuites: item?.cost?.labourMinuites || "NA", 
-                commission: item?.cost?.commission || "NA", 
+                duration:item?.cost?.duration || "NA",
+                price:item?.cost?.packageCost || "NA",
+                activeUser:"NA",
                 actions: ['edit', 'expire','view'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
@@ -177,13 +173,7 @@ const Maintenance = (props) => {
             case 'status':
                 const onChange = (key) => ({ value }) => updateStatus(key, { isActive: value });
                 return <Switch defaultValue={data.isActive} id={data.id} onChange={onChange} />
-            case 'costOfService':
-                return <p>${data[column.key]}</p>;
-            
-            case 'costOfMaterial':
-                return <p>${data[column.key]}</p>;
-            
-            case 'commission':
+            case 'price':
                 return <p>${data[column.key]}</p>;
             default:
                 return <p>{data[column.key]}</p>;

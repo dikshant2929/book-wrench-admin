@@ -12,7 +12,7 @@ import FileUpload from '@app/widgets/FileUpload';
 
 import exposedPath from '@ExposedPath';
 import encrypt from '@app/storage/encrypt';
-import './Service.scss';
+import './Maintenance.scss';
 import Services from './Services/maintenance.service';
 import Button from '@button';
 import MultipleDocUploader from '../../../common/elements/MultipleDocUploader';

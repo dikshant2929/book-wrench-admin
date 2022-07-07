@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Input from '@common/elements/Input';
-import RadioBox from '@common/elements/Radiobox';
-import CheckBox from '@common/elements/CheckBox';
 import MultipleVideoUploader from '@common/elements/MultipleVideoUploader';
-
-
-
 import Textarea from '@common/elements/Textarea';
 import ReactTypeHead from '@common/elements/ReactTypehead';
 import FileUpload from '@app/widgets/FileUpload';
-
 import exposedPath from '@ExposedPath';
 import encrypt from '@app/storage/encrypt';
 import './Maintenance.scss';
@@ -133,7 +127,7 @@ const costInputFieldConfiguration = (keyOfInput, label) => {
 
 const AddEditMaintenance = (props) => {
 
-    const mandatoryFields = ["categoryId", "title"];
+    const mandatoryFields = ["categoryId", "title","packageCost","costPerVisit","renewalCost","duration","interval","intervalValue"];
 
    
     const [isEditMode, setEditMode] = useState(false);
@@ -214,7 +208,7 @@ const AddEditMaintenance = (props) => {
 
         let categoryId = null;
         let subCategoryIds = null;
-        let productIds = null;
+        let productsIds = null;
         let servicesIds = null;
 
         
@@ -223,10 +217,9 @@ const AddEditMaintenance = (props) => {
        
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            console.log(data)
             const { title, isActive, packageDescription, icon } = data;
             subCategoryIds = Array.isArray(data.subCategoryIds) && data.subCategoryIds.map(item => item.id) || [];
-            productIds = Array.isArray(data.productIds) && data.productIds.map(item => item.id) || [];
+            productsIds = Array.isArray(data.productsIds) && data.productsIds.map(item => item.id) || [];
             servicesIds = Array.isArray(data.servicesIds) && data.servicesIds.map(item => item.id) || [];
             setFieldValue(
                 { 
@@ -235,7 +228,7 @@ const AddEditMaintenance = (props) => {
                     packageDescription, 
                     icon,
                     subCategoryIds, 
-                    productIds,
+                    productsIds,
                     servicesIds,
                     categoryId:data.categoryId.id,
                     priority:data.priority,
@@ -263,7 +256,27 @@ const AddEditMaintenance = (props) => {
             );
 
             categoryId = data.categoryId.id;
+
+          
+            if (data.priority) {
+                const selectedData = priorityList.find(item => item.id === data.priority);
+                setSelectedPriorityDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
+            if (data.cost.duration) {
+                const selectedData = durationList.find(item => item.id === data.cost.duration);
+                setSelectedDurationDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
+
+            if (data.frequency.interval) {
+                const selectedData = intervalList.find(item => item.id === data.frequency.interval);
+                setSelectedIntervalDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
             
+
+
+            
+
+
             setTitle(`Edit Maintenance (${data.title})`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
@@ -272,7 +285,7 @@ const AddEditMaintenance = (props) => {
 
         fetchCategoryList(categoryId);
         fetchSubCategoryList(categoryId,subCategoryIds) 
-        fetchProductList(productIds);
+        fetchProductList(productsIds);
         fetchServicesList(servicesIds);
 
         
@@ -283,23 +296,27 @@ const AddEditMaintenance = (props) => {
 
     
     
-    const fetchProductList = (productIds) => {
+    const fetchProductList = (productsIds) => {
         Services.productList(data => {
             setProductList(data);
-            if (productIds) {
-                const selectedData = data.find(item => item.id === productId);
-                setProductDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            
+            if (productsIds && Array.isArray(productsIds) && productsIds.length) {
+                let selectedDataList = data.filter(item => productsIds.some(productId => productId === item.id));
+                selectedDataList = selectedDataList.map(item => ({ ...item, label: item.title, value: item.id }))
+                setProductDropdownValue([...selectedDataList]);
             }
 
         })
     }
+    
 
     const fetchServicesList = (servicesIds) => {
         Services.servicesList(data => {
             setServicesList(data);
-            if (servicesIds) {
-                const selectedData = data.find(item => item.id === servicesId);
-                setServicesDropdownValue({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            if (servicesIds && Array.isArray(servicesIds) && servicesIds.length) {
+                let selectedDataList = data.filter(item => servicesIds.some(servicesId => servicesId === item.id));
+                selectedDataList = selectedDataList.map(item => ({ ...item, label: item.title, value: item.id }))
+                setServicesDropdownValue([...selectedDataList]);
             }
 
         })
@@ -331,7 +348,6 @@ const AddEditMaintenance = (props) => {
 
     const handleOnChange = (key) => (value) => {
         setFieldValue(previous => ({ ...previous, [key]: value.id }));
-
         switch (key) {
             case "categoryId":
                 setSubCategoryList([])
@@ -380,8 +396,6 @@ const AddEditMaintenance = (props) => {
         }
     }
 
-   console.log(fieldValue,"fieldValue") 
-   
     return (
         <div className="addCategory bg-white center mx-8 md:mx-20 mt-12 mb-10 rounded-md">
             <h1 className="text-center font-medium text-2xl px-10 py-8 sm:text-left border-b-2 border-[#EDEFFB]">
