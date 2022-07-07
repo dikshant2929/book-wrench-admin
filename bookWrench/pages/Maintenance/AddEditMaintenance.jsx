@@ -403,8 +403,8 @@ const AddEditMaintenance = (props) => {
             </h1>
             <div className="wrapper__1">
                 <div className="wrapper__2">
-                    <div className="add-catg-form-wrapper">
-                        <div className="flex flex-col lg:flex-row lg:items-center category__header m-10 gap-4">
+                    <div className="add-catg-form-wrapper maintenance__wrapper">
+                        <div className="flex flex-col lg:flex-row lg:items-center category__header m-10 gap-4 maintenance__first">
                             <div className='basis__10 border-light'>
                                 <label className='text-base font-bold'>Category</label>
                             </div>
@@ -416,7 +416,7 @@ const AddEditMaintenance = (props) => {
                                 fields={{ key: 'id', value: 'title' }}
                                 placeholder="Select Category"
                                 value={selectedDropdownValue}
-                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none mandatory__field"}
                             />
 
                             <ReactTypeHead
@@ -444,7 +444,7 @@ const AddEditMaintenance = (props) => {
                                     fields={{ key: 'id', value: 'title' }}
                                     placeholder="Select priority"
                                     value={selectedPriorityDropdownValue}
-                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                    parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none mt-5"}
                                  />
                                 <div className='flex gap-4 mt-5'>
                                      <Textarea parentClass="textArea w-1/2 ta__with-height" value={fieldValue?.packageDescription} onChange={onTextChange('packageDescription')} title="Package Description" name="packageDescription" />
@@ -455,8 +455,8 @@ const AddEditMaintenance = (props) => {
                         </div>
                         <hr />
                         <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
-                            <div className='basis__10 border-light'>
-                                <label className='text-base font-bold'>Cost</label>
+                            <div className='basis__10 border-light mandatory__heading'>
+                                <label className='label-warning text-base font-bold'>Cost</label>
                             </div>
                             <div className='w-auto md:w-full'>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
@@ -500,8 +500,8 @@ const AddEditMaintenance = (props) => {
                         </div>
                         <hr /> 
                         <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
-                            <div className='basis__10 border-light'>
-                                <label className='text-base font-bold'>Frequency</label>
+                            <div className='basis__10 border-light mandatory__heading'>
+                                <label className='label-warning text-base font-bold'>Frequency</label>
                             </div>
                             <div className='w-auto md:w-full'>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>

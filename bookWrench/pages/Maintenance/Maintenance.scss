@@ -26,7 +26,14 @@
     box-shadow: none;
     
 }
-
+#packageCost,#costPerVisit,#renewalCost{   
+    span:nth-of-type(1){
+      right: 0 !important;
+    }
+}
+#intervalValue,#packageCost,#costPerVisit,#renewalCost{
+  padding: 0;
+}
 
 #packageCost,#costPerVisit,#renewalCost,#expense,#additionalCost,#commission,#laborCost {
   position: relative;
@@ -100,12 +107,27 @@
     // }
 }
 
-#costOfService .label__small::after{
+.mandatory__field .label__small::after{
   content: "*";
   color: red;
   font-size: 14px;
   margin-left: 2px;
 }
+
+#title .label__small::after{
+  content: "*";
+  color: red;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
+.mandatory__heading .label-warning::after{
+  content: "*";
+  color: red;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
 .ta__with-height textarea{
   height: 136px;
   margin-top: 14px;
@@ -122,6 +144,12 @@ position: absolute;
 // bottom: 0px;
 top: 100%;
 left: 0;
+}
+.__value-container{
+  border-radius: 10px 0 0 10px;
+}
+.__indicators{
+  border-radius: 0 10px 10px 0;
 }
 
 @media only screen and (max-width: 768px) {
