@@ -454,9 +454,9 @@ const AddEditMaintenance = (props) => {
 
                         </div>
                         <hr />
-                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
-                            <div className='basis__10 border-light mandatory__heading'>
-                                <label className='label-warning text-base font-bold'>Cost</label>
+                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10 mandatory__field">
+                            <div className='basis__10 border-light'>
+                                <label className='text-base font-bold'>Cost</label>
                             </div>
                             <div className='w-auto md:w-full'>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
@@ -499,9 +499,9 @@ const AddEditMaintenance = (props) => {
 
                         </div>
                         <hr /> 
-                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10">
-                            <div className='basis__10 border-light mandatory__heading'>
-                                <label className='label-warning text-base font-bold'>Frequency</label>
+                        <div className="w-auto md:w-full flex flex-col md:flex-row gap-4 m-10 mandatory__field">
+                            <div className='basis__10 border-light '>
+                                <label className='text-base font-bold'>Frequency</label>
                             </div>
                             <div className='w-auto md:w-full'>
                                 <div className='flex basis-wrapper flex-wrap lg:flex-nowrap gap-4'>
