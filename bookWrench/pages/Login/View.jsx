@@ -70,12 +70,12 @@ const View = (props) => {
     const showSuccessMessage = (data) => {
         const msg = data?.data?.responseMessage || data?.data?.message || 'Something went wrong';
         setToastState({ ...{ visibility: true, isSuccess: true, message: msg } });
-        setTimeout(() => {
-            setToastState({ ...{ visibility: false, isSuccess: false, message: null } });
-            props?.auth?.authenticate(() => {
-                window.location.replace(Dashboard);
-            });
-        }, 2000);
+        // setTimeout(() => {
+        //     setToastState({ ...{ visibility: false, isSuccess: false, message: null } });
+        //     props?.auth?.authenticate(() => {
+        //         window.location.replace(Dashboard);
+        //     });
+        // }, 2000);
     };
 
     const sendRequest = (request) => {
