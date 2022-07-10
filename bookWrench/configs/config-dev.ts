@@ -5,7 +5,7 @@ export default {
     cors: 1,
     logs: 1,
     isStackTrace: 1,
-    baseUrl: 'https://1.0.4.211:9001',
+    baseUrl : "/api/v1/",
     // apiBaseUrl: 'http://app.connecto.io/newconnecto/',
     // apiServerBaseUrl: 'http://app.connecto.io/newconnecto/',
     jobsBaseUrl: 'https://staging-app.connecto.io/',

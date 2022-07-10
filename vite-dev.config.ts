@@ -7,12 +7,11 @@ const env = "staging" || process.env.NODE_ENV;
 
 const server = {
     proxy: {
-        '/api/v1': {
+        '^/api/v1/*': {
             target: baseUrl[env] || "http://localhost:4002/api/v1/",
-            //target : 'https://bookWrench-uat-ec2.cardekho.com',
             changeOrigin: true,
-            secure: true,
-            //rewrite: (path) => path.replace(/^\/api\/v1/, ''),
+            secure: false,
+            rewrite: (path) => path.replace(/^\/api\/v1/, ''),
         },
     },
 };
