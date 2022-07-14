@@ -1,0 +1,173 @@
+.addCategory {
+    box-shadow: 0 0 15px -7px grey;   
+}
+
+
+
+.category {   
+    .btn-wrapper {  
+      a{
+        font-size: 0.875rem;
+        line-height: 1rem;
+      }
+    }
+  }
+  .formInner{    
+    [type='text']{
+      width: 50%;     
+    }   
+  } 
+
+  .basis-wrapper > div{
+    flex-basis: 13%;
+  }
+  
+  .no-outline:focus{
+    box-shadow: none;
+    
+}
+#packageCost,#costPerVisit,#renewalCost{   
+    span:nth-of-type(1){
+      right: 0 !important;
+    }
+}
+#intervalValue,#packageCost,#costPerVisit,#renewalCost{
+  padding: 0;
+}
+
+#packageCost,#costPerVisit,#renewalCost,#expense,#additionalCost,#commission,#laborCost {
+  position: relative;
+
+      span:nth-of-type(1){
+      position: absolute;
+      width: 55px;
+      height: 48px;
+      right: 4px;
+      border-radius: 0px 8px 8px 0px;
+      background-color: lightgray;
+    }
+    span:nth-of-type(1)::after{
+      content: "$";
+      text-align: center;
+      position: absolute;
+      color: #555555;
+      font-weight: 500;
+      font-size: 14px;
+      top: 14px;
+      left: 22px;
+    }
+    // span:nth-of-type(1)::before{
+    //   content: " ";
+    //   position: absolute;
+    //   transform: translate(100%, 41%);
+    //   width: 8px;
+    //   height: 8px;
+    //   border: 2px solid #555555;
+    //   border-top: none;
+    //   border-right: none;
+    //   top: 17px;
+    //   right: 14px;
+    //   transform: rotate(315deg);
+    // }
+}
+#ticketTimeMinutes{
+  position: relative;
+  flex-basis: 13%;
+
+      span:nth-of-type(1){
+      position: absolute;
+      width: 70px;
+      height: 48px;
+      right: 4px;
+      border-radius: 0px 8px 8px 0px;
+      background-color: lightgray;
+    }
+    span:nth-of-type(1)::after{
+      content: "mins";
+      text-align: center;
+      position: absolute;
+      color: #555555;
+      font-weight: 500;
+      font-size: 14px;
+      top: 14px;
+      left: 18px;
+    }
+    // span:nth-of-type(1)::before{
+    //   content: " ";
+    //   position: absolute;
+    //   transform: translate(100%, 41%);
+    //   width: 8px;
+    //   height: 8px;
+    //   border: 2px solid #555555;
+    //   border-top: none;
+    //   border-right: none;
+    //   top: 16px;
+    //   right: 14px;
+    //   transform: rotate(315deg);
+    // }
+}
+
+.mandatory__field .label__small::after{
+  content: "*";
+  color: red;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
+#title .label__small::after{
+  content: "*";
+  color: red;
+  font-size: 14px;
+  margin-left: 2px;
+}
+
+.ta__with-height textarea{
+  height: 136px;
+  margin-top: 14px;
+}
+
+.errorField{
+  position: relative;
+}
+
+.error_msg_red{
+font-size: 9px;
+// margin: 0;
+position: absolute;
+// bottom: 0px;
+top: 100%;
+left: 0;
+}
+.__value-container{
+  border-radius: 10px 0 0 10px;
+}
+.__indicators{
+  border-radius: 0 10px 10px 0;
+}
+
+@media only screen and (max-width: 768px) {
+  .addCategory .add-catg-form-wrapper form input{
+      margin-bottom: 1.5rem;
+  }
+  .basis-wrapper > div{
+    flex-basis: 45%;
+  }
+}
+
+
+@media only screen and (max-width: 991px) {
+ 
+  .basis-wrapper > div{
+    flex-basis: 45% !important;
+  }
+  .basis__48{
+    flex-basis: 48% !important;
+  }
+  .border-light{
+    padding-bottom: 1.75rem;
+    border-bottom-width: 2px;
+    border-color: rgba(243, 244, 246, var(--tw-border-opacity));
+  }
+}
+
+

@@ -44,6 +44,14 @@ const {
     MaintenanceCreate,
     MaintenanceEdit,
     MaintenanceView,
+
+
+    Customer,
+    CustomerCreate,
+    CustomerEdit,
+    CustomerView,
+
+    
     
 
 
@@ -91,6 +99,11 @@ const privateRouteConfig = [
     { name: 'maintenance-create', path: MaintenanceCreate, componentName: 'MaintenanceCreate', exact: true },
     { name: 'maintenance-view', path: MaintenanceView, componentName: 'MaintenanceView', exact: true },
     { name: 'maintenance', path: Maintenance, componentName: 'Maintenance', exact: true },
+
+    { name: 'customer-edit', path: CustomerEdit, componentName: 'CustomerCreate'},
+    { name: 'customer-create', path: CustomerCreate, componentName: 'CustomerCreate', exact: true },
+    { name: 'customer-view', path: CustomerView, componentName: 'CustomerView', exact: true },
+    { name: 'customer', path: Customer, componentName: 'Customer', exact: true },
     
 
     { name: 'vendor-management-edit', path: VendorManagementEdit, componentName: 'VendorManagementCreate'},
@@ -141,8 +154,14 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'AddEditMaintenance' */ '@pages/Maintenance/AddEditMaintenance'));
         case 'MaintenanceView':
             return loadable(() => import(/* webpackChunkName: 'MaintenanceView' */ '@pages/Maintenance/ViewMaintenance'));
+        case 'Customer':
+            return loadable(() => import(/* webpackChunkName: 'Customer' */ '@pages/Customer'));
+        case 'CustomerCreate':
+            return loadable(() => import(/* webpackChunkName: 'AddEditCustomer' */ '@pages/Customer/AddEditCustomer'));
+        case 'CustomerView':
+            return loadable(() => import(/* webpackChunkName: 'CustomerView' */ '@pages/Customer/ViewCustomer'));
 
-        case 'VendorManagement':
+            case 'VendorManagement':
             return loadable(() => import(/* webpackChunkName: 'VendorManagement' */ '@pages/VendorManagement'));
         case 'VendorManagementCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditVendorManagement' */ '@pages/VendorManagement/AddEditVendorManagement'));

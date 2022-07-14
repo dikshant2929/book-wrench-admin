@@ -4,7 +4,7 @@
   "scripts": {
     "test": "jest -u",
     "test:non-update": "jest",
-    "dev": "cross-env TAILWIND_MODE=watch NODE_ENV=dev configs=dev vite --debug --config vite-dev.config.ts --port 3000",
+    "dev": "cross-env TAILWIND_MODE=watch NODE_ENV=dev configs=dev vite --debug --config vite-dev.config.ts --port 3001",
     "build:staging": "cross-env NODE_ENV=staging configs=staging vite build",
     "build:prod": "cross-env NODE_ENV=production configs=production vite build",
     "build:uat": "cross-env NODE_ENV=uat configs=uat vite build",

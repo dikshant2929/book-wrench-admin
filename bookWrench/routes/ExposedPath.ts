@@ -37,6 +37,11 @@ const path = {
     MaintenanceCreate: PREFIX + 'maintenance/create',
     MaintenanceEdit: PREFIX + 'maintenance/edit/:editmaintenance',
     MaintenanceView: PREFIX + 'maintenance/view/:editmaintenance',
+
+    Customer: PREFIX + 'customer',
+    CustomerCreate: PREFIX + 'customer/create',
+    CustomerEdit: PREFIX + 'customer/edit/:editcustomer',
+    CustomerView: PREFIX + 'customer/view/:editcustomer',
     
 
     
