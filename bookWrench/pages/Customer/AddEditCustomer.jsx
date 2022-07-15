@@ -32,20 +32,20 @@ const customerTypeList = [
 
 const customerCategoryList = [
     {
-        id: "silver",
-        title: "Silver"
+        id: "residential",
+        title: "Residential"
     },
     {
-        id: "gold",
-        title: "Gold"
+        id: "retail",
+        title: "Retail"
     },
     {
-        id: "platinum",
-        title: "Platinum"
+        id: "industrial",
+        title: "Industrial"
     },
     {
-        id: "diamond",
-        title: "Diamond"
+        id: "enterprise",
+        title: "Enterprise"
     }
 ]
 
@@ -204,12 +204,13 @@ const AddEditCustomer = (props) => {
 
     console.log(fieldValue)
     return (
+        <div className="mx-8 sm:mx-20 mt-12 mb-10">
         <div className='customer__wrapper'>
             <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
                 {title}
             </h1>
             <div className='customer__section flex gap-3 m-6'>
-                <div className='customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
+                <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
                     <ul className='side_menubar'>
                         <li className='active'>Personal Information</li>
                         <li>Service Request</li>
@@ -277,6 +278,7 @@ const AddEditCustomer = (props) => {
                 </div>
             </div>
 
+        </div>
         </div>
 
     );
