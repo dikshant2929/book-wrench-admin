@@ -39,4 +39,8 @@ export default {
         url: 'maintenance/',
         options: {},
     },
+    customer: {
+        url: 'customer/',
+        options: {},
+    },
 };
