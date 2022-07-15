@@ -130,7 +130,7 @@ const Customer = (props) => {
     };
 
     useEffect(() => {
-        Services.maintenanceList(data => {
+        Services.customerList(data => {
             const prevConfig = { ...config };
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;

@@ -121,6 +121,16 @@
   margin-left: 2px;
 }
 
+#firstName,
+#lastName,
+#email {
+    .label__small::after{
+      content: "*";
+      color: red;
+      font-size: 14px;
+      margin-left: 2px;
+    }
+  }
 .ta__with-height textarea{
   height: 136px;
   margin-top: 14px;
@@ -144,6 +154,30 @@ left: 0;
 .__indicators{
   border-radius: 0 10px 10px 0;
 }
+#email,#mobileNumber{
+  padding: 0;
+}
+
+.side_menubar{
+
+  & li{
+    margin-inline: 14px;
+    padding-block-start: 24px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  & li:first-child{
+    padding-block-start: 0;
+  }
+
+  & li.active{
+    color:#0052CC;
+    border-bottom: 2px solid #0052CC;
+  }
+}
+
+
+// --------------------****------------------- Media Queries -------------------------------****------------
 
 @media only screen and (max-width: 768px) {
   .addCategory .add-catg-form-wrapper form input{
