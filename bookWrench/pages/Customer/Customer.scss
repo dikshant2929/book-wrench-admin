@@ -165,6 +165,7 @@ left: 0;
     padding-block-start: 24px;
     font-size: 1rem;
     font-weight: 500;
+    white-space: nowrap;
   }
   & li:first-child{
     padding-block-start: 0;
@@ -175,7 +176,6 @@ left: 0;
     border-bottom: 2px solid #0052CC;
   }
 }
-
 
 // --------------------****------------------- Media Queries -------------------------------****------------
 

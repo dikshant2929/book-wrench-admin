@@ -29,7 +29,8 @@
     .basis__33 {
         flex-basis: 33%;
     }
-    .basis__75{
+
+    .basis__75 {
         flex-basis: 75%;
     }
 
@@ -50,11 +51,12 @@
 
     .form__input_w_height {
         @apply h-12 w-full rounded-lg border border-[#D6D6D6] text-sm text-black;
-    }
 
-    .form__input_w_height:focus {
-        @apply ring-1 ring-[#2563eb] border-0;
+        &:focus {
+                 @apply ring-1 ring-[#2563eb] border-0;
+        }
     }
+   
 
     .form__input__border {
         @apply rounded-lg border border-[#D6D6D6]
@@ -74,6 +76,10 @@
 
     .__multi-value--is-disabled .custamSelectBox.__multi-value__label {
         color: hsl(0, 0%, 60%);
+    }
+
+    .custamSelectBox {
+        white-space: nowrap;
     }
 
 
