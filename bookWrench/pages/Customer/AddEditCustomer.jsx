@@ -209,9 +209,9 @@ const AddEditCustomer = (props) => {
             <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
                 {title}
             </h1>
-            <div className='customer__section flex gap-3 m-6'>
+            <div className='customer__section flex flex-col lg:flex-row gap-3 m-6'>
                 <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
-                    <ul className='side_menubar'>
+                    <ul className='side_menubar text-center md:text-left'>
                         <li className='active'>Personal Information</li>
                         <li>Service Request</li>
                         <li>Maintenance</li>
@@ -224,9 +224,9 @@ const AddEditCustomer = (props) => {
                         <div className="wrapper__2">
                             <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
                                 <h3 className='text-base font-bold'>Personal Information</h3>
-                                <div className='customer__detail_section my-8 flex flex-col'>
+                                <div className='customer__detail_section mt-6 flex flex-col'>
                                     <h4 className='text-xs font-bold mb-4'>Customer Details</h4>
-                                    <div className='grid grid-cols-4 gap-4'>
+                                    <div className='grid md:grid-cols-4 gap-4'>
                                         <Input  {...formConfiguration("firstName", "First Name")} selectedValue={fieldValue?.firstName} cb={onTextChange('firstName')} />
                                         <Input  {...formConfiguration("lastName", "Last Name")} selectedValue={fieldValue?.lastName} cb={onTextChange('lastName')} />
                                         <Input  {...costInputFieldConfigurationEmail("email", "Primary Email")} selectedValue={fieldValue?.email} cb={onTextChange('email')} />
@@ -255,7 +255,7 @@ const AddEditCustomer = (props) => {
 
                                 </div>
 
-                                <div className='POC__section'>
+                                <div className='POC__section my-8'>
                                     <h4 className='text-xs font-bold mb-4'>Points of Contact</h4>
                                 </div>
 
