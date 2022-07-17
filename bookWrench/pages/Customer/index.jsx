@@ -24,38 +24,29 @@ const defaultProps = {
             // },
 
             {
-                key: 'title',
-                value: 'Package Name',
+                key: 'customerId',
+                value: 'Customer Id',
             },
             {
-                key: 'departmentTitle',
-                value: 'Department',
+                key: 'customerName',
+                value: 'Customer Name',
             },
             {
-                key: 'categoryTitle',
-                value: 'Category',
+                key: 'email',
+                value: 'Email',
             },
             {
-                key: 'subCategoryTitle',
-                value: 'Sub Category',
+                key: 'mobileNumber',
+                value: 'Mobile Number',
             },
             {
-                key: 'duration',
-                value: 'Duration',
+                key: 'customerCategory',
+                value: 'Customer Category',
             },
             {
-                key: 'price',
-                value: 'Price',
+                key: 'customerType',
+                value: 'Customer Type',
             },
-            {
-                key: 'activeUser',
-                value: 'Active User',
-            },
-            
-         // {
-            //     key: 'status',
-            //     value: 'Status',
-            // },
             {
                 key: 'createdAt',
                 value: 'Created At',
@@ -136,13 +127,8 @@ const Customer = (props) => {
             prevConfig.table.filteredRecords = 0;
             prevConfig.table.dataList = data.map((item, index) => (
                 { ...item,
-                subCategoryTitle:item?.subCategoryIds[0]?.title || "NA", 
-                categoryTitle:item?.categoryId?.title || "NA", 
-                departmentTitle:item?.categoryId?.departmentId?.title || "NA", 
-                duration:item?.cost?.duration || "NA",
-                price:item?.cost?.packageCost || "NA",
-                activeUser:"NA",
-                actions: ['edit', 'expire','view'] }));
+                customerName:item.firstName + " " + item.lastName,
+                actions: ['edit', 'expire'] }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });

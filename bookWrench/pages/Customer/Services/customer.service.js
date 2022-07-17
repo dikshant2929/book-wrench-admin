@@ -47,7 +47,7 @@ export default class Services {
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
-            const msg = error?.response?.data?.message || 'Something went wrong';
+            const msg = error?.response?.data?.message || 'Something went wrong shankar';
             showToster({ status: 'Error', msg: msg });
             console.log(error);
             return error;
