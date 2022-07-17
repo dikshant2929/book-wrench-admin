@@ -130,9 +130,9 @@ const costInputFieldConfigurationEmail = (keyOfInput, label) => {
 
 const AddEditCustomer = (props) => {
 
-    const mandatoryFields = ["firstName", "lastName", "email"];
+    const mandatoryFields = ["firstName", "lastName", "email","mobileNumber"];
 
-
+console.log(props)
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState('Add New Customer');
@@ -162,8 +162,19 @@ const AddEditCustomer = (props) => {
         const encryptedData = props?.match?.params?.editcustomer;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            const { firstName, lastName, email } = data;
-            setFieldValue({ firstName, lastName, email });
+           
+            const { firstName, lastName, email,mobileNumber } = data;
+            setFieldValue({ firstName, lastName, email,mobileNumber });
+
+            if (data.customerCategory) {
+                const selectedData = customerCategoryList.find(item => item.id === data.customerCategory);
+                setSelectedDropdownValueCustomerCategory({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
+
+            if (data.customerType) {
+                const selectedData = customerTypeList.find(item => item.id === data.customerType);
+                setSelectedDropdownValueCustomer({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            }
 
             setTitle(`Edit Customer (${data.title})`);
             formConfiguration.selectedValue = data.title;
@@ -202,7 +213,7 @@ const AddEditCustomer = (props) => {
         }
     }
 
-    console.log(fieldValue)
+
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
         <div className='customer__wrapper'>
@@ -256,7 +267,7 @@ const AddEditCustomer = (props) => {
                                 </div>
 
                                 <div className='POC__section my-8'>
-                                    <h4 className='text-xs font-bold mb-4'>Points of Contact</h4>
+                                   
                                 </div>
 
 

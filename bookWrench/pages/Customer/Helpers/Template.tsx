@@ -11,7 +11,7 @@ const { Customer } = exposedPath;
 
 export const ExpireCampaignYesPopup = (props: any) => {
     const onClickYes = () => {
-        Services.deleteMaintenance(props.data.id,{}, props.data.id,(res:any) => {
+        Services.deleteCustomer(props.data.id,{}, props.data.id,(res:any) => {
             showToster({ status: 'Success', msg: res.msg || 'Customer Delete Successfully' });
             popupToggler(); 
             setTimeout(() => {
@@ -25,7 +25,7 @@ export const ExpireCampaignYesPopup = (props: any) => {
  return (
         <>
             <p className="text-sm">
-                Do you really want to delete <span className="font-bold">{props.data.title}</span> Maintenance ?{' '}
+                Do you really want to delete <span className="font-bold">{props.data.title}</span> Customer ?{' '}
             </p>
             <br />
             <span onClick={onClickYes} className="inline-block bg-green-500 text-white p-1 cursor-pointer px-4 py-2 rounded-md text-sm">
