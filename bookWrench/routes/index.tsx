@@ -54,7 +54,7 @@ const {
     
     
 
-
+    PointOfContact,
     
 
 } = exposedPath;
@@ -100,6 +100,7 @@ const privateRouteConfig = [
     { name: 'maintenance-view', path: MaintenanceView, componentName: 'MaintenanceView', exact: true },
     { name: 'maintenance', path: Maintenance, componentName: 'Maintenance', exact: true },
 
+    { name: 'point-of-contact', path: PointOfContact, componentName: 'PointOfContact'},
     { name: 'customer-edit', path: CustomerEdit, componentName: 'CustomerCreate'},
     { name: 'customer-create', path: CustomerCreate, componentName: 'CustomerCreate', exact: true },
     { name: 'customer-view', path: CustomerView, componentName: 'CustomerView', exact: true },
@@ -165,6 +166,8 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'VendorManagement' */ '@pages/VendorManagement'));
         case 'VendorManagementCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditVendorManagement' */ '@pages/VendorManagement/AddEditVendorManagement'));
+        case 'PointOfContact':
+            return loadable(() => import(/* webpackChunkName: 'PointOfContactList' */ '@pages/Customer/sub-module/point-of-contact'));
     }
 };
 
