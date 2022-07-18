@@ -203,10 +203,12 @@ span.platinum,span.gold,span.silver,span.diamond{
 span.up::before{
   content: "\2191";
   font-size: 14px;
+  margin-inline-end: 4px;
 }
 span.down::before{
   content: "\2193";
   font-size: 14px;
+  margin-inline-end: 4px;
 }
 
 
