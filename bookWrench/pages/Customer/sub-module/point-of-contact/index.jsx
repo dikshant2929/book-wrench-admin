@@ -48,7 +48,7 @@ const PointOfContact = (props) => {
                 {mobileNumber && <div>{mobileNumber}</div>}
                 {designation && <div>{designation}</div>}
                 <div onClick={() => editPointOfContact(itemNumber)} >Edit Icon</div>
-                <div onClick={() => onRemoveContactPerson(customerData.id, contactPersonId)}>Delete Icon</div>
+                <div onClick={() => onRemoveContactPerson(customerData.id, contactPersonId, name)}>Delete Icon</div>
             </div>
         )
     }
@@ -72,15 +72,30 @@ const PointOfContact = (props) => {
         
     }
 
-    const onRemoveContactPerson = (customerId, contactPersonId) => {
-        // customerData.contactPerson.push(data);
-        // const {_id, customerId, createdBy, createdAt, updatedAt, id, customerName, actions, type, ...request} = customerData;
-        //Add New Point Of Contact
-        Services.removeContactPerson(customerId, contactPersonId, (data) => {
-            console.log(data);
-            setCustomerData({...data});
-            // popupToggler();
-        })
+    const onRemoveContactPerson = (customerId, contactPersonId, name) => {
+
+        const removeContact = () => {
+            Services.removeContactPerson(customerId, contactPersonId, (data) => {
+                console.log(data);
+                setCustomerData({...data});
+                popupToggler();
+            })
+        }
+        
+        const popupContent = (<>
+            <p className="text-sm">
+                Do you really want to delete <span className="font-bold">{name}</span> contact ?{' '}
+            </p>
+            <br />
+            <span onClick={removeContact} className="inline-block bg-green-500 text-white p-1 cursor-pointer px-4 py-2 rounded-md text-sm">
+                Yes
+            </span>
+            <span className="inline-block ml-2 bg-gray-200 text-black p-1 cursor-pointer px-4 py-2 rounded-md text-sm" onClick={() => popupToggler(false)}>No</span>
+        </>);
+
+        popupContents({ contents: popupContent, title: 'Remove Contact' });
+        popupToggler();
+       
         
     }
 
