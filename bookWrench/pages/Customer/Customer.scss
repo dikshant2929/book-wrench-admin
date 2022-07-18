@@ -178,6 +178,43 @@ left: 0;
   }
 }
 
+
+span.platinum{
+  background-color: #C6C9DE; 
+}
+span.gold{
+  background-color: #FBC559;
+}
+span.silver{
+  background-color: #C0C0C0;
+}
+span.diamond{
+  background-color: #00afd733;
+}
+span.platinum,span.gold,span.silver,span.diamond{
+  padding: 5px 8px;
+  border-radius: 30px;
+}
+.table__head:nth-child(6),
+.table__data:nth-child(6){
+  text-align: center;
+}
+
+span.up::before{
+  content: "\2191";
+  font-size: 14px;
+}
+span.down::before{
+  content: "\2193";
+  font-size: 14px;
+}
+
+
+
+
+
+
+
 // --------------------****------------------- Media Queries -------------------------------****------------
 
 @media only screen and (max-width: 768px) {
