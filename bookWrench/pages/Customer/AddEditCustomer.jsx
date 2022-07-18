@@ -223,7 +223,7 @@ const AddEditCustomer = (props) => {
                     <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
                         <ul className='side_menubar text-center md:text-left'>
                             <li className='active'>Personal Information</li>
-                            <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.customerId, editModeData)}>Point Of Contact</li>
+                            {/* <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.customerId, editModeData)}>Point Of Contact</li> */}
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
