@@ -7,6 +7,8 @@ import '../../Customer.scss';
 import Services from '../../Services/customer.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
+import { popupContents, popupToggler } from '@common/elements/Popup';
+import AddEditContactPerson from "./AddEditContactPerson";
 
 const { Customer } = exposedPath;
 const defaultProps = {};
@@ -15,6 +17,9 @@ const title = "Point of Contact";
 
 const PointOfContact = (props) => {
 
+    console.log(props);
+
+    const [ customerData, setCustomerData ] = useState({});
     const [contacts, setContactList] = useState([]);
     const getContactPersons = (userId) => {
         Services.customerList((data) => {
@@ -25,22 +30,62 @@ const PointOfContact = (props) => {
             }
         }, { customerId: userId })
     }
-    useEffect(() => {
-        getContactPersons(3);
-    }, []);
 
-    console.log(contacts);
+    useEffect(() => {
+        const customerData = props?.history?.location?.state;
+        if(customerData){
+            setCustomerData({...customerData});
+            setContactList(customerData?.contactPerson || []);
+        }else{
+            const customerId = props?.match?.params?.customerId;
+            customerId && getContactPersons(customerId);
+        }
+        // if (encryptedData) {
+        //     // const data = JSON.parse(encrypt.decode(encryptedData));
+        //     setTitle(`Edit Department (${data.title})`)
+        //     setEditModeData(data);
+        //     setEditMode(true);
+        //     const {title,isActive,description,icon} = data
+        //     setFieldValue({title,isActive,description,icon})
+        // }
+        // return () => {
+        //     setFieldValue(prevState => ({...prevState,title:""}))
+        // }
+    }, [props]);
+
 
     const ContactItem = ({ name, email, mobileNumber, designation }) => {
-
         return (
-            <div>
+            <div className='bg-gray-300'>
                 {name && <p>{name}</p>}
                 {email && <p>{email}</p>}
                 {mobileNumber && <p>{mobileNumber}</p>}
                 {designation && <p>{designation}</p>}
             </div>
         )
+    }
+
+
+    const addNewContactPerson = (data) => {
+        // customerData.contactPerson.push(data);
+        // const {_id, customerId, createdBy, createdAt, updatedAt, id, customerName, actions, type, ...request} = customerData;
+        const request = {
+            contactPerson : [data]
+        }
+        //Add New Point Of Contact
+        Services.addContactPerson(request, customerData.id, (data) => {
+            setCustomerData({...data});
+            popupToggler();
+        })
+        
+    }
+
+    const onAddContactButtonClicked = () => {
+        const popupContent = (
+            <AddEditContactPerson addNewContactPerson={addNewContactPerson}/>
+        );
+        popupContents({ contents: popupContent, title: 'Information' });
+        popupToggler();
     }
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
@@ -49,6 +94,7 @@ const PointOfContact = (props) => {
                 <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
                     {title}
                 </h1>
+                
                 <div className='customer__section flex flex-col lg:flex-row gap-3 m-6'>
                     <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
                         <ul className='side_menubar text-center md:text-left'>
@@ -63,11 +109,17 @@ const PointOfContact = (props) => {
                         <div className="wrapper__1">
                             <div className="wrapper__2">
                                 <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
-                                    <h3 className='text-base font-bold'>{title}</h3>
+                                    <div className='flex justify-between'>
+                                    <h3 className='text-base font-bold inline-block'>{title}</h3>
+                                    <Button
+                                        title="Add Contact Person"
+                                        onClick={onAddContactButtonClicked}
+                                    />
+                                    </div>
                                     <div className='customer__detail_section mt-6 flex flex-col POC__section my-8'>
                                         <div className='grid md:grid-cols-4 gap-4'>
                                             <ul>
-                                                {contacts.map(contact => <li key={contact._id}><ContactItem {...contact} /></li>)}
+                                                {customerData?.contactPerson?.map(contact => <li key={contact._id}><ContactItem {...contact} /></li>)}
                                             </ul>
                                         </div>
                                     </div>

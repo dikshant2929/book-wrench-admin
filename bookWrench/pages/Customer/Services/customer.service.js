@@ -28,6 +28,19 @@ export default class Services {
         }
     } 
 
+    static async addContactPerson(dataObject, id , cb ) {
+        try {
+            const data = await API.post('customer', dataObject, id + "/contact-person");
+            showToster({ status: 'Success', msg: "customer has been updated successfully" });
+            return cb && cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    } 
+
     static async categoryList(cb) {
         try {
             const data = await API.get('category');
