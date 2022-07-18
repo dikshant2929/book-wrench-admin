@@ -7,6 +7,8 @@ import '../../Customer.scss';
 import Services from '../../Services/customer.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
+import { popupContents, popupToggler } from '@common/elements/Popup';
+import AddEditContactPerson from "./AddEditContactPerson";
 
 const { Customer } = exposedPath;
 const defaultProps = {};
@@ -15,33 +17,94 @@ const title = "Point of Contact";
 
 const PointOfContact = (props) => {
 
+    const [ customerData, setCustomerData ] = useState({});
     const [contacts, setContactList] = useState([]);
     const getContactPersons = (userId) => {
         Services.customerList((data) => {
-
             if (data?.length) {
-                console.log(data?.[0]);
+                setCustomerData(data[0])
                 setContactList(data?.[0]?.contactPerson || []);
             }
         }, { customerId: userId })
     }
+
     useEffect(() => {
-        getContactPersons(3);
-    }, []);
+        const customerData = props?.history?.location?.state;
+        if(customerData){
+            setCustomerData({...customerData});
+            setContactList(customerData?.contactPerson || []);
+        }else{
+            const customerId = props?.match?.params?.customerId;
+            customerId && getContactPersons(customerId);
+        }
+    }, [props]);
 
-    console.log(contacts);
 
-    const ContactItem = ({ name, email, mobileNumber, designation }) => {
-
+    const ContactItem = ({ name, email, mobileNumber, designation,itemNumber }) => {
         return (
-            <div>
-                {name && <p>{name}</p>}
-                {email && <p>{email}</p>}
-                {mobileNumber && <p>{mobileNumber}</p>}
-                {designation && <p>{designation}</p>}
+            <div className='bg-gray-300'>
+                {name && <div>{name}</div>}
+                {email && <div>{email}</div>}
+                {mobileNumber && <div>{mobileNumber}</div>}
+                {designation && <div>{designation}</div>}
+                <div onClick={() => editPointOfContact(itemNumber)} >Edit Icon</div>
+                <div>Delete Icon</div>
             </div>
         )
     }
+
+    const editPointOfContact = (itemNumber) => {
+        onAddContactButtonClicked(itemNumber)
+       
+    }
+
+    const addNewContactPerson = (data) => {
+        // customerData.contactPerson.push(data);
+        // const {_id, customerId, createdBy, createdAt, updatedAt, id, customerName, actions, type, ...request} = customerData;
+        const request = {
+            contactPerson : [data]
+        }
+        //Add New Point Of Contact
+        Services.addContactPerson(request, customerData.id, (data) => {
+            setCustomerData({...data});
+            popupToggler();
+        })
+        
+    }
+
+    const addNewContactPersonEdit = (data,currentIndex) => {
+        // customerData.contactPerson.push(data);
+        // const {_id, customerId, createdBy, createdAt, updatedAt, id, customerName, actions, type, ...request} = customerData;
+        const request = {
+            contactPerson : [data]
+        }
+        //Add New Point Of Contact
+        Services.editContactPerson(request, customerData.id, customerData?.contactPerson[currentIndex]._id, (data) => {
+            setCustomerData({...data});
+            popupToggler();
+        })
+        
+    }
+
+
+
+    
+
+    const onAddContactButtonClicked = (itemNumber) => {
+        const popupContent = (
+            <AddEditContactPerson  {...customerData} currentId={itemNumber} addNewContactPersonEdit={addNewContactPersonEdit}  addNewContactPerson={addNewContactPerson}/>
+        );
+        popupContents({ contents: popupContent, title: 'Information' });
+        popupToggler();
+    }
+
+
+    const onclickEvents = () => {
+        const editPath = `${Customer}/edit/${encrypt.encode(JSON.stringify({ ...customerData, type : "Edit" }))}`;
+        props.history.push(editPath, customerData);
+    }
+
+
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
 
@@ -49,13 +112,13 @@ const PointOfContact = (props) => {
                 <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
                     {title}
                 </h1>
+                
                 <div className='customer__section flex flex-col lg:flex-row gap-3 m-6'>
                     <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
                         <ul className='side_menubar text-center md:text-left'>
-                            <li>Personal Information</li>
-                            {/* <li className='active'><UALink title="Point Of Contact" to={PointOfContact}>Point Of Contact</UALink></li> */}
-                            <li>Maintenance</li>
-                            <li>Others</li>
+                            <li onClick={onclickEvents}>Personal Information</li>
+                            <li className='active'><UALink title="Point Of Contact" to={exposedPath.PointOfContact}>Point Of Contact</UALink></li>
+                           
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
@@ -63,13 +126,19 @@ const PointOfContact = (props) => {
                         <div className="wrapper__1">
                             <div className="wrapper__2">
                                 <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
-                                    <h3 className='text-base font-bold'>{title}</h3>
+                                    <div className='flex justify-between'>
+                                    <h3 className='text-base font-bold inline-block'>{title}</h3>
+                                    <Button
+                                        title="Add Contact Person"
+                                        onClick={() => onAddContactButtonClicked(null)}
+                                    />
+                                    </div>
                                     <div className='customer__detail_section mt-6 flex flex-col POC__section my-8'>
-                                        <div className='grid md:grid-cols-4 gap-4'>
+                                        {(contacts.length > 0) ? <div className='grid md:grid-cols-4 gap-4'>
                                             <ul>
-                                                {contacts.map(contact => <li key={contact._id}><ContactItem {...contact} /></li>)}
+                                                {customerData?.contactPerson?.map((contact,index) => <li key={contact._id}><ContactItem itemNumber={index} {...contact} /></li>)}
                                             </ul>
-                                        </div>
+                                        </div> : <div>No Point of contact at the moment </div>}
                                     </div>
                                 </div>
                             </div>
