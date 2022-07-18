@@ -17,7 +17,7 @@ const defaultProps = {
         filteredRecords: 20,
         heading: [
 
-             
+
             // {
             //     key: 'id',
             //     value: 'Service ID',
@@ -126,13 +126,15 @@ const Customer = (props) => {
             prevConfig.table.totalRecords = 0;
             prevConfig.table.filteredRecords = 0;
             prevConfig.table.dataList = data.map((item, index) => (
-                { ...item,
-                customerName:item.firstName + " " + item.lastName,
-                actions: ['edit', 'expire'] }));
+                {
+                    ...item,
+                    customerName: item.firstName + " " + item.lastName,
+                    actions: ['edit', 'expire']
+                }));
             setDataList(prevConfig.table.dataList);
             setConfig({ ...prevConfig });
         });
-        
+
     }, []);
 
     const loadTableData = () => {
@@ -160,9 +162,9 @@ const Customer = (props) => {
                 const onChange = (key) => ({ value }) => updateStatus(key, { isActive: value });
                 return <Switch defaultValue={data.isActive} id={data.id} onChange={onChange} />
             case 'customerType':
-                return <p>{data[column.key]}</p>;
+                return <span className={data[column.key]}>{data[column.key]}</span>;
             default:
-                return <p>{data[column.key]}</p>;
+                return <span>{data[column.key]}</span>;
         }
     };
 
@@ -197,11 +199,11 @@ const Customer = (props) => {
                                 </span>
                             </div>
                             <span className='p-2 absolute'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
-                                        <path d="M6.81964 12.2639C9.8265 12.2639 12.264 9.82631 12.264 6.81944C12.264 3.81256 9.8265 1.375 6.81964 1.375C3.81278 1.375 1.37524 3.81256 1.37524 6.81944C1.37524 9.82631 3.81278 12.2639 6.81964 12.2639Z" stroke="#A5A9C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M13.6252 13.625L10.6648 10.6646" stroke="#A5A9C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
+                                    <path d="M6.81964 12.2639C9.8265 12.2639 12.264 9.82631 12.264 6.81944C12.264 3.81256 9.8265 1.375 6.81964 1.375C3.81278 1.375 1.37524 3.81256 1.37524 6.81944C1.37524 9.82631 3.81278 12.2639 6.81964 12.2639Z" stroke="#A5A9C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.6252 13.625L10.6648 10.6646" stroke="#A5A9C1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
                         </div>
 
                         <RedirectButton
@@ -218,6 +220,23 @@ const Customer = (props) => {
                     </TableWidgets>
                 </div>
             </div>
+            <div className='customer__summary grid grid-cols-3 gap-5 mb-6'>
+                <div className='t_sr bg-white py-4 px-6 rounded-lg grid gap-2'>
+                    <span className='font-normal text-base text-[#656565]'>Total SR</span>
+                    <span className='font-bold text-3xl'>1200</span>
+                    <span className='up font-medium text-base text-[#28C66F]'>700</span>
+                </div>
+                <div className='c_active bg-white py-4 px-6 rounded-lg grid gap-2'>
+                    <span className='font-normal text-base text-[#656565]'>Active</span>
+                    <span className='font-bold text-3xl'>900</span>
+                    <span className='down font-medium text-base text-[#EC5453]'>170</span>
+                </div>
+                <div className='in_active bg-white py-4 px-6 rounded-lg grid gap-2'>
+                    <span className='font-normal text-base text-[#656565]'>Inactive</span>
+                    <span className='font-bold text-3xl'>900</span>
+                    <span className='down font-medium text-base text-[#EC5453]'>170</span>
+                </div>
+            </div>
 
 
 
@@ -231,7 +250,7 @@ const Customer = (props) => {
                 tableHeaders={tableHeaders}
                 tableCellView={tableCellView}
                 updateHeader={updateHeader}
-                //showColumnPicker={false}
+            //showColumnPicker={false}
             />
 
         </div>
