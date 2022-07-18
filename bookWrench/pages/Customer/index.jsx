@@ -159,8 +159,8 @@ const Customer = (props) => {
             case 'status':
                 const onChange = (key) => ({ value }) => updateStatus(key, { isActive: value });
                 return <Switch defaultValue={data.isActive} id={data.id} onChange={onChange} />
-            case 'price':
-                return <p>${data[column.key]}</p>;
+            case 'customerType':
+                return <p>{data[column.key]}</p>;
             default:
                 return <p>{data[column.key]}</p>;
         }

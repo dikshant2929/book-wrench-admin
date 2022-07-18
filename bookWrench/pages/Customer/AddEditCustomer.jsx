@@ -8,7 +8,7 @@ import Services from './Services/customer.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 
-const { Customer, PointOfContact } = exposedPath;
+const { Customer, PointOfContact,Address } = exposedPath;
 const defaultProps = {};
 
 
@@ -225,7 +225,9 @@ const AddEditCustomer = (props) => {
                 <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
                     <ul className='side_menubar text-center md:text-left'>
                         <li className='active'>Personal Information</li>
+                        
                         <li><UALink title="Point Of Contact" to={PointOfContact}>Point Of Contact</UALink></li>
+                        <li><UALink title="Address" to={Address}>Address</UALink></li>
                         <li>Service Request</li>
                         <li>Maintenance</li>
                         <li>Others</li>
