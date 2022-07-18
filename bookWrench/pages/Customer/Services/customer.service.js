@@ -41,9 +41,9 @@ export default class Services {
         }
     } 
 
-    static async customerList(cb) {
+    static async customerList(cb, params = {}) {
         try {
-            const data = await API.get('customer');
+            const data = await API.get('customer', params);
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
