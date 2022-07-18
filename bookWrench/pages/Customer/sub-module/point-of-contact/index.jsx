@@ -40,7 +40,7 @@ const PointOfContact = (props) => {
     }, [props]);
 
 
-    const ContactItem = ({ name, email, mobileNumber, designation,itemNumber }) => {
+    const ContactItem = ({ name, email, mobileNumber, designation,itemNumber, _id : contactPersonId}) => {
         return (
             <div className='bg-gray-300'>
                 {name && <div>{name}</div>}
@@ -48,7 +48,7 @@ const PointOfContact = (props) => {
                 {mobileNumber && <div>{mobileNumber}</div>}
                 {designation && <div>{designation}</div>}
                 <div onClick={() => editPointOfContact(itemNumber)} >Edit Icon</div>
-                <div>Delete Icon</div>
+                <div onClick={() => onRemoveContactPerson(customerData.id, contactPersonId)}>Delete Icon</div>
             </div>
         )
     }
@@ -72,13 +72,24 @@ const PointOfContact = (props) => {
         
     }
 
-    const addNewContactPersonEdit = (data,currentIndex) => {
+    const onRemoveContactPerson = (customerId, contactPersonId) => {
         // customerData.contactPerson.push(data);
         // const {_id, customerId, createdBy, createdAt, updatedAt, id, customerName, actions, type, ...request} = customerData;
-        const request = {
-            contactPerson : [data]
-        }
         //Add New Point Of Contact
+        Services.removeContactPerson(customerId, contactPersonId, (data) => {
+            console.log(data);
+            setCustomerData({...data});
+            // popupToggler();
+        })
+        
+    }
+
+
+    const editContactPerson = (data,currentIndex) => {
+        const request = {
+            contactPerson : data
+        }
+        //Edit existing contact person
         Services.editContactPerson(request, customerData.id, customerData?.contactPerson[currentIndex]._id, (data) => {
             setCustomerData({...data});
             popupToggler();
@@ -92,7 +103,7 @@ const PointOfContact = (props) => {
 
     const onAddContactButtonClicked = (itemNumber) => {
         const popupContent = (
-            <AddEditContactPerson  {...customerData} currentId={itemNumber} addNewContactPersonEdit={addNewContactPersonEdit}  addNewContactPerson={addNewContactPerson}/>
+            <AddEditContactPerson  {...customerData} currentId={itemNumber} editContactPerson={editContactPerson}  addNewContactPerson={addNewContactPerson}/>
         );
         popupContents({ contents: popupContent, title: 'Information' });
         popupToggler();

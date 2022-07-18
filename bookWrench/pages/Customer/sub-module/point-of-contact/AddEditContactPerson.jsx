@@ -6,6 +6,8 @@ const mandatoryFields = ["name", "email", "mobileNumber"];
 
 const AddEditContactPerson = (props) => {
 
+    console.log(props);
+
     const [isEditMode, setEditMode] = useState(false);
     const [isButtonEnable, setButtonEnable] = useState(false);
     const [fieldValue, setFieldValue] = useState({
@@ -31,15 +33,15 @@ const AddEditContactPerson = (props) => {
 
 
     useEffect(() => {
-        console.log(props.currentId)
-      if(props.currentId) {
+        console.log(props.customerId)
+      if(props.customerId) {
         setEditMode(true)
       }
     },[props])
 
     const onFormSubmit = (data) => {
         if (isEditMode) {
-            props?.addNewContactPersonEdit(data,props.currentId);
+            props?.editContactPerson(data,props.currentId);
         } else {
             props?.addNewContactPerson(data);
         }
