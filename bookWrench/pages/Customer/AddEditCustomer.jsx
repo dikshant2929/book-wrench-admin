@@ -131,9 +131,9 @@ const costInputFieldConfigurationEmail = (keyOfInput, label) => {
 
 const AddEditCustomer = (props) => {
 
-    const mandatoryFields = ["firstName", "lastName", "email","mobileNumber"];
+    const mandatoryFields = ["firstName", "lastName", "email", "mobileNumber"];
 
-console.log(props)
+    console.log(props)
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState('Add New Customer');
@@ -163,9 +163,8 @@ console.log(props)
         const encryptedData = props?.match?.params?.editcustomer;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-           
-            const { firstName, lastName, email,mobileNumber } = data;
-            setFieldValue({ firstName, lastName, email,mobileNumber });
+            const { firstName, lastName, email, mobileNumber } = data;
+            setFieldValue({ firstName, lastName, email, mobileNumber });
 
             if (data.customerCategory) {
                 const selectedData = customerCategoryList.find(item => item.id === data.customerCategory);
@@ -217,65 +216,65 @@ console.log(props)
 
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
-        <div className='customer__wrapper'>
-            <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
-                {title}
-            </h1>
-            <div className='customer__section flex flex-col lg:flex-row gap-3 m-6'>
-                <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
-                    <ul className='side_menubar text-center md:text-left'>
-                        <li className='active'>Personal Information</li>
-                        <li><UALink title="Point Of Contact" to={PointOfContact}>Point Of Contact</UALink></li>
-                        <li>Service Request</li>
-                        <li>Maintenance</li>
-                        <li>Others</li>
-                    </ul>
-                </div>
-                <div className="addCategory bg-white center rounded-md w-full">
+            <div className='customer__wrapper'>
+                <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
+                    {title}
+                </h1>
+                <div className='customer__section flex flex-col lg:flex-row gap-3 m-6'>
+                    <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
+                        <ul className='side_menubar text-center md:text-left'>
+                            <li className='active'>Personal Information</li>
+                            <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.customerId, editModeData)}>Point Of Contact</li>
+                            <li>Service Request</li>
+                            <li>Maintenance</li>
+                            <li>Others</li>
+                        </ul>
+                    </div>
+                    <div className="addCategory bg-white center rounded-md w-full">
 
-                    <div className="wrapper__1">
-                        <div className="wrapper__2">
-                            <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
-                                <h3 className='text-base font-bold'>Personal Information</h3>
-                                <div className='customer__detail_section mt-6 flex flex-col'>
-                                    <h4 className='text-xs font-bold mb-4'>Customer Details</h4>
-                                    <div className='grid md:grid-cols-4 gap-4'>
-                                        <Input  {...formConfiguration("firstName", "First Name")} selectedValue={fieldValue?.firstName} cb={onTextChange('firstName')} />
-                                        <Input  {...formConfiguration("lastName", "Last Name")} selectedValue={fieldValue?.lastName} cb={onTextChange('lastName')} />
-                                        <Input  {...costInputFieldConfigurationEmail("email", "Primary Email")} selectedValue={fieldValue?.email} cb={onTextChange('email')} />
-                                        <Input  {...costInputFieldConfigurationMobile("mobileNumber", "Mobile Number")} selectedValue={fieldValue?.mobileNumber} cb={onTextChange('mobileNumber')} />
-                                        <ReactTypeHead
-                                            header="Customer Type"
-                                            handleSelect={handleOnChange('customerType')}
-                                            dataList={customerTypeList}
-                                            fields={{ key: 'id', value: 'title' }}
-                                            placeholder="Customer Type"
-                                            value={selectedDropdownValueCustomer}
-                                            parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                                        />
+                        <div className="wrapper__1">
+                            <div className="wrapper__2">
+                                <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
+                                    <h3 className='text-base font-bold'>Personal Information</h3>
+                                    <div className='customer__detail_section mt-6 flex flex-col'>
+                                        <h4 className='text-xs font-bold mb-4'>Customer Details</h4>
+                                        <div className='grid md:grid-cols-4 gap-4'>
+                                            <Input  {...formConfiguration("firstName", "First Name")} selectedValue={fieldValue?.firstName} cb={onTextChange('firstName')} />
+                                            <Input  {...formConfiguration("lastName", "Last Name")} selectedValue={fieldValue?.lastName} cb={onTextChange('lastName')} />
+                                            <Input  {...costInputFieldConfigurationEmail("email", "Primary Email")} selectedValue={fieldValue?.email} cb={onTextChange('email')} />
+                                            <Input  {...costInputFieldConfigurationMobile("mobileNumber", "Mobile Number")} selectedValue={fieldValue?.mobileNumber} cb={onTextChange('mobileNumber')} />
+                                            <ReactTypeHead
+                                                header="Customer Type"
+                                                handleSelect={handleOnChange('customerType')}
+                                                dataList={customerTypeList}
+                                                fields={{ key: 'id', value: 'title' }}
+                                                placeholder="Customer Type"
+                                                value={selectedDropdownValueCustomer}
+                                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                            />
 
-                                        <ReactTypeHead
-                                            header="Customer Category"
-                                            handleSelect={handleOnChange('customerCategory')}
-                                            dataList={customerCategoryList}
-                                            fields={{ key: 'id', value: 'title' }}
-                                            placeholder="Select Customer Category"
-                                            value={selectedDropdownValueCustomerCategory}
-                                            parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                                        />
+                                            <ReactTypeHead
+                                                header="Customer Category"
+                                                handleSelect={handleOnChange('customerCategory')}
+                                                dataList={customerCategoryList}
+                                                fields={{ key: 'id', value: 'title' }}
+                                                placeholder="Select Customer Category"
+                                                value={selectedDropdownValueCustomerCategory}
+                                                parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
+                                            />
+                                        </div>
+
+
+                                    </div>
+
+                                    <div className='POC__section my-8'>
+
                                     </div>
 
 
+
                                 </div>
-
-                                <div className='POC__section my-8'>
-                                   
-                                </div>
-
-
-                               
-                            </div>
-                            <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
+                                <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
                                     <Button
                                         disabled={!isButtonEnable ?? false}
                                         onClick={(e) => {
@@ -286,12 +285,12 @@ console.log(props)
                                         title={isEditMode ? 'Update' : 'Save'}
                                     />
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
         </div>
 
     );

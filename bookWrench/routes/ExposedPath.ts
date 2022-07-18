@@ -53,7 +53,7 @@ const path = {
     VendorManagementCreate: PREFIX + 'vendor-management/create',
     VendorManagementEdit: PREFIX + 'vendor-management/edit/:editVendorManagement',
 
-    PointOfContact : PREFIX + "customer/point-of-contact/:customerId" 
+    PointOfContact : PREFIX + "customer/point-of-contact" 
     // RMList: PREFIX + 'rm',
     // RMCreate: PREFIX + 'rm/create',
     // RMUpdate: PREFIX + 'rm/update',
