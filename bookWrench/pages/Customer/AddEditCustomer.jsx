@@ -133,7 +133,6 @@ const AddEditCustomer = (props) => {
 
     const mandatoryFields = ["firstName", "lastName", "email", "mobileNumber"];
 
-    console.log(props)
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
     const [title, setTitle] = useState('Add New Customer');
@@ -176,7 +175,7 @@ const AddEditCustomer = (props) => {
                 setSelectedDropdownValueCustomer({ ...selectedData, label: selectedData.title, value: selectedData.id })
             }
 
-            setTitle(`Edit Customer (${data.title})`);
+            setTitle(`Edit Customer #${data.customerId}`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
             setEditMode(true);
