@@ -53,8 +53,9 @@ const {
 
     
     
-
+    EditPointOfContact,
     PointOfContact,
+    EditAddress,
     Address
     
 
@@ -101,8 +102,8 @@ const privateRouteConfig = [
     { name: 'maintenance-view', path: MaintenanceView, componentName: 'MaintenanceView', exact: true },
     { name: 'maintenance', path: Maintenance, componentName: 'Maintenance', exact: true },
 
-    { name: 'point-of-contact', path: PointOfContact, componentName: 'PointOfContact'},
-    { name: 'address', path: Address, componentName: 'Address'},
+    { name: 'point-of-contact', path: EditPointOfContact, componentName: 'PointOfContact'},
+    { name: 'address', path: EditAddress, componentName: 'Address'},
     
     { name: 'customer-edit', path: CustomerEdit, componentName: 'CustomerCreate'},
     { name: 'customer-create', path: CustomerCreate, componentName: 'CustomerCreate', exact: true },

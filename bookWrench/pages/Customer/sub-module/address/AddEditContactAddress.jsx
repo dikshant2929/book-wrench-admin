@@ -4,7 +4,7 @@ import Button from '@common/elements/Button';
 import Services from '../../Services/customer.service';
 const mandatoryFields = ["name", "email", "mobileNumber"];
 
-const AddEditContactPerson = (props) => {
+const AddEditContactAddress = (props) => {
 
     console.log(props);
 
@@ -152,4 +152,4 @@ const costInputFieldConfigurationEmail = (keyOfInput, label) => {
 };
 
 
-export default AddEditContactPerson;
+export default AddEditContactAddress;
