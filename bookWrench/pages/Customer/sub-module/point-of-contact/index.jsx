@@ -31,9 +31,9 @@ const PointOfContact = (props) => {
 
     useEffect(() => {
         const customerId = props?.match?.params?.customerId;
-        if(customerId){
+        if (customerId) {
             customerId && getContactPersons(customerId);
-        }else{
+        } else {
             const customerData = props?.history?.location?.state;
             if (customerData) {
                 setCustomerData({ ...customerData });
@@ -44,13 +44,19 @@ const PointOfContact = (props) => {
 
     const ContactItem = ({ name, email, mobileNumber, designation, itemNumber, _id: contactPersonId }) => {
         return (
-            <div className="bg-gray-300">
-                {name && <div>{name}</div>}
-                {email && <div>{email}</div>}
-                {mobileNumber && <div>{mobileNumber}</div>}
-                {designation && <div>{designation}</div>}
-                <div onClick={() => editPointOfContact(itemNumber)}>Edit Icon</div>
-                <div onClick={() => onRemoveContactPerson(customerData.id, contactPersonId, name)}>Delete Icon</div>
+            <div className="bg-[#F2F3F7] rounded-lg POC relative flex flex-col p-2 gap-1.5">
+                {name && <span className='text-base font-semibold'>{name}</span>}
+                {email && <span className='text-sm font-normal'>{email}</span>}
+                {mobileNumber && <span className='text-sm font-normal'>{mobileNumber}</span>}
+                {designation && <span className='text-sm font-normal'>{designation}</span>}
+                <div className='absolute top-0 right-0 flex gap-1 items-center p-2'>
+                    <span className=' border-[#a4a4a4] p-px' onClick={() => editPointOfContact(itemNumber)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </span>
+                    <span className='' onClick={() => onRemoveContactPerson(customerData.id, contactPersonId, name)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </span>
+                </div>
             </div>
         );
     };
@@ -143,10 +149,10 @@ const PointOfContact = (props) => {
                 <div className="customer__section flex flex-col lg:flex-row gap-3 m-6">
                     <div className="addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md">
                         <ul className="side_menubar text-center md:text-left">
-                            
-                            
-                            
-{/* 
+
+
+
+                            {/* 
                             <li className="active">
                                 <UALink title="Point Of Contact" to={exposedPath.PointOfContact}>
                                     Point Of Contact
@@ -172,7 +178,7 @@ const PointOfContact = (props) => {
                                     </div>
                                     <div className="customer__detail_section mt-6 flex flex-col POC__section my-8">
                                         {contacts.length > 0 ? (
-                                            <div className="grid md:grid-cols-4 gap-4">
+                                            <div className="grid md:grid-cols-3 gap-4">
                                                 <ul>
                                                     {customerData?.contactPerson?.map((contact, index) => (
                                                         <li key={contact._id}>

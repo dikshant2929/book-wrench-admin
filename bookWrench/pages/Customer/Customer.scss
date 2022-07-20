@@ -123,7 +123,7 @@
 
 #firstName,
 #lastName,
-#email,#mobileNumber {
+#email,#mobileNumber,.add__poc #name {
     .label__small::after{
       content: "*";
       color: red;
@@ -211,6 +211,9 @@ span.down::before{
   margin-inline-end: 4px;
 }
 
+.add__poc div .label__small{
+  text-align: left;
+}
 
 
 

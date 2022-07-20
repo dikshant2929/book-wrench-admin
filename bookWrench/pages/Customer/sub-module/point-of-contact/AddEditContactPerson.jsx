@@ -51,13 +51,13 @@ const AddEditContactPerson = (props) => {
     console.log(isEditMode)
     return (
         <div>
-            <div className='grid md:grid-cols-2 gap-2'>
+            <div className='grid md:grid-cols-2 gap-4 add__poc'>
                 <Input  {...formConfiguration("name", "Name")} selectedValue={fieldValue?.name} cb={onTextChange('name')} />
-                <Input  {...formConfiguration("designation", "Designation")} selectedValue={fieldValue?.designation} cb={onTextChange('designation')} />
-                <Input  {...costInputFieldConfigurationEmail("email", "Email")} selectedValue={fieldValue?.email} cb={onTextChange('email')} />
                 <Input  {...costInputFieldConfigurationMobile("mobileNumber", "Mobile Number")} selectedValue={fieldValue?.mobileNumber} cb={onTextChange('mobileNumber')} />
+                <Input  {...costInputFieldConfigurationEmail("email", "Email")} selectedValue={fieldValue?.email} cb={onTextChange('email')} />
+                <Input  {...formConfiguration("designation", "Designation")} selectedValue={fieldValue?.designation} cb={onTextChange('designation')} />
             </div>
-            <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
+            <div className="btn-wrapper m-auto text-center pt-9">
                 <Button
                     disabled={!isButtonEnable ?? false}
                     onClick={(e) => {

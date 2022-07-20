@@ -29,9 +29,9 @@ const Address = (props) => {
 
     useEffect(() => {
         const customerId = props?.match?.params?.customerId;
-        if(customerId){
+        if (customerId) {
             customerId && getContactPersons(customerId);
-        }else{
+        } else {
             const customerData = props?.history?.location?.state;
             if (customerData) {
                 setCustomerData({ ...customerData });
@@ -43,12 +43,19 @@ const Address = (props) => {
     const ContactItem = ({ location, gateNumber, contactPerson }) => {
         const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
         return (
-            <div className="bg-gray-300">
-                {location && <div>{location}</div>}
-                {gateNumber && <div>Gate Number: {gateNumber}</div>}
-                {contactPerson && <div>Contact Person : {getContactPersonsFromId(contactPerson).name}</div>}
-                <div onClick={() => editPointOfContact(itemNumber)}>Edit Icon</div>
-                <div onClick={() => onRemoveContactPerson(customerData.id, contactPersonId, name)}>Delete Icon</div>
+            <div className="bg-[#F2F3F7] rounded-lg POC relative flex flex-col p-2 gap-1.5">
+                <span className='text-base font-semibold'>Jack</span>
+                {location && <span className='text-sm font-normal'>{location}</span>}
+                {gateNumber && <span className='text-sm font-normal'>Gate Number: {gateNumber}</span>}
+                {contactPerson && <span className='text-sm font-normal'>Contact Person : {getContactPersonsFromId(contactPerson).name}</span>}
+                <div className='absolute top-0 right-0 flex gap-1 items-center p-2'>
+                    <span onClick={() => editPointOfContact(itemNumber)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </span>
+                    <span onClick={() => onRemoveContactPerson(customerData.id, contactPersonId, name)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    </span>
+                </div>
             </div>
         );
     };
@@ -160,7 +167,7 @@ const Address = (props) => {
                                     </div>
                                     <div className="customer__detail_section mt-6 flex flex-col POC__section my-8">
                                         {customerData?.contactAddress?.length > 0 ? (
-                                            <div className="grid md:grid-cols-4 gap-4">
+                                            <div className="grid md:grid-cols-3 gap-4">
                                                 <ul>
                                                     {customerData?.contactAddress?.map((contact, index) => (
                                                         <li key={contact._id}>
