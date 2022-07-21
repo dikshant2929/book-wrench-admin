@@ -29,6 +29,7 @@
     .basis__33 {
         flex-basis: 33%;
     }
+
     .basis__40 {
         flex-basis: 40%;
     }
@@ -56,10 +57,10 @@
         @apply h-12 w-full rounded-lg border border-[#D6D6D6] text-sm text-black;
 
         &:focus {
-                 @apply ring-1 ring-[#2563eb] border-0;
+            @apply ring-1 ring-[#2563eb] border-0;
         }
     }
-   
+
 
     .form__input__border {
         @apply rounded-lg border border-[#D6D6D6]
@@ -119,6 +120,29 @@
     .table__data {
         @apply px-4 py-2 font-inter font-medium text-sm text-left min-w-105px;
     }
+
+
+    // ---------------------- Scrollbar -----------------
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
 
 
 }
