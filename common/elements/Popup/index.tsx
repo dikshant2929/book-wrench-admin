@@ -6,7 +6,7 @@ export let popupToggler: (visible?: boolean) => any;
 const Popup: any = (props: any) => {
     const overlayClasses = 'fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-70 z-10';
     const contentClasses =
-        'max-h-600px fixed top-1/2 left-1/2 bg-white rounded-lg w-4/5 max-w-screen-sm overflow-y-auto z-20 p-9 text-center box-border';
+        'max-h-600px fixed top-1/2 left-1/2 bg-white rounded-lg w-4/5 max-w-screen-sm overflow-y-auto z-20 p-4 text-center box-border';
     const closeBtnClasses = 'absolute top-3 right-3 cursor-pointer hover:border rounded-md border-gray-300';
     const titleClasses = 'text-left font-medium text-lg mb-4';
 
