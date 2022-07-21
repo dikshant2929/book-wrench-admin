@@ -8,17 +8,14 @@ const mandatoryFields = ["name", "email", "mobileNumber"];
 
 const contactNames = [
     {
-        id: "contact1",
-        title: "Contact 1"
-    },
-    {
-        id: "contact2",
-        title: "Contact 2"
-    },
-    {
-        id: "contact3",
-        title: "Contact 3"
-    }
+        label: 'Contact 1'
+      },
+      {
+        label: 'Contact 2'
+      },
+      {
+        label: 'Contact 3'
+      }
 ]
 
 
@@ -105,7 +102,7 @@ const contactNames = [
                             id="selectPOC"
                             onChange={setSelected}
                             options={contactNames}
-                            placeholder="Choose a Contact..."
+                            placeholder="Select Contact"
                             selected={selected}
                         />
                     </div>
