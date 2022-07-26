@@ -244,7 +244,7 @@ const AddEditMaintenance = (props) => {
                     servicesIds,
                     categoryId:data.categoryId.id,
                     priority:data.priority,
-                   
+
                     duration:data.cost.duration,
                     packageCost:data.cost.packageCost,
                     costPerVisit:data.cost.costPerVisit,
@@ -258,9 +258,7 @@ const AddEditMaintenance = (props) => {
 
                     interval:data.frequency.interval,
                     intervalValue:data.frequency.intervalValue,
-                   
-                    
-                    
+
                     documents: data.attachments.documents || [],
                     images: data.attachments.images || [],
                     videos: data.attachments.videos || []

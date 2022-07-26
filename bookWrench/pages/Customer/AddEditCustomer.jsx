@@ -14,6 +14,10 @@ const defaultProps = {};
 
 const customerTypeList = [
     {
+        id: "standard",
+        title: "Standard"
+    },
+    {
         id: "silver",
         title: "Silver"
     },
@@ -28,10 +32,15 @@ const customerTypeList = [
     {
         id: "diamond",
         title: "Diamond"
-    }
+    },
+    
 ]
 
 const customerCategoryList = [
+    {
+        id: "standard",
+        title: "Standard"
+    },
     {
         id: "residential",
         title: "Residential"
@@ -189,6 +198,7 @@ const AddEditCustomer = (props) => {
 
 
     const handleOnChange = (key) => (value) => {
+        if(!value) return;
         setFieldValue(previous => ({ ...previous, [key]: value.id }));
         switch (key) {
             case "customerCategory":

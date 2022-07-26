@@ -185,13 +185,16 @@ span.platinum{
 span.gold{
   background-color: #FBC559;
 }
+span.standard{
+  background-color: #a19d94;
+}
 span.silver{
-  background-color: #C0C0C0;
+  background-color: #c0c0c0;
 }
 span.diamond{
   background-color: #00afd733;
 }
-span.platinum,span.gold,span.silver,span.diamond{
+span.platinum,span.gold,span.silver,span.diamond, span.standard{
   padding: 5px 8px;
   border-radius: 30px;
 }

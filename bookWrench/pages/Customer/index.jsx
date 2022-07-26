@@ -222,7 +222,7 @@ const Customer = (props) => {
             </div>
             <div className='customer__summary grid grid-cols-3 gap-5 mb-6'>
                 <div className='t_sr bg-white py-4 px-6 rounded-lg grid gap-2'>
-                    <span className='font-normal text-base text-[#656565]'>Total SR</span>
+                    <span className='font-normal text-base text-[#656565]'>Total Customers</span>
                     <span className='font-bold text-3xl'>1200</span>
                     <span className='up font-medium text-base text-[#28C66F]'>700</span>
                 </div>
