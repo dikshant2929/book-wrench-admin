@@ -178,8 +178,8 @@ const PointOfContact = (props) => {
                                     </div>
                                     <div className="customer__detail_section mt-6 flex flex-col POC__section my-8">
                                         {contacts.length > 0 ? (
-                                            <div className="grid md:grid-cols-3 gap-4">
-                                                <ul>
+                                            <div >
+                                                <ul className="grid md:grid-cols-3 gap-4">
                                                     {customerData?.contactPerson?.map((contact, index) => (
                                                         <li key={contact._id}>
                                                             <ContactItem itemNumber={index} {...contact} />
