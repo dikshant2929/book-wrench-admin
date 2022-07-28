@@ -82,7 +82,7 @@ const AddEditContactAddress = (props) => {
     return (
         <div>
             <div className='grid md:grid-cols-2 gap-2 add__address'>
-                <Input  {...formConfiguration("locality", "Locality")} selectedValue={fieldValue?.locality} cb={onTextChange('locality')} />
+                <Input  {...formConfiguration("locality", "Address")} selectedValue={fieldValue?.locality} cb={onTextChange('locality')} />
                 <Input  {...formConfiguration("gateNumber", "Gate Number (If gated property)")} selectedValue={fieldValue?.gateNumber} cb={onTextChange('gateNumber')} />
                 {/* <Input  {...formConfiguration("houseNumber", "House/Apartment name and number")} selectedValue={fieldValue?.houseNumber} cb={onTextChange('houseNumber')} />
                     <Input  {...formConfigurationNumber("pincode", "Pincode")} selectedValue={fieldValue?.pincode} cb={onTextChange('pincode')} />
