@@ -56,7 +56,8 @@ const {
     EditPointOfContact,
     PointOfContact,
     EditAddress,
-    Address
+    Address,
+    EditMaintenance
     
 
 } = exposedPath;
@@ -104,6 +105,7 @@ const privateRouteConfig = [
 
     { name: 'point-of-contact', path: EditPointOfContact, componentName: 'PointOfContact'},
     { name: 'address', path: EditAddress, componentName: 'Address'},
+    { name: 'customer-maintenance', path: EditMaintenance, componentName: 'MaintenanceCustomer'},
     
     { name: 'customer-edit', path: CustomerEdit, componentName: 'CustomerCreate'},
     { name: 'customer-create', path: CustomerCreate, componentName: 'CustomerCreate', exact: true },
@@ -169,6 +171,8 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'AddEditVendorManagement' */ '@pages/VendorManagement/AddEditVendorManagement'));
         case 'PointOfContact':
             return loadable(() => import(/* webpackChunkName: 'PointOfContactList' */ '@pages/Customer/sub-module/point-of-contact'));
+        case 'MaintenanceCustomer':
+                return loadable(() => import(/* webpackChunkName: 'MaintenanceCustomer' */ '@pages/Customer/sub-module/maintenance'));
         case 'Address':
             return loadable(() => import(/* webpackChunkName: 'Address' */ '@pages/Customer/sub-module/address'));
 

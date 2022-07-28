@@ -54,18 +54,18 @@ export default class Services {
         }
     } 
 
-    static async addAddress(dataObject, id , cb ) {
+    static async addMaintenance(dataObject, cb) {
         try {
-            const data = await API.post('customer', dataObject, id + "/contact-address");
-            showToster({ status: 'Success', msg: "Address has been added successfully" });
-            return cb && cb(data?.data);
+            const data = await API.post('customerMaintenance', dataObject);
+            showToster({ status: 'Success', msg: "maintenance has been added successfully" });
+            return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
             showToster({ status: 'Error', msg: msg });
             console.log(error);
             return error;
         }
-    } 
+    }  
 
     static async removeContactPerson(customerId, contactPersonId , cb ) {
         try {
@@ -119,6 +119,22 @@ export default class Services {
         }
     } 
 
+    static async maintenanceCustomerList(cb) {
+        try {
+            const data = await API.get('customerMaintenance');
+            // showToster({ status: 'Success', msg: "Category has been added successfully" });
+            return cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    } 
+
+
+    
+
     static async customerList(cb, params = {}) {
         try {
             const data = await API.get('customer', params);
@@ -144,5 +160,18 @@ export default class Services {
             return error;
         }
     }  
+
+    static async maintenanceList(cb) {
+        try {
+            const data = await API.get('maintenance');
+            // showToster({ status: 'Success', msg: "Category has been added successfully" });
+            return cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    } 
 }
 // 

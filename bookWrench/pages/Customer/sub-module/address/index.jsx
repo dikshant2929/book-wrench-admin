@@ -158,8 +158,8 @@ const Address = (props) => {
                             <li onClick={onclickEvents}>Personal Information</li>
                             <li onClick={() => props.history.push(exposedPath.PointOfContact + "/" + customerData?.customerId, customerData)}>Point Of Contact</li>
                             <li className='active' onClick={() => props.history.push(exposedPath.Address + "/" + customerData?.customerId, customerData)}>Addresses</li>
-
-                        </ul>
+                            <li onClick={() => props.history.push(exposedPath.CustomerMaintenance + "/" + customerData?.customerId, customerData)}>Maintenance</li>
+                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
                         <div className="wrapper__1">

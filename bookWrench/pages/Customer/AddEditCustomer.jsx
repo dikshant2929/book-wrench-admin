@@ -8,7 +8,7 @@ import Services from './Services/customer.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 
-const { Customer, PointOfContact,Address } = exposedPath;
+const { Customer, PointOfContact,Address,CustomerMaintenance } = exposedPath;
 const defaultProps = {};
 
 
@@ -235,6 +235,7 @@ const AddEditCustomer = (props) => {
                             <li className='active'>Personal Information</li>
                             <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.customerId, editModeData)}>Point Of Contact</li>
                             <li onClick={() => props.history.push(Address + "/" + editModeData?.customerId, editModeData)}>Addresses</li>
+                            <li onClick={() => props.history.push(CustomerMaintenance + "/" + editModeData?.customerId, editModeData)}>Maintenance</li>
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">

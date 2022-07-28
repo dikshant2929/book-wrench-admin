@@ -8,24 +8,35 @@ import Services from '../../Services/customer.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 import { popupContents, popupToggler } from '@common/elements/Popup';
-import AddEditContactPerson from './AddEditContactPerson';
+import AddEditMaintenance from './AddEditMaintenance';
 
 const { Customer } = exposedPath;
 const defaultProps = {};
-const title = 'Point of Contact';
+const title = 'Maintenance';
 
-const PointOfContact = (props) => {
+const MaintenanceCustomer = (props) => {
     const [customerData, setCustomerData] = useState({});
-    const [contacts, setContactList] = useState([]);
+    const [maintenanceCustomerList, setMaintenanceCustomerList] = useState({});
+
     const getContactPersons = (userId) => {
         Services.customerList(
             (data) => {
                 if (data?.length) {
                     setCustomerData(data[0]);
-                    setContactList(data?.[0]?.contactPerson || []);
                 }
             },
             { customerId: userId },
+        );
+    };
+
+    const getMaintenanceCustomer = () => {
+        Services.maintenanceCustomerList(
+            (data) => {
+                if (data?.length) {
+                    setMaintenanceCustomerList(data);
+                }
+            }
+            
         );
     };
 
@@ -37,24 +48,40 @@ const PointOfContact = (props) => {
             const customerData = props?.history?.location?.state;
             if (customerData) {
                 setCustomerData({ ...customerData });
-                setContactList(customerData?.contactPerson || []);
             }
         }
+
+     
+
+        getMaintenanceCustomer()
+
+
     }, [props]);
 
-    const ContactItem = ({ name, email, mobileNumber, designation, itemNumber, _id: contactPersonId }) => {
+
+    const MaintenanceItems = ({maintenance,itemNumber} ) => {
+       // const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
         return (
             <div className="bg-[#F2F3F7] rounded-lg POC relative flex flex-col p-2 gap-1.5">
-                {name && <span className='text-base font-semibold'>{name}</span>}
-                {email && <span className='text-sm font-normal'>{email}</span>}
-                {mobileNumber && <span className='text-sm font-normal'>{mobileNumber}</span>}
-                {designation && <span className='text-sm font-normal'>{designation}</span>}
+                <span className='text-base font-semibold'>Maintenance-{itemNumber + 1}</span>
+                <div>Place on : {maintenance.updatedAt}</div>
+                <div>Service Package :- </div>
+                <div>Visit Frequency :- {maintenance.frequency.intervalValue} {maintenance.frequency.interval}</div>
+                <div>Description :- {maintenance.description}</div>
+
+                <div>Package Cost :- ${maintenance.cost.packageCost}</div>
+
+                <div>Cost per visit :- ${maintenance.cost.costPerVisit}</div>
+
+                <div>Renewal Cost :- ${maintenance.cost.renewalCost}</div>
+
+                
                 <div className='absolute top-0 right-0 flex gap-1 items-center p-2'>
-                    <span className=' border-[#a4a4a4] p-px' onClick={() => editPointOfContact(itemNumber)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    <span onClick={() => editPointOfContact(itemNumber)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                     </span>
-                    <span className='' onClick={() => onRemoveContactPerson(customerData.id, contactPersonId, name)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    <span onClick={() => onRemoveContactPerson(customerData.id, _id, location)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </span>
                 </div>
             </div>
@@ -65,22 +92,29 @@ const PointOfContact = (props) => {
         onAddContactButtonClicked(itemNumber);
     };
 
-    const addNewContactPerson = (data) => {
-        // customerData.contactPerson.push(data);
-        // const {_id, customerId, createdBy, createdAt, updatedAt, id, customerName, actions, type, ...request} = customerData;
+    const addNewMaintenance = (data) => {
+        const { contactAddress : address,maintenance,description,interval,intervalValue:value  } = data
         const request = {
-            contactPerson: [data],
+            address,
+            maintenance,
+            customer:customerData.id,
+            description,
+            vistFrequency: {
+                interval,
+                value
+            },
         };
         //Add New Point Of Contact
-        Services.addContactPerson(request, customerData.id, (data) => {
+        Services.addMaintenance(request,(data) => {
             setCustomerData({ ...data });
             popupToggler();
         });
     };
 
     const onRemoveContactPerson = (customerId, contactPersonId, name) => {
+
         const removeContact = () => {
-            Services.removeContactPerson(customerId, contactPersonId, (data) => {
+            Services.removeAddress(customerId, contactPersonId, (data) => {
                 console.log(data);
                 setCustomerData({ ...data });
                 popupToggler();
@@ -90,7 +124,7 @@ const PointOfContact = (props) => {
         const popupContent = (
             <>
                 <p className="text-sm">
-                    Do you really want to delete <span className="font-bold">{name}</span> contact ?{' '}
+                    Do you really want to delete <span className="font-bold">{name}</span> location ?{' '}
                 </p>
                 <br />
                 <span
@@ -108,16 +142,19 @@ const PointOfContact = (props) => {
             </>
         );
 
-        popupContents({ contents: popupContent, title: 'Remove Contact' });
+        popupContents({ contents: popupContent, title: 'Remove Maintenance' });
         popupToggler();
     };
 
-    const editContactPerson = (data, currentIndex) => {
+    const editAddress = (data, currentIndex) => {
+        const { locality : location, gateNumber = null, contactPerson } = data
         const request = {
-            contactPerson: data,
+            contactAddress: {
+                location, gateNumber, contactPerson
+            },
         };
         //Edit existing contact person
-        Services.editContactPerson(request, customerData.id, customerData?.contactPerson[currentIndex]._id, (data) => {
+        Services.editAddress(request, customerData.id, customerData?.contactAddress[currentIndex]._id, (data) => {
             setCustomerData({ ...data });
             popupToggler();
         });
@@ -125,14 +162,14 @@ const PointOfContact = (props) => {
 
     const onAddContactButtonClicked = (itemNumber) => {
         const popupContent = (
-            <AddEditContactPerson
+            <AddEditMaintenance
                 {...customerData}
                 currentId={itemNumber}
-                editContactPerson={editContactPerson}
-                addNewContactPerson={addNewContactPerson}
+                editAddress={editAddress}
+                addNewMaintenance={addNewMaintenance}
             />
         );
-        popupContents({ contents: popupContent, title: 'Information' });
+        popupContents({ contents: popupContent, title: 'Add Maintenance' });
         popupToggler();
     };
 
@@ -149,21 +186,10 @@ const PointOfContact = (props) => {
                 <div className="customer__section flex flex-col lg:flex-row gap-3 m-6">
                     <div className="addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md">
                         <ul className="side_menubar text-center md:text-left">
-
-
-
-                            {/* 
-                            <li className="active">
-                                <UALink title="Point Of Contact" to={exposedPath.PointOfContact}>
-                                    Point Of Contact
-                                </UALink>
-                            </li> */}
-
                             <li onClick={onclickEvents}>Personal Information</li>
-                            <li className='active' onClick={() => props.history.push(exposedPath.PointOfContact + "/" + customerData?.customerId, customerData)}>Point Of Contact</li>
+                            <li onClick={() => props.history.push(exposedPath.PointOfContact + "/" + customerData?.customerId, customerData)}>Point Of Contact</li>
                             <li onClick={() => props.history.push(exposedPath.Address + "/" + customerData?.customerId, customerData)}>Addresses</li>
-                            <li onClick={() => props.history.push(exposedPath.CustomerMaintenance + "/" + customerData?.customerId, customerData)}>Maintenance</li>
-
+                            <li className='active'  onClick={() => props.history.push(exposedPath.CustomerMaintenance + "/" + customerData?.customerId, customerData)}>Maintenance</li>
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
@@ -173,17 +199,17 @@ const PointOfContact = (props) => {
                                     <div className="flex justify-between">
                                         <h3 className="text-base font-bold inline-block">{title}</h3>
                                         <Button
-                                            title="Add Contact Person"
+                                            title="Add Maintenance"
                                             onClick={() => onAddContactButtonClicked(null)}
                                         />
                                     </div>
                                     <div className="customer__detail_section mt-6 flex flex-col POC__section my-8">
-                                        {contacts.length > 0 ? (
-                                            <div >
+                                        {maintenanceCustomerList?.length > 0 ? (
+                                            <div>
                                                 <ul className="grid md:grid-cols-3 gap-4">
-                                                    {customerData?.contactPerson?.map((contact, index) => (
-                                                        <li key={contact._id}>
-                                                            <ContactItem itemNumber={index} {...contact} />
+                                                    {maintenanceCustomerList?.map((list, index) => (
+                                                        <li key={list._id}>
+                                                            <MaintenanceItems itemNumber={index} {...list} />
                                                         </li>
                                                     ))}
                                                 </ul>
@@ -202,5 +228,5 @@ const PointOfContact = (props) => {
     );
 };
 
-PointOfContact.defaultProps = defaultProps;
-export default PointOfContact;
+MaintenanceCustomer.defaultProps = defaultProps;
+export default MaintenanceCustomer;

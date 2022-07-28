@@ -56,7 +56,10 @@ const path = {
     PointOfContact : PREFIX + "customer/point-of-contact",
     EditPointOfContact : PREFIX + "customer/point-of-contact/:customerId",
     Address : PREFIX + "customer/address",
-    EditAddress : PREFIX + "customer/address/:customerId" 
+    EditAddress : PREFIX + "customer/address/:customerId",
+
+    CustomerMaintenance : PREFIX + "customer/maintenance",
+    EditMaintenance : PREFIX + "customer/maintenance/:customerId" 
     
     // RMList: PREFIX + 'rm',
     // RMCreate: PREFIX + 'rm/create',
