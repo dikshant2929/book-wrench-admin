@@ -80,10 +80,10 @@ export default class Services {
         }
     } 
 
-    static async removeAddress(customerId, addressId , cb ) {
+    static async removeMaintenanceList(customerId , cb ) {
         try {
-            const data = await API.delete('customer', customerId + "/contact-address/" + addressId);
-            showToster({ status: 'Success', msg: "Address has been removed successfully" });
+            const data = await API.delete('customerMaintenance', customerId);
+            showToster({ status: 'Success', msg: "Customer Maintenance has been removed successfully" });
             return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';

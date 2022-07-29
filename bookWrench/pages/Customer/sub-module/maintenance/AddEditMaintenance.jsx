@@ -55,6 +55,8 @@ const costInputFieldConfiguration = (keyOfInput, label) => {
 
 const AddEditMaintenance = (props) => {
 
+    console.log(props)
+    
     const [selectedDropdownValueAddress, setSelectedDropdownValueAddress] = useState(null);
     const [contactList, setContactList] = useState([]);
     const [isEditMode, setEditMode] = useState(false);
@@ -63,12 +65,19 @@ const AddEditMaintenance = (props) => {
     const [maintenanceList, setMaintenanceList] = useState();
     const [selectedMaintenanceList, setSelectedMaintenanceList] = useState();
 
-    const [selectedIntervalDropdownValue, setSelectedIntervalDropdownValue] = useState(null);
+    const [selectedIntervalDropdownValue, setSelectedIntervalDropdownValue] = useState();
     
     
     
-    const [fieldValue, setFieldValue] = useState({});
+    const [fieldValue, setFieldValue] = useState({
+        description : props?.maintenanceCustomerList[props.currentId]?.description || "",
+        intervalValue: props?.maintenanceCustomerList[props.currentId]?.vistFrequency.value || "",
+        interval: props?.maintenanceCustomerList[props.currentId]?.vistFrequency.interval || "",
 
+    });
+
+
+    //props.maintenanceCustomerList[props.currentId].maintenance.id
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
             const fields = ["intervalValue"];
@@ -86,18 +95,18 @@ const AddEditMaintenance = (props) => {
    
 
     useEffect(() => {
-        if (Array.isArray(props.contactAddress) && props.contactAddress.length) {
-            const list = [];
-            props.contactAddress.forEach(contactAddress => { 
-                const data = {...contactAddress, label: contactAddress.location, value: contactAddress._id } 
-                if(contactAddress._id === props?.contactAddress[props.currentId]?.contactAddress ){
-                    setFieldValue(prev => ({...prev, contactAddress : contactAddress._id}))
-                    setSelectedDropdownValueAddress({ ...data });
-                }
-                list.push(data);
-            });
-            setContactList([...list]);
-        }
+        // if (Array.isArray(props.contactAddress) && props.contactAddress.length) {
+        //     const list = [];
+        //     props.contactAddress.forEach(contactAddress => { 
+        //         const data = {...contactAddress, label: contactAddress.location, value: contactAddress._id } 
+        //         if(contactAddress._id === props?.contactAddress[props.currentId]?.contactAddress ){
+        //             setFieldValue(prev => ({...prev, contactAddress : contactAddress._id}))
+        //             setSelectedDropdownValueAddress({ ...data });
+        //         }
+        //         list.push(data);
+        //     });
+        //     setContactList([...list]);
+        // }
 
         if (props.currentId !== null) {
             setEditMode(true);
@@ -110,10 +119,10 @@ const AddEditMaintenance = (props) => {
                 const list = [];
                 data.forEach(maintenanceList => { 
                     const data = {...maintenanceList, label: maintenanceList.title, value: maintenanceList.id } 
-                    // if(contactPerson._id === props?.contactAddress[props.currentId]?.contactPerson ){
-                    //     setFieldValue(prev => ({...prev, contactPerson : contactPerson._id}))
-                    //     setSelectedMaintenanceList({ ...data });
-                    // }
+                    if(maintenanceList.id === props?.maintenanceCustomerList[props.currentId]?.maintenance?.id ){
+                        setFieldValue(prev => ({...prev, maintenance : maintenanceList.id}))
+                        setSelectedMaintenanceList({ ...data });
+                    }
                     list.push(data);
                 });
                 setMaintenanceList([...list]);

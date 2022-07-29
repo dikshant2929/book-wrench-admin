@@ -59,28 +59,29 @@ const MaintenanceCustomer = (props) => {
     }, [props]);
 
 
-    const MaintenanceItems = ({maintenance,itemNumber} ) => {
+    const MaintenanceItems = (list) => {
+     
        // const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
         return (
             <div className="bg-[#F2F3F7] rounded-lg POC relative flex flex-col p-2 gap-1.5">
-                <span className='text-base font-semibold'>Maintenance-{itemNumber + 1}</span>
-                <div>Place on : {maintenance.updatedAt}</div>
+                <span className='text-base font-semibold'>Maintenance-{list.itemNumber + 1}</span>
+                <div>Place on : {list.updatedAt}</div>
                 <div>Service Package :- </div>
-                <div>Visit Frequency :- {maintenance.frequency.intervalValue} {maintenance.frequency.interval}</div>
-                <div>Description :- {maintenance.description}</div>
+                <div>Visit Frequency :- {list.vistFrequency.value} {list.vistFrequency.interval}</div>
+                <div>Description :- {list.description}</div>
 
-                <div>Package Cost :- ${maintenance.cost.packageCost}</div>
+                <div>Package Cost :- ${list.maintenance.cost.packageCost}</div>
 
-                <div>Cost per visit :- ${maintenance.cost.costPerVisit}</div>
+                <div>Cost per visit :- ${list.maintenance.cost.costPerVisit}</div>
 
-                <div>Renewal Cost :- ${maintenance.cost.renewalCost}</div>
+                <div>Renewal Cost :- ${list.maintenance.cost.renewalCost}</div>
 
                 
                 <div className='absolute top-0 right-0 flex gap-1 items-center p-2'>
-                    <span onClick={() => editPointOfContact(itemNumber)}>
+                    <span onClick={() => editPointOfContact(list.itemNumber)}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                     </span>
-                    <span onClick={() => onRemoveContactPerson(customerData.id, _id, location)}>
+                    <span onClick={() => onRemoveMaintenance(list.id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </span>
                 </div>
@@ -111,12 +112,11 @@ const MaintenanceCustomer = (props) => {
         });
     };
 
-    const onRemoveContactPerson = (customerId, contactPersonId, name) => {
+    const onRemoveMaintenance = (id) => {
 
-        const removeContact = () => {
-            Services.removeAddress(customerId, contactPersonId, (data) => {
-                console.log(data);
-                setCustomerData({ ...data });
+        const removeMaintenance = () => {
+            Services.removeMaintenanceList(id, (data) => {
+                setMaintenanceCustomerList({ ...data });
                 popupToggler();
             });
         };
@@ -124,11 +124,11 @@ const MaintenanceCustomer = (props) => {
         const popupContent = (
             <>
                 <p className="text-sm">
-                    Do you really want to delete <span className="font-bold">{name}</span> location ?{' '}
+                    Do you really want to delete <span className="font-bold">{name}</span> Customer Maintenance ?{' '}
                 </p>
                 <br />
                 <span
-                    onClick={removeContact}
+                    onClick={removeMaintenance}
                     className="inline-block bg-green-500 text-white p-1 cursor-pointer px-4 py-2 rounded-md text-sm"
                 >
                     Yes
@@ -142,7 +142,7 @@ const MaintenanceCustomer = (props) => {
             </>
         );
 
-        popupContents({ contents: popupContent, title: 'Remove Maintenance' });
+        popupContents({ contents: popupContent, title: 'Remove Customer Maintenance' });
         popupToggler();
     };
 
@@ -163,7 +163,7 @@ const MaintenanceCustomer = (props) => {
     const onAddContactButtonClicked = (itemNumber) => {
         const popupContent = (
             <AddEditMaintenance
-                {...customerData}
+                {...{maintenanceCustomerList,customerData}}
                 currentId={itemNumber}
                 editAddress={editAddress}
                 addNewMaintenance={addNewMaintenance}
