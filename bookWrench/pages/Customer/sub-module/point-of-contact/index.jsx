@@ -172,7 +172,7 @@ const PointOfContact = (props) => {
                                 <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
                                     <div className="flex justify-between">
                                         <h3 className="text-base font-bold inline-block">{title}</h3>
-                                        <Button
+                                        <Button className='border border-[#0066FF] rounded-lg items-center justify-center'
                                             title="Add Contact Person"
                                             onClick={() => onAddContactButtonClicked(null)}
                                         />

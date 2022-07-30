@@ -121,7 +121,7 @@ const AddEditContactAddress = (props) => {
                     />
                 </div>
             </div>
-            <div className="btn-wrapper m-auto text-center border-t-2 border-[#EDEFFB] py-6">
+            <div className="btn-wrapper m-auto text-center py-6">
                 <Button
                     disabled={!isButtonEnable ?? false}
                     onClick={(e) => {

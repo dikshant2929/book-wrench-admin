@@ -186,7 +186,7 @@ const AddEditMaintenance = (props) => {
             <div className='grid  add__address'>
                 <Textarea parentClass="w-full ta__with-height add__maintainance mt-5" value={fieldValue?.description} onChange={onTextChange('description')} title="Description" name="description" />
             </div>
-            <div className='text-left font-semibold text-xs my-4'> Visit Frequencys</div>
+            <div className='text-left font-semibold text-xs my-4'>Visit Frequency</div>
             <div className='w-auto md:w-full'>
                 <div className='grid grid-cols-2 gap-4'>
                     <ReactTypeHead
