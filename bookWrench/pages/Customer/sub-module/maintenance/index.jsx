@@ -36,7 +36,7 @@ const MaintenanceCustomer = (props) => {
                     setMaintenanceCustomerList(data);
                 }
             }
-            
+
         );
     };
 
@@ -51,7 +51,7 @@ const MaintenanceCustomer = (props) => {
             }
         }
 
-     
+
 
         getMaintenanceCustomer()
 
@@ -60,29 +60,48 @@ const MaintenanceCustomer = (props) => {
 
 
     const MaintenanceItems = (list) => {
-     
-       // const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
+
+        // const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
         return (
             <div className="bg-[#F2F3F7] rounded-lg POC relative flex flex-col p-2 gap-1.5">
-                <span className='text-base font-semibold'>Maintenance-{list.itemNumber + 1}</span>
-                <div>Place on : {list.updatedAt}</div>
-                <div>Service Package :- </div>
-                <div>Visit Frequency :- {list.vistFrequency.value} {list.vistFrequency.interval}</div>
-                <div>Description :- {list.description}</div>
+                <div className='mb-3'>
+                    <span className='text-base font-semibold'>Maintenance-{list.itemNumber + 1}</span>
+                    <div className='text-xs font-normal text-[#6F757E] py-1'>Place on : {list.updatedAt}</div>
+                </div>
+                <div className='grid grid-cols-2 mb-3'>
+                    <div className='text-xs font-semibold text-[#6F757E]'>Service Package
+                        <div className='text-sm font-medium text-[#27303E] py-1'>Jarde and Sons</div>
+                    </div>
+                    <div className='text-xs font-semibold text-[#6F757E]'>Visit Frequency
+                        <div className='text-sm font-medium text-[#27303E] py-1'> {list.vistFrequency.value} {list.vistFrequency.interval}</div>
+                    </div>
+                </div>
 
-                <div>Package Cost :- ${list.maintenance.cost.packageCost}</div>
+                <div className='text-xs font-semibold text-[#6F757E] mb-3'>Description
+                    <div className='text-sm font-medium text-[#27303E] py-1'> {list.description}</div>
+                </div>
 
-                <div>Cost per visit :- ${list.maintenance.cost.costPerVisit}</div>
+                <div className='flex bg-white p-2.5 rounded-md'>
+                    <div className='basis__22 text-xs font-semibold text-[#6F757E]'>Package Cost
+                        <div className='text-sm font-medium text-[#27303E] py-1'> ${list.maintenance.cost.packageCost} </div>
+                    </div>
 
-                <div>Renewal Cost :- ${list.maintenance.cost.renewalCost}</div>
+                    <div className='basis__22 text-xs font-semibold text-[#6F757E]'>Cost per visit
+                        <div className='text-sm font-medium text-[#27303E] py-1'>${list.maintenance.cost.costPerVisit}</div>
+                    </div>
 
-                
+                    <div className='basis__22 text-xs font-semibold text-[#6F757E]'>Renewal Cost
+                        <div className='text-sm font-medium text-[#27303E] py-1'> ${list.maintenance.cost.renewalCost}</div>
+                    </div>
+                </div>
+
+
                 <div className='absolute top-0 right-0 flex gap-1 items-center p-2'>
                     <span onClick={() => editPointOfContact(list.itemNumber)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                     </span>
                     <span onClick={() => onRemoveMaintenance(list.id)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </span>
                 </div>
             </div>
@@ -94,11 +113,11 @@ const MaintenanceCustomer = (props) => {
     };
 
     const addNewMaintenance = (data) => {
-        const { contactAddress : address,maintenance,description,interval,intervalValue:value  } = data
+        const { contactAddress: address, maintenance, description, interval, intervalValue: value } = data
         const request = {
             address,
             maintenance,
-            customer:customerData.id,
+            customer: customerData.id,
             description,
             vistFrequency: {
                 interval,
@@ -106,7 +125,7 @@ const MaintenanceCustomer = (props) => {
             },
         };
         //Add New Point Of Contact
-        Services.addMaintenance(request,(data) => {
+        Services.addMaintenance(request, (data) => {
             setCustomerData({ ...data });
             popupToggler();
         });
@@ -147,7 +166,7 @@ const MaintenanceCustomer = (props) => {
     };
 
     const editAddress = (data, currentIndex) => {
-        const { locality : location, gateNumber = null, contactPerson } = data
+        const { locality: location, gateNumber = null, contactPerson } = data
         const request = {
             contactAddress: {
                 location, gateNumber, contactPerson
@@ -163,7 +182,7 @@ const MaintenanceCustomer = (props) => {
     const onAddContactButtonClicked = (itemNumber) => {
         const popupContent = (
             <AddEditMaintenance
-                {...{maintenanceCustomerList,customerData}}
+                {...{ maintenanceCustomerList, customerData }}
                 currentId={itemNumber}
                 editAddress={editAddress}
                 addNewMaintenance={addNewMaintenance}
@@ -189,7 +208,7 @@ const MaintenanceCustomer = (props) => {
                             <li onClick={onclickEvents}>Personal Information</li>
                             <li onClick={() => props.history.push(exposedPath.PointOfContact + "/" + customerData?.customerId, customerData)}>Point Of Contact</li>
                             <li onClick={() => props.history.push(exposedPath.Address + "/" + customerData?.customerId, customerData)}>Addresses</li>
-                            <li className='active'  onClick={() => props.history.push(exposedPath.CustomerMaintenance + "/" + customerData?.customerId, customerData)}>Maintenance</li>
+                            <li className='active' onClick={() => props.history.push(exposedPath.CustomerMaintenance + "/" + customerData?.customerId, customerData)}>Maintenance</li>
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
@@ -206,7 +225,7 @@ const MaintenanceCustomer = (props) => {
                                     <div className="customer__detail_section mt-6 flex flex-col POC__section my-8">
                                         {maintenanceCustomerList?.length > 0 ? (
                                             <div>
-                                                <ul className="grid md:grid-cols-3 gap-4">
+                                                <ul className="grid gap-8">
                                                     {maintenanceCustomerList?.map((list, index) => (
                                                         <li key={list._id}>
                                                             <MaintenanceItems itemNumber={index} {...list} />
