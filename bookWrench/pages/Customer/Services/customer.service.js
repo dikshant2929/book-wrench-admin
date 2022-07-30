@@ -67,6 +67,19 @@ export default class Services {
         }
     }  
 
+    static async editMaintenance(dataObject, cb, params = {}, id) {
+        try {
+            const data = await API.put('customerMaintenance', dataObject, params, id);
+            showToster({ status: 'Success', msg: "Customer's maintenance has been updated successfully" });
+            return cb && cb(data?.data);
+        } catch (error) {
+            const msg = error?.response?.data?.message || 'Something went wrong';
+            showToster({ status: 'Error', msg: msg });
+            console.log(error);
+            return error;
+        }
+    } 
+
     static async removeContactPerson(customerId, contactPersonId , cb ) {
         try {
             const data = await API.delete('customer', customerId + "/contact-person/" + contactPersonId);

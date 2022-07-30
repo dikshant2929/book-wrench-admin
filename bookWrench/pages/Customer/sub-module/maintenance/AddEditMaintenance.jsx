@@ -4,7 +4,6 @@ import Button from '@common/elements/Button';
 import CheckBox from '@common/elements/CheckBox';
 import ReactTypeHead from '@common/elements/ReactTypehead';
 import Services from '../../Services/customer.service';
-const mandatoryFields = ["maintenance", "contactAddress"];
 import Textarea from '@common/elements/Textarea';
 
 
@@ -53,17 +52,20 @@ const costInputFieldConfiguration = (keyOfInput, label) => {
     }
 }
 
+const mandatoryFields = ["maintenance", "contactAddress"];
+
 const AddEditMaintenance = (props) => {
 
     console.log(props)
 
-    const [selectedDropdownValueAddress, setSelectedDropdownValueAddress] = useState(null);
-    const [contactList, setContactList] = useState([]);
     const [isEditMode, setEditMode] = useState(false);
     const [isButtonEnable, setButtonEnable] = useState(false);
 
     const [maintenanceList, setMaintenanceList] = useState();
     const [selectedMaintenanceList, setSelectedMaintenanceList] = useState();
+
+    const [addressList, setAddressList] = useState([]);
+    const [selectedDropdownValueAddress, setSelectedDropdownValueAddress] = useState(null);
 
     const [selectedIntervalDropdownValue, setSelectedIntervalDropdownValue] = useState();
 
@@ -87,6 +89,7 @@ const AddEditMaintenance = (props) => {
     }
 
     useEffect(() => {
+        console.log(fieldValue);
         const isValidForm = mandatoryFields.every(item => Boolean(fieldValue[item]))
         setButtonEnable(isValidForm);
     }, [fieldValue]);
@@ -113,7 +116,6 @@ const AddEditMaintenance = (props) => {
             setButtonEnable(true);
         }
 
-
         Services.maintenanceList(
             (data) => {
                 const list = [];
@@ -131,8 +133,25 @@ const AddEditMaintenance = (props) => {
 
         );
 
+        //Setting Up Address and filled setSelectedDropdownValueAddress if already selected address is there.
+        if(props?.customerData?.contactAddress?.length){
+            const list = [];
+            props?.customerData?.contactAddress.forEach(address => {
+                const data = {...address, label : address.location, value: address._id};
+                if(props.currentId && (address._id === props?.maintenanceCustomerList?.[props.currentId]?.address)){
+                    setFieldValue(prev => ({ ...prev, contactAddress: address._id }))
+                    setSelectedDropdownValueAddress(data)
+                }
+                list.push(data);
+            });
+            setAddressList(list);
+        }
 
-
+        //Auto-Filling Intervals if already selected
+        if(props.currentId && props?.maintenanceCustomerList?.[props.currentId]?.vistFrequency?.interval){
+            const { id, title } = intervalList.find(({ id }) => props?.maintenanceCustomerList?.[props.currentId]?.vistFrequency?.interval === id);
+            setSelectedIntervalDropdownValue({ id, title, label: title, value: id });
+        }
 
     }, [props])
 
@@ -208,7 +227,7 @@ const AddEditMaintenance = (props) => {
                     {/* <Input  {...formConfiguration("contactName", "Contact Name")} selectedValue={fieldValue?.contactName} cb={onTextChange('contactName')} /> */}
                     <ReactTypeHead
                         id="selectPOC"
-                        options={contactList}
+                        options={addressList}
                         handleSelect={handleOnChange('contactAddress')}
                         placeholder="Select Address"
                         value={selectedDropdownValueAddress}

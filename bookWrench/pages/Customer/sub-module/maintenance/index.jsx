@@ -62,15 +62,17 @@ const MaintenanceCustomer = (props) => {
     const MaintenanceItems = (list) => {
 
         // const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
+        const maintenanceTitle = `Maintenance-${list.itemNumber + 1}`;
+
         return (
             <div className="bg-[#F2F3F7] rounded-lg POC relative flex flex-col p-2 gap-1.5">
                 <div className='mb-3'>
-                    <span className='text-base font-semibold'>Maintenance-{list.itemNumber + 1}</span>
+                    <span className='text-base font-semibold'>{ maintenanceTitle }</span>
                     <div className='text-xs font-normal text-[#6F757E] py-1'>Place on : {list.updatedAt}</div>
                 </div>
                 <div className='grid grid-cols-2 mb-3'>
                     <div className='text-xs font-semibold text-[#6F757E]'>Service Package
-                        <div className='text-sm font-medium text-[#27303E] py-1'>Jarde and Sons</div>
+                        <div className='text-sm font-medium text-[#27303E] py-1'>{list.maintenance.title}</div>
                     </div>
                     <div className='text-xs font-semibold text-[#6F757E]'>Visit Frequency
                         <div className='text-sm font-medium text-[#27303E] py-1'> {list.vistFrequency.value} {list.vistFrequency.interval}</div>
@@ -78,7 +80,7 @@ const MaintenanceCustomer = (props) => {
                 </div>
 
                 <div className='text-xs font-semibold text-[#6F757E] mb-3'>Description
-                    <div className='text-sm font-medium text-[#27303E] py-1'> {list.description}</div>
+                    <div className='text-sm font-medium text-[#27303E] py-1'> {list.description || "NA"}</div>
                 </div>
 
                 <div className='flex bg-white p-2.5 rounded-md'>
@@ -100,7 +102,7 @@ const MaintenanceCustomer = (props) => {
                     <span onClick={() => editPointOfContact(list.itemNumber)}>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                     </span>
-                    <span onClick={() => onRemoveMaintenance(list.id)}>
+                    <span onClick={() => onRemoveMaintenance(list.id, maintenanceTitle)}>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </span>
                 </div>
@@ -126,16 +128,21 @@ const MaintenanceCustomer = (props) => {
         };
         //Add New Point Of Contact
         Services.addMaintenance(request, (data) => {
-            setCustomerData({ ...data });
+            const mcList = [...(maintenanceCustomerList || [])];
+            mcList.push(data);
+            setMaintenanceCustomerList([ ...mcList ]);
             popupToggler();
         });
     };
 
-    const onRemoveMaintenance = (id) => {
+    const onRemoveMaintenance = (id, title) => {
 
         const removeMaintenance = () => {
             Services.removeMaintenanceList(id, (data) => {
-                setMaintenanceCustomerList({ ...data });
+                if(data?.id){
+                    const filteredMaintenanceList = maintenanceCustomerList.filter(({ id }) => id !== data.id);
+                    setMaintenanceCustomerList([...filteredMaintenanceList]);
+                }
                 popupToggler();
             });
         };
@@ -143,7 +150,7 @@ const MaintenanceCustomer = (props) => {
         const popupContent = (
             <>
                 <p className="text-sm">
-                    Do you really want to delete <span className="font-bold">{name}</span> Customer Maintenance ?{' '}
+                    Do you really want to delete <span className="font-bold">{title}</span> ?{' '}
                 </p>
                 <br />
                 <span
@@ -161,22 +168,31 @@ const MaintenanceCustomer = (props) => {
             </>
         );
 
-        popupContents({ contents: popupContent, title: 'Remove Customer Maintenance' });
+        popupContents({ contents: popupContent, title: 'Remove Maintenance Package' });
         popupToggler();
     };
 
     const editAddress = (data, currentIndex) => {
-        const { locality: location, gateNumber = null, contactPerson } = data
+        
+        const id = maintenanceCustomerList[currentIndex].id;
+        const { contactAddress: address, maintenance, description, interval, intervalValue: value } = data
         const request = {
-            contactAddress: {
-                location, gateNumber, contactPerson
+            address,
+            maintenance,
+            customer: customerData.id,
+            description,
+            vistFrequency: {
+                interval,
+                value
             },
         };
-        //Edit existing contact person
-        Services.editAddress(request, customerData.id, customerData?.contactAddress[currentIndex]._id, (data) => {
-            setCustomerData({ ...data });
+
+        Services.editMaintenance(request, (data) => {
+            const mcList = [...maintenanceCustomerList];
+            mcList[currentIndex] = data;
+            setMaintenanceCustomerList(mcList)
             popupToggler();
-        });
+        }, {}, id);
     };
 
     const onAddContactButtonClicked = (itemNumber) => {
