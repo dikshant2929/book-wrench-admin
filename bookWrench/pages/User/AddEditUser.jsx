@@ -3,40 +3,40 @@ import Input from '@common/elements/Input';
 import ReactTypeHead from '@common/elements/ReactTypehead';
 import exposedPath from '@ExposedPath';
 import encrypt from '@app/storage/encrypt';
-import './Customer.scss';
-import Services from './Services/customer.service';
+import './User.scss';
+import Services from './Services/user.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 
-const { Customer, PointOfContact,Address,CustomerMaintenance } = exposedPath;
+const { User, PointOfContact,Address,UserMaintenance } = exposedPath;
 const defaultProps = {};
 
 
-const customerTypeList = [
+const userTypeList = [
     {
-        id: "standard",
-        title: "Standard"
+        id: "admin",
+        title: "Admin"
     },
     {
-        id: "silver",
-        title: "Silver"
+        id: "user",
+        title: "User"
     },
-    {
-        id: "gold",
-        title: "Gold"
-    },
-    {
-        id: "platinum",
-        title: "Platinum"
-    },
-    {
-        id: "diamond",
-        title: "Diamond"
-    },
+    // {
+    //     id: "gold",
+    //     title: "Gold"
+    // },
+    // {
+    //     id: "platinum",
+    //     title: "Platinum"
+    // },
+    // {
+    //     id: "diamond",
+    //     title: "Diamond"
+    // },
     
 ]
 
-const customerCategoryList = [
+const userCategoryList = [
     {
         id: "standard",
         title: "Standard"
@@ -68,6 +68,32 @@ const formConfiguration = (keyOfInput, label) => {
         selectedValue: '',
         props: {
             type: 'text',
+            name: keyOfInput,
+            // maxLength : "3",
+            'data-gsv-err-msg': label + ' is required.',
+            classNameLabel: 'label__small',
+            classNameInput: 'form__input_w_height',
+        },
+        extraProps: {
+            label: label,
+            validation: 'required,minLength',
+            minLength: 1,
+            parentId: keyOfInput,
+            parentClass: 'w-full',
+            newInptClass: 'newClass',
+        },
+        isRequired: true,
+        cls: "p-0"
+    }
+}
+
+const formConfigurationPassword = (keyOfInput, label) => {
+    return {
+        id: keyOfInput,
+        componentType: 'InputBox',
+        selectedValue: '',
+        props: {
+            type: 'password',
             name: keyOfInput,
             // maxLength : "3",
             'data-gsv-err-msg': label + ' is required.',
@@ -138,18 +164,17 @@ const costInputFieldConfigurationEmail = (keyOfInput, label) => {
     }
 };
 
-const AddEditCustomer = (props) => {
+const mandatoryFields = ["username", "name", "password"];
 
-    const mandatoryFields = ["firstName", "lastName", "email", "mobileNumber"];
+const AddEditUser = (props) => {    
 
     const [isEditMode, setEditMode] = useState(false);
     const [editModeData, setEditModeData] = useState(null);
-    const [title, setTitle] = useState('Add New Customer');
-    const [selectedDropdownValueCustomerCategory, setSelectedDropdownValueCustomerCategory] = useState(null);
-    const [selectedDropdownValueCustomer, setSelectedDropdownValueCustomer] = useState(null);
+    const [title, setTitle] = useState('Add New User');
+    const [selectedDropdownValueUserCategory, setSelectedDropdownValueUserCategory] = useState(null);
+    const [selectedDropdownValueUser, setSelectedDropdownValueUser] = useState(null);
     const [isButtonEnable, setButtonEnable] = useState(false);
     const [fieldValue, setFieldValue] = useState({
-        firstName: "",
     })
 
     useEffect(() => {
@@ -159,32 +184,29 @@ const AddEditCustomer = (props) => {
 
     const onFormSubmit = (data) => {
 
+        // console.log(data);
         if (isEditMode) {
-            Services.editCustomer(data, () => props.history.push(Customer), {}, editModeData.id);
+            delete data.username;
+            Services.editUser(data, () => props.history.push(User), {}, editModeData.id);
         } else {
-            Services.addCustomer(data, () => props.history.push(Customer));
+            Services.addUser(data, () => props.history.push(User));
         }
     };
 
     useEffect(() => {
 
-        const encryptedData = props?.match?.params?.editcustomer;
+        const encryptedData = props?.match?.params?.usercustomer;
         if (encryptedData) {
             const data = JSON.parse(encrypt.decode(encryptedData));
-            const { firstName, lastName, email, mobileNumber } = data;
-            setFieldValue({ firstName, lastName, email, mobileNumber });
+            const { name, username, email, phoneNumber, role } = data;
+            setFieldValue({ name, username, email, phoneNumber, role });
 
-            if (data.customerCategory) {
-                const selectedData = customerCategoryList.find(item => item.id === data.customerCategory);
-                setSelectedDropdownValueCustomerCategory({ ...selectedData, label: selectedData.title, value: selectedData.id })
+            if (data.role) {
+                const selectedData = userTypeList.find(item => item.id === data.role);
+                setSelectedDropdownValueUser({ ...selectedData, label: selectedData.title, value: selectedData.id })
             }
 
-            if (data.customerType) {
-                const selectedData = customerTypeList.find(item => item.id === data.customerType);
-                setSelectedDropdownValueCustomer({ ...selectedData, label: selectedData.title, value: selectedData.id })
-            }
-
-            setTitle(`Edit Customer #${data.customerId}`);
+            setTitle(`Edit User #${data.username}`);
             formConfiguration.selectedValue = data.title;
             setEditModeData(data);
             setEditMode(true);
@@ -201,12 +223,12 @@ const AddEditCustomer = (props) => {
         if(!value) return;
         setFieldValue(previous => ({ ...previous, [key]: value.id }));
         switch (key) {
-            case "customerCategory":
-                setSelectedDropdownValueCustomerCategory(value);
+            case "userCategory":
+                setSelectedDropdownValueUserCategory(value);
                 setFieldValue(previous => ({ ...previous }));
                 break;
-            case "customerType":
-                setSelectedDropdownValueCustomer(value);
+            case "role":
+                setSelectedDropdownValueUser(value);
                 setFieldValue(previous => ({ ...previous }));
                 break;
             default:
@@ -216,7 +238,7 @@ const AddEditCustomer = (props) => {
 
     const onTextChange = (key) => (...data) => {
         if (Array.isArray(data)) {
-            const fields = ['firstName', 'lastName', 'email', 'mobileNumber']
+            const fields = ['username', 'name', 'email', 'phoneNumber', "password"]
             const value = key === "isActive" ? (data[1] === "active") : (fields.includes(key) ? data[1] : data[0]);
             setFieldValue(previous => ({ ...previous, [key]: value }))
         }
@@ -225,19 +247,18 @@ const AddEditCustomer = (props) => {
 
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
-            <div className='customer__wrapper'>
+            <div className='user__wrapper'>
                 <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">
                     {title}
                 </h1>
-                <div className='customer__section flex flex-col lg:flex-row gap-3 m-6'>
-                    <div className='addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
+                <div className='user__section flex flex-col lg:flex-row gap-3 m-6'>
+                    <div className='addCategory user__sidebar basis__20 pt-4 px-3 bg-white rounded-md'>
                         <ul className='side_menubar text-center md:text-left'>
                             <li className='active'>Personal Information</li>
                             { isEditMode && <>
-                            <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.customerId, editModeData)}>Point Of Contact</li>
-                            <li onClick={() => props.history.push(Address + "/" + editModeData?.customerId, editModeData)}>Addresses</li>
-                            <li onClick={() => props.history.push(CustomerMaintenance + "/" + editModeData?.customerId, editModeData)}>Maintenance</li>
-                            </>}
+                                <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.userId, editModeData)}>Password</li>
+                            </>
+                            }
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
@@ -246,34 +267,36 @@ const AddEditCustomer = (props) => {
                             <div className="wrapper__2">
                                 <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
                                     <h3 className='text-base font-bold'>Personal Information</h3>
-                                    <div className='customer__detail_section mt-6 flex flex-col'>
-                                        <h4 className='text-xs font-bold mb-4'>Customer Details</h4>
+                                    <div className='user__detail_section mt-6 flex flex-col'>
+                                        <h4 className='text-xs font-bold mb-4'>User Details</h4>
                                         <div className='grid md:grid-cols-4 gap-4'>
-                                            <Input  {...formConfiguration("firstName", "First Name")} selectedValue={fieldValue?.firstName} cb={onTextChange('firstName')} />
-                                            <Input  {...formConfiguration("lastName", "Last Name")} selectedValue={fieldValue?.lastName} cb={onTextChange('lastName')} />
+                                            {/* <Input  {...formConfiguration("firstName", "First Name")} selectedValue={fieldValue?.firstName} cb={onTextChange('firstName')} /> */}
+                                            <Input  {...formConfiguration("name", "Name")} selectedValue={fieldValue?.name} cb={onTextChange('name')} />
                                             <Input  {...costInputFieldConfigurationEmail("email", "Primary Email")} selectedValue={fieldValue?.email} cb={onTextChange('email')} />
-                                            <Input  {...costInputFieldConfigurationMobile("mobileNumber", "Mobile Number")} selectedValue={fieldValue?.mobileNumber} cb={onTextChange('mobileNumber')} />
+                                            <Input  {...costInputFieldConfigurationMobile("phoneNumber", "Phone Number")} selectedValue={fieldValue?.phoneNumber} cb={onTextChange('phoneNumber')} />
                                             <ReactTypeHead
                                                 isClearable
-                                                header="Customer Type"
-                                                handleSelect={handleOnChange('customerType')}
-                                                dataList={customerTypeList}
+                                                header="User Type"
+                                                handleSelect={handleOnChange('role')}
+                                                dataList={userTypeList}
                                                 fields={{ key: 'id', value: 'title' }}
-                                                placeholder="Customer Type"
-                                                value={selectedDropdownValueCustomer}
+                                                placeholder="User Type"
+                                                value={selectedDropdownValueUser}
                                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
                                             />
 
-                                            <ReactTypeHead
+                                            <Input  {...formConfiguration("username", "Username")} selectedValue={fieldValue?.username} cb={onTextChange('username')} disabled={isEditMode}/>
+                                            <Input  {...formConfigurationPassword("password", "Password")} selectedValue={fieldValue?.password} cb={onTextChange('password')} />
+                                            {/* <ReactTypeHead
                                                 isClearable
-                                                header="Customer Category"
-                                                handleSelect={handleOnChange('customerCategory')}
-                                                dataList={customerCategoryList}
+                                                header="User Category"
+                                                handleSelect={handleOnChange('userCategory')}
+                                                dataList={userCategoryList}
                                                 fields={{ key: 'id', value: 'title' }}
-                                                placeholder="Select Customer Category"
-                                                value={selectedDropdownValueCustomerCategory}
+                                                placeholder="Select User Category"
+                                                value={selectedDropdownValueUserCategory}
                                                 parentClass={"min-w-1/4 leading-8 block w-auto rounded-md outline-none"}
-                                            />
+                                            /> */}
                                         </div>
 
 
@@ -308,5 +331,5 @@ const AddEditCustomer = (props) => {
     );
 };
 
-AddEditCustomer.defaultProps = defaultProps;
-export default AddEditCustomer;
+AddEditUser.defaultProps = defaultProps;
+export default AddEditUser;

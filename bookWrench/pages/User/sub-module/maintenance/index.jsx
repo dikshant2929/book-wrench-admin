@@ -3,60 +3,57 @@ import Input from '@common/elements/Input';
 import ReactTypeHead from '@common/elements/ReactTypehead';
 import exposedPath from '@ExposedPath';
 import encrypt from '@app/storage/encrypt';
-import '../../Customer.scss';
-import Services from '../../Services/customer.service';
+import '../../User.scss';
+import Services from '../../Services/user.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 import { popupContents, popupToggler } from '@common/elements/Popup';
 import AddEditMaintenance from './AddEditMaintenance';
 
-const { Customer } = exposedPath;
+const { User } = exposedPath;
 const defaultProps = {};
 const title = 'Maintenance';
 
-const MaintenanceCustomer = (props) => {
-    const [customerData, setCustomerData] = useState({});
-    const [maintenanceCustomerList, setMaintenanceCustomerList] = useState({});
+const MaintenanceUser = (props) => {
+    const [userData, setUserData] = useState({});
+    const [maintenanceUserList, setMaintenanceUserList] = useState({});
 
     const getContactPersons = (userId) => {
-        Services.customerList(
+        Services.userList(
             (data) => {
                 if (data?.length) {
-                    setCustomerData(data[0]);
-                    getMaintenanceCustomer(data[0].id);
+                    setUserData(data[0]);
                 }
             },
-            { customerId: userId },
+            { userId: userId },
         );
     };
 
-    const getMaintenanceCustomer = (customerId) => {
-        Services.maintenanceCustomerList(
+    const getMaintenanceUser = () => {
+        Services.maintenanceUserList(
             (data) => {
                 if (data?.length) {
-                    setMaintenanceCustomerList(data);
+                    setMaintenanceUserList(data);
                 }
-            },
-            {},
-            `?customer=${customerId}`
+            }
+
         );
     };
 
     useEffect(() => {
-        const customerId = props?.match?.params?.customerId;
-        if (customerId) {
-            getContactPersons(customerId);
+        const userId = props?.match?.params?.userId;
+        if (userId) {
+            userId && getContactPersons(userId);
         } else {
-            const customerData = props?.history?.location?.state;
-            if (customerData) {
-                setCustomerData({ ...customerData });
-                getMaintenanceCustomer(customerData.id)
+            const userData = props?.history?.location?.state;
+            if (userData) {
+                setUserData({ ...userData });
             }
         }
 
 
 
-        
+        getMaintenanceUser()
 
 
     }, [props]);
@@ -64,7 +61,7 @@ const MaintenanceCustomer = (props) => {
 
     const MaintenanceItems = (list) => {
 
-        // const getContactPersonsFromId = (id) => customerData.contactPerson.find(item => item._id === id);
+        // const getContactPersonsFromId = (id) => userData.contactPerson.find(item => item._id === id);
         const maintenanceTitle = `Maintenance-${list.itemNumber + 1}`;
 
         return (
@@ -102,10 +99,10 @@ const MaintenanceCustomer = (props) => {
 
 
                 <div className='absolute top-0 right-0 flex gap-1 items-center p-2'>
-                    <span className='cursor-pointer' onClick={() => editPointOfContact(list.itemNumber)}>
+                    <span onClick={() => editPointOfContact(list.itemNumber)}>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
                     </span>
-                    <span className='cursor-pointer' onClick={() => onRemoveMaintenance(list.id, maintenanceTitle)}>
+                    <span onClick={() => onRemoveMaintenance(list.id, maintenanceTitle)}>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="#a4a4a4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </span>
                 </div>
@@ -122,7 +119,7 @@ const MaintenanceCustomer = (props) => {
         const request = {
             address,
             maintenance,
-            customer: customerData.id,
+            user: userData.id,
             description,
             vistFrequency: {
                 interval,
@@ -131,9 +128,9 @@ const MaintenanceCustomer = (props) => {
         };
         //Add New Point Of Contact
         Services.addMaintenance(request, (data) => {
-            const mcList = [...(maintenanceCustomerList || [])];
+            const mcList = [...(maintenanceUserList || [])];
             mcList.push(data);
-            setMaintenanceCustomerList([ ...mcList ]);
+            setMaintenanceUserList([ ...mcList ]);
             popupToggler();
         });
     };
@@ -143,8 +140,8 @@ const MaintenanceCustomer = (props) => {
         const removeMaintenance = () => {
             Services.removeMaintenanceList(id, (data) => {
                 if(data?.id){
-                    const filteredMaintenanceList = maintenanceCustomerList.filter(({ id }) => id !== data.id);
-                    setMaintenanceCustomerList([...filteredMaintenanceList]);
+                    const filteredMaintenanceList = maintenanceUserList.filter(({ id }) => id !== data.id);
+                    setMaintenanceUserList([...filteredMaintenanceList]);
                 }
                 popupToggler();
             });
@@ -177,12 +174,12 @@ const MaintenanceCustomer = (props) => {
 
     const editAddress = (data, currentIndex) => {
         
-        const id = maintenanceCustomerList[currentIndex].id;
+        const id = maintenanceUserList[currentIndex].id;
         const { contactAddress: address, maintenance, description, interval, intervalValue: value } = data
         const request = {
             address,
             maintenance,
-            customer: customerData.id,
+            user: userData.id,
             description,
             vistFrequency: {
                 interval,
@@ -191,9 +188,9 @@ const MaintenanceCustomer = (props) => {
         };
 
         Services.editMaintenance(request, (data) => {
-            const mcList = [...maintenanceCustomerList];
+            const mcList = [...maintenanceUserList];
             mcList[currentIndex] = data;
-            setMaintenanceCustomerList(mcList)
+            setMaintenanceUserList(mcList)
             popupToggler();
         }, {}, id);
     };
@@ -201,7 +198,7 @@ const MaintenanceCustomer = (props) => {
     const onAddContactButtonClicked = (itemNumber) => {
         const popupContent = (
             <AddEditMaintenance
-                {...{ maintenanceCustomerList, customerData }}
+                {...{ maintenanceUserList, userData }}
                 currentId={itemNumber}
                 editAddress={editAddress}
                 addNewMaintenance={addNewMaintenance}
@@ -212,22 +209,22 @@ const MaintenanceCustomer = (props) => {
     };
 
     const onclickEvents = () => {
-        const editPath = `${Customer}/edit/${encrypt.encode(JSON.stringify({ ...customerData, type: 'Edit' }))}`;
-        props.history.push(editPath, customerData);
+        const editPath = `${User}/edit/${encrypt.encode(JSON.stringify({ ...userData, type: 'Edit' }))}`;
+        props.history.push(editPath, userData);
     };
 
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
-            <div className="customer__wrapper">
+            <div className="user__wrapper">
                 <h1 className="text-center font-medium text-2xl mx-6 my-8 sm:text-left">{title}</h1>
 
-                <div className="customer__section flex flex-col lg:flex-row gap-3 m-6">
-                    <div className="addCategory customer__sidebar basis__20 pt-4 px-3 bg-white rounded-md">
+                <div className="user__section flex flex-col lg:flex-row gap-3 m-6">
+                    <div className="addCategory user__sidebar basis__20 pt-4 px-3 bg-white rounded-md">
                         <ul className="side_menubar text-center md:text-left">
                             <li onClick={onclickEvents}>Personal Information</li>
-                            <li onClick={() => props.history.push(exposedPath.PointOfContact + "/" + customerData?.customerId, customerData)}>Point Of Contact</li>
-                            <li onClick={() => props.history.push(exposedPath.Address + "/" + customerData?.customerId, customerData)}>Addresses</li>
-                            <li className='active' onClick={() => props.history.push(exposedPath.CustomerMaintenance + "/" + customerData?.customerId, customerData)}>Maintenance</li>
+                            <li onClick={() => props.history.push(exposedPath.PointOfContact + "/" + userData?.userId, userData)}>Point Of Contact</li>
+                            <li onClick={() => props.history.push(exposedPath.Address + "/" + userData?.userId, userData)}>Addresses</li>
+                            <li className='active' onClick={() => props.history.push(exposedPath.UserMaintenance + "/" + userData?.userId, userData)}>Maintenance</li>
                         </ul>
                     </div>
                     <div className="addCategory bg-white center rounded-md w-full">
@@ -241,11 +238,11 @@ const MaintenanceCustomer = (props) => {
                                             onClick={() => onAddContactButtonClicked(null)}
                                         />
                                     </div>
-                                    <div className="customer__detail_section mt-6 flex flex-col POC__section my-8">
-                                        {maintenanceCustomerList?.length > 0 ? (
+                                    <div className="user__detail_section mt-6 flex flex-col POC__section my-8">
+                                        {maintenanceUserList?.length > 0 ? (
                                             <div>
                                                 <ul className="grid gap-8">
-                                                    {maintenanceCustomerList?.map((list, index) => (
+                                                    {maintenanceUserList?.map((list, index) => (
                                                         <li key={list._id}>
                                                             <MaintenanceItems itemNumber={index} {...list} />
                                                         </li>
@@ -266,5 +263,5 @@ const MaintenanceCustomer = (props) => {
     );
 };
 
-MaintenanceCustomer.defaultProps = defaultProps;
-export default MaintenanceCustomer;
+MaintenanceUser.defaultProps = defaultProps;
+export default MaintenanceUser;
