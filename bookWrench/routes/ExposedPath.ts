@@ -41,14 +41,11 @@ const path = {
     Customer: PREFIX + 'customer',
     CustomerCreate: PREFIX + 'customer/create',
     CustomerEdit: PREFIX + 'customer/edit/:editcustomer',
-   
+
+    User: PREFIX + 'user',
+    UserCreate: PREFIX + 'user/create',
+    UserEdit: PREFIX + 'user/edit/:usercustomer',
     
-
-    
-
-    
-
-
     VendorManagement: PREFIX + 'vendor-management',
     VendorManagementCreate: PREFIX + 'vendor-management/create',
     VendorManagementEdit: PREFIX + 'vendor-management/edit/:editVendorManagement',

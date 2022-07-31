@@ -51,6 +51,10 @@ const {
     CustomerEdit,
     
 
+    User,
+    UserCreate,
+    UserEdit,
+    
     
     
     EditPointOfContact,
@@ -112,6 +116,11 @@ const privateRouteConfig = [
     { name: 'customer', path: Customer, componentName: 'Customer', exact: true },
     
 
+
+    { name: 'user-edit', path: UserEdit, componentName: 'UserCreate'},
+    { name: 'user-create', path: UserCreate, componentName: 'UserCreate', exact: true },
+    { name: 'user', path: User, componentName: 'User', exact: true },
+
     { name: 'vendor-management-edit', path: VendorManagementEdit, componentName: 'VendorManagementCreate'},
     { name: 'vendor-management-create', path: VendorManagementCreate, componentName: 'VendorManagementCreate', exact: true },
     { name: 'vendor-management', path: VendorManagement, componentName: 'VendorManagement', exact: true },
@@ -164,7 +173,10 @@ const asyncLoad = (component: any) => {
             return loadable(() => import(/* webpackChunkName: 'Customer' */ '@pages/Customer'));
         case 'CustomerCreate':
             return loadable(() => import(/* webpackChunkName: 'AddEditCustomer' */ '@pages/Customer/AddEditCustomer'));
-     
+        case 'User':
+            return loadable(() => import(/* webpackChunkName: 'User' */ '@pages/User'));
+        case 'UserCreate':
+            return loadable(() => import(/* webpackChunkName: 'AddEditUser' */ '@pages/User/AddEditUser'));
             case 'VendorManagement':
             return loadable(() => import(/* webpackChunkName: 'VendorManagement' */ '@pages/VendorManagement'));
         case 'VendorManagementCreate':

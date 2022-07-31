@@ -43,6 +43,10 @@ export default {
         url: 'customer/',
         options: {},
     },
+    user: {
+        url: 'user/',
+        options: {},
+    },
     customerMaintenance: {
         url: 'customer-maintenance/',
         options: {},

@@ -7,7 +7,7 @@ import UALink from '@common/elements/UALink';
 import { Route, useLocation } from 'react-router-dom';
 import './header.scss';
 
-const { Home, Dashboard, Category, SubCategory, Department, Service, VendorManagement, Product,Maintenance,Customer } = exposedPath;
+const { Home, Dashboard, Category, SubCategory, Department, Service, VendorManagement, Product,Maintenance,Customer, User } = exposedPath;
 
 
 const defaultProps = {
@@ -55,8 +55,8 @@ const defaultProps = {
             icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z'
         },
         {
-            title: 'Settings',
-            link: Dashboard,
+            title: 'User',
+            link: User,
             isActive: false,
             tag: 'MOD_OFFER',
             icon: 'M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z',

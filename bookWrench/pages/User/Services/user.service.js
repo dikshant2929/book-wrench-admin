@@ -2,10 +2,10 @@ import API from '@API';
 import { showToster } from '@common/elements/ToastNotification/new_index';
 
 export default class Services {
-    static async addCustomer(dataObject, cb) {
+    static async addUser(dataObject, cb) {
         try {
-            const data = await API.post('customer', dataObject);
-            showToster({ status: 'Success', msg: "Customer has been added successfully" });
+            const data = await API.post('user', dataObject);
+            showToster({ status: 'Success', msg: "User has been added successfully" });
             return cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -15,10 +15,10 @@ export default class Services {
         }
     }  
     
-    static async editCustomer(dataObject, cb, params = {}, id) {
+    static async editUser(dataObject, cb, params = {}, id) {
         try {
-            const data = await API.put('customer', dataObject, params, id);
-            showToster({ status: 'Success', msg: "Customer has been updated successfully" });
+            const data = await API.put('user', dataObject, params, id);
+            showToster({ status: 'Success', msg: "User has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -30,7 +30,7 @@ export default class Services {
 
     static async addContactPerson(dataObject, id , cb ) {
         try {
-            const data = await API.post('customer', dataObject, id + "/contact-person");
+            const data = await API.post('user', dataObject, id + "/contact-person");
             showToster({ status: 'Success', msg: "Contact Person has been added successfully" });
             return cb && cb(data?.data);
         } catch (error) {
@@ -43,7 +43,7 @@ export default class Services {
 
     static async editAddress(dataObject, id,_id , cb ) {
         try {
-            const data = await API.put('customer', dataObject, {}, id + "/contact-address/" + _id);
+            const data = await API.put('user', dataObject, {}, id + "/contact-address/" + _id);
             showToster({ status: 'Success', msg: "Address has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
@@ -56,7 +56,7 @@ export default class Services {
 
     static async addMaintenance(dataObject, cb) {
         try {
-            const data = await API.post('customerMaintenance', dataObject);
+            const data = await API.post('userMaintenance', dataObject);
             showToster({ status: 'Success', msg: "maintenance has been added successfully" });
             return cb(data?.data);
         } catch (error) {
@@ -69,8 +69,8 @@ export default class Services {
 
     static async editMaintenance(dataObject, cb, params = {}, id) {
         try {
-            const data = await API.put('customerMaintenance', dataObject, params, id);
-            showToster({ status: 'Success', msg: "Customer's maintenance has been updated successfully" });
+            const data = await API.put('userMaintenance', dataObject, params, id);
+            showToster({ status: 'Success', msg: "User's maintenance has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -80,10 +80,10 @@ export default class Services {
         }
     } 
 
-    static async removeContactPerson(customerId, contactPersonId , cb ) {
+    static async removeContactPerson(userId, contactPersonId , cb ) {
         try {
-            const data = await API.delete('customer', customerId + "/contact-person/" + contactPersonId);
-            showToster({ status: 'Success', msg: "Customer has been removed successfully" });
+            const data = await API.delete('user', userId + "/contact-person/" + contactPersonId);
+            showToster({ status: 'Success', msg: "User has been removed successfully" });
             return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -93,10 +93,10 @@ export default class Services {
         }
     } 
 
-    static async removeMaintenanceList(customerId , cb ) {
+    static async removeMaintenanceList(userId , cb ) {
         try {
-            const data = await API.delete('customerMaintenance', customerId);
-            showToster({ status: 'Success', msg: "Customer Maintenance has been removed successfully" });
+            const data = await API.delete('userMaintenance', userId);
+            showToster({ status: 'Success', msg: "User Maintenance has been removed successfully" });
             return cb && cb(data?.data);
         } catch (error) {
             const msg = error?.response?.data?.message || 'Something went wrong';
@@ -108,7 +108,7 @@ export default class Services {
 
     static async editContactPerson(dataObject, id,_id , cb ) {
         try {
-            const data = await API.put('customer', dataObject, {}, id + "/contact-person/" + _id);
+            const data = await API.put('user', dataObject, {}, id + "/contact-person/" + _id);
             showToster({ status: 'Success', msg: "Contact Person has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
@@ -132,9 +132,9 @@ export default class Services {
         }
     } 
 
-    static async maintenanceCustomerList(cb, params, id) {
+    static async maintenanceUserList(cb) {
         try {
-            const data = await API.get('customerMaintenance', params, id);
+            const data = await API.get('userMaintenance');
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
@@ -148,22 +148,22 @@ export default class Services {
 
     
 
-    static async customerList(cb, params = {}) {
+    static async userList(cb, params = {}) {
         try {
-            const data = await API.get('customer', params);
+            const data = await API.get('user', params);
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
-            const msg = error?.response?.data?.message || 'Something went wrong shankar';
+            const msg = error?.response?.data?.message || 'Something went wrong';
             showToster({ status: 'Error', msg: msg });
             console.log(error);
             return error;
         }
     } 
     
-    static async deleteCustomer(dataObject,params = {}, id,cb) {
+    static async deleteUser(dataObject,params = {}, id,cb) {
         try {
-            const data = await API.delete('customer', dataObject, params, id);
+            const data = await API.delete('user', dataObject, params, id);
            // showToster({ status: 'Success', msg: "Category has been updated successfully" });
             return cb && cb(data?.data);
         } catch (error) {
