@@ -46,6 +46,9 @@ const path = {
     UserCreate: PREFIX + 'user/create',
     UserEdit: PREFIX + 'user/edit/:usercustomer',
     
+    PasswordOfUser : PREFIX + "user/password",
+    EditPasswordOfUser : PREFIX + "user/password/:userId",
+
     VendorManagement: PREFIX + 'vendor-management',
     VendorManagementCreate: PREFIX + 'vendor-management/create',
     VendorManagementEdit: PREFIX + 'vendor-management/edit/:editVendorManagement',

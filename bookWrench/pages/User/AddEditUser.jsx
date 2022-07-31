@@ -8,7 +8,7 @@ import Services from './Services/user.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 
-const { User, PointOfContact,Address,UserMaintenance } = exposedPath;
+const { User, PasswordOfUser ,Address,UserMaintenance } = exposedPath;
 const defaultProps = {};
 
 
@@ -256,7 +256,7 @@ const AddEditUser = (props) => {
                         <ul className='side_menubar text-center md:text-left'>
                             <li className='active'>Personal Information</li>
                             { isEditMode && <>
-                                <li onClick={() => props.history.push(PointOfContact + "/" + editModeData?.userId, editModeData)}>Password</li>
+                                <li onClick={() => props.history.push(PasswordOfUser + "/" + editModeData?.id, editModeData)}>Password</li>
                             </>
                             }
                         </ul>

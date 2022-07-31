@@ -8,13 +8,48 @@ import Services from '../../Services/user.service';
 import Button from '@button';
 import UALink from '@common/elements/UALink';
 import { popupContents, popupToggler } from '@common/elements/Popup';
-import AddEditContactPerson from './AddEditContactPerson';
+import AddEditContactPerson from './AddEditUserPassword';
 
 const { User } = exposedPath;
 const defaultProps = {};
 const title = 'Point of Contact';
 
+
+
+const formConfigurationPassword = (keyOfInput, label) => {
+    return {
+        id: keyOfInput,
+        componentType: 'InputBox',
+        selectedValue: '',
+        props: {
+            type: 'password',
+            name: keyOfInput,
+            // maxLength : "3",
+            'data-gsv-err-msg': label + ' is required.',
+            classNameLabel: 'label__small',
+            classNameInput: 'form__input_w_height',
+        },
+        extraProps: {
+            label: label,
+            validation: 'required,minLength',
+            minLength: 1,
+            parentId: keyOfInput,
+            parentClass: 'w-full',
+            newInptClass: 'newClass',
+        },
+        isRequired: true,
+        cls: "p-0"
+    }
+}
+
 const PointOfContact = (props) => {
+
+    console.log({ props });
+
+    const [fieldValue, setFieldValue] = useState({
+    })
+    const [isButtonEnable, setButtonEnable] = useState(false);
+
     const [userData, setUserData] = useState({});
     const [contacts, setContactList] = useState([]);
     const getContactPersons = (userId) => {
@@ -25,7 +60,7 @@ const PointOfContact = (props) => {
                     setContactList(data?.[0]?.contactPerson || []);
                 }
             },
-            { userId: userId },
+            { _id :userId } ,
         );
     };
 
@@ -141,6 +176,33 @@ const PointOfContact = (props) => {
         props.history.push(editPath, userData);
     };
 
+    const onTextChange = (key) => (...data) => {
+        
+        if (Array.isArray(data)) {
+            const fields = ["password", "confirmPassword"]
+            const value = (fields.includes(key) ? data[1] : data[0]);
+            setFieldValue(previous => ({ ...previous, [key]: value }))
+            setFieldValue(previous => {
+                if(previous["password"] && previous["confirmPassword"]){
+                    setButtonEnable(previous["password"] === previous["confirmPassword"]);
+                }
+                return previous;
+            })
+        }
+    }
+
+    const onFormSubmit = ({ password }) => {
+        console.log(userData, password);
+        const { id, createdAt, username, lastLogin, updatedAt, ...request} = userData;
+        Services.editUser({ ...request, password }, (data) => {
+            if(data){
+                const editPath = `${User}/edit/${encrypt.encode(JSON.stringify({ ...data, type : "Edit" }))}`;
+                props.history.push(editPath, data);
+            }
+
+        }, {}, id)
+    }
+    console.log(fieldValue);
     return (
         <div className="mx-8 sm:mx-20 mt-12 mb-10">
             <div className="user__wrapper">
@@ -160,9 +222,7 @@ const PointOfContact = (props) => {
                             </li> */}
 
                             <li onClick={onclickEvents}>Personal Information</li>
-                            <li className='active' onClick={() => props.history.push(exposedPath.PointOfContact + "/" + userData?.userId, userData)}>Point Of Contact</li>
-                            <li onClick={() => props.history.push(exposedPath.Address + "/" + userData?.userId, userData)}>Addresses</li>
-                            <li onClick={() => props.history.push(exposedPath.UserMaintenance + "/" + userData?.userId, userData)}>Maintenance</li>
+                            <li className='active' onClick={() => props.history.push(exposedPath.PasswordOfUser + "/" + userData?.id, userData)}>Password</li>
 
                         </ul>
                     </div>
@@ -170,7 +230,7 @@ const PointOfContact = (props) => {
                         <div className="wrapper__1">
                             <div className="wrapper__2">
                                 <div className="add-catg-form-wrapper maintenance__wrapper px-4 pt-4">
-                                    <div className="flex justify-between">
+                                    {/* <div className="flex justify-between">
                                         <h3 className="text-base font-bold inline-block">{title}</h3>
                                         <Button className='border border-[#0066FF] rounded-lg items-center justify-center'
                                             title="Add Contact Person"
@@ -191,8 +251,26 @@ const PointOfContact = (props) => {
                                         ) : (
                                             <div>No Point of contact at the moment </div>
                                         )}
+                                    </div> */}
+
+                                    <div>
+                                        <div className='grid md:grid-cols-2 gap-4 add__poc'>
+                                        <Input  {...formConfigurationPassword("password", "Password")} selectedValue={fieldValue?.password} cb={onTextChange('password')} />
+                                        <Input  {...formConfigurationPassword("confirmPassword", "Confirm Password")} selectedValue={fieldValue?.confirmPassword} cb={onTextChange('confirmPassword')} />
+                                        </div>
+                                        <div className="btn-wrapper m-auto text-center pt-9">
+                                            <Button
+                                                disabled={!isButtonEnable ?? false}
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    onFormSubmit(fieldValue);
+                                                }}
+                                                className={`form__button ${!isButtonEnable ?? false ? 'btn-disabled' : 'button-primary'}`}
+                                                title={'Update' }
+                                            />
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>

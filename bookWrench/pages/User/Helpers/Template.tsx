@@ -11,13 +11,13 @@ const { User } = exposedPath;
 
 export const ExpireCampaignYesPopup = (props: any) => {
     const onClickYes = () => {
-        Services.deleteUser(props.data.id,{}, props.data.id,(res:any) => {
-            showToster({ status: 'Success', msg: res.msg || 'User Delete Successfully' });
+        Services.editUser( { isVerified: false, isActive: false },(res:any) => {
+            showToster({ status: 'Success', msg: res.msg || 'User deactivated Successfully' });
             popupToggler(); 
             setTimeout(() => {
                 props.reloadTable();
             }, 500);
-        });
+        }, {}, props.data.id);
     };
     const onClickNo = () => {
         popupToggler(); 
@@ -25,7 +25,7 @@ export const ExpireCampaignYesPopup = (props: any) => {
  return (
         <>
             <p className="text-sm">
-                Do you really want to delete <span className="font-bold">{props.data.title}</span> User ?{' '}
+                Do you really want to deactive <span className="font-bold">{props.data.username}</span> ?{' '}
             </p>
             <br />
             <span onClick={onClickYes} className="inline-block bg-green-500 text-white p-1 cursor-pointer px-4 py-2 rounded-md text-sm">
@@ -46,8 +46,6 @@ const TableEditViewExpire = ({ data, history, reloadTable }: any) => {
         switch (eventId) {
             case edit.id: //Edit Campaign
                 const editPath = `${User}/edit/${encrypt.encode(JSON.stringify({ ...data, type : "Edit" }))}`;
-                console.log(data);
-                
                 history.push(editPath, data);
                 break;
             case view.id: //Edit Campaign

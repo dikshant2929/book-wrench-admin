@@ -148,9 +148,9 @@ export default class Services {
 
     
 
-    static async userList(cb, params = {}) {
+    static async userList(cb, params = {}, id) {
         try {
-            const data = await API.get('user', params);
+            const data = await API.get('user', params, id);
             // showToster({ status: 'Success', msg: "Category has been added successfully" });
             return cb(data?.data);
         } catch (error) {
